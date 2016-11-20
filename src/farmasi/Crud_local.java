@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -30,14 +31,118 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Crud_local extends DBKoneksi_local {
     
-     private Statement statement = null;
+    private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
+     String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Petugas","Tgl","Nama Barang","Jml", "Harga Satuan", "Total"};
     
+      public DefaultTableModel modelctrans = new DefaultTableModel(caritrans_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
     public Crud_local() throws Exception{
       ConDb();
     }
+    
+     public void readRec_cariTransRM(String norm, String tgl) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME + " WHERE "
+                + helper_v_trans.KEY_NO_RM + " =? AND " + helper_v_trans.KEY_TGL + " =?");
+
+        preparedStatement.setString(1, norm);
+        preparedStatement.setString(2, tgl);
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0;
+
+        while (resultSet.next()) {
+
+            i++;
+
+            String no = String.valueOf(i);
+            String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
+            String rm = resultSet.getString(helper_v_trans.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+            String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
+            String tglc = resultSet.getString(helper_v_trans.KEY_TGL);
+            String brg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            int jml = resultSet.getInt(helper_v_trans.KEY_JML);
+            Double hargasat = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
+            Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
+
+            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,petugas,tglc,brg,jml,hargasat,totalc});
+        }
+    }
+    
+    
+     public void readRec_cariTrans(String nm_p, String tgl) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME + " WHERE "
+                + helper_v_trans.KEY_NM_PASIEN + " like ? AND " + helper_v_trans.KEY_TGL + " =?");
+
+        preparedStatement.setString(1, "%" + nm_p + "%");
+        preparedStatement.setString(2, tgl);
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0;
+
+        while (resultSet.next()) {
+
+            i++;
+
+            String no = String.valueOf(i);
+            String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
+            String rm = resultSet.getString(helper_v_trans.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+            String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
+            String tglc = resultSet.getString(helper_v_trans.KEY_TGL);
+            String brg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            int jml = resultSet.getInt(helper_v_trans.KEY_JML);
+            Double hargasat = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
+            Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
+
+            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,petugas,tglc,brg,jml,hargasat,totalc});
+        }
+    }
+    
+       public void readRec_Allhistory() throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME);
+
+     
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i=0;
+     
+        while (resultSet.next()) {
+
+            i++;
+
+            String no = String.valueOf(i);
+            String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
+            String rm = resultSet.getString(helper_v_trans.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+            String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
+            String tglc = resultSet.getString(helper_v_trans.KEY_TGL);
+            String brg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            int jml = resultSet.getInt(helper_v_trans.KEY_JML);
+            Double hargasat = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
+            Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
+
+            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,petugas,tglc,brg,jml,hargasat,totalc});
+            
+
+        }
+
+          
+    } 
+    
+    
     
       public int readRec_count() throws SQLException {
 

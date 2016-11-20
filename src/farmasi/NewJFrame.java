@@ -65,6 +65,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }
 
+   
     String[] brg_title = new String[]{"Kode obat", "Nama Obat", "Satuan"};
 
     String[] trans_title = new String[]{"No.", "Jml", "Nama Barang", "Harga Satuan", "Total", "Hapus"};
@@ -210,6 +211,27 @@ public class NewJFrame extends javax.swing.JFrame {
         
        //set No nota
        Set_Nonota();
+       
+       
+       txt_history.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterhistory();
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterhistory();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterhistory();
+            }
+
+        });
+       
        
         txt_cari_rm.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -435,10 +457,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jDateTimePicker1 = new uz.ncipro.calendar.JDateTimePicker();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtb_history = new javax.swing.JTable();
+        jtgl_history = new uz.ncipro.calendar.JDateTimePicker();
+        txt_history = new javax.swing.JTextField();
+        bt_cari_history = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -783,7 +805,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtb_history.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -794,16 +816,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(jtb_history);
 
-        jDateTimePicker1.setDisplayFormat("yyyy/MM/dd");
+        jtgl_history.setDisplayFormat("yyyy/MM/dd");
 
-        jButton1.setText("Refresh");
+        bt_cari_history.setText("Cari RM");
+        bt_cari_history.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_historyActionPerformed(evt);
+            }
+        });
 
         jLayeredPane2.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jDateTimePicker1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jtgl_history, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(txt_history, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(bt_cari_history, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -814,12 +841,12 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5)
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jDateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtgl_history, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_history, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 319, Short.MAX_VALUE)))
+                        .addComponent(bt_cari_history, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 300, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jLayeredPane2Layout.setVerticalGroup(
@@ -828,11 +855,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jDateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
+                        .addComponent(jtgl_history, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bt_cari_history))
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jTextField1)))
+                        .addComponent(txt_history)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1247,6 +1274,47 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtb_barangKeyPressed
 
+    private void bt_cari_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_historyActionPerformed
+        // TODO add your handling code here:
+        
+     if(this.txt_history.getText().isEmpty()){
+     
+                try {
+                    
+                    datl = new Crud_local();
+                    
+                    try {
+                        datl.readRec_Allhistory();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    jtb_history.setModel(datl.modelctrans);
+                } catch (Exception ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+     }   
+     else{   
+        String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        
+         try {
+                datl = new Crud_local();
+
+                try {
+                    datl.readRec_cariTransRM(txt_history.getText(),dateFormatter.format(this.jtgl_history.getDate()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                jtb_history.setModel(datl.modelctrans);
+
+            } catch (Exception ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     }
+    }//GEN-LAST:event_bt_cari_historyActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1334,6 +1402,27 @@ public class NewJFrame extends javax.swing.JFrame {
             }
     }
     
+    
+    private void filterhistory(){
+        String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        
+         try {
+                datl = new Crud_local();
+
+                try {
+                    datl.readRec_cariTrans(txt_history.getText(),dateFormatter.format(this.jtgl_history.getDate()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                jtb_history.setModel(datl.modelctrans);
+
+            } catch (Exception ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+    
     class ImageRenderer extends DefaultTableCellRenderer {
 
         JLabel lbl = new JLabel();
@@ -1348,12 +1437,11 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_cari_history;
     private javax.swing.JButton bt_cari_rm;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_proses_cari_registrasi;
     private javax.swing.JButton bt_simpan;
-    private javax.swing.JButton jButton1;
-    private uz.ncipro.calendar.JDateTimePicker jDateTimePicker1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1375,21 +1463,22 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JCheckBox jck_rpt;
     private javax.swing.JPanel jp_barang;
     private javax.swing.JPanel jp_rm;
     private javax.swing.JTable jtb_barang;
+    private javax.swing.JTable jtb_history;
     private javax.swing.JTable jtb_registrasi;
     private javax.swing.JTable jtb_transaksi;
     private uz.ncipro.calendar.JDateTimePicker jtgl;
+    private uz.ncipro.calendar.JDateTimePicker jtgl_history;
     private javax.swing.JLabel lbl_grand_tot;
     private javax.swing.JLabel lbl_total;
     private javax.swing.JTextField txt_barang;
     private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextArea txt_catatan;
     private javax.swing.JTextField txt_harga_satuan;
+    private javax.swing.JTextField txt_history;
     private javax.swing.JTextField txt_jml;
     private javax.swing.JTextField txt_nama_pasien;
     private javax.swing.JTextField txt_no_rm;
