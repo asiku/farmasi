@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="510" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5972857-afd0-4072-b040-360bbe7459e9">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="144"/>
+	<parameter name="TOTSEMUA" class="java.lang.Double">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nonota" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from trans_farmasi,detail_trans_farmasi where trans_farmasi.no_nota=$P{nonota} and detail_trans_farmasi.no_nota=$P{nonota}]]>
+	</queryString>
+	<field name="no_nota" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_rm" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_pasien" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="catatan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="petugas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jml" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="satuan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga_satuan" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_barang" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="no_nota">
+		<groupExpression><![CDATA[$F{no_nota}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="110" y="0" width="324" height="18" uuid="dbb69b9c-b9b0-4638-8c3b-ca5221784ac4"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RS JULIANA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="18" width="324" height="18" uuid="ce263c39-c377-41a9-89ed-491228d1c232"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Tajur No. 75, Bogor, Jawa Barat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="36" width="324" height="18" uuid="8559c286-c74d-4a89-8737-17fad823c268"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telp: 0251 - 83395993, E-mail : rsiajuliana@gmail.com]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="67" width="530" height="1" uuid="ff76ea45-4a77-4a73-9852-1f4ee20d0f71"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="86" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="63" width="555" height="20" uuid="34c20238-e08f-4378-9cfe-13e0d01b6c78"/>
+			</rectangle>
+			<textField>
+				<reportElement x="95" y="0" width="82" height="20" uuid="9f94bdde-0638-473f-9b3c-87407006e117"/>
+				<textFieldExpression><![CDATA[$F{no_rm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="20" width="100" height="20" uuid="5620ceac-3be1-49b5-b244-932368a8463c"/>
+				<textFieldExpression><![CDATA[$F{nama_pasien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="95" y="40" width="100" height="20" uuid="e971c256-7adb-48b7-8597-ec58c39a81a8"/>
+				<textFieldExpression><![CDATA[$F{catatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="3" width="100" height="20" uuid="3d7ac387-83a9-48e7-bb17-8edceef813a7"/>
+				<textFieldExpression><![CDATA[$F{no_nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="24" width="100" height="20" uuid="22288f67-26dd-4fa7-83dc-be3625cd80d0"/>
+				<textFieldExpression><![CDATA[$F{petugas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="8" y="67" width="23" height="19" uuid="59230ce9-788d-4e22-8898-901b894198e5"/>
+				<text><![CDATA[No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="66" width="23" height="19" uuid="db91425e-3e5f-45d5-bc18-2612198c6d8b"/>
+				<text><![CDATA[Jml]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="66" width="117" height="19" uuid="d207ba16-1343-4447-9adb-ac9a71abf70f"/>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="0" width="60" height="20" uuid="960745cc-93c3-4fa6-a9a4-552a2075e4ad"/>
+				<text><![CDATA[No. Rm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="8" y="20" width="73" height="20" uuid="23b7c71d-0d2a-4a19-bc80-19d721c9692f"/>
+				<text><![CDATA[Nama Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="0" width="19" height="23" uuid="e6aefa1f-2204-46d4-92b0-a5404482bfc1"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="20" width="19" height="23" uuid="d9eb77de-cc8c-47c8-a508-8857a78f100f"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="3" width="60" height="20" uuid="89f0957f-6a50-4480-84cc-e756f795ebce"/>
+				<text><![CDATA[No. Nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="3" width="19" height="23" uuid="4aec70c0-85c2-4be0-abd8-4498fcb90e65"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="23" width="73" height="20" uuid="3fc954c4-ed1b-4f59-b909-db1b8d58f6bb"/>
+				<text><![CDATA[Petugas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="23" width="19" height="23" uuid="fad336ea-8531-4642-bf70-b1e439882b65"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="40" width="73" height="20" uuid="6996d604-9b0c-4586-aeb6-c8aa440444f8"/>
+				<text><![CDATA[Catatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="40" width="19" height="23" uuid="5b34804a-c238-4c26-98ab-d6e0c570dd51"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="66" width="99" height="19" uuid="7bcf45e0-ecc6-44fd-9d43-08aa2e78637b"/>
+				<text><![CDATA[Harga Satuan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="67" width="117" height="19" uuid="7017c6cf-061b-40e7-9872-9e460e633551"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="195" y="44" width="73" height="20" uuid="006a85e8-1972-47e3-9feb-3a0e9bbbfb05"/>
+				<text><![CDATA[Tgl]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="44" width="19" height="23" uuid="e3ff4d6a-6253-4293-ac59-1aeb587faea6"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="282" y="46" width="100" height="20" uuid="12f3309a-3180-49fd-99eb-0cf6911d4728"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="1" width="41" height="20" uuid="f03b8a8d-1fb5-4ace-b8a6-d2d23863fa56"/>
+				<textFieldExpression><![CDATA[$F{jml}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="1" width="234" height="20" uuid="e49f6e99-149d-4654-86ed-fa91327f78e0"/>
+				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="1" width="19" height="20" uuid="31a47637-f774-4873-b347-cf0ac2427b69"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="0" width="100" height="20" uuid="a999d226-a503-44b9-9470-9743eddc941b"/>
+				<textFieldExpression><![CDATA[$F{harga_satuan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="447" y="2" width="100" height="20" uuid="9075d1c6-efca-4f21-9118-69ad102bfef8"/>
+				<textFieldExpression><![CDATA[$F{jml}*$F{harga_satuan}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="31" y="-23" width="1" height="47" uuid="d2f4ed22-75d2-4a9e-93b1-f9ce6224de1b"/>
+			</line>
+			<line>
+				<reportElement x="84" y="-23" width="1" height="47" uuid="e0d39b8e-aef8-46ed-a409-5e0aded7c5f7"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-21" width="1" height="45" uuid="6eedf11b-dd0f-4df4-bfc3-661824b1db29"/>
+			</line>
+			<line>
+				<reportElement x="332" y="-22" width="1" height="45" uuid="80e88a69-c3fb-46fa-b638-7e0ed4056daf"/>
+			</line>
+			<line>
+				<reportElement x="440" y="-21" width="1" height="45" uuid="cd27005d-d456-431d-848e-870ca81b6e47"/>
+			</line>
+			<line>
+				<reportElement x="555" y="-22" width="1" height="45" uuid="86d12828-ca6c-4acc-8962-8f0035a63eed"/>
+			</line>
+			<line>
+				<reportElement x="1" y="22" width="554" height="2" uuid="0f77fe29-29ac-4f0e-a8f8-4ab18607601b"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
