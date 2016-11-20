@@ -113,7 +113,7 @@ public class Crud_local extends DBKoneksi_local {
 
     }
     
-  public void CetakNota(String nonota) throws JRException {
+  public void CetakNota(String nonota,String tampil) throws JRException {
 
         InputStream is = null;
         is = getClass().getResourceAsStream("rpt_cetak.jrxml");
@@ -130,10 +130,12 @@ public class Crud_local extends DBKoneksi_local {
         //jp.setPageHeight(180);
        // jp.setOrientation(OrientationEnum.PORTRAIT);
 
+      
         JasperPrintManager.printReport(jp,false);
-        
-        JasperViewer.viewReport(jp, false);
-
+       
+        if(tampil.equals("ok")){
+            JasperViewer.viewReport(jp, false);
+        }
        
     }    
     

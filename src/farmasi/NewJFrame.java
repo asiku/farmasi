@@ -6,6 +6,7 @@
 package farmasi;
 
 import java.awt.Component;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,6 +39,8 @@ import javax.swing.table.TableModel;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
+    private String tampilrpt="";
+    
     private boolean cek=true;
     
     HashMap<String, String> cbrg = new HashMap<String, String>();
@@ -202,8 +205,10 @@ public class NewJFrame extends javax.swing.JFrame {
         //this.jp_barang.setVisible(false);
         this.jp_rm.setVisible(false); 
 
-       //set No nota
+        //set tampil report
+        this.jck_rpt.setSelected(true);
         
+       //set No nota
        Set_Nonota();
        
         txt_cari_rm.getDocument().addDocumentListener(new DocumentListener() {
@@ -598,6 +603,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 jtb_barangMouseReleased(evt);
             }
         });
+        jtb_barang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtb_barangKeyPressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(jtb_barang);
 
         txt_barang.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -742,6 +752,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.add(bt_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 14, -1, -1));
 
         jck_rpt.setText(" Tampilkan Report");
+        jck_rpt.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jck_rptItemStateChanged(evt);
+            }
+        });
         jPanel1.add(jck_rpt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 170, -1));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 860, 260));
@@ -865,6 +880,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void txt_catatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_catatanKeyPressed
         // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.txt_barang.requestFocus();
 
@@ -873,6 +891,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void txt_notaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_notaKeyPressed
         // TODO add your handling code here:
+        
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
+        
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.txt_catatan.requestFocus();
 
@@ -881,6 +904,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void txt_nama_pasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nama_pasienKeyPressed
         // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
+        
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.txt_nota.requestFocus();
 
@@ -893,6 +920,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
         
         // TODO add your handling code here:
+        
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             
@@ -940,6 +971,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
+        
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
+        
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             //   this.jp_barang.setVisible(false);
             // this.jp_rm.setVisible(false);
@@ -959,10 +995,14 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void txt_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_barangKeyPressed
         // TODO add your handling code here:
-//        if (evt.getKeyCode() == KeyEvent.VK_F1) {
-//            this.txt_jml.requestFocus();
-//
-//        }
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.jtb_barang.requestFocus();
+
+        }
     }//GEN-LAST:event_txt_barangKeyPressed
 
     private void txt_jmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_jmlActionPerformed
@@ -1119,6 +1159,7 @@ public class NewJFrame extends javax.swing.JFrame {
         
    if(!(this.txt_nota.getText().isEmpty()||this.txt_no_rm.getText().isEmpty()||this.txt_nama_pasien.getText().isEmpty()||this.txt_catatan.getText().isEmpty())){       
   
+       jtb_transaksi.requestFocus();
        
       try {
   
@@ -1138,7 +1179,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         Double.valueOf(dm.getValueAt(i, 3).toString()),dm.getValueAt(i, 2).toString(),Double.valueOf(dm.getValueAt(i, 4).toString()));
             }
       
-             datl.CetakNota(this.txt_nota.getText());
+             datl.CetakNota(this.txt_nota.getText(),tampilrpt);
             
              this.Hapussemua();
              
@@ -1171,6 +1212,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void txt_petugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_petugasKeyPressed
         // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
     }//GEN-LAST:event_txt_petugasKeyPressed
 
     private void jtb_registrasiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_registrasiMouseReleased
@@ -1186,6 +1230,22 @@ public class NewJFrame extends javax.swing.JFrame {
             savePrint();
         }
     }//GEN-LAST:event_jtb_transaksiKeyPressed
+
+    private void jck_rptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jck_rptItemStateChanged
+        // TODO add your handling code here:
+        if(evt.getStateChange() == ItemEvent.SELECTED) {//checkbox has been selected
+           tampilrpt="ok";
+        } else {
+            tampilrpt="no";
+        }
+    }//GEN-LAST:event_jck_rptItemStateChanged
+
+    private void jtb_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_barangKeyPressed
+        // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
+    }//GEN-LAST:event_jtb_barangKeyPressed
 
     /**
      * @param args the command line arguments
