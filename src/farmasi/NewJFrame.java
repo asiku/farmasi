@@ -676,6 +676,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel3.add(jp_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 860, 210));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtb_transaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -699,7 +700,14 @@ public class NewJFrame extends javax.swing.JFrame {
                 jtb_transaksiMouseClicked(evt);
             }
         });
+        jtb_transaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtb_transaksiKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtb_transaksi);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 50, 832, 201));
 
         bt_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/hps_ico.png"))); // NOI18N
         bt_hapus.setText("Hapus Semua");
@@ -708,6 +716,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 bt_hapusActionPerformed(evt);
             }
         });
+        jPanel1.add(bt_hapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(693, 15, -1, -1));
 
         bt_simpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/save_ico.png"))); // NOI18N
         bt_simpan.setText("Save & Print");
@@ -716,33 +725,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 bt_simpanActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bt_simpan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bt_hapus))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_hapus)
-                    .addComponent(bt_simpan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel1.add(bt_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 14, -1, -1));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 860, 260));
 
@@ -1039,8 +1022,9 @@ public class NewJFrame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_bt_hapusActionPerformed
 
-    private void bt_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_simpanActionPerformed
-   
+    
+    private void savePrint(){
+       
    int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Data Sudah Benar?","Warning ",
    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
    
@@ -1091,7 +1075,11 @@ public class NewJFrame extends javax.swing.JFrame {
          }
        
        }    
-   
+
+    }
+    
+    private void bt_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_simpanActionPerformed
+        savePrint();
     }//GEN-LAST:event_bt_simpanActionPerformed
 
     private void txt_petugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_petugasKeyPressed
@@ -1104,6 +1092,13 @@ public class NewJFrame extends javax.swing.JFrame {
             set_pasien();
         }
     }//GEN-LAST:event_jtb_registrasiMouseReleased
+
+    private void jtb_transaksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_transaksiKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_F1) {
+            savePrint();
+        }
+    }//GEN-LAST:event_jtb_transaksiKeyPressed
 
     /**
      * @param args the command line arguments
