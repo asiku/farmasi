@@ -180,7 +180,18 @@ public class NewJFrame extends javax.swing.JFrame {
 
         return DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
     }
+ 
+    private void Set_Nonota() throws Exception{
+         datl = new Crud_local();
 
+        try {
+            this.txt_nota.setText("PJ-"+String.valueOf(datl.readRec_count()+1));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public NewJFrame() throws Exception {
         initComponents();
 
@@ -189,17 +200,12 @@ public class NewJFrame extends javax.swing.JFrame {
         txt_tgl.setText(tglsekarang());
 
         //this.jp_barang.setVisible(false);
-        this.jp_rm.setVisible(false);
+        this.jp_rm.setVisible(false); 
 
-        datl = new Crud_local();
-
-        try {
-            this.txt_nota.setText("PJ-"+String.valueOf(datl.readRec_count()+1));
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       //set No nota
         
+       Set_Nonota();
+       
         txt_cari_rm.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -415,6 +421,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jtb_transaksi = new javax.swing.JTable();
         bt_hapus = new javax.swing.JButton();
         bt_simpan = new javax.swing.JButton();
+        jck_rpt = new javax.swing.JCheckBox();
         txt_petugas = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txt_tgl = new javax.swing.JLabel();
@@ -727,6 +734,9 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jPanel1.add(bt_simpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(537, 14, -1, -1));
 
+        jck_rpt.setText(" Tampilkan Report");
+        jPanel1.add(jck_rpt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 170, -1));
+
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 860, 260));
 
         txt_petugas.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -742,7 +752,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Penjualan", jPanel3);
 
-        jLabel10.setText("F1 : Print     Ctrl + c : Cari");
+        jLabel10.setText("F1 : Print  Ctrl + c : Cari    [ untuk mencari No. RM ketik di inputan No. RM Enter ]");
 
         lbl_grand_tot.setText("Rp.");
 
@@ -755,8 +765,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(lbl_grand_tot, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -768,9 +778,9 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_grand_tot))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_grand_tot)
+                    .addComponent(jLabel10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1049,7 +1059,7 @@ public class NewJFrame extends javax.swing.JFrame {
       
             for (int i = rowCount - 1; i >= 0; i--) {
                 datl.Save_detail_trans(this.txt_nota.getText(), Integer.valueOf(dm.getValueAt(i, 1).toString()), "-", 
-                        Double.valueOf(dm.getValueAt(i, 3).toString()),dm.getValueAt(i, 2).toString(),Double.valueOf(dm.getValueAt(i, 5).toString()));
+                        Double.valueOf(dm.getValueAt(i, 3).toString()),dm.getValueAt(i, 2).toString(),Double.valueOf(dm.getValueAt(i, 4).toString()));
             }
       
              datl.CetakNota(this.txt_nota.getText());
@@ -1057,6 +1067,7 @@ public class NewJFrame extends javax.swing.JFrame {
              this.Hapussemua();
              
              this.txt_no_rm.requestFocus();
+             Set_Nonota();
          }
          else{
             JOptionPane.showMessageDialog(null, "Data  transaksi Obat Belum ada!");
@@ -1223,6 +1234,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JCheckBox jck_rpt;
     private javax.swing.JPanel jp_barang;
     private javax.swing.JPanel jp_rm;
     private javax.swing.JTable jtb_barang;
