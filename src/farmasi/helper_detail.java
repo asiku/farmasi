@@ -16,5 +16,6 @@ public class helper_detail {
     public static String KEY_SATUAN = "satuan";
     public static String KEY_HARGA_SATUAN = "harga_satuan";
     public static String KEY_NAMA_BRG = "nama_barang";
+    public static String KEY_TOTAL = "total";
     
 }

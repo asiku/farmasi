@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.type.OrientationEnum;
 import net.sf.jasperreports.view.JasperViewer;
@@ -57,18 +58,19 @@ public class Crud_local extends DBKoneksi_local {
       return r;        
     } 
    
-   public void Save_detail_trans(String no_nota, int jml, String satuan, double hargasatuan,String nmbrg) {
+   public void Save_detail_trans(String no_nota, int jml, String satuan, double hargasatuan,String nmbrg,double total) {
 
         try {
             preparedStatement = connect.prepareStatement("insert into " + helper_detail.TB_NAME + " (" + helper_detail.KEY_NO_NOTA + "," + helper_detail.KEY_JML
                     + "," + helper_detail.KEY_SATUAN + "," + helper_detail.KEY_HARGA_SATUAN + "," + helper_detail.KEY_NAMA_BRG+ ") "
-                    + " values (?,?,?,?,?)");
+                    + " values (?,?,?,?,?,?)");
 
             preparedStatement.setString(1, no_nota);
             preparedStatement.setInt(2, jml);
             preparedStatement.setString(3, satuan);
             preparedStatement.setDouble(4, hargasatuan);
             preparedStatement.setString(5, nmbrg);
+           preparedStatement.setDouble(6, total);
            
             preparedStatement.execute();
 
@@ -126,10 +128,14 @@ public class Crud_local extends DBKoneksi_local {
         JasperPrint jp = JasperFillManager.fillReport(jr, map, connect);
         //jp.setPageWidth(200);
         //jp.setPageHeight(180);
-        jp.setOrientation(OrientationEnum.PORTRAIT);
+       // jp.setOrientation(OrientationEnum.PORTRAIT);
 
+        JasperPrintManager.printReport(jp,false);
+        
         JasperViewer.viewReport(jp, false);
 
+       
     }    
     
+ 
 }

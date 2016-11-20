@@ -1049,7 +1049,7 @@ public class NewJFrame extends javax.swing.JFrame {
       
             for (int i = rowCount - 1; i >= 0; i--) {
                 datl.Save_detail_trans(this.txt_nota.getText(), Integer.valueOf(dm.getValueAt(i, 1).toString()), "-", 
-                        Integer.valueOf(dm.getValueAt(i, 3).toString()),dm.getValueAt(i, 2).toString());
+                        Double.valueOf(dm.getValueAt(i, 3).toString()),dm.getValueAt(i, 2).toString(),Double.valueOf(dm.getValueAt(i, 5).toString()));
             }
       
              datl.CetakNota(this.txt_nota.getText());
