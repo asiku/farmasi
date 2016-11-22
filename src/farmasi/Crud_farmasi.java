@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -49,6 +51,34 @@ public class Crud_farmasi extends DBkoneksi {
     };
     
     
+ 
+    public String readRec_pasien(String norm) throws SQLException {
+
+         String nmp="";
+       
+         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_pasien.TB_NAME + " WHERE "
+                + helper_pasien.KEY_NO_RM + " =?");
+
+        preparedStatement.setString(1, norm);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0;
+
+        while (resultSet.next()) {
+
+           
+            String rm = resultSet.getString(helper_pasien.KEY_NO_RM);
+            nmp = resultSet.getString(helper_pasien.KEY_NM_PASIEN);
+          
+          
+            
+        }
+        
+        return nmp;
+        
+        
+    }
  
     
     
@@ -168,8 +198,10 @@ public void readRec_brgF(String namabrg) throws SQLException {
             String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
             String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
             String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
-
-            modelreg.addRow(new Object[]{no, rm, nmp, reg});
+           
+         
+              modelreg.addRow(new Object[]{no, rm, nmp, reg});
+           
         }
     }
     

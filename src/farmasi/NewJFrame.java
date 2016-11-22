@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -189,7 +190,7 @@ public class NewJFrame extends javax.swing.JFrame {
          datl = new Crud_local();
 
         try {
-            this.txt_nota.setText("PJ-"+String.valueOf(datl.readRec_count()+1));
+            this.txt_nota.setText("PJ-"+LocalDateTime.now().getSecond()+"-"+String.valueOf(datl.readRec_count()+1));
             
         } catch (SQLException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -454,6 +455,7 @@ public class NewJFrame extends javax.swing.JFrame {
         txt_tgl = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lbl_grand_tot = new javax.swing.JLabel();
+        jcmb_catatan = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -602,7 +604,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txt_catatan);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 68, 386, 70));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 78, 386, 60));
 
         jLabel5.setText("Catatan");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, -1));
@@ -801,6 +803,14 @@ public class NewJFrame extends javax.swing.JFrame {
         lbl_grand_tot.setText("Rp.");
         jPanel3.add(lbl_grand_tot, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 650, 240, -1));
 
+        jcmb_catatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rawat Jalan", "Rawat Inap", "Penjualan Bebas" }));
+        jcmb_catatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmb_catatanActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jcmb_catatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 240, -1));
+
         jTabbedPane1.addTab("Penjualan", jPanel3);
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -963,9 +973,30 @@ public class NewJFrame extends javax.swing.JFrame {
                 dat = new Crud_farmasi();
                 dat.readRec_registrasiRM(this.txt_no_rm.getText(), tglsekarang());
                 
-                this.txt_no_rm.setText(dat.modelreg.getValueAt(0, 1).toString());
-                this.txt_nama_pasien.setText(dat.modelreg.getValueAt(0, 2).toString());
-                this.txt_nama_pasien.requestFocus();
+              if(dat.modelreg.getRowCount()>0){  
+                    this.txt_no_rm.setText(dat.modelreg.getValueAt(0, 1).toString());
+                    this.txt_nama_pasien.setText(dat.modelreg.getValueAt(0, 2).toString());
+                    this.txt_nama_pasien.requestFocus();
+              }
+              else{
+                      this.txt_nama_pasien.setText("");
+                      this.txt_no_rm.requestFocus();
+              }
+                // ga ketemu cari di data pasien
+                if(this.txt_nama_pasien.getText().isEmpty()){
+                     dat = new Crud_farmasi();
+                     this.txt_nama_pasien.setText(dat.readRec_pasien(this.txt_no_rm.getText()));
+                     if(this.txt_nama_pasien.getText().isEmpty()){
+                     JOptionPane.showMessageDialog(null, "Data Tidak di Temukan!");
+                      this.txt_nama_pasien.setText("");
+                      this.txt_no_rm.requestFocus();
+                     }
+                     else{
+                     this.txt_nama_pasien.requestFocus();
+                     }
+                }
+                
+                
               
             } catch (Exception ex) {
                  JOptionPane.showMessageDialog(null, "Data Tidak di Temukan!");
@@ -1315,6 +1346,11 @@ public class NewJFrame extends javax.swing.JFrame {
      }
     }//GEN-LAST:event_bt_cari_historyActionPerformed
 
+    private void jcmb_catatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmb_catatanActionPerformed
+        // TODO add your handling code here:
+        this.txt_catatan.setText(jcmb_catatan.getSelectedItem().toString());
+    }//GEN-LAST:event_jcmb_catatanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1464,6 +1500,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JCheckBox jck_rpt;
+    private javax.swing.JComboBox<String> jcmb_catatan;
     private javax.swing.JPanel jp_barang;
     private javax.swing.JPanel jp_rm;
     private javax.swing.JTable jtb_barang;
