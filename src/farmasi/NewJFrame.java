@@ -127,10 +127,10 @@ public class NewJFrame extends javax.swing.JFrame {
           if(cbrg.size()==0 ) { 
 
               modeltrans.addRow(new Object[]{i,
-                "",
+                this.txt_hit_jml.getText(),
                 jtb_barang.getModel().getValueAt(row, 1).toString(),
-                "",
-                0});
+                this.txt_hit_harga.getText(),
+                hitung()});
 
             this.jtb_transaksi.setModel(modeltrans);
           
@@ -142,10 +142,10 @@ public class NewJFrame extends javax.swing.JFrame {
               if(!cbrg.containsKey(jtb_barang.getModel().getValueAt(row, 1)))
               {       
                   modeltrans.addRow(new Object[]{i,
-                "",
+              this.txt_hit_jml.getText(),
                 jtb_barang.getModel().getValueAt(row, 1).toString(),
-                "",
-                0});
+                this.txt_hit_harga.getText(),
+                hitung()});
 
             this.jtb_transaksi.setModel(modeltrans);
           
@@ -170,21 +170,28 @@ public class NewJFrame extends javax.swing.JFrame {
 //           jobnum=jTable2.getModel().getValueAt(row, 7).toString();
         }
 
+        
+        
+        
     }
 
-    public void hitung() {
+    public Double hitung() {
+        
+        Double tot=0.0;
 
-        if ((txt_jml.getText().isEmpty() || txt_harga_satuan.getText().isEmpty())) {
+        if ((txt_hit_jml.getText().isEmpty() || txt_hit_harga.getText().isEmpty())) {
             //Double tot=Double.valueOf(this.txt_jml.getText())*Double.valueOf(this.txt_harga_satuan.getText());
             //this.lbl_total.setText(Double.valueOf(tot).toString());
-            this.lbl_total.setText("0");
+            this.lbl_hit_total.setText("0");
         } else {
             //this.lbl_total.setText("isi");
-            Double tot = Double.valueOf(this.txt_jml.getText()) * Double.valueOf(this.txt_harga_satuan.getText());
+             tot = Double.valueOf(this.txt_hit_jml.getText()) * Double.valueOf(this.txt_hit_harga.getText());
 
             String fr = formatuang(tot);
-            this.lbl_total.setText(fr);
+            this.lbl_hit_total.setText(fr);
         }
+        
+        return tot;
     }
 
     private String tglsekarang() {
@@ -194,15 +201,15 @@ public class NewJFrame extends javax.swing.JFrame {
         return DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
     }
  
-    private void Set_Nonota() throws Exception{
-         datl = new Crud_local();
+    private void Set_Nonota() {
+         //datl = new Crud_local();
 
-        try {
-            this.txt_nota.setText("PJ-"+LocalDateTime.now().getSecond()+"-"+String.valueOf(datl.readRec_count()+1));
+        //try {
+           // this.txt_nota.setText("PJ-"+LocalDateTime.now().getSecond()+"-"+String.valueOf(datl.readRec_count()+1));
             
-        } catch (SQLException ex) {
-            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //} catch (SQLException ex) {
+          
+        this.txt_nota.setText("PJ-"+LocalDateTime.now().getSecond()+"-"+String.valueOf(LocalDateTime.now().getSecond()+1));
     }
     
     public NewJFrame() throws Exception {
@@ -227,6 +234,39 @@ public class NewJFrame extends javax.swing.JFrame {
        //set No nota
        Set_Nonota();
        
+        txt_hit_harga.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               hitung();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               hitung();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               hitung();
+            }
+        });
+       
+       txt_hit_jml.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               hitung();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               hitung();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               hitung();
+            }
+        });
        
        txt_history.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -455,7 +495,12 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jDlg_itung = new javax.swing.JDialog();
         txt_hit_jml = new javax.swing.JTextField();
-        jlbl_barang = new javax.swing.JLabel();
+        lbl_barang = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txt_hit_harga = new javax.swing.JTextField();
+        bt_det_proses = new javax.swing.JButton();
+        lbl_hit_total = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         bt_cari_rm = new javax.swing.JButton();
@@ -509,29 +554,91 @@ public class NewJFrame extends javax.swing.JFrame {
         bt_cari_history = new javax.swing.JButton();
 
         jDlg_itung.setModal(true);
-        jDlg_itung.setSize(new java.awt.Dimension(400, 400));
+        jDlg_itung.setSize(new java.awt.Dimension(400, 250));
 
         txt_hit_jml.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txt_hit_jml.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_hit_jmlActionPerformed(evt);
+            }
+        });
+        txt_hit_jml.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_hit_jmlKeyPressed(evt);
+            }
+        });
+
+        jLabel12.setText("Jml");
+
+        jLabel13.setText("Harga");
+
+        txt_hit_harga.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txt_hit_harga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_hit_hargaActionPerformed(evt);
+            }
+        });
+        txt_hit_harga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_hit_hargaKeyPressed(evt);
+            }
+        });
+
+        bt_det_proses.setText("Proses");
+        bt_det_proses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_det_prosesActionPerformed(evt);
+            }
+        });
+
+        lbl_hit_total.setText("RP.");
 
         javax.swing.GroupLayout jDlg_itungLayout = new javax.swing.GroupLayout(jDlg_itung.getContentPane());
         jDlg_itung.getContentPane().setLayout(jDlg_itungLayout);
         jDlg_itungLayout.setHorizontalGroup(
             jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDlg_itungLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlbl_barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_hit_jml, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDlg_itungLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGroup(jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_hit_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_hit_jml, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jDlg_itungLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bt_det_proses, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                            .addComponent(lbl_hit_total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDlg_itungLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lbl_barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jDlg_itungLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txt_hit_harga, txt_hit_jml});
+
         jDlg_itungLayout.setVerticalGroup(
             jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDlg_itungLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jlbl_barang, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbl_barang, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_hit_jml, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGroup(jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_hit_jml, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(jDlg_itungLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_hit_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_hit_total)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(bt_det_proses)
+                .addGap(20, 20, 20))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -805,7 +912,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jtb_registrasi);
 
-        jLayeredPane4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 360, 320));
+        jLayeredPane4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 360, 510));
 
         jTabbedPane2.addTab("Data Registrasi Pasien", jLayeredPane4);
 
@@ -1338,8 +1445,28 @@ public class NewJFrame extends javax.swing.JFrame {
 //            //this.formdetail.setAlwaysOnTop(true);
 //            this.formdetail.setLocationRelativeTo(null);
 //             this.formdetail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                
+  int row = this.jtb_barang.getSelectedRow();
+
+        if (row != -1) {
+          
+          if(!cbrg.containsKey(jtb_barang.getModel().getValueAt(row, 1)))
+              {       
                 jDlg_itung.setLocationRelativeTo(this);
                 this.jDlg_itung.setVisible(true);
+                this.txt_hit_harga.setText("");
+                this.txt_hit_jml.setText("");
+                this.txt_hit_jml.requestFocus();
+              }
+              else{
+                  JOptionPane.showMessageDialog(null, "Data Obat Ada Yang Sama!");
+              }
+            
+          
+        } 
+
+                
+             
                 
         }
     }//GEN-LAST:event_jtb_barangKeyPressed
@@ -1396,6 +1523,44 @@ public class NewJFrame extends javax.swing.JFrame {
             set_pasien();
         }
     }//GEN-LAST:event_jtb_registrasiMouseReleased
+
+    private void txt_hit_jmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hit_jmlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hit_jmlActionPerformed
+
+    private void txt_hit_hargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hit_hargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hit_hargaActionPerformed
+
+    private void txt_hit_jmlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_jmlKeyPressed
+        // TODO add your handling code here:
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           txt_hit_harga.requestFocus();
+       }
+    }//GEN-LAST:event_txt_hit_jmlKeyPressed
+
+    private void txt_hit_hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_hargaKeyPressed
+        // TODO add your handling code here:
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           set_trans();
+           this.Set_Nonota();
+           this.jDlg_itung.setVisible(false);
+           this.txt_hit_harga.setText("0");
+           this.txt_hit_jml.setText("0");
+           this.lbl_hit_total.setText("0");
+       }
+        
+    }//GEN-LAST:event_txt_hit_hargaKeyPressed
+
+    private void bt_det_prosesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_det_prosesActionPerformed
+        // TODO add your handling code here:
+        set_trans();
+           
+           this.jDlg_itung.setVisible(false);
+           this.txt_hit_harga.setText("0");
+           this.txt_hit_jml.setText("0");
+           this.lbl_hit_total.setText("0");
+    }//GEN-LAST:event_bt_det_prosesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1521,6 +1686,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_cari_history;
     private javax.swing.JButton bt_cari_rm;
+    private javax.swing.JButton bt_det_proses;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_proses_cari_registrasi;
     private javax.swing.JButton bt_simpan;
@@ -1528,6 +1694,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1551,7 +1719,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JCheckBox jck_rpt;
     private javax.swing.JComboBox<String> jcmb_catatan;
-    private javax.swing.JLabel jlbl_barang;
     private javax.swing.JPanel jp_barang;
     private javax.swing.JTable jtb_barang;
     private javax.swing.JTable jtb_history;
@@ -1559,13 +1726,16 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTable jtb_transaksi;
     private uz.ncipro.calendar.JDateTimePicker jtgl;
     private uz.ncipro.calendar.JDateTimePicker jtgl_history;
+    private javax.swing.JLabel lbl_barang;
     private javax.swing.JLabel lbl_grand_tot;
+    private javax.swing.JLabel lbl_hit_total;
     private javax.swing.JLabel lbl_total;
     private javax.swing.JTextField txt_barang;
     private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextArea txt_catatan;
     private javax.swing.JTextField txt_harga_satuan;
     private javax.swing.JTextField txt_history;
+    private javax.swing.JTextField txt_hit_harga;
     private javax.swing.JTextField txt_hit_jml;
     private javax.swing.JTextField txt_jml;
     private javax.swing.JTextField txt_nama_pasien;
