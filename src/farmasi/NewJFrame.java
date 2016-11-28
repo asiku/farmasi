@@ -45,8 +45,8 @@ import javax.swing.table.TableModel;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
-    frm_detail formdetail=new frm_detail();
-    
+    //frm_detail formdetail=new frm_detail();
+    String aX="";
     
     private String tampilrpt="";
     
@@ -469,6 +469,21 @@ public class NewJFrame extends javax.swing.JFrame {
 
     }
 
+    private void filterbrg(String kt) {
+        try {
+            dat = new Crud_farmasi();
+            try {
+                dat.readRec_brgF(kt);
+            } catch (SQLException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            this.jtb_barang.setModel(dat.modelbrg);
+        } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void filterbrg() {
         try {
             dat = new Crud_farmasi();
@@ -738,6 +753,9 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
         jtb_barang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtb_barangKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtb_barangKeyPressed(evt);
             }
@@ -1435,11 +1453,13 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jtb_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_barangKeyPressed
         // TODO add your handling code here:
+        
+        
          if (evt.getKeyCode() == KeyEvent.VK_F1) {
             savePrint();
         }
          
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+         else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 //            this.formdetail.setVisible(true);
 //            this.formdetail.pack();
 //            //this.formdetail.setAlwaysOnTop(true);
@@ -1451,7 +1471,8 @@ public class NewJFrame extends javax.swing.JFrame {
         if (row != -1) {
           
           if(!cbrg.containsKey(jtb_barang.getModel().getValueAt(row, 1)))
-              {       
+              {      
+                lbl_barang.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
                 jDlg_itung.setLocationRelativeTo(this);
                 this.jDlg_itung.setVisible(true);
                 this.txt_hit_harga.setText("");
@@ -1464,11 +1485,20 @@ public class NewJFrame extends javax.swing.JFrame {
             
           
         } 
-
-                
-             
-                
+          
         }
+//       else if(evt.getKeyCode() == evt.getKeyChar())
+       
+//        {
+//           
+//             
+//                  
+//        this.txt_barang.requestFocus();
+//        this.txt_barang.setText(String.valueOf(evt.getKeyChar()));
+//      
+//            jtb_barang.setRowSelectionInterval(0, 0);
+//        
+//        }   
     }//GEN-LAST:event_jtb_barangKeyPressed
 
     private void bt_cari_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_historyActionPerformed
@@ -1537,6 +1567,11 @@ public class NewJFrame extends javax.swing.JFrame {
        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
            txt_hit_harga.requestFocus();
        }
+       
+       if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+           this.jDlg_itung.setVisible(false);
+       }
+       
     }//GEN-LAST:event_txt_hit_jmlKeyPressed
 
     private void txt_hit_hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_hargaKeyPressed
@@ -1549,6 +1584,11 @@ public class NewJFrame extends javax.swing.JFrame {
            this.txt_hit_jml.setText("0");
            this.lbl_hit_total.setText("0");
        }
+       
+       if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+           this.jDlg_itung.setVisible(false);
+       }
+       
         
     }//GEN-LAST:event_txt_hit_hargaKeyPressed
 
@@ -1561,6 +1601,16 @@ public class NewJFrame extends javax.swing.JFrame {
            this.txt_hit_jml.setText("0");
            this.lbl_hit_total.setText("0");
     }//GEN-LAST:event_bt_det_prosesActionPerformed
+
+    private void jtb_barangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_barangKeyTyped
+        // TODO add your handling code here
+        char keyChar = evt.getKeyChar();
+        
+        this.txt_barang.requestFocus();
+        this.txt_barang.setText(String.valueOf(keyChar));
+      
+            jtb_barang.setRowSelectionInterval(0, 0);
+    }//GEN-LAST:event_jtb_barangKeyTyped
 
     /**
      * @param args the command line arguments
