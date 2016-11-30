@@ -8,17 +8,39 @@ package tarif;
 import farmasi.Crud_local;
 import farmasi.NewJFrame;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.paint.Color;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static javax.swing.SwingUtilities.paintComponent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import tools.ScreenImage;
 import tools.Utilitas;
 
 /**
@@ -30,6 +52,19 @@ public class frm_tarif extends javax.swing.JFrame {
     /**
      * Creates new form frm_tarif
      */
+ 
+   int myx = 0;
+    int myy = 0;
+ 
+     
+     private int pos=0;
+  private Image image;
+  // Graphics2D object ==> used to draw on
+  private Graphics2D ig2;
+  private BufferedImage bi;
+  // Mouse coordinates
+  private int currentX, currentY, oldX, oldY;
+  private   HashMap<String,Integer > points = new HashMap<String,Integer>();
     
      private Crud_local datl;
      
@@ -37,9 +72,45 @@ public class frm_tarif extends javax.swing.JFrame {
      
     public frm_tarif() {
         initComponents();
+        
+        
       
        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+      
+    
+       
+      this.jPanel3.addMouseMotionListener(new MouseMotionAdapter() {
+      public void mouseDragged(MouseEvent e) {
+ 
+       
+        currentX = e.getX();
+        currentY = e.getY();
+          
+            ig2=(Graphics2D) jPanel3.getGraphics();
+    
+            pos++;
+            
+            points.put("oldX"+pos, oldX);
+            points.put("oldY"+pos, oldY);
+            points.put("currentX"+pos, currentX);
+            points.put("currentY"+pos, currentY);
+            
+          ig2.drawLine(oldX, oldY, currentX, currentY);
+          
+         
+          oldX = currentX;
+          oldY = currentY;
+
+ // coord x,y when drag mouse
+       
+      
+   
+       
+      }
+    });
+       
+       
+       
        txt_tarif.addFocusListener(new FocusListener() {
 
             @Override
@@ -485,6 +556,7 @@ public class frm_tarif extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        bt_hapus_ttd = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -913,6 +985,14 @@ public class frm_tarif extends javax.swing.JFrame {
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 430, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel3MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel3MouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -941,6 +1021,11 @@ public class frm_tarif extends javax.swing.JFrame {
         jPanel4.add(jDateTimePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 160, -1));
 
         bt_pengesah.setText("Publish Tarif Pengesah");
+        bt_pengesah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_pengesahActionPerformed(evt);
+            }
+        });
         jPanel4.add(bt_pengesah, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 260, -1));
 
         bt_cari_verif.setText("...");
@@ -970,6 +1055,14 @@ public class frm_tarif extends javax.swing.JFrame {
 
         jLabel8.setText("Log Perubahan Data Publish");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 230, -1));
+
+        bt_hapus_ttd.setText("Hapus TTD");
+        bt_hapus_ttd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_hapus_ttdActionPerformed(evt);
+            }
+        });
+        jPanel4.add(bt_hapus_ttd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 185, 120, 20));
 
         jTabbedPane1.addTab("Verifikasi dan Pengesahan", jPanel4);
 
@@ -1232,6 +1325,57 @@ public class frm_tarif extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_saranaKeyPressed
 
     
+    private void corat_coret(int oldx,int oldy){
+   
+
+//      jPanel3=new javax.swing.JPanel() {
+//            @Override
+//            protected void paintComponent(Graphics g) {
+//                super.paintComponent(g);
+//               Graphics2D gr = (Graphics2D) g;
+//              gr.setColor(Color.BLACK);
+//              
+//              gr.drawLine(oldX, oldX, oldX, oldX);
+//            }
+//        };
+
+    Graphics g=jPanel3.getGraphics();
+    
+    g.drawLine(0, 0, oldy, oldy);
+
+    }
+    
+    private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
+        // TODO add your handling code here:
+       // corat_coret(evt.getX(),evt.getY());
+//        System.out.println("X : " +evt.getX());
+//        System.out.println("Y : " +evt.getY());
+      oldX=evt.getX();
+     oldY=evt.getY();
+
+ 
+    }//GEN-LAST:event_jPanel3MousePressed
+
+    private void bt_hapus_ttdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapus_ttdActionPerformed
+        // TODO add your handling code here:
+        this.jPanel3.repaint();
+    }//GEN-LAST:event_bt_hapus_ttdActionPerformed
+
+    private void bt_pengesahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pengesahActionPerformed
+     try {
+         // TODO add your handling code here:
+
+         saveImage();
+     } catch (IOException ex) {
+         Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+     }
+    }//GEN-LAST:event_bt_pengesahActionPerformed
+
+    private void jPanel3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel3MouseReleased
+
+    
     private void filterpoli(){
     
           try {
@@ -1370,6 +1514,67 @@ public class frm_tarif extends javax.swing.JFrame {
    
     }
     
+    
+    public void saveImage() throws IOException {
+         
+     //   Graphics2D g2 = bi.createGraphics();
+//
+//Graphics2D g = bi.createGraphics();
+//g.drawImage(image, 0, 0, null);
+//g.dispose();
+        
+  //  jPanel3.paint(g);
+       
+      // BufferedImage bix = ScreenImage.createImage(jPanel3);
+       //ScreenImage.writeImage(bix, "Screen-Image.jpg");
+       
+ 
+//  ig2.(Color.WHITE);
+//  ig2.drawLine(oldX, oldY, currentX, currentY);
+  //jPanel3.printAll();
+  // int width = this.jPanel3.getWidth(), height = this.jPanel3.getHeight();
+      //  g2.dispose();
+       
+
+      
+      
+      //ig2.drawString(message, (width - stringWidth) / 2, height / 2 + stringHeight / 4);
+      
+      //ig2.drawLine(oldX, oldY, (width - currentX) / 2, currentY / 2 + height / 4);
+      
+      int w=jPanel3.getWidth(),h=jPanel3.getHeight();
+       
+      bi=new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
+       
+     ig2=bi.createGraphics();
+     
+    
+     ig2.setColor(java.awt.Color.RED);
+    //  ig2.drawLine(oldX, oldY, (w - currentX) / 2, h / 2 + h / 4);
+      
+    
+    
+      
+       //  System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
+         //System.out.println(mentry.getValue());
+          //ig2.drawLine(oldX, oldY, currentX, currentY);
+        
+    for(int i=1;i<pos;i++){  
+         System.out.println("oldX"+i);
+          ig2.drawLine(points.get("oldX"+i), points.get("oldY"+i), points.get("currentX"+i),points.get("currentY"+i));
+    }
+      
+      pos=0;
+      
+        try
+        {
+            ImageIO.write(bi, "jpg", new File("clip.jpg"));
+        }
+        catch(IOException ioe)
+        {
+            System.out.println("Clip write help: " + ioe.getMessage());
+        }
+    }
       
     /**
      * @param args the command line arguments
@@ -1414,6 +1619,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JButton bt_cetak;
     private javax.swing.JButton bt_delete;
     private javax.swing.JButton bt_edit;
+    private javax.swing.JButton bt_hapus_ttd;
     private javax.swing.JButton bt_pengesah;
     private javax.swing.JButton bt_pengesah1;
     private javax.swing.JButton bt_save;
