@@ -565,6 +565,9 @@ public class frm_tarif extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_rsKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_rsKeyPressed(evt);
+            }
         });
 
         txt_dr.setText("0");
@@ -572,12 +575,18 @@ public class frm_tarif extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_drKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_drKeyPressed(evt);
+            }
         });
 
         txt_sarana.setText("0");
         txt_sarana.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_saranaKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_saranaKeyPressed(evt);
             }
         });
 
@@ -745,7 +754,7 @@ public class frm_tarif extends javax.swing.JFrame {
 
         jLabel4.setText("Status");
 
-        cmb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rawat Jalan", "Rawat Inap", "BPJS" }));
+        cmb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Rawat Jalan", "Rawat Inap", "BPJS" }));
         cmb_status.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmb_statusKeyPressed(evt);
@@ -1111,16 +1120,28 @@ public class frm_tarif extends javax.swing.JFrame {
                 if(this.txt_kode_tarif.getText().isEmpty()||txt_nama_tarif.getText().isEmpty()||
                         txt_poli.getText().isEmpty()||txt_tarif.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null, "Maaf Data Inputan Ada yg Kosong!");
+                    this.txt_kode_tarif.requestFocus();
                 }
                 else{
                   if(txt_tarif.getText().equals("0")){
                       JOptionPane.showMessageDialog(null, "Maaf Tarif/Presentase Tidak Boleh 0!");
+                      this.txt_tarif.requestFocus();
                   }
                   else if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))<100){
                    JOptionPane.showMessageDialog(null, "Maaf Presentase kurang dari 100 !");
+                    this.txt_rs.requestFocus();
                   }
                   else{
-                  
+                     if(!this.cmb_status.getSelectedItem().equals(" ")){
+                        //save
+                        
+                         
+                     }
+                     else{
+                      JOptionPane.showMessageDialog(null, "Maaf Status Tidak Boleh Kosong !");
+                      this.cmb_status.requestFocus();
+                     
+                     }
                   }
                 }
         }
@@ -1188,6 +1209,27 @@ public class frm_tarif extends javax.swing.JFrame {
      
       lbl_cepe.setText(" "+pr +" %");
     }//GEN-LAST:event_bt_saveMouseEntered
+
+    private void txt_rsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rsKeyPressed
+        // TODO add your handling code here:
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_dr.requestFocus();
+        }
+    }//GEN-LAST:event_txt_rsKeyPressed
+
+    private void txt_drKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_drKeyPressed
+        // TODO add your handling code here:
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_sarana.requestFocus();
+        }
+    }//GEN-LAST:event_txt_drKeyPressed
+
+    private void txt_saranaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_saranaKeyPressed
+        // TODO add your handling code here:
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.bt_save.requestFocus();
+        }
+    }//GEN-LAST:event_txt_saranaKeyPressed
 
     
     private void filterpoli(){
