@@ -1475,6 +1475,8 @@ public class NewJFrame extends javax.swing.JFrame {
                 lbl_barang.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
                 jDlg_itung.setLocationRelativeTo(this);
                 this.jDlg_itung.setVisible(true);
+                
+                //
                 this.txt_hit_harga.setText("");
                 this.txt_hit_jml.setText("");
                 this.txt_hit_jml.requestFocus();

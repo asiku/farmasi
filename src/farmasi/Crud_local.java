@@ -37,6 +37,15 @@ public class Crud_local extends DBKoneksi_local {
     
      String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Petugas","Tgl","Nama Barang","Jml", "Harga Satuan", "Total"};
     
+     String[] poli_title= new String[]{"Id", "Nama Poli"}; 
+     
+     public DefaultTableModel modelpoli = new DefaultTableModel(poli_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+     
       public DefaultTableModel modelctrans = new DefaultTableModel(caritrans_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -46,6 +55,48 @@ public class Crud_local extends DBKoneksi_local {
     public Crud_local() throws Exception{
       ConDb();
     }
+    
+    
+    
+    public void readRec_cariPoli(String nm_poli) throws SQLException {
+  
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_poli.TB_NAME + " WHERE "
+                + helper_poli.KEY_POLI + " like ? ");
+
+        preparedStatement.setString(1, "%" + nm_poli + "%");
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+              
+            String idpoli = resultSet.getString(helper_poli.KEY_ID_POLI);
+            String nmpoli = resultSet.getString(helper_poli.KEY_POLI);
+          
+            modelpoli.addRow(new Object[]{idpoli, nmpoli});
+            
+        }
+    }
+    
+    
+    
+    public void readRec_cariPoli() throws SQLException {
+
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_poli.TB_NAME);
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+            
+            String idpoli = resultSet.getString(helper_poli.KEY_ID_POLI);
+            String nmpoli = resultSet.getString(helper_poli.KEY_POLI);
+          
+            modelpoli.addRow(new Object[]{idpoli, nmpoli});
+            
+        }
+    }
+    
+    
     
      public void readRec_cariTransRM(String norm, String tgl) throws SQLException {
 
@@ -175,7 +226,7 @@ public class Crud_local extends DBKoneksi_local {
             preparedStatement.setString(3, satuan);
             preparedStatement.setDouble(4, hargasatuan);
             preparedStatement.setString(5, nmbrg);
-           preparedStatement.setDouble(6, total);
+            preparedStatement.setDouble(6, total);
            
             preparedStatement.execute();
 
