@@ -37,7 +37,26 @@ public class Crud_local extends DBKoneksi_local {
     
      String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Petugas","Tgl","Nama Barang","Jml", "Harga Satuan", "Total"};
     
+     String[] tarif_title= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","Presentase RS.","Presentase Dr.",
+         "Presentase Sarana","Nama Poli","Status","Keterangan"}; 
+     
      String[] poli_title= new String[]{"Id", "Nama Poli"}; 
+     
+     String[] status_title= new String[]{"Id", "Nama Status"}; 
+     
+     public DefaultTableModel modeltarif = new DefaultTableModel(tarif_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+     
+     public DefaultTableModel modelstatus = new DefaultTableModel(status_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
      
      public DefaultTableModel modelpoli = new DefaultTableModel(poli_title, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -55,8 +74,94 @@ public class Crud_local extends DBKoneksi_local {
     public Crud_local() throws Exception{
       ConDb();
     }
+     public void readRec_cariTarif(String nm) throws SQLException {
+  
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
+      + helper_status.KEY_STATUS + " like ? ");
+
+        preparedStatement.setString(1, "%" + nm + "%");
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+            String nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+             double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
+              double presrs = resultSet.getDouble(helper_tarif.KEY_PRESENTASE_RS);
+              double presdr = resultSet.getDouble(helper_tarif.KEY_PRESENTASE_DR);
+              double pressarana = resultSet.getDouble(helper_tarif.KEY_PRESENTASE_SARANA);
+              String poli = resultSet.getString(helper_tarif.KEY_POLI);
+              String status = resultSet.getString(helper_tarif.KEY_STATUS);
+              String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
+              
+          
+            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket});
+            
+        }
+    }
+    public void readRec_cariTarif() throws SQLException {
+  
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME );
+
+       
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+            String nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+             double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
+              double presrs = resultSet.getDouble(helper_tarif.KEY_PRESENTASE_RS);
+              double presdr = resultSet.getDouble(helper_tarif.KEY_PRESENTASE_DR);
+              double pressarana = resultSet.getDouble(helper_tarif.KEY_PRESENTASE_SARANA);
+              String poli = resultSet.getString(helper_tarif.KEY_POLI);
+              String status = resultSet.getString(helper_tarif.KEY_STATUS);
+              String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
+              
+          
+            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket});
+            
+        }
+    }
     
+    public void readRec_cariStatus() throws SQLException {
+  
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_status.TB_NAME);
+
+       
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+              
+            String idstatus = resultSet.getString(helper_status.KEY_ID_STATUS);
+            String nmstatus = resultSet.getString(helper_status.KEY_STATUS);
+          
+            modelstatus.addRow(new Object[]{idstatus, nmstatus});
+            
+        }
+    }
     
+    public void readRec_cariStatus(String nm_status) throws SQLException {
+  
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_status.TB_NAME + " WHERE "
+                + helper_status.KEY_STATUS + " like ? ");
+
+        preparedStatement.setString(1, "%" + nm_status + "%");
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+              
+            String idstatus = resultSet.getString(helper_status.KEY_ID_STATUS);
+            String nmstatus = resultSet.getString(helper_status.KEY_STATUS);
+          
+            modelstatus.addRow(new Object[]{idstatus, nmstatus});
+            
+        }
+    }
     
     public void readRec_cariPoli(String nm_poli) throws SQLException {
   
@@ -268,7 +373,50 @@ public class Crud_local extends DBKoneksi_local {
 
 
     }
-    
+   
+   //save master tarif
+   public void Save_tarif(String kode_tarif, String nama_tindakan, double tarif_tindakan, double presentase_dr,double presentase_rs,double presentase_sarana
+                         ,int id_poli,int id_status,String status_pengesah,String status_verif,String keterangan) {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_tarif.TB_NAME + " (" + helper_tarif.KEY_KODE_TARIF + "," + helper_tarif.KEY_NAMA_TINDAKAN
+                    + "," + helper_tarif.KEY_TARIF_TINDAKAN + "," + helper_tarif.KEY_PRESENTASE_DR + "," + helper_tarif.KEY_PRESENTASE_RS 
+                    + "," + helper_tarif.KEY_PRESENTASE_SARANA + "," + helper_tarif.KEY_ID_POLI + "," + helper_tarif.KEY_ID_STATUS + ","
+                    + helper_tarif.KEY_STATUS_PENGESAH + "," + helper_tarif.KEY_STATUS_VERIF + "," +helper_tarif.KEY_KETERANGAN + ") "
+                    + " values (?,?,?,?,?,?,?,?,?,?,?)");
+
+            preparedStatement.setString(1, kode_tarif);
+            preparedStatement.setString(2, nama_tindakan);
+            preparedStatement.setDouble(3, tarif_tindakan);
+            preparedStatement.setDouble(4, presentase_dr);
+            preparedStatement.setDouble(5, presentase_rs);
+            preparedStatement.setDouble(6, presentase_sarana);
+            preparedStatement.setInt(7, id_poli);
+            preparedStatement.setInt(8, id_status);
+            preparedStatement.setString(9, status_pengesah);
+            preparedStatement.setString(10, status_verif);
+            preparedStatement.setString(11, keterangan);
+            
+            preparedStatement.execute();
+
+
+            JOptionPane.showMessageDialog(null, "Data Tersimpan");
+        } catch (SQLException ex) {
+            if(ex.getErrorCode() == 1062 ){
+            //duplicate primary key 
+             JOptionPane.showMessageDialog(null, "Gagal Tersimpan : Kode " + kode_tarif + " sudah pernah di input");
+            }
+            else{
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            }
+            
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+    }
+   
   public void CetakNota(String nonota,String tampil) throws JRException {
 
         InputStream is = null;
