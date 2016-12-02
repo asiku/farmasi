@@ -5,8 +5,12 @@
  */
 package tools;
 
+import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -28,5 +32,19 @@ public class Utilitas {
 
         return kursIndonesia.format(hrg);
 
+    }
+    
+    public static void  HapusText(JPanel panel){
+     JTextField temp=null;
+    
+     
+        for(Component c:panel.getComponents()){
+           if(c.getClass().toString().contains("javax.swing.JTextField")){
+              temp=(JTextField)c;
+             
+              temp.setText("");
+        }
+        
+      }
     }
 }
