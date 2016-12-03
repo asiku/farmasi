@@ -41,11 +41,36 @@ public class Crud_local extends DBKoneksi_local {
      String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Petugas","Tgl","Nama Barang","Jml", "Harga Satuan", "Total"};
     
      String[] tarif_title= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
-         "% Sarana","Nama Poli","Status","Keterangan","id poli","id status"}; 
+         "% Sarana","Nama Poli","Status","Keterangan","id poli","id status"};
      
+      String[] tarif_title_log= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
+         "% Sarana","Nama Poli","Status","pilih"};
+      
+     final Class[] columnClass = new Class[] {
+    String.class, String.class, Double.class, Double.class, Double.class, Double.class, String.class, String.class, Boolean.class
+};
      String[] poli_title= new String[]{"Id", "Nama Poli"}; 
      
      String[] status_title= new String[]{"Id", "Nama Status"}; 
+     
+     
+     
+     public DefaultTableModel modeltariflog = new DefaultTableModel(tarif_title_log, 0) {
+        public boolean isCellEditable(int row, int column) {
+            if (column == 8) {
+                return true;
+            } else {
+                return false;
+
+            }
+
+        }
+         @Override
+    public Class<?> getColumnClass(int columnIndex)
+    {
+        return columnClass[columnIndex];
+    }
+    };
      
      public DefaultTableModel modeltarif = new DefaultTableModel(tarif_title, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -106,6 +131,33 @@ public class Crud_local extends DBKoneksi_local {
         
         
     }
+     
+    public void readRec_cariTariflog() throws SQLException {
+  
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME );
+
+       
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+            String nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+              double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
+              double presrs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS);
+              double presdr = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR);
+              double pressarana = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA);
+              String poli = resultSet.getString(helper_tarif.KEY_POLI);
+              String status = resultSet.getString(helper_tarif.KEY_STATUS);
+              boolean pilih=false;
+          
+            modeltariflog.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,pilih});
+            
+        }
+    }
+     
+     
     public void readRec_cariTarif() throws SQLException {
   
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME );
