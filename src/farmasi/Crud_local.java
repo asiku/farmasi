@@ -5,6 +5,9 @@
  */
 package farmasi;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,12 +27,15 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.type.OrientationEnum;
 import net.sf.jasperreports.view.JasperViewer;
+import tarif.frm_tarif;
 
 /**
  *
  * @author jengcool
  */
 public class Crud_local extends DBKoneksi_local {
+    
+    public static HashMap<Integer,Integer> cekvalpilih=new HashMap<Integer,Integer>();
     
     public static String usm = "";
     public static String psm = "";
@@ -44,10 +50,11 @@ public class Crud_local extends DBKoneksi_local {
          "% Sarana","Nama Poli","Status","Keterangan","id poli","id status"};
      
       String[] tarif_title_log= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
-         "% Sarana","Nama Poli","Status","pilih"};
+         "% Sarana","Nama Poli","Status","Pengesah","Verif","pilih"};
       
      final Class[] columnClass = new Class[] {
-    String.class, String.class, Double.class, Double.class, Double.class, Double.class, String.class, String.class, Boolean.class
+    String.class, String.class, Double.class, Double.class, Double.class, Double.class, String.class
+             , String.class, String.class, String.class, Boolean.class
 };
      String[] poli_title= new String[]{"Id", "Nama Poli"}; 
      
@@ -57,7 +64,7 @@ public class Crud_local extends DBKoneksi_local {
      
      public DefaultTableModel modeltariflog = new DefaultTableModel(tarif_title_log, 0) {
         public boolean isCellEditable(int row, int column) {
-            if (column == 8) {
+            if (column == 10) {
                 return true;
             } else {
                 return false;
@@ -65,11 +72,28 @@ public class Crud_local extends DBKoneksi_local {
             }
 
         }
-         @Override
+        
+    @Override
     public Class<?> getColumnClass(int columnIndex)
     {
         return columnClass[columnIndex];
     }
+    
+     @Override
+    public void setValueAt(Object value, int row, int col) {
+    super.setValueAt(value, row, col);
+    if (col == 10) {
+        if ((Boolean) this.getValueAt(row, col) == true) {
+            //code goes here
+            cekvalpilih.put(col, row);
+        }
+        else if ((Boolean) this.getValueAt(row, col) == false) {
+            //code goes here
+            cekvalpilih.remove(col,row);
+        }
+       }   
+    }
+    
     };
      
      public DefaultTableModel modeltarif = new DefaultTableModel(tarif_title, 0) {
@@ -132,11 +156,13 @@ public class Crud_local extends DBKoneksi_local {
         
     }
      
-    public void readRec_cariTariflog() throws SQLException {
+     public void readRec_cariTariflogPengesah() throws SQLException {
   
-      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME );
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
+      + helper_tarif.KEY_STATUS_PENGESAH +"=?"+" AND "+helper_tarif.KEY_STATUS_VERIF +"=?");
 
-       
+       preparedStatement.setString(1,"pending");
+       preparedStatement.setString(2,"ok");
         
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -150,9 +176,41 @@ public class Crud_local extends DBKoneksi_local {
               double pressarana = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA);
               String poli = resultSet.getString(helper_tarif.KEY_POLI);
               String status = resultSet.getString(helper_tarif.KEY_STATUS);
+              String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
+              String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
               boolean pilih=false;
           
-            modeltariflog.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,pilih});
+            modeltariflog.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,p,v,pilih});
+            
+        }
+    }
+    
+     
+    public void readRec_cariTariflog() throws SQLException {
+  
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
+      + helper_tarif.KEY_STATUS_PENGESAH +"=?"+" AND "+helper_tarif.KEY_STATUS_VERIF +"=?");
+
+       preparedStatement.setString(1,"edit");
+       preparedStatement.setString(2,"edit");
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+            String nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+              double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
+              double presrs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS);
+              double presdr = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR);
+              double pressarana = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA);
+              String poli = resultSet.getString(helper_tarif.KEY_POLI);
+              String status = resultSet.getString(helper_tarif.KEY_STATUS);
+              String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
+              String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
+              boolean pilih=false;
+          
+            modeltariflog.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,p,v,pilih});
             
         }
     }
@@ -405,7 +463,36 @@ public class Crud_local extends DBKoneksi_local {
 
     }
    
-   
+   public void Save_log_tarif(String usernamep, String usernamev, String kode_tarif, String sp, String sv,String pathgbr) throws FileNotFoundException {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_log_pengesah.TB_NAME + " (" + helper_log_pengesah.KEY_USERNAMEP + "," + helper_log_pengesah.KEY_USERNAMEV
+                    + "," + helper_log_pengesah.KEY_KODE_TARIF + "," + helper_log_pengesah.KEY_STATP + "," + helper_log_pengesah.KEY_STATV + 
+                    "," + helper_log_pengesah.KEY_TTD +") "
+                    + " values (?,?,?,?,?,?)");
+
+            InputStream inputStream = new FileInputStream(new File(pathgbr));
+            
+            preparedStatement.setString(1, usernamep);
+            preparedStatement.setString(2, usernamev);
+            preparedStatement.setString(3, kode_tarif);
+            preparedStatement.setString(4, sp);
+            preparedStatement.setString(5, sv);
+            preparedStatement.setBlob(6, inputStream);
+            preparedStatement.execute();
+
+
+          //  JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+    }
    
    public void Save_trans(String no_nota, String no_rm, String nama_pasien, String catatan, String petugas) {
 
@@ -432,6 +519,64 @@ public class Crud_local extends DBKoneksi_local {
 
 
     }
+   
+   public void updateTarifStatusLogPengesah(String kode_tarif,String status_pengesah,String username) {
+    
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_log_pengesah.TB_NAME + " set " 
+                    + helper_log_pengesah.KEY_STATP+"=?," 
+                    + helper_log_pengesah.KEY_USERNAMEP+"=?" 
+                    +" where "+ helper_tarif.KEY_KODE_TARIF + "=?");
+            
+           
+            preparedStatement.setString(1, status_pengesah);
+            preparedStatement.setString(2, username);
+            preparedStatement.setString(3, kode_tarif);
+             
+            preparedStatement.executeUpdate();
+             //JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+//            JOptionPane.showMessageDialog(null, "Gagal Update");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+   
+   public void updateTarifStatus(String kode_tarif,String status_pengesah,String status_verif) {
+    
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_tarif.TB_NAME + " set " 
+                    + helper_tarif.KEY_STATUS_PENGESAH+"=?," 
+                    + helper_tarif.KEY_STATUS_VERIF+"=?"
+                    +" where "+ helper_tarif.KEY_KODE_TARIF + "=?");
+            
+           
+            preparedStatement.setString(1, status_pengesah);
+            preparedStatement.setString(2, status_verif);
+            preparedStatement.setString(3, kode_tarif);
+             
+            preparedStatement.executeUpdate();
+             //JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+//            JOptionPane.showMessageDialog(null, "Gagal Update");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+   
    
     public void updateTarif(String kode_tarif, String nama_tindakan, double tarif_tindakan, int presentase_dr,int presentase_rs,int presentase_sarana
                          ,int id_poli,int id_status,String status_pengesah,String status_verif,String keterangan) {
@@ -520,11 +665,17 @@ public class Crud_local extends DBKoneksi_local {
 
     }
    
-    public void Cek(String pl) throws SQLException {
+    public void Cek(String pl,String s) throws SQLException {
 
-
+       if(s.equals("p")) 
+       {
         preparedStatement = connect.prepareStatement("select *, CAST(AES_DECRYPT(pass, '0736') AS CHAR(255)) xcd from " + helper_pengesah.TB_NAME + " where "
                 + helper_pengesah.KEY_USERNAME + " = ?");
+       }
+       else if(s.equals("v")){
+       preparedStatement = connect.prepareStatement("select *, CAST(AES_DECRYPT(pass, '0736') AS CHAR(255)) xcd from " + helper_verif.TB_NAME + " where "
+                + helper_verif.KEY_USERNAME + " = ?");
+       }
 
         preparedStatement.setString(1, pl);
 

@@ -8,6 +8,10 @@ package tools;
 import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -34,6 +38,23 @@ public class Utilitas {
 
     }
     
+     public static String tglsekarang() {
+
+        LocalDate localDate = LocalDate.now();
+
+        return DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
+    }
+    
+      public static String tglsekarangJam() {
+
+        LocalDate localDate = LocalDate.now();
+        LocalTime  localTime= LocalTime.now();
+
+        LocalDateTime ldt = LocalDateTime.of(localDate, localTime);
+
+        return DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss").format(ldt);
+    }
+     
     public static void  HapusText(JPanel panel){
      JTextField temp=null;
     

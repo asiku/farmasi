@@ -10,7 +10,14 @@ package farmasi;
  * @author jengcool
  */
 public class helper_log_pengesah {
-    public static String TB_NAME = "tb_pengesah";
-    public static String KEY_USERNAME = "username_pengesah";
-    public static String KEY_PASSWORD = "pass";
+    
+    public static String TB_NAME = "log_pengesah";
+    public static String KEY_USERNAMEP = "username_pengesah";
+    public static String KEY_USERNAMEV = "username_verif";
+    public static String KEY_TGL = "tgl";
+    public static String KEY_KODE_TARIF = "kode_tarif";
+    public static String KEY_STATP = "status_pengesah";
+    public static String KEY_STATV = "status_verif";
+    public static String KEY_TTD = "ttd";
+    
 }
