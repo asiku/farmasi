@@ -1137,6 +1137,11 @@ public class frm_tarif extends javax.swing.JFrame {
         });
 
         bt_delete.setText("Delete");
+        bt_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_deleteActionPerformed(evt);
+            }
+        });
 
         bt_cetak.setText("Print");
 
@@ -1716,6 +1721,10 @@ public class frm_tarif extends javax.swing.JFrame {
 
     private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
         // TODO add your handling code here:
+        
+         DefaultListModel<String> listModel = new DefaultListModel<>();
+        
+        
          int pr= Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText());
      
       lbl_cepe.setText(" "+pr +" %");
@@ -1752,6 +1761,9 @@ public class frm_tarif extends javax.swing.JFrame {
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText());
+                             listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
+                             
+                             lst_save_tarif.setModel(listModel);
                              
                              refreshtbtarif();
                              
@@ -2256,6 +2268,33 @@ public class frm_tarif extends javax.swing.JFrame {
         this.refreshtbtarif();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
+    private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
+        // TODO add your handling code here:
+         if(this.txt_stat.getText().equals("ok")||this.txt_stat.getText().equals("edit")) {
+                                
+             JOptionPane.showMessageDialog(null, "Tidak bisa Delete Karena sudah di Verif!");
+             
+           }
+       else{
+             try {
+                 
+                 datl= new Crud_local();
+                
+                 datl.DelRec(txt_kode_tarif.getText());
+                 
+                 refreshtbtarif();
+                 
+                 
+             } catch (SQLException ex) {
+                 Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (Exception ex) {
+                 Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+             }
+                                
+                                
+        }
+    }//GEN-LAST:event_bt_deleteActionPerformed
+
     
     private void filtertarifcari(){
     
@@ -2454,6 +2493,7 @@ public class frm_tarif extends javax.swing.JFrame {
     public void saveImagev() throws IOException {
      
         DefaultListModel<String> listModel = new DefaultListModel<>();
+        
         int i = 0;
         
     if(Integer.valueOf(lbl_ttd_cek.getText().toString())>1000){      

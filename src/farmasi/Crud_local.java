@@ -705,7 +705,27 @@ public class Crud_local extends DBKoneksi_local {
 
 
         }
+    }
+        
+     public void DelRec(String kode) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_tarif.TB_NAME + " where " + helper_tarif.KEY_KODE_TARIF + "=?");
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+        try {
+            preparedStatement.setString(1, kode);
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+      
+        preparedStatement.execute();
+       
+        
     }
    
    
