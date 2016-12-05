@@ -1878,6 +1878,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private void bt_hapus_ttdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapus_ttdActionPerformed
         // TODO add your handling code here:
         points.clear();
+        pos=0;
         this.jPanel3.repaint();
          lbl_ttd_cek1.setText("0");
     }//GEN-LAST:event_bt_hapus_ttdActionPerformed
@@ -2069,6 +2070,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private void bt_hapus_ttd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapus_ttd1ActionPerformed
         // TODO add your handling code here:
         pointsv.clear();
+        posv=0;
         lbl_ttd_cek.setText("0");
         this.jPanel2.repaint();
         
@@ -2465,7 +2467,8 @@ public class frm_tarif extends javax.swing.JFrame {
     
      ig2v.setColor(java.awt.Color.RED);
    
-        
+    System.out.println("point "+pointsv.size());
+    
     for(int ip=1;ip<posv;ip++){  
          //System.out.println("oldX"+i);
          
