@@ -19,5 +19,5 @@ public class helper_log_pengesah {
     public static String KEY_STATP = "status_pengesah";
     public static String KEY_STATV = "status_verif";
     public static String KEY_TTD = "ttd";
-    
+     public static String KEY_TTDP= "ttd_pengesah";
 }

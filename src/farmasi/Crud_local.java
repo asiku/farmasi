@@ -47,7 +47,7 @@ public class Crud_local extends DBKoneksi_local {
      String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Petugas","Tgl","Nama Barang","Jml", "Harga Satuan", "Total"};
     
      String[] tarif_title= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
-         "% Sarana","Nama Poli","Status","Keterangan","id poli","id status"};
+         "% Sarana","Nama Poli","Status","Keterangan","id poli","id status","Status Pengesah","Status Verif"};
      
       String[] tarif_title_log= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
          "% Sarana","Nama Poli","Status","Pengesah","Verif","pilih"};
@@ -148,8 +148,10 @@ public class Crud_local extends DBKoneksi_local {
               String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
               int id_poli = resultSet.getInt(helper_tarif.KEY_ID_POLI);
               int id_status= resultSet.getInt(helper_tarif.KEY_ID_STATUS);
+              String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
+              String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
           
-            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status});
+            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v});
             
         }
         
@@ -237,8 +239,10 @@ public class Crud_local extends DBKoneksi_local {
               String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
                int id_poli = resultSet.getInt(helper_tarif.KEY_ID_POLI);
               int id_status= resultSet.getInt(helper_tarif.KEY_ID_STATUS);
+               String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
+              String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
           
-            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status});
+            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v});
             
         }
     }
@@ -520,19 +524,22 @@ public class Crud_local extends DBKoneksi_local {
 
     }
    
-   public void updateTarifStatusLogPengesah(String kode_tarif,String status_pengesah,String username) {
+   public void updateTarifStatusLogPengesah(String kode_tarif,String status_pengesah,String username,String path) throws FileNotFoundException {
     
         try {
             preparedStatement = connect.prepareStatement("update " + helper_log_pengesah.TB_NAME + " set " 
                     + helper_log_pengesah.KEY_STATP+"=?," 
-                    + helper_log_pengesah.KEY_USERNAMEP+"=?" 
-                    +" where "+ helper_tarif.KEY_KODE_TARIF + "=?");
+                    + helper_log_pengesah.KEY_USERNAMEP+"=?,"
+                    + helper_log_pengesah.KEY_TTDP+"=?" 
+                    +" where "+ helper_tarif.KEY_KODE_TARIF + "=?"+" AND "+helper_tarif.KEY_STATUS_PENGESAH+"=?");
             
-           
+            InputStream inputStream = new FileInputStream(new File(path));
+              
             preparedStatement.setString(1, status_pengesah);
             preparedStatement.setString(2, username);
-            preparedStatement.setString(3, kode_tarif);
-             
+            preparedStatement.setBlob(3, inputStream);
+            preparedStatement.setString(4, kode_tarif);
+            preparedStatement.setString(5, "pending");
             preparedStatement.executeUpdate();
              //JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
         } catch (SQLException ex) {

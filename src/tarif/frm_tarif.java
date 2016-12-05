@@ -98,8 +98,11 @@ public class frm_tarif extends javax.swing.JFrame {
     tr.getColumn(6).setPreferredWidth(80);
     tr.getColumn(7).setPreferredWidth(100);
     tr.getColumn(8).setPreferredWidth(100);
-    tr.getColumn(9).setPreferredWidth(0);
-     tr.getColumn(10).setPreferredWidth(0);
+    tr.getColumn(9).setPreferredWidth(50);
+    tr.getColumn(10).setPreferredWidth(50);
+    tr.getColumn(11).setPreferredWidth(120);
+    tr.getColumn(12).setPreferredWidth(100);
+     
    }
   
   
@@ -107,18 +110,19 @@ public class frm_tarif extends javax.swing.JFrame {
     public frm_tarif() {
         initComponents();
         
-        
+       txt_stat.setVisible(false);
         
        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
       
     
-      try {
-          datl=new Crud_local();
-          datl.readRec_cariTarif();
-          tb_tarif.setModel(datl.modeltarif);
-      } catch (Exception ex) {
-          Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-      }
+//      try {
+//          datl=new Crud_local();
+//          datl.readRec_cariTarif();
+//          tb_tarif.setModel(datl.modeltarif);
+//          
+//      } catch (Exception ex) {
+//          Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+//      }
        
       
        this.jPanel2.addMouseMotionListener(new MouseMotionAdapter() {
@@ -615,7 +619,19 @@ public class frm_tarif extends javax.swing.JFrame {
          setukurantbtarif();
     }
 
-    
+    private void refreshtbtarif(){
+     try {
+             datl=new Crud_local();
+             datl.readRec_cariTarif();
+             tb_tarif.setModel(datl.modeltarif);
+             
+         } catch (Exception ex) {
+             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+         
+         setukurantbtarif();
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -686,15 +702,15 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_kode_status = new javax.swing.JLabel();
         txt_status = new javax.swing.JTextField();
         bt_cari_status = new javax.swing.JButton();
+        txt_stat = new javax.swing.JTextField();
+        bt_proses = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         lbl_verif = new javax.swing.JLabel();
         lbl_nama_pengesah = new javax.swing.JLabel();
-        jDateTimePicker1 = new uz.ncipro.calendar.JDateTimePicker();
         bt_pengesah = new javax.swing.JButton();
         bt_verif = new javax.swing.JButton();
-        jDateTimePicker2 = new uz.ncipro.calendar.JDateTimePicker();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_log_publish = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
@@ -705,7 +721,6 @@ public class frm_tarif extends javax.swing.JFrame {
         ck_pengesah = new javax.swing.JCheckBox();
         ck_pilih_semua = new javax.swing.JCheckBox();
         bt_hapus_ttd1 = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
         lbl_ttd_cek = new javax.swing.JLabel();
         lbl_ttd_cek1 = new javax.swing.JLabel();
         lbl_ttd_cek2 = new javax.swing.JLabel();
@@ -955,6 +970,12 @@ public class frm_tarif extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1211,6 +1232,12 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
 
+        txt_stat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_statKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_inputanLayout = new javax.swing.GroupLayout(panel_inputan);
         panel_inputan.setLayout(panel_inputanLayout);
         panel_inputanLayout.setHorizontalGroup(
@@ -1224,7 +1251,10 @@ public class frm_tarif extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(23, 23, 23)
                         .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel_inputanLayout.createSequentialGroup()
+                                .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txt_nama_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
@@ -1253,7 +1283,8 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel_inputanLayout.createSequentialGroup()
@@ -1278,6 +1309,13 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        bt_proses.setText("Proses Verifikasi");
+        bt_proses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_prosesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1286,11 +1324,12 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panel_inputan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bt_proses, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel_inputan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1329,8 +1368,10 @@ public class frm_tarif extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(bt_proses)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
 
@@ -1390,7 +1431,6 @@ public class frm_tarif extends javax.swing.JFrame {
 
         lbl_nama_pengesah.setText("          < TTD Pengesah >");
         jPanel4.add(lbl_nama_pengesah, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 220, 20));
-        jPanel4.add(jDateTimePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 160, -1));
 
         bt_pengesah.setText("Publish Tarif Pengesah");
         bt_pengesah.setEnabled(false);
@@ -1399,7 +1439,7 @@ public class frm_tarif extends javax.swing.JFrame {
                 bt_pengesahActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_pengesah, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 260, -1));
+        jPanel4.add(bt_pengesah, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 430, -1));
 
         bt_verif.setText("Publish Tarif Verifikasi");
         bt_verif.setEnabled(false);
@@ -1408,8 +1448,7 @@ public class frm_tarif extends javax.swing.JFrame {
                 bt_verifActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_verif, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, 260, -1));
-        jPanel4.add(jDateTimePicker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 160, -1));
+        jPanel4.add(bt_verif, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 430, -1));
 
         tb_log_publish.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
         tb_log_publish.setModel(new javax.swing.table.DefaultTableModel(
@@ -1438,10 +1477,12 @@ public class frm_tarif extends javax.swing.JFrame {
         });
         jPanel4.add(bt_hapus_ttd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 430, 20));
 
+        txt_cari_tarif1.setEnabled(false);
         txt_cari_tarif1.setPreferredSize(new java.awt.Dimension(4, 25));
         jPanel4.add(txt_cari_tarif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 240, 30));
 
         bt_cari_tarif1.setText("Cari");
+        bt_cari_tarif1.setEnabled(false);
         jPanel4.add(bt_cari_tarif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 140, -1));
 
         ck_verif.setText("Verifikator");
@@ -1506,7 +1547,6 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
         jPanel4.add(bt_hapus_ttd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 430, 20));
-        jPanel4.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 340, 20));
 
         lbl_ttd_cek.setText("0");
         jPanel4.add(lbl_ttd_cek, new org.netbeans.lib.awtextra.AbsoluteConstraints(891, 60, 50, -1));
@@ -1711,7 +1751,9 @@ public class frm_tarif extends javax.swing.JFrame {
                              
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "edit", "edit", txt_keterangan.getText());
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText());
+                             
+                             refreshtbtarif();
                              
                          } catch (Exception ex) {
                              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -1929,11 +1971,13 @@ public class frm_tarif extends javax.swing.JFrame {
            this.txt_rs.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,3).toString())); 
            this.txt_dr.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,4).toString())); 
            this.txt_sarana.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,5).toString())); 
+           txt_stat.setText(tb_tarif.getModel().getValueAt(row,12).toString());
         }     
     }
     private void tb_tarifMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tarifMouseReleased
         // TODO add your handling code here:
          if (evt.getClickCount() == 2) {
+            
            settarif();
         }
     }//GEN-LAST:event_tb_tarifMouseReleased
@@ -1983,10 +2027,20 @@ public class frm_tarif extends javax.swing.JFrame {
                          try {
                              //save
                              datl= new Crud_local();
-                             
-                             datl.updateTarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+                           
+                            if(this.txt_stat.getText().equals("ok")||this.txt_stat.getText().equals("edit")) {
+                                
+                              JOptionPane.showMessageDialog(null, "Tidak bisa Edit Karena sudah di Verif!");
+                            }
+                            else{
+                                datl.updateTarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "edit", "edit", txt_keterangan.getText());
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText());
+                             
+                             refreshtbtarif();
+                                
+                                
+                            }
                              
                          } catch (Exception ex) {
                              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -2173,6 +2227,32 @@ public class frm_tarif extends javax.swing.JFrame {
           Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
       }
     }//GEN-LAST:event_bt_verifActionPerformed
+
+    private void bt_prosesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_prosesActionPerformed
+        // TODO add your handling code here:
+         this.refreshtbtarif();
+        
+        for ( int i = 0; i < tb_tarif.getRowCount(); i++) {
+            String sp=tb_tarif.getModel().getValueAt(i, 11).toString();
+            String sv=tb_tarif.getModel().getValueAt(i, 12).toString();
+            
+            if(!(sv.equals("ok")||sp.equals("pending"))){
+              datl.updateTarifStatus(this.tb_tarif.getModel().getValueAt(i, 0).toString(), "edit", "edit");
+            }
+            
+           }
+        
+        this.refreshtbtarif();
+    }//GEN-LAST:event_bt_prosesActionPerformed
+
+    private void txt_statKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_statKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_statKeyPressed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        this.refreshtbtarif();
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
     
     private void filtertarifcari(){
@@ -2392,7 +2472,7 @@ public class frm_tarif extends javax.swing.JFrame {
           ig2v.drawLine(pointsv.get("oldX"+ip), pointsv.get("oldY"+ip), pointsv.get("currentX"+ip),pointsv.get("currentY"+ip));
     }
       
-      posv=0;
+     
       
         try
         {
@@ -2421,6 +2501,8 @@ public class frm_tarif extends javax.swing.JFrame {
               
                lst_save_publish.setModel(listModel);
               
+                posv=0;
+               
                this.txt_username.setText("");
                this.txt_pwd.setText("");
                this.txt_usernamev.setText("");
@@ -2477,7 +2559,7 @@ public class frm_tarif extends javax.swing.JFrame {
           ig2.drawLine(points.get("oldX"+ip), points.get("oldY"+ip), points.get("currentX"+ip),points.get("currentY"+ip));
     }
       
-      pos=0;
+    
       
         try
         {
@@ -2499,7 +2581,7 @@ public class frm_tarif extends javax.swing.JFrame {
 		   
 		    if (chked) {
 		       datl.updateTarifStatusLogPengesah(this.tb_log_publish.getModel().getValueAt(i, 0).toString(), "ok",
-                               txt_username.getText());
+                               txt_username.getText(),pathFile);
                        datl.updateTarifStatus(this.tb_log_publish.getModel().getValueAt(i, 0).toString(), "ok", "ok");
 		       listModel.addElement("Tersimpan Pengesah:"+this.tb_log_publish.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
                     }
@@ -2507,6 +2589,8 @@ public class frm_tarif extends javax.swing.JFrame {
               
                lst_save_publish.setModel(listModel);
               
+                 pos=0;
+                 
                this.txt_username.setText("");
                this.txt_pwd.setText("");
                this.txt_usernamev.setText("");
@@ -2779,6 +2863,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JButton bt_hapus_ttd;
     private javax.swing.JButton bt_hapus_ttd1;
     private javax.swing.JButton bt_pengesah;
+    private javax.swing.JButton bt_proses;
     private javax.swing.JButton bt_save;
     private javax.swing.JButton bt_verif;
     private javax.swing.JCheckBox ck_pengesah;
@@ -2788,8 +2873,6 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JDialog dlg_cari_status;
     private javax.swing.JDialog dlg_login;
     private javax.swing.JDialog dlg_loginv;
-    private uz.ncipro.calendar.JDateTimePicker jDateTimePicker1;
-    private uz.ncipro.calendar.JDateTimePicker jDateTimePicker2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2814,7 +2897,6 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2857,6 +2939,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_pwdv;
     private javax.swing.JTextField txt_rs;
     private javax.swing.JTextField txt_sarana;
+    private javax.swing.JTextField txt_stat;
     private javax.swing.JTextField txt_status;
     private javax.swing.JTextField txt_tarif;
     private javax.swing.JTextField txt_username;
