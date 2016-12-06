@@ -12,8 +12,10 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import tools.Utilitas;
 
 
 /**
@@ -30,6 +32,20 @@ public class frm_petugas_poli extends javax.swing.JFrame {
     
     private Crud_local datl;
     
+    private boolean editmode;
+    
+    private void refreshtb(){
+     try {
+             
+             datl=new Crud_local();
+             datl.readRec_cariPetugas();
+             tb_petugas.setModel(datl.modelpetugas);
+             
+         } catch (Exception ex) {
+             Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
+    
     public frm_petugas_poli() {
         initComponents();
         
@@ -42,6 +58,10 @@ public class frm_petugas_poli extends javax.swing.JFrame {
          } catch (Exception ex) {
              Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
          }
+        
+        
+        refreshtb();
+        
         
         this.setLocationRelativeTo(null);
         
@@ -117,7 +137,7 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         txt_username = new javax.swing.JTextField();
         txt_pwd = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbl_retype = new javax.swing.JLabel();
         txt_pwd2 = new javax.swing.JPasswordField();
         txt_nip = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -125,12 +145,12 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         txt_nama_petugas = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         lbl_kode_poli = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         bt_cari_nip = new javax.swing.JButton();
         bt_cari_poli = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txt_poli = new javax.swing.JTextField();
+        lbl_retype1 = new javax.swing.JLabel();
+        txt_pwd_baru = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         bt_save = new javax.swing.JButton();
         bt_cancel = new javax.swing.JButton();
@@ -270,7 +290,7 @@ public class frm_petugas_poli extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
-        jLabel4.setText("Retype Password");
+        lbl_retype.setText("Retype Password");
 
         txt_pwd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -303,21 +323,6 @@ public class frm_petugas_poli extends javax.swing.JFrame {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
-        );
-
-        jLabel1.setText("Foto");
-
         bt_cari_nip.setText("...");
         bt_cari_nip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,9 +339,19 @@ public class frm_petugas_poli extends javax.swing.JFrame {
 
         jLabel8.setText("Nama Poli");
 
+        txt_poli.setEditable(false);
         txt_poli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_poliKeyPressed(evt);
+            }
+        });
+
+        lbl_retype1.setText("Password Baru");
+
+        txt_pwd_baru.setEditable(false);
+        txt_pwd_baru.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_pwd_baruKeyPressed(evt);
             }
         });
 
@@ -344,89 +359,77 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addComponent(txt_pwd2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_kode_poli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_nama_petugas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_nip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_retype, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_retype1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_pwd2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_pwd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_poli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_kode_poli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_nama_petugas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_nip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_pwd_baru, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(bt_cari_nip, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_cari_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addGap(108, 108, 108))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lbl_kode_poli, txt_nama_petugas, txt_nip, txt_poli, txt_pwd, txt_pwd2, txt_pwd_baru, txt_username});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jLabel1)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_cari_nip))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_nip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bt_cari_nip))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txt_nama_petugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(lbl_kode_poli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bt_cari_poli))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txt_poli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txt_pwd2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_nama_petugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lbl_kode_poli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_cari_poli))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_poli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_retype1)
+                    .addComponent(txt_pwd_baru, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_retype)
+                    .addComponent(txt_pwd2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_pwd, txt_pwd2});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_pwd, txt_pwd2, txt_pwd_baru});
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -517,6 +520,11 @@ public class frm_petugas_poli extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tb_petugas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_petugasMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_petugas);
 
         bt_cari.setText("cari");
@@ -591,9 +599,16 @@ public class frm_petugas_poli extends javax.swing.JFrame {
 
     private void txt_pwd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_pwd2KeyPressed
         // TODO add your handling code here:
+      if(this.txt_pwd_baru.getText().isEmpty()){  
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             bt_save.requestFocus();
         }
+      }
+      else{
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            bt_edit.requestFocus();
+        }
+      }
     }//GEN-LAST:event_txt_pwd2KeyPressed
 
     private void txt_nipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nipKeyPressed
@@ -611,22 +626,55 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lbl_kode_poliKeyPressed
 
+    private void savepetugas(){
+        try {
+            datl=new Crud_local();
+            datl.Save_petugas(this.txt_nip.getText(), this.txt_nama_petugas.getText(), 
+                    Integer.valueOf(this.lbl_kode_poli.getText()), this.txt_username.getText(), this.txt_pwd.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+    
+      private void updatepetugaspass(){
+        try {
+            datl=new Crud_local();
+            datl.Update_petugaspwd(this.txt_nip.getText(), this.txt_nama_petugas.getText(), 
+                    Integer.valueOf(this.lbl_kode_poli.getText()), this.txt_username.getText(), this.txt_pwd_baru.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+    
+    private void updatepetugas(){
+        try {
+            datl=new Crud_local();
+            datl.Update_petugas(this.txt_nip.getText(), this.txt_nama_petugas.getText(), 
+                    Integer.valueOf(this.lbl_kode_poli.getText()), this.txt_username.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+    
     private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
 
-//        if(this.txt_username.getText().isEmpty()||this.txt_pwd.getText().isEmpty()||this.txt_pwd2.getText().isEmpty()){
-//            JOptionPane.showMessageDialog(null, "Inputan Kosong!");
-//            this.txt_username.requestFocus();
-//        }
-//        else{
-//            if(this.txt_pwd2.getText().equals(this.txt_pwd.getText())){
-//                loginAct();
-//            }
-//            else{
-//                this.txt_pwd2.requestFocus();
-//                JOptionPane.showMessageDialog(null, "Password Tidak sama!");
-//
-//            }
-//        }
+        if(txt_nip.getText().isEmpty()||this.lbl_kode_poli.getText().isEmpty()||this.txt_username.getText().isEmpty()||this.txt_pwd.getText().isEmpty()||this.txt_pwd2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Inputan Kosong!");
+            this.txt_username.requestFocus();
+        }
+        else{
+            if(this.txt_pwd2.getText().equals(this.txt_pwd.getText())){
+                
+                this.savepetugas();
+                this.refreshtb();
+                txtcls();
+            }
+            else{
+                this.txt_pwd2.requestFocus();
+                JOptionPane.showMessageDialog(null, "Password Tidak sama!");
+
+            }
+        }
     }//GEN-LAST:event_bt_saveActionPerformed
 
     private void bt_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelActionPerformed
@@ -634,12 +682,45 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_bt_cancelActionPerformed
 
+    private void txtcls(){
+    txt_pwd_baru.setEditable(false);
+        Utilitas.HapusText(jPanel1);
+        txt_pwd_baru.setText("");
+        txt_pwd.setText("");
+        txt_pwd2.setText("");
+    }
+    
     private void bt_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_addActionPerformed
         // TODO add your handling code here:
+        txtcls();
     }//GEN-LAST:event_bt_addActionPerformed
 
     private void bt_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_editActionPerformed
         // TODO add your handling code here:
+         if(txt_nip.getText().isEmpty()||this.lbl_kode_poli.getText().isEmpty()||this.txt_username.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Inputan Kosong!");
+            this.txt_username.requestFocus();
+        }
+        else{
+          
+          if(!txt_pwd_baru.getText().isEmpty()) {  
+            if(this.txt_pwd2.getText().equals(this.txt_pwd_baru.getText())){
+                
+                loginActPetugas();
+               
+                this.refreshtb();
+            }
+            else{
+                this.txt_pwd2.requestFocus();
+                JOptionPane.showMessageDialog(null, "Password Tidak sama!");
+
+            }
+          }
+          else{
+               this.updatepetugas();
+               this.refreshtb();
+          } 
+        }
     }//GEN-LAST:event_bt_editActionPerformed
 
     private void bt_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapusActionPerformed
@@ -757,6 +838,34 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tb_cari_petugasMouseReleased
 
+    private void tb_petugasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_petugasMouseReleased
+        // TODO add your handling code here:
+          // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int row = this.tb_petugas.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                
+                this.txt_nip.setText(this.tb_petugas.getModel().getValueAt(row, 0).toString());
+                this.txt_nama_petugas.setText(this.tb_petugas.getModel().getValueAt(row, 1).toString());
+                lbl_kode_poli.setText(this.tb_petugas.getModel().getValueAt(row, 2).toString());
+                this.txt_poli.setText(this.tb_petugas.getModel().getValueAt(row, 3).toString());
+                this.txt_username.setText(this.tb_petugas.getModel().getValueAt(row, 4).toString());
+                this.txt_nip.requestFocus();
+                txt_pwd_baru.setEditable(true);
+            }
+        }
+    }//GEN-LAST:event_tb_petugasMouseReleased
+
+    private void txt_pwd_baruKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_pwd_baruKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_pwd2.requestFocus();
+        }
+    }//GEN-LAST:event_txt_pwd_baruKeyPressed
+
     private void filterpoli(){
     
           try {
@@ -791,6 +900,37 @@ public class frm_petugas_poli extends javax.swing.JFrame {
             }
     }
     
+     
+     
+     private void loginActPetugas(){
+   
+     
+        try {
+            datl = new Crud_local();
+       
+            datl.CekPetugas(txt_username.getText());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (Exception ex) {
+            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+            
+            if (Crud_local.usm.equals(txt_username.getText()) && Crud_local.psm.equals(txt_pwd.getText())) {
+                   
+                  updatepetugaspass();
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Password Salah Maaf Tidak bisa Edit!");
+            }
+            
+  
+     }
+    
+     
     /**
      * @param args the command line arguments
      */
@@ -838,22 +978,21 @@ public class frm_petugas_poli extends javax.swing.JFrame {
     private javax.swing.JButton bt_save;
     private javax.swing.JDialog dlg_cari_petugas;
     private javax.swing.JDialog dlg_cari_poli;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField lbl_kode_poli;
+    private javax.swing.JLabel lbl_retype;
+    private javax.swing.JLabel lbl_retype1;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_petugas;
     private javax.swing.JTable tb_poli;
@@ -865,6 +1004,7 @@ public class frm_petugas_poli extends javax.swing.JFrame {
     private javax.swing.JTextField txt_poli;
     private javax.swing.JPasswordField txt_pwd;
     private javax.swing.JPasswordField txt_pwd2;
+    private javax.swing.JPasswordField txt_pwd_baru;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

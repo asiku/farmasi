@@ -60,7 +60,10 @@ public class Crud_local extends DBKoneksi_local {
      
      String[] status_title= new String[]{"Id", "Nama Status"}; 
      
+     String[] petugas_title= new String[]{"Nip", "Nama Petugas","Id Poli","Poli","User Name"}; 
      
+     
+    
      
      public DefaultTableModel modeltariflog = new DefaultTableModel(tarif_title_log, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -123,9 +126,20 @@ public class Crud_local extends DBKoneksi_local {
 
         }
     };
+      
+    public DefaultTableModel modelpetugas = new DefaultTableModel(petugas_title, 0) {
+         public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+     };   
+      
+      
     public Crud_local() throws Exception{
       ConDb();
     }
+    
+    
      public void readRec_cariTarif(String nm) throws SQLException {
   
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
@@ -322,7 +336,25 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
+     public void readRec_cariPetugas() throws SQLException {
+
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV);
     
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+            String nip = resultSet.getString(helper_petugas_poli.KEY_NIP);
+            String nama= resultSet.getString(helper_petugas_poli.KEY_NAMA);
+            String idpoli = resultSet.getString(helper_petugas_poli.KEY_ID_POLI);
+            String nmpoli = resultSet.getString(helper_petugas_poli.KEY_POLI);
+            String username = resultSet.getString(helper_petugas_poli.KEY_USERNAME);
+          
+            modelpetugas.addRow(new Object[]{nip, nama,idpoli,nmpoli,username});
+            
+            
+        }
+    }
     
      public void readRec_cariTransRM(String norm, String tgl) throws SQLException {
 
@@ -497,6 +529,104 @@ public class Crud_local extends DBKoneksi_local {
 
 
     }
+   
+   public void Update_petugas(String nip, String namap, int idpoli, String username){
+    
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_petugas_poli.TB_NAME + " set "
+                    + helper_petugas_poli.KEY_NIP+"=?," 
+                    + helper_petugas_poli.KEY_NAMA+"=?," 
+                    + helper_petugas_poli.KEY_ID_POLI+"=?," 
+                    + helper_petugas_poli.KEY_USERNAME+"=?" 
+                    + " where "
+                    + helper_petugas_poli.KEY_NIP + "=?");
+
+            String s = "0736";
+
+            preparedStatement.setString(1, nip);
+            preparedStatement.setString(2, namap);
+            preparedStatement.setInt(3, idpoli);
+            preparedStatement.setString(4, username);
+            preparedStatement.setString(5, nip);
+
+            preparedStatement.executeUpdate();
+
+
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
+    public void Update_petugaspwd(String nip, String namap, int idpoli, String username, String pass){
+    
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_petugas_poli.TB_NAME + " set "
+                    + helper_petugas_poli.KEY_NIP+"=?," 
+                    + helper_petugas_poli.KEY_NAMA+"=?," 
+                    + helper_petugas_poli.KEY_ID_POLI+"=?," 
+                    + helper_petugas_poli.KEY_USERNAME+"=?," 
+                    + helper_petugas_poli.KEY_PASS + "=AES_ENCRYPT(?,?)" + " where "
+                    + helper_petugas_poli.KEY_NIP + "=?");
+
+            String s = "0736";
+
+            preparedStatement.setString(1, nip);
+            preparedStatement.setString(2, namap);
+            preparedStatement.setInt(3, idpoli);
+            preparedStatement.setString(4, username);
+            preparedStatement.setString(5, pass);
+            preparedStatement.setBytes(6, s.getBytes());
+            preparedStatement.setString(7, nip);
+
+            preparedStatement.executeUpdate();
+
+
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
+    public void Save_petugas(String nip, String namap, int idpoli, String username, String pass) {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_petugas_poli.TB_NAME + " (" + helper_petugas_poli.KEY_NIP + "," + helper_petugas_poli.KEY_NAMA
+                    + "," + helper_petugas_poli.KEY_ID_POLI + "," + helper_petugas_poli.KEY_USERNAME + "," + helper_petugas_poli.KEY_PASS + ") "
+                    + " values (?,?,?,?,AES_ENCRYPT(?,?))");
+
+            
+   
+            String s = "0736";
+            
+            preparedStatement.setString(1, nip);
+            preparedStatement.setString(2, namap);
+            preparedStatement.setInt(3, idpoli);
+            preparedStatement.setString(4, username);
+            preparedStatement.setString(5, pass);
+            preparedStatement.setBytes(6,s.getBytes());
+            preparedStatement.execute();
+
+            JOptionPane.showMessageDialog(null, "Data Tersimpan");
+            
+        } catch (SQLException ex) {
+           if(ex.getErrorCode() == 1062 ){
+            //duplicate primary key 
+             JOptionPane.showMessageDialog(null, "Gagal Tersimpan : Kode " + nip + " sudah pernah di input");
+            }
+            else{
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+    }
+   
+   
    
    public void Save_trans(String no_nota, String no_rm, String nama_pasien, String catatan, String petugas) {
 
@@ -728,7 +858,35 @@ public class Crud_local extends DBKoneksi_local {
         
     }
    
-   
+   public void CekPetugas(String pl) throws SQLException {
+
+
+        preparedStatement = connect.prepareStatement("select *, CAST(AES_DECRYPT(pass, '0736') AS CHAR(255)) xcd from " + helper_petugas_poli.TB_NAME + " where "
+                + helper_petugas_poli.KEY_USERNAME + " = ?");
+
+        preparedStatement.setString(1, pl);
+
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+
+            psm = resultSet.getString("xcd");
+            System.out.println(psm);
+        }
+
+        if (!psm.isEmpty()) {
+
+            usm = pl;
+
+//            StrPr m = new StrPr();
+//
+//            m.setCredentials(pl, tmp);
+
+
+        }
+
+    }
    
   public void CetakNota(String nonota,String tampil) throws JRException {
 
