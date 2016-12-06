@@ -321,6 +321,7 @@ public class Crud_local extends DBKoneksi_local {
     
     public void readRec_cariPoli() throws SQLException {
 
+        
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_poli.TB_NAME);
     
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -332,6 +333,31 @@ public class Crud_local extends DBKoneksi_local {
             String nmpoli = resultSet.getString(helper_poli.KEY_POLI);
           
             modelpoli.addRow(new Object[]{idpoli, nmpoli});
+            
+        }
+    }
+    
+      public void readRec_cariPetugasF(String nm_petugas) throws SQLException {
+
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV + " WHERE "
+                + helper_petugas_poli.KEY_NAMA + " like ? ");
+
+        preparedStatement.setString(1, "%" + nm_petugas + "%");    
+          
+       
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+            String nip = resultSet.getString(helper_petugas_poli.KEY_NIP);
+            String nama= resultSet.getString(helper_petugas_poli.KEY_NAMA);
+            String idpoli = resultSet.getString(helper_petugas_poli.KEY_ID_POLI);
+            String nmpoli = resultSet.getString(helper_petugas_poli.KEY_POLI);
+            String username = resultSet.getString(helper_petugas_poli.KEY_USERNAME);
+          
+            modelpetugas.addRow(new Object[]{nip, nama,idpoli,nmpoli,username});
+            
             
         }
     }
@@ -857,7 +883,26 @@ public class Crud_local extends DBKoneksi_local {
        
         
     }
-   
+        
+     public void DelRecPetugas(String kode) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_petugas_poli.TB_NAME + " where " + helper_petugas_poli.KEY_NIP + "=?");
+        
+            preparedStatement.setString(1, kode);
+            
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Hapus Gagal!");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+      
+        
+       
+        
+    }
    public void CekPetugas(String pl) throws SQLException {
 
 

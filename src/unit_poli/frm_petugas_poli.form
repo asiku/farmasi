@@ -406,9 +406,7 @@
                   <Component id="bt_edit" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="bt_hapus" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="bt_cetak" min="-2" pref="118" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="bt_cancel" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -424,7 +422,6 @@
                       <Component id="bt_add" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bt_edit" alignment="3" max="32767" attributes="0"/>
                       <Component id="bt_hapus" alignment="3" max="32767" attributes="0"/>
-                      <Component id="bt_cetak" alignment="3" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -469,14 +466,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_hapusActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="bt_cetak">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cetak"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_cetakActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

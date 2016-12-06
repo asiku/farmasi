@@ -118,7 +118,9 @@ public void readRec_brgF(String namabrg) throws SQLException {
     }
     
 
-  public void readRec_petugasF(String nm) throws SQLException{
+  public void readRec_petugasF(String nm) throws SQLException {
+
+      
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas.TB_NAME + " WHERE "
                     + helper_petugas.KEY_NAMA + " like ?");
 
@@ -137,7 +139,9 @@ public void readRec_brgF(String namabrg) throws SQLException {
             modeltugas.addRow(new Object[]{nip, nama});
             
         }
-  }
+
+    }
+
 
   public void readRec_petugas() throws SQLException {
 

@@ -65,6 +65,22 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         
+        txt_cari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               filterpetugaspoli();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               filterpetugaspoli();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               filterpetugaspoli();
+            }
+        });
         
         txt_cari_poli.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -157,7 +173,6 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         bt_add = new javax.swing.JButton();
         bt_edit = new javax.swing.JButton();
         bt_hapus = new javax.swing.JButton();
-        bt_cetak = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_petugas = new javax.swing.JTable();
@@ -468,13 +483,6 @@ public class frm_petugas_poli extends javax.swing.JFrame {
             }
         });
 
-        bt_cetak.setText("Cetak");
-        bt_cetak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_cetakActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -488,9 +496,7 @@ public class frm_petugas_poli extends javax.swing.JFrame {
                 .addComponent(bt_edit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_hapus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_cetak, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -503,8 +509,7 @@ public class frm_petugas_poli extends javax.swing.JFrame {
                     .addComponent(bt_save)
                     .addComponent(bt_add)
                     .addComponent(bt_edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_cetak, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(bt_hapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -723,13 +728,32 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_editActionPerformed
 
+    private void hapuspetugas(){
+        try {
+            datl=new Crud_local();
+            datl.DelRecPetugas(this.txt_nip.getText());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+    }
+    
     private void bt_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapusActionPerformed
         // TODO add your handling code here:
+     if(!txt_nip.getText().isEmpty())   {
+         int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","Warning ",
+   JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+   
+     if(dialogResult == JOptionPane.YES_OPTION){  
+        hapuspetugas();
+        this.refreshtb();
+      }
+     }
+     else{
+         JOptionPane.showMessageDialog(null, "Maaf Nip Kosong Tidak Bisa di Hapus!");
+     }
     }//GEN-LAST:event_bt_hapusActionPerformed
-
-    private void bt_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cetakActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_cetakActionPerformed
 
     private void tb_poliMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_poliMouseReleased
         // TODO add your handling code here:
@@ -866,6 +890,25 @@ public class frm_petugas_poli extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_pwd_baruKeyPressed
 
+        
+   private void filterpetugaspoli(){
+    
+          try {
+                datl = new Crud_local();
+
+                try {
+                    datl.readRec_cariPetugasF(txt_cari.getText());
+                } catch (SQLException ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                tb_petugas.setModel(datl.modelpetugas);
+            } catch (Exception ex) {
+                Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
+         
+        
     private void filterpoli(){
     
           try {
@@ -972,7 +1015,6 @@ public class frm_petugas_poli extends javax.swing.JFrame {
     private javax.swing.JButton bt_cari;
     private javax.swing.JButton bt_cari_nip;
     private javax.swing.JButton bt_cari_poli;
-    private javax.swing.JButton bt_cetak;
     private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_save;
