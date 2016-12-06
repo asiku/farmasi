@@ -35,7 +35,17 @@ public class Crud_farmasi extends DBkoneksi {
     String[] reg_title = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal"};
 
     String[] brg_title = new String[]{ "Kode obat", "Nama Obat", "Satuan"};
+    
+    String[] petugas_title = new String[]{"Nip", "Nama Petugas"};
+    
 
+    public DefaultTableModel modeltugas = new DefaultTableModel(petugas_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+    
     public DefaultTableModel modelbrg = new DefaultTableModel(brg_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -107,6 +117,50 @@ public void readRec_brgF(String namabrg) throws SQLException {
         }
     }
     
+
+  public void readRec_petugasF(String nm) throws SQLException{
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas.TB_NAME + " WHERE "
+                    + helper_petugas.KEY_NAMA + " like ?");
+
+            preparedStatement.setString(1, "%" + nm + "%");
+ 
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+         while (resultSet.next()) {
+
+//            i++;
+
+//            String no = String.valueOf(i);
+            String nip = resultSet.getString(helper_petugas.KEY_NIP);
+            String nama = resultSet.getString(helper_petugas.KEY_NAMA);
+  
+            modeltugas.addRow(new Object[]{nip, nama});
+            
+        }
+  }
+
+  public void readRec_petugas() throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas.TB_NAME);
+
+     
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+//        int i = 0;
+
+        while (resultSet.next()) {
+
+//            i++;
+
+//            String no = String.valueOf(i);
+            String nip = resultSet.getString(helper_petugas.KEY_NIP);
+            String nama = resultSet.getString(helper_petugas.KEY_NAMA);
+  
+            modeltugas.addRow(new Object[]{nip, nama});
+            
+        }
+    }
+
     
     public void readRec_brg(String namabrg) throws SQLException {
 
