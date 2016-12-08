@@ -40,6 +40,8 @@ public class Crud_local extends DBKoneksi_local {
     public static String usm = "";
     public static String psm = "";
     
+     public static String namapetugaslogin = "";
+    
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -917,6 +919,7 @@ public class Crud_local extends DBKoneksi_local {
         while (resultSet.next()) {
 
             psm = resultSet.getString("xcd");
+            namapetugaslogin=resultSet.getString(helper_petugas_poli.KEY_NAMA);
             System.out.println(psm);
         }
 
