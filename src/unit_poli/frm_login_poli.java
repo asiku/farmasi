@@ -199,11 +199,23 @@ public class frm_login_poli extends javax.swing.JFrame {
         }
             
             if (Crud_local.usm.equals(txt_username.getText()) && Crud_local.psm.equals(txt_pwd.getText())) {
-                frm_poli pol=new frm_poli(namapetugaslogin);
+               
+            try {
+                datl.readRec_cariPetugasBypoli(txt_username.getText());
+              if(Crud_local.namapoli.equals("Klinik Spesialis Anak")){   
+                frm_poli pol=new frm_poli(namapetugaslogin,Crud_local.namapoli);
                 
                 pol.setVisible(true);
                 
                 dispose();
+              }
+                 
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Login Koneksi Data Bermasalah!");
+                Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+            
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Password Salah!");

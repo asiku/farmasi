@@ -41,6 +41,7 @@ public class Crud_local extends DBKoneksi_local {
     public static String psm = "";
     
      public static String namapetugaslogin = "";
+     public static String namapoli = "";
     
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
@@ -364,6 +365,25 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
+      
+        public void readRec_cariPetugasBypoli(String username) throws SQLException {
+
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV + " WHERE "
+                + helper_petugas_poli.KEY_USERNAME + "=?");
+
+        preparedStatement.setString(1,username);    
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+
+        while (resultSet.next()) {
+    
+            namapoli= resultSet.getString(helper_petugas_poli.KEY_POLI);
+               
+        }
+    }
+    
+      
      public void readRec_cariPetugas() throws SQLException {
 
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV);
@@ -920,6 +940,7 @@ public class Crud_local extends DBKoneksi_local {
 
             psm = resultSet.getString("xcd");
             namapetugaslogin=resultSet.getString(helper_petugas_poli.KEY_NAMA);
+            //namapoli=resultSet.getString(helper_petugas_poli.KEY_POLI);
             System.out.println(psm);
         }
 
