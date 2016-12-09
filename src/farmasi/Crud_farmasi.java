@@ -236,6 +236,37 @@ public void readRec_brgF(String namabrg) throws SQLException {
         }
     }
 
+    
+    public void readRec_registrasiRM_NMPOLI(String norm,String nm,String tgl) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_NAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "
+                + helper_registrasi.KEY_NO_RM + " like ? OR " 
+                + helper_registrasi.KEY_NM_PASIEN 
+                + " like ? ");
+
+        preparedStatement.setString(1, tgl);
+        preparedStatement.setString(2, "%" + norm + "%");
+        preparedStatement.setString(3, "%" + nm + "%");
+        
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0;
+
+        while (resultSet.next()) {
+
+            i++;
+
+            String no = String.valueOf(i);
+            String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
+            String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
+
+            modelreg.addRow(new Object[]{no, rm, nmp, reg});
+        }
+    }
+
     public void readRec_registrasiRM(String norm, String tgl) throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_NAME + " WHERE "
