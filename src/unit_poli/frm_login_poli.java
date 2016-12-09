@@ -80,6 +80,11 @@ public class frm_login_poli extends javax.swing.JFrame {
         });
 
         bt_cancel.setText("Cancel");
+        bt_cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,6 +186,11 @@ public class frm_login_poli extends javax.swing.JFrame {
         // TODO add your handling code here:
         loginActPetugas();
     }//GEN-LAST:event_bt_loginActionPerformed
+
+    private void bt_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_bt_cancelActionPerformed
 
     private void loginActPetugas(){
    

@@ -77,11 +77,13 @@
                       <Component id="lbl_jam" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lbl_petugas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lbl_poli" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Component id="lbl_news" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lbl_poli1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="1065" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lbl_poli" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="961" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -89,13 +91,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_poli" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_petugas" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_jam" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                              <Component id="lbl_poli1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lbl_news" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_petugas" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_jam" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_poli" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <Component id="lbl_poli1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -135,6 +140,14 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbl_poli1MouseClicked"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_news">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/unit_poli/news_ico.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Info"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -221,7 +234,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jDateTimePicker1" min="-2" pref="304" max="-2" attributes="0"/>
+                      <Component id="dt_tgl_reg" min="-2" pref="304" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -230,14 +243,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jDateTimePicker1" min="-2" max="-2" attributes="0"/>
+                      <Component id="dt_tgl_reg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="uz.ncipro.calendar.JDateTimePicker" name="jDateTimePicker1">
+            <Component class="uz.ncipro.calendar.JDateTimePicker" name="dt_tgl_reg">
+              <Properties>
+                <Property name="displayFormat" type="java.lang.String" value="yyyy/MM/dd"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -264,7 +280,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable4">
+                <Component class="javax.swing.JTable" name="tb_reg">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">

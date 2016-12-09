@@ -5,8 +5,16 @@
  */
 package unit_poli;
 
+import farmasi.Crud_farmasi;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import tools.Utilitas;
@@ -17,6 +25,8 @@ import tools.Utilitas;
  */
 public class frm_poli extends javax.swing.JFrame {
 
+    private Crud_farmasi dat;
+    
     /**
      * Creates new form frm_poli
      */
@@ -37,13 +47,78 @@ public class frm_poli extends javax.swing.JFrame {
          
          jPanel2.setPreferredSize( new Dimension(this.ToolBar.getWidth()+200,72));
          
-         setwaktu();
+        
          
+         filterRegbytgl(2);
+         
+         LoopTgl();
     }
 
     private void setwaktu(){
      this.lbl_jam.setText(Utilitas.tglsekarangJam()+"   ");
     }
+    
+    
+    private void LoopTgl(){
+    
+//     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+//
+//     Runnable task = () -> System.out.println("Scheduling: " + System.nanoTime());
+//
+//     int initialDelay = 0;
+//     int period = 1;
+//     executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
+
+ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+Runnable task = () -> {
+  //  try {
+        //TimeUnit.SECONDS.sleep(2);
+         setwaktu();
+       // System.out.println("Scheduling: " + System.nanoTime());
+//    }
+//    catch (InterruptedException e) {
+//        System.err.println("task interrupted");
+//    }
+};
+
+executor.scheduleWithFixedDelay(task, 0, 1, TimeUnit.SECONDS);
+    
+    }
+ 
+    private void filterRegbytgl(int pilih){
+    
+     String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+
+        if (this.txt_cari_reg.getText().isEmpty()) {
+
+            // System.out.print("No "+ dateFormatter.format(this.jtgl.getDate()));
+            try {
+                dat = new Crud_farmasi();
+
+                try {
+                   if(pilih==1){ 
+                    dat.readRec_registrasi(dateFormatter.format(this.dt_tgl_reg.getDate()));
+                   }
+                   else{
+                   dat.readRec_registrasi(Utilitas.tglsekarang());
+                   }
+                } catch (SQLException ex) {
+                    Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                tb_reg.setModel(dat.modelreg);
+
+            } catch (Exception ex) {
+                Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+    
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,15 +135,16 @@ public class frm_poli extends javax.swing.JFrame {
         lbl_petugas = new javax.swing.JLabel();
         lbl_poli = new javax.swing.JLabel();
         lbl_poli1 = new javax.swing.JLabel();
+        lbl_news = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         txt_cari_reg = new javax.swing.JTextField();
         lbl_cari = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jDateTimePicker1 = new uz.ncipro.calendar.JDateTimePicker();
+        dt_tgl_reg = new uz.ncipro.calendar.JDateTimePicker();
         jLabel7 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tb_reg = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -141,6 +217,9 @@ public class frm_poli extends javax.swing.JFrame {
             }
         });
 
+        lbl_news.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/news_ico.png"))); // NOI18N
+        lbl_news.setText("Info");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -150,23 +229,27 @@ public class frm_poli extends javax.swing.JFrame {
                 .addComponent(lbl_jam)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_petugas)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_poli)
                 .addGap(26, 26, 26)
+                .addComponent(lbl_news)
+                .addGap(18, 18, 18)
                 .addComponent(lbl_poli1)
-                .addContainerGap(1065, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(lbl_poli)
+                .addContainerGap(961, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_poli)
-                    .addComponent(lbl_petugas)
-                    .addComponent(lbl_jam)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(lbl_poli1)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_news)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbl_petugas)
+                        .addComponent(lbl_jam)
+                        .addComponent(lbl_poli)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(8, 8, 8)
+                            .addComponent(lbl_poli1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -179,26 +262,28 @@ public class frm_poli extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(0, 153, 153));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        dt_tgl_reg.setDisplayFormat("yyyy/MM/dd");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dt_tgl_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dt_tgl_reg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel7.setText("Cari Pasien");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tb_reg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -209,7 +294,7 @@ public class frm_poli extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tb_reg);
 
         jTabbedPane2.addTab("Data Registrasi", jScrollPane4);
 
@@ -710,12 +795,12 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_save;
+    private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
-    private uz.ncipro.calendar.JDateTimePicker jDateTimePicker1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -747,7 +832,6 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTextField jTextField1;
@@ -756,9 +840,11 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_cari2;
     private javax.swing.JLabel lbl_cari3;
     private javax.swing.JLabel lbl_jam;
+    private javax.swing.JLabel lbl_news;
     private javax.swing.JLabel lbl_petugas;
     private javax.swing.JLabel lbl_poli;
     private javax.swing.JLabel lbl_poli1;
+    private javax.swing.JTable tb_reg;
     private javax.swing.JTextField txt_cari_reg;
     private javax.swing.JTextField txt_cari_reg1;
     private javax.swing.JTextField txt_dokter;
