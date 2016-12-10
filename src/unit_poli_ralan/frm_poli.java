@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit_poli;
+package unit_poli_ralan;
 
+import unit_poli.*;
 import farmasi.Crud_farmasi;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,85 +28,97 @@ import tools.Utilitas;
  */
 public class frm_poli extends javax.swing.JFrame {
 
+    
     private ScheduledExecutorService executor;
-
+    
     private Crud_farmasi dat;
-
+    
     /**
      * Creates new form frm_poli
      */
-    public frm_poli() {
+    
+     public frm_poli() {
         initComponents();
-
-    }
-
-    public frm_poli(String nmp, String poli) {
-        initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        this.lbl_petugas.setText(nmp);
-        this.lbl_poli.setText(poli);
-
-        jPanel2.setPreferredSize(new Dimension(this.ToolBar.getWidth() + 200, 72));
-
-        filterReg();
         
-        LoopTgl();
-
-        txt_cari_reg.getDocument().addDocumentListener(new DocumentListener() {
+        
+      
+         
+    }
+    public frm_poli(String nmp,String poli) {
+        initComponents();
+         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+         
+         this.lbl_petugas.setText(nmp);
+         this.lbl_poli.setText(poli);
+         
+         jPanel2.setPreferredSize( new Dimension(this.ToolBar.getWidth()+200,72));
+         
+        
+         
+         filterRegbytgl(2);
+         
+         LoopTgl();
+         
+         
+         txt_cari_reg.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                //filterReg();
-                if (txt_cari_reg.getText().isEmpty()) {
-
-                }
+              //filterReg();
+             if(txt_cari_reg.getText().isEmpty()){ 
+               filterRegbytgl(1);
+             }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-
-                //filterReg();
-                if (txt_cari_reg.getText().isEmpty()) {
-
-                }
+                
+            //filterReg();
+            if(txt_cari_reg.getText().isEmpty()){ 
+               filterRegbytgl(1);
+             }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                //filterReg();
-                if (txt_cari_reg.getText().isEmpty()) {
-
-                }
+             //filterReg();
+             if(txt_cari_reg.getText().isEmpty()){ 
+               filterRegbytgl(1);
+             }
             }
-        });
-
+        }); 
+          
+         
+         
+         
     }
 
-    private void filterReg() {
+    
+    private void filterReg(){
+        
+        String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 
         try {
-            dat = new Crud_farmasi();
-
-            String[] b = {"ARJUNO", "MAHAMERU", "LEUSER", "RANAI", "PANGRANGO", "CADANGAN"};
-
-            dat.readRec_kamarinap(b);
             
-            this.tb_reg.setModel(dat.modelkamarinap);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            dat=new Crud_farmasi();
+            dat.readRec_registrasiRM_NMPOLI(txt_cari_reg.getText(),txt_cari_reg.getText(), dateFormatter.format(this.dt_tgl_reg.getDate()));
+            this.tb_reg.setModel(dat.modelreg);
+            
         } catch (Exception ex) {
             Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    
+    
     }
-
-    private void setwaktu() {
-        this.lbl_jam.setText(Utilitas.tglsekarangJam() + "   ");
+    
+    
+    private void setwaktu(){
+     this.lbl_jam.setText(Utilitas.tglsekarangJam()+"   ");
     }
-
-    private void LoopTgl() {
-
+    
+    
+    private void LoopTgl(){
+    
 //     ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 //
 //     Runnable task = () -> System.out.println("Scheduling: " + System.nanoTime());
@@ -113,23 +126,58 @@ public class frm_poli extends javax.swing.JFrame {
 //     int initialDelay = 0;
 //     int period = 1;
 //     executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);
-        executor = Executors.newScheduledThreadPool(1);
 
-        Runnable task = () -> {
-            //  try {
-            //TimeUnit.SECONDS.sleep(2);
-            setwaktu();
-            // System.out.println("Scheduling: " + System.nanoTime());
+ executor = Executors.newScheduledThreadPool(1);
+
+Runnable task = () -> {
+  //  try {
+        //TimeUnit.SECONDS.sleep(2);
+         setwaktu();
+       // System.out.println("Scheduling: " + System.nanoTime());
 //    }
 //    catch (InterruptedException e) {
 //        System.err.println("task interrupted");
 //    }
-        };
+};
 
-        executor.scheduleWithFixedDelay(task, 0, 1, TimeUnit.SECONDS);
-
+executor.scheduleWithFixedDelay(task, 0, 1, TimeUnit.SECONDS);
+    
     }
+ 
+    private void filterRegbytgl(int pilih){
+    
+     String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 
+        if (this.txt_cari_reg.getText().isEmpty()) {
+
+            // System.out.print("No "+ dateFormatter.format(this.jtgl.getDate()));
+            try {
+                dat = new Crud_farmasi();
+
+                try {
+                   if(pilih==1){ 
+                    dat.readRec_registrasi(dateFormatter.format(this.dt_tgl_reg.getDate()));
+                   }
+                   else{
+                   dat.readRec_registrasi(Utilitas.tglsekarang());
+                   }
+                } catch (SQLException ex) {
+                    Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                tb_reg.setModel(dat.modelreg);
+
+            } catch (Exception ex) {
+                Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,6 +195,8 @@ public class frm_poli extends javax.swing.JFrame {
         lbl_poli1 = new javax.swing.JLabel();
         lbl_news = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        dt_tgl_reg = new uz.ncipro.calendar.JDateTimePicker();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -298,6 +348,22 @@ public class frm_poli extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jPanel5.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        dt_tgl_reg.setDisplayFormat("yyyy/MM/dd");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dt_tgl_reg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(dt_tgl_reg, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        );
+
         tb_reg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -324,7 +390,7 @@ public class frm_poli extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -346,7 +412,9 @@ public class frm_poli extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txt_cari_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_cari_reg)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_cari)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -357,9 +425,14 @@ public class frm_poli extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_cari_reg)
-                    .addComponent(lbl_cari))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txt_cari_reg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbl_cari)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane2)
                 .addContainerGap())
         );
@@ -441,7 +514,7 @@ public class frm_poli extends javax.swing.JFrame {
                             .addComponent(txt_no_rawat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
@@ -1029,17 +1102,17 @@ public class frm_poli extends javax.swing.JFrame {
 
     private void lbl_poli1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_poli1MouseClicked
         // TODO add your handling code here:
-        int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan Keluar?", "Warning ",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-        if (dialogResult == JOptionPane.YES_OPTION) {
-
-            executor.shutdown();
-
-            new frm_login_poli().setVisible(true);
-            dispose();
-        }
-
+          int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan Keluar?","Warning ",
+   JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+   
+  if(dialogResult == JOptionPane.YES_OPTION){  
+      
+      executor.shutdown();
+      
+      new frm_login_poli().setVisible(true);
+      dispose();
+  }
+        
     }//GEN-LAST:event_lbl_poli1MouseClicked
 
     private void lbl_cariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cariMouseClicked
@@ -1073,6 +1146,7 @@ public class frm_poli extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frm_poli.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1088,6 +1162,7 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_save;
+    private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1142,6 +1217,7 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
