@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -43,7 +43,7 @@ public class Crud_local extends DBKoneksi_local {
      public static String namapetugaslogin = "";
      public static String namapoli = "";
     
-    private Statement statement = null;
+ 
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     

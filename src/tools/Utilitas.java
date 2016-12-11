@@ -5,6 +5,8 @@
  */
 package tools;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Component;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -15,13 +17,47 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 /**
  *
  * @author jengcool
  */
 public class Utilitas {
     
+    
+ public static void main(String [] args)
+ {
+ try {
+ 
+ Client client = Client.create();
+ WebResource webResource = client.resource("http://localhost/rsjul/restfulPHP.php?wonderName=Taj%20Mahal");
+ ClientResponse response = webResource.accept("").get(ClientResponse.class);
+ if (response.getStatus() != 200) {
+ throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+ }
+ 
+ String output2 = response.getEntity(String.class);
+ 
+ 
+ ObjectMapper objectMapper = new ObjectMapper();
+
+//read JSON like DOM Parser
+JsonNode rootNode = objectMapper.readTree(output2);
+ 
+JsonNode idNode = rootNode.path("result");
+
+System.out.println("id = "+idNode.asText());
+ 
+ 
+ System.out.println("\n============Plain Text Response============");
+ System.out.println(output2);
+ 
+ } catch (Exception e) {
+ e.printStackTrace();
+ }
+ }
     public static String formatuang(Double hrg) {
 
         DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
