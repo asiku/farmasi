@@ -20,6 +20,10 @@ import javax.swing.JTextField;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -32,6 +36,23 @@ public class Utilitas {
 // 
 // }
 // 
+    
+    
+    
+ public static void filtertb(String text,JTable tb,int col){
+  
+  final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tb.getModel());
+  tb.setRowSorter(sorter);
+  
+   
+  if (text.length() == 0) {
+          sorter.setRowFilter(null);
+  } else {
+          sorter.setRowFilter(RowFilter.regexFilter("(?i)" +text,col));
+   }
+  
+  } 
+    
     public static String getDateServer() {
         
         String wkt="";
@@ -42,6 +63,7 @@ public class Utilitas {
             //WebResource webResource = client.resource("http://localhost/rsjul/restfulPHP.php?wonderName=Taj%20Mahal");
 
             WebResource webResource = client.resource("http://localhost/rsjul/timeserver.php?waktu=mentawaktujang");
+            //WebResource webResource = client.resource("http://192.168.1.31/rsjul/timeserver.php?waktu=mentawaktujang");
 
             ClientResponse response = webResource.accept("").get(ClientResponse.class);
             if (response.getStatus() != 200) {

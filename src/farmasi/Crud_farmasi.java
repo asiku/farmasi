@@ -35,8 +35,10 @@ public class Crud_farmasi extends DBkoneksi {
     String[] brg_title = new String[]{"Kode obat", "Nama Obat", "Satuan"};
 
     String[] petugas_title = new String[]{"Nip", "Nama Petugas"};
+    
+    String[] pegawai_title = new String[]{"Nip", "Nama Pegawai","Jabatan"};
 
-    String[] kamarinap_title = new String[]{"No. RM", "Nama Pasien", "No. Rawat"};
+    String[] kamarinap_title = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap"};
 
     public DefaultTableModel modelkamarinap = new DefaultTableModel(kamarinap_title, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -45,6 +47,13 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
+     public DefaultTableModel modelpegawai = new DefaultTableModel(pegawai_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+     };
+    
     public DefaultTableModel modeltugas = new DefaultTableModel(petugas_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -66,82 +75,44 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
-    public void readRec_kamarinap(String[] bangsal,String bln) {
-
-        try {
-            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =?"
-            );
-
-            preparedStatement.setString(1, bangsal[0]);
-            preparedStatement.setString(2, bangsal[1]);
-            preparedStatement.setString(3, bangsal[2]);
-            preparedStatement.setString(4, bangsal[3]);
-            preparedStatement.setString(5, bangsal[4]);
-            preparedStatement.setString(6, bangsal[5]);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-//        int i = 0;
-            System.out.println("No RM" + resultSet.getFetchSize());
-
-            while (resultSet.next()) {
-
-//            i++;
-//            String no = String.valueOf(i);
-                String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
-                String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
-                String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
-
-                modelkamarinap.addRow(new Object[]{norm, nmp, norawat});
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     
-    public void readRec_kamarinap(String[] bangsal) {
+    public void readRec_kamarinap(String[] bangsal,String txtcari,String tgl) {
 
         try {
             preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
-                    + helper_kamar_inap.KEY_NM_BANGSAL + " =?"
-            );
-
-            preparedStatement.setString(1, bangsal[0]);
-            preparedStatement.setString(2, bangsal[1]);
-            preparedStatement.setString(3, bangsal[2]);
-            preparedStatement.setString(4, bangsal[3]);
-            preparedStatement.setString(5, bangsal[4]);
-            preparedStatement.setString(6, bangsal[5]);
+                    + helper_kamar_inap.KEY_NO_RM + " like ? OR "
+                    + helper_kamar_inap.KEY_NM_PASIEN + " like ?");
+            
+            preparedStatement.setString(1, "%"+ txtcari +"%");
+            preparedStatement.setString(2, "%"+ txtcari +"%");
+           
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
 //        int i = 0;
-            System.out.println("No RM" + resultSet.getFetchSize());
+           // System.out.println("No RM" + resultSet.getFetchSize());
 
             while (resultSet.next()) {
 
 //            i++;
 //            String no = String.valueOf(i);
+             if((resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[0])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[1])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[2])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[3])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[4])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[5]))
+                  && resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).substring(5, resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).length() - 3).equals(tgl))
+              {
                 String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
                 String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
                 String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
-
-                modelkamarinap.addRow(new Object[]{norm, nmp, norawat});
-
+                String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
+                String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
+                modelkamarinap.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal});
+              }
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -195,6 +166,29 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    public void readRec_pegawaiF(String nm) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_pegawai.TB_NAME + " WHERE "
+                + helper_pegawai.KEY_NAMA + " like ?");
+
+        preparedStatement.setString(1, "%" + nm + "%");
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+
+//            i++;
+//            String no = String.valueOf(i);
+            String nip = resultSet.getString(helper_pegawai.KEY_NIP);
+            String nama = resultSet.getString(helper_pegawai.KEY_NAMA);
+            String jbtn = resultSet.getString(helper_pegawai.KEY_JABATAN);
+            modelpegawai.addRow(new Object[]{nip, nama,jbtn});
+
+        }
+
+    }
+
+    
     public void readRec_petugasF(String nm) throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas.TB_NAME + " WHERE "

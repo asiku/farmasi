@@ -1120,6 +1120,10 @@ executor.scheduleWithFixedDelay(task, 0, 1, TimeUnit.SECONDS);
         filterReg();
     }//GEN-LAST:event_lbl_cariMouseClicked
 
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
