@@ -79,7 +79,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_jam" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_tgl_server" min="-2" pref="90" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_jamnow" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="lbl_petugas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="lbl_news" min="-2" max="-2" attributes="0"/>
@@ -87,7 +91,7 @@
                       <Component id="lbl_poli1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="lbl_poli" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="961" max="32767" attributes="0"/>
+                      <EmptySpace pref="786" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -108,6 +112,14 @@
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lbl_tgl_server" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_jamnow" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -151,6 +163,13 @@
                   <Image iconType="3" name="/unit_poli/news_ico.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Info"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_tgl_server">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_jamnow">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="sssss"/>
               </Properties>
             </Component>
           </SubComponents>

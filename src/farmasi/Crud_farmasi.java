@@ -66,6 +66,47 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
+    public void readRec_kamarinap(String[] bangsal,String bln) {
+
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
+                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
+                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
+                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
+                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
+                    + helper_kamar_inap.KEY_NM_BANGSAL + " =? OR "
+                    + helper_kamar_inap.KEY_NM_BANGSAL + " =?"
+            );
+
+            preparedStatement.setString(1, bangsal[0]);
+            preparedStatement.setString(2, bangsal[1]);
+            preparedStatement.setString(3, bangsal[2]);
+            preparedStatement.setString(4, bangsal[3]);
+            preparedStatement.setString(5, bangsal[4]);
+            preparedStatement.setString(6, bangsal[5]);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+//        int i = 0;
+            System.out.println("No RM" + resultSet.getFetchSize());
+
+            while (resultSet.next()) {
+
+//            i++;
+//            String no = String.valueOf(i);
+                String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
+                String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
+                String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
+
+                modelkamarinap.addRow(new Object[]{norm, nmp, norawat});
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
     public void readRec_kamarinap(String[] bangsal) {
 
         try {

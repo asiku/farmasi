@@ -50,6 +50,8 @@ public class frm_poli extends javax.swing.JFrame {
 
         filterReg();
         
+        this.lbl_tgl_server.setText(Utilitas.getDateServer());
+        
         LoopTgl();
 
         txt_cari_reg.getDocument().addDocumentListener(new DocumentListener() {
@@ -101,7 +103,7 @@ public class frm_poli extends javax.swing.JFrame {
     }
 
     private void setwaktu() {
-        this.lbl_jam.setText(Utilitas.tglsekarangJam() + "   ");
+        this.lbl_jamnow.setText(Utilitas.Jam()+ "   ");
     }
 
     private void LoopTgl() {
@@ -147,6 +149,8 @@ public class frm_poli extends javax.swing.JFrame {
         lbl_poli = new javax.swing.JLabel();
         lbl_poli1 = new javax.swing.JLabel();
         lbl_news = new javax.swing.JLabel();
+        lbl_tgl_server = new javax.swing.JLabel();
+        lbl_jamnow = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel12 = new javax.swing.JPanel();
@@ -267,6 +271,8 @@ public class frm_poli extends javax.swing.JFrame {
         lbl_news.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/news_ico.png"))); // NOI18N
         lbl_news.setText("Info");
 
+        lbl_jamnow.setText("sssss");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -274,7 +280,11 @@ public class frm_poli extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_jam)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_tgl_server, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_jamnow, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_petugas)
                 .addGap(26, 26, 26)
                 .addComponent(lbl_news)
@@ -282,7 +292,7 @@ public class frm_poli extends javax.swing.JFrame {
                 .addComponent(lbl_poli1)
                 .addGap(25, 25, 25)
                 .addComponent(lbl_poli)
-                .addContainerGap(961, Short.MAX_VALUE))
+                .addContainerGap(786, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,6 +308,12 @@ public class frm_poli extends javax.swing.JFrame {
                             .addGap(8, 8, 8)
                             .addComponent(lbl_poli1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_tgl_server)
+                    .addComponent(lbl_jamnow))
+                .addGap(22, 22, 22))
         );
 
         ToolBar.add(jPanel2);
@@ -1209,12 +1225,14 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_cari;
     private javax.swing.JLabel lbl_cari3;
     private javax.swing.JLabel lbl_jam;
+    private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kamar_inap;
     private javax.swing.JLabel lbl_news;
     private javax.swing.JLabel lbl_petugas;
     private javax.swing.JLabel lbl_poli;
     private javax.swing.JLabel lbl_poli1;
     private javax.swing.JLabel lbl_tgl_masuk;
+    private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JTable tb_reg;
     private javax.swing.JTextField txt_cari_reg;
     private javax.swing.JTextField txt_cari_reg1;
