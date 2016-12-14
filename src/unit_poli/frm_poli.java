@@ -6,11 +6,14 @@
 package unit_poli;
 
 import farmasi.Crud_farmasi;
+import farmasi.Crud_local;
+import static farmasi.Crud_local.cekvalpilih;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -41,6 +45,10 @@ public class frm_poli extends javax.swing.JFrame {
 
     private Crud_farmasi dat;
 
+    private Crud_local datl;
+
+    private boolean pilihcari;
+
     /**
      * Creates new form frm_poli
      */
@@ -53,6 +61,8 @@ public class frm_poli extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+       
+
         this.lbl_petugas.setText(nmp);
         this.lbl_poli.setText(poli);
 
@@ -60,28 +70,26 @@ public class frm_poli extends javax.swing.JFrame {
         LoopTgl();
 
         filterReg();
-         
-        
-        
+
         txt_cari_reg.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                 filtertxt();
+                filtertxt();
 
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                 filtertxt();
+                filtertxt();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                 filtertxt();
+                filtertxt();
             }
         });
-        
-            this.txt_cari_petugas.getDocument().addDocumentListener(new DocumentListener() {
+
+        this.txt_cari_petugas.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 filterPegawai();
@@ -98,13 +106,39 @@ public class frm_poli extends javax.swing.JFrame {
                 filterPegawai();
             }
         });
-        
-       filterPegawai();
+
+        filterPegawai();
+
+        settbTindakan();
+    }
+
+    private void settbTindakan() {
+
+        try {
+            datl = new Crud_local();
+
+            datl.readRec_cariTarifTemplate(txt_cari_tindakan_template.getText(),false,1);
+
+            this.tb_tindakan.setModel(datl.modeltariftemplate);
+
+            setukurantbtindakan();
+            
+            // System.out.println("count:"+tb_tindakan.getColumnModel().getColumnCount());
+//            for (int i = tb_tindakan.getColumnModel().getColumnCount()-1; i >= 0; i--) {
+//             if(!(i==0||i==1)){
+//                 System.out.println(i);
+//               TableColumn col = tb_tindakan.getColumnModel().getColumn(i);
+//               tb_tindakan.getColumnModel().removeColumn(col);
+//             }
+//            }
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     private void filtertxt() {
-       
-     
+
 //            for (int i = 0; i < txt_cari_reg.getText().length(); i++) {
 //                if (Character.isDigit(txt_cari_reg.getText().charAt(i))) {
 //                    Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 0);
@@ -112,8 +146,7 @@ public class frm_poli extends javax.swing.JFrame {
 //                    Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 1);
 //                }
 //            }
-
-  filterReg();
+        filterReg();
 
     }
 
@@ -124,14 +157,13 @@ public class frm_poli extends javax.swing.JFrame {
         if (!this.lbl_tgl_server.getText().isEmpty()) {
             try {
 
- 
                 dat = new Crud_farmasi();
 
                 String[] b = {"ARJUNO", "MAHAMERU", "LEUSER", "RANAI", "PANGRANGO", "CADANGAN"};
 
                 String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
 
-                dat.readRec_kamarinap(b,this.txt_cari_reg.getText(),t);
+                dat.readRec_kamarinap(b, this.txt_cari_reg.getText(), t);
 
                 this.tb_reg.setModel(dat.modelkamarinap);
 
@@ -146,7 +178,6 @@ public class frm_poli extends javax.swing.JFrame {
 //                        dm.removeRow(i);
 //                    }
 //                }
-
             } catch (SQLException ex) {
                 Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -158,12 +189,23 @@ public class frm_poli extends javax.swing.JFrame {
         }
     }
 
+     private void setukurantbtindakan() {
+        tb_reg.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        TableColumnModel tr = tb_tindakan.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(70);
+        tr.getColumn(1).setPreferredWidth(280);
+        tr.getColumn(2).setPreferredWidth(80);
+        
+    }
+    
     private void setukurantbReg() {
         tb_reg.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         TableColumnModel tr = tb_reg.getColumnModel();
 
-        tr.getColumn(0).setPreferredWidth(70);
+        tr.getColumn(0).setPreferredWidth(80);
         tr.getColumn(1).setPreferredWidth(299);
         tr.getColumn(2).setPreferredWidth(0);
         tr.getColumn(3).setPreferredWidth(0);
@@ -214,6 +256,7 @@ public class frm_poli extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tb_cari_petugas = new javax.swing.JTable();
         txt_cari_petugas = new javax.swing.JTextField();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         ToolBar = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         lbl_jam = new javax.swing.JLabel();
@@ -248,9 +291,11 @@ public class frm_poli extends javax.swing.JFrame {
         lbl_tgl_masuk = new javax.swing.JLabel();
         lbl_kamar_inap = new javax.swing.JLabel();
         bt_cari_dpjp = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        bt_cari_ppjp = new javax.swing.JButton();
         txt_dpjp = new javax.swing.JTextField();
         txt_ppjp = new javax.swing.JTextField();
+        r_perawatan = new javax.swing.JRadioButton();
+        r_pulang = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
@@ -276,22 +321,33 @@ public class frm_poli extends javax.swing.JFrame {
         jRadioButton4 = new javax.swing.JRadioButton();
         jRadioButton5 = new javax.swing.JRadioButton();
         jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         txt_nama_template = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        txt_cari_reg1 = new javax.swing.JTextField();
-        lbl_cari3 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txt_nama_template1 = new javax.swing.JTextField();
+        bt_cari_template_petugas = new javax.swing.JButton();
+        bt_cari_template_petugas1 = new javax.swing.JButton();
+        txt_nama_template4 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txt_cari_tindakan_template = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        tb_tindakan = new javax.swing.JTable();
+        bt_cari_tindakan_template = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        txt_cari_input_template = new javax.swing.JTextField();
+        txt_nama_template2 = new javax.swing.JTextField();
+        txt_nama_template5 = new javax.swing.JTextField();
+        bt_cari_tindakan_template1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jButton5 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         dlg_dpjp.setModal(true);
         dlg_dpjp.setSize(new java.awt.Dimension(450, 352));
@@ -331,19 +387,19 @@ public class frm_poli extends javax.swing.JFrame {
             dlg_dpjpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlg_dpjpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dlg_dpjpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-                    .addComponent(txt_cari_petugas))
+                .addGroup(dlg_dpjpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_cari_petugas, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dlg_dpjpLayout.setVerticalGroup(
             dlg_dpjpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlg_dpjpLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txt_cari_petugas)
+                .addComponent(txt_cari_petugas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -451,10 +507,7 @@ public class frm_poli extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,6 +563,12 @@ public class frm_poli extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        txt_nm_pasien.setEditable(false);
+
+        txt_no_rm.setEditable(false);
+
+        txt_no_rawat.setEditable(false);
+
         jLabel2.setText("No Rawat");
 
         jLabel3.setText("No RM");
@@ -518,7 +577,11 @@ public class frm_poli extends javax.swing.JFrame {
 
         jLabel6.setText("DPJP");
 
+        txt_nip_dpjp.setEditable(false);
+
         jLabel7.setText("PPJP");
+
+        txt_nip_ppjp.setEditable(false);
 
         jLabel10.setText("Kamar Inap");
 
@@ -535,7 +598,22 @@ public class frm_poli extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("jButton5");
+        bt_cari_ppjp.setText("jButton5");
+        bt_cari_ppjp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_ppjpActionPerformed(evt);
+            }
+        });
+
+        txt_dpjp.setEditable(false);
+
+        txt_ppjp.setEditable(false);
+
+        buttonGroup2.add(r_perawatan);
+        r_perawatan.setText("Perawatan");
+
+        buttonGroup2.add(r_pulang);
+        r_pulang.setText("Pulang");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -563,13 +641,17 @@ public class frm_poli extends javax.swing.JFrame {
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_tgl_masuk, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ppjp, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_kamar_inap, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(r_perawatan)
+                        .addGap(43, 43, 43)
+                        .addComponent(r_pulang))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txt_nip_ppjp, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_ppjp, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41))
+                        .addComponent(bt_cari_ppjp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -583,20 +665,24 @@ public class frm_poli extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_nip_ppjp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6))
+                            .addComponent(bt_cari_ppjp))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_ppjp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel11)
                         .addGap(5, 5, 5)
                         .addComponent(lbl_tgl_masuk, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
                         .addGap(5, 5, 5)
-                        .addComponent(lbl_kamar_inap, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_kamar_inap, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(r_perawatan)
+                            .addComponent(r_pulang)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txt_no_rawat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addGap(5, 5, 5)
                         .addComponent(txt_no_rm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -649,26 +735,24 @@ public class frm_poli extends javax.swing.JFrame {
                 .addComponent(txt_dokter, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_dokter1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_dokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txt_dokter1)
-                        .addComponent(jButton9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(txt_dokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)
-                        .addComponent(jButton8)))
+                        .addComponent(jButton9)
+                        .addComponent(jLabel5)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -713,7 +797,7 @@ public class frm_poli extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jTextField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -753,14 +837,6 @@ public class frm_poli extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bt_save)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_add)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bt_edit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bt_hapus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton2)
@@ -770,7 +846,15 @@ public class frm_poli extends javax.swing.JFrame {
                 .addComponent(jRadioButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton5)
-                .addGap(30, 30, 30))
+                .addGap(47, 47, 47)
+                .addComponent(bt_save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_add)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_edit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -809,22 +893,63 @@ public class frm_poli extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
 
         jTabbedPane1.addTab("Input Tindakan", jPanel1);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setText("Nama Template");
+        jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 30, 115, -1));
+
+        jLabel12.setText("DPJP");
+        jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 64, 115, -1));
+        jPanel9.add(txt_nama_template, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 28, 174, -1));
+        jPanel9.add(txt_nama_template1, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 62, 174, -1));
+
+        bt_cari_template_petugas.setText("...");
+        jPanel9.add(bt_cari_template_petugas, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 59, 41, -1));
+
+        bt_cari_template_petugas1.setText("...");
+        jPanel9.add(bt_cari_template_petugas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 127, 41, -1));
+        jPanel9.add(txt_nama_template4, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 130, 174, -1));
+
+        jLabel13.setText("PPJP");
+        jPanel9.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 132, 49, -1));
+        jPanel9.add(txt_cari_tindakan_template, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 345, 33));
+
+        tb_tindakan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tb_tindakan);
+
+        jPanel9.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 293, 407, 290));
+
+        bt_cari_tindakan_template.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        jPanel9.add(bt_cari_tindakan_template, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 46, 33));
+
+        jButton1.setText(">");
+        jPanel9.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 408, -1, -1));
+
+        jButton2.setText("X");
+        jPanel9.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(431, 451, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -839,36 +964,9 @@ public class frm_poli extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        lbl_cari3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        jPanel9.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 294, 434, 291));
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jButton3.setText("Save");
-
-        jButton4.setText("delete All");
-
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -879,98 +977,53 @@ public class frm_poli extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane6.setViewportView(jTable6);
+        jScrollPane7.setViewportView(jTable4);
 
-        jButton1.setText(">>");
+        jPanel9.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 57, 434, 219));
+        jPanel9.add(txt_cari_input_template, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 12, 380, 33));
+        jPanel9.add(txt_nama_template2, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 96, 174, -1));
+        jPanel9.add(txt_nama_template5, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 164, 174, -1));
 
-        jButton2.setText("X");
+        bt_cari_tindakan_template1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        jPanel9.add(bt_cari_tindakan_template1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 10, 43, 33));
 
-        jLabel15.setText("Data Tindakan");
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel19.setText("Data Template");
+        jButton5.setText("Hapus");
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txt_nama_template, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(txt_cari_reg1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_cari3))
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        jButton4.setText("Edit");
 
-        jPanel10Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txt_cari_reg1, txt_nama_template});
+        jButton6.setText("Edit");
 
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(txt_nama_template, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_cari_reg1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel19))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jButton1)
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addComponent(lbl_cari3)
-                .addGap(506, 506, 506))
-        );
+        jButton3.setText("Save");
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addContainerGap())
         );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel9.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 410, -1));
 
         jTabbedPane1.addTab("Buat Template Tindakan", jPanel9);
 
@@ -1024,33 +1077,32 @@ public class frm_poli extends javax.swing.JFrame {
     private void tb_regKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_regKeyTyped
         // TODO add your handling code here:
         char keyChar = evt.getKeyChar();
-        
+
         this.txt_cari_reg.requestFocus();
-        
-      if(evt.getKeyCode()!= KeyEvent.VK_ENTER){ 
-        
-        this.txt_cari_reg.setText(String.valueOf(keyChar).trim());
-      }
-      
-       if(!txt_cari_reg.getText().isEmpty()){ 
+
+        if (evt.getKeyCode() != KeyEvent.VK_ENTER) {
+
+            this.txt_cari_reg.setText(String.valueOf(keyChar).trim());
+        }
+
+        if (!txt_cari_reg.getText().isEmpty()) {
             tb_reg.setRowSelectionInterval(0, 0);
-           }
+        }
     }//GEN-LAST:event_tb_regKeyTyped
 
     private void txt_cari_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_regKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-           this.filtertxt();
+            this.filtertxt();
             this.tb_reg.requestFocus();
             //jtb_barang.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-           if(!txt_cari_reg.getText().isEmpty()){ 
-            tb_reg.setRowSelectionInterval(0, 0);
-           }
-           else{
-              
-            filterReg();
             
-           }
+                tb_reg.setRowSelectionInterval(0, 0);
+            
+
+                
+
+            
 
         }
     }//GEN-LAST:event_txt_cari_regKeyPressed
@@ -1069,10 +1121,10 @@ public class frm_poli extends javax.swing.JFrame {
                 txt_no_rawat.setText(this.tb_reg.getModel().getValueAt(row, 2).toString());
                 this.lbl_tgl_masuk.setText(this.tb_reg.getModel().getValueAt(row, 3).toString());
                 lbl_kamar_inap.setText(this.tb_reg.getModel().getValueAt(row, 4).toString());
-                
+
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
-                
+
             }
 
         }
@@ -1085,28 +1137,32 @@ public class frm_poli extends javax.swing.JFrame {
 
             if (row == -1) {
                 // No row selected
+            } else if (pilihcari) {
+                setPJ(1, row);
             } else {
-                txt_nip_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 0).toString());
-                this.txt_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 1).toString());
-                this.dlg_dpjp.setVisible(false);
-            }
+                setPJ(2, row);
+            } //                txt_nip_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 0).toString());
+            //                this.txt_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 1).toString());
+            //                this.dlg_dpjp.setVisible(false);
         }
     }//GEN-LAST:event_tb_cari_petugasMouseReleased
 
-    private void setPJ(int i,int row){
-    
-        if(i==1){
-                txt_nip_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 0).toString());
-                this.txt_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 1).toString());
-                this.dlg_dpjp.setVisible(false);
+    private void setPJ(int i, int row) {
+
+        if (i == 1) {
+            txt_nip_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 0).toString());
+            this.txt_dpjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 1).toString());
+            this.dlg_dpjp.setVisible(false);
+            bt_cari_ppjp.requestFocus();
+            txt_cari_petugas.setText("");
+        } else {
+            txt_nip_ppjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 0).toString());
+            this.txt_ppjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 1).toString());
+            this.dlg_dpjp.setVisible(false);
+             txt_cari_petugas.setText("");
+
         }
-        else{
-        txt_nip_ppjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 0).toString());
-                this.txt_ppjp.setText(this.tb_cari_petugas.getModel().getValueAt(row, 1).toString());
-                this.dlg_dpjp.setVisible(false);
-        
-        }
-    
+
     }
     private void tb_cari_petugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_cari_petugasKeyPressed
         // TODO add your handling code here:
@@ -1116,20 +1172,17 @@ public class frm_poli extends javax.swing.JFrame {
 
             if (row == -1) {
                 // No row selected
+            } else if (pilihcari) {
+                setPJ(1, row);
             } else {
-      
-                setPJ(1,row);
-
-               // bt_cari_poli.requestFocus();
-
-            }
+                setPJ(2, row);
+            } // bt_cari_poli.requestFocus();
 
         }
 
     }//GEN-LAST:event_tb_cari_petugasKeyPressed
 
-    
-    
+
     private void txt_cari_petugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_petugasKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -1140,15 +1193,18 @@ public class frm_poli extends javax.swing.JFrame {
 
     private void bt_cari_dpjpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_dpjpActionPerformed
         // TODO add your handling code here:
+
+        pilihcari = true;
+
         this.dlg_dpjp.setLocationRelativeTo(this);
         this.dlg_dpjp.setVisible(true);
-        
+
     }//GEN-LAST:event_bt_cari_dpjpActionPerformed
 
     private void tb_regMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_regMouseReleased
         // TODO add your handling code here:
-         if (evt.getClickCount() == 2) {
-              int row = this.tb_reg.getSelectedRow();
+        if (evt.getClickCount() == 2) {
+            int row = this.tb_reg.getSelectedRow();
 
             if (row == -1) {
                 // No row selected
@@ -1161,30 +1217,39 @@ public class frm_poli extends javax.swing.JFrame {
                 lbl_kamar_inap.setText(this.tb_reg.getModel().getValueAt(row, 4).toString());
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
-                
+
             }
-         }
+        }
     }//GEN-LAST:event_tb_regMouseReleased
 
-     private void filterPegawai(){
-    
-          try {
-                dat = new Crud_farmasi();
+    private void bt_cari_ppjpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_ppjpActionPerformed
+        // TODO add your handling code here:
 
-                try {
-                    dat.readRec_pegawaiF(txt_cari_petugas.getText());
-                } catch (SQLException ex) {
-                    Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        pilihcari = false;
 
-                tb_cari_petugas.setModel(dat.modelpegawai);
-            } catch (Exception ex) {
+        this.dlg_dpjp.setLocationRelativeTo(this);
+        this.dlg_dpjp.setVisible(true);
+        txt_cari_petugas.requestFocus();
+
+    }//GEN-LAST:event_bt_cari_ppjpActionPerformed
+
+    private void filterPegawai() {
+
+        try {
+            dat = new Crud_farmasi();
+
+            try {
+                dat.readRec_pegawaiF(txt_cari_petugas.getText());
+            } catch (SQLException ex) {
                 Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            tb_cari_petugas.setModel(dat.modelpegawai);
+        } catch (Exception ex) {
+            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -1218,26 +1283,30 @@ public class frm_poli extends javax.swing.JFrame {
                 new frm_poli().setVisible(true);
             }
         });
-        
-        
-        
+
     }
 
- 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToolBar ToolBar;
     private javax.swing.JButton bt_add;
     private javax.swing.JButton bt_cari_dpjp;
+    private javax.swing.JButton bt_cari_ppjp;
+    private javax.swing.JButton bt_cari_template_petugas;
+    private javax.swing.JButton bt_cari_template_petugas1;
+    private javax.swing.JButton bt_cari_tindakan_template;
+    private javax.swing.JButton bt_cari_tindakan_template1;
     private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_save;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JDialog dlg_dpjp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -1245,8 +1314,8 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1255,12 +1324,11 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -1276,15 +1344,15 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable6;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_cari;
-    private javax.swing.JLabel lbl_cari3;
     private javax.swing.JLabel lbl_jam;
     private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kamar_inap;
@@ -1294,15 +1362,23 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_poli1;
     private javax.swing.JLabel lbl_tgl_masuk;
     private javax.swing.JLabel lbl_tgl_server;
+    private javax.swing.JRadioButton r_perawatan;
+    private javax.swing.JRadioButton r_pulang;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_reg;
+    private javax.swing.JTable tb_tindakan;
+    private javax.swing.JTextField txt_cari_input_template;
     private javax.swing.JTextField txt_cari_petugas;
     private javax.swing.JTextField txt_cari_reg;
-    private javax.swing.JTextField txt_cari_reg1;
+    private javax.swing.JTextField txt_cari_tindakan_template;
     private javax.swing.JTextField txt_dokter;
     private javax.swing.JTextField txt_dokter1;
     private javax.swing.JTextField txt_dpjp;
     private javax.swing.JTextField txt_nama_template;
+    private javax.swing.JTextField txt_nama_template1;
+    private javax.swing.JTextField txt_nama_template2;
+    private javax.swing.JTextField txt_nama_template4;
+    private javax.swing.JTextField txt_nama_template5;
     private javax.swing.JTextField txt_nip_dpjp;
     private javax.swing.JTextField txt_nip_ppjp;
     private javax.swing.JTextField txt_nm_pasien;

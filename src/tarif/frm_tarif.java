@@ -1314,7 +1314,7 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        bt_proses.setText("Proses Verifikasi");
+        bt_proses.setText("Proses Untuk Verifikasi");
         bt_proses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_prosesActionPerformed(evt);
@@ -1761,6 +1761,7 @@ public class frm_tarif extends javax.swing.JFrame {
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText());
+                           
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
                              lst_save_tarif.setModel(listModel);
@@ -2246,12 +2247,18 @@ public class frm_tarif extends javax.swing.JFrame {
         // TODO add your handling code here:
          this.refreshtbtarif();
         
+          DefaultListModel<String> listModel = new DefaultListModel<>();
+         
         for ( int i = 0; i < tb_tarif.getRowCount(); i++) {
             String sp=tb_tarif.getModel().getValueAt(i, 11).toString();
             String sv=tb_tarif.getModel().getValueAt(i, 12).toString();
             
             if(!(sv.equals("ok")||sp.equals("pending"))){
               datl.updateTarifStatus(this.tb_tarif.getModel().getValueAt(i, 0).toString(), "edit", "edit");
+              listModel.addElement("Proses Untuk Verif:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                             
+              lst_save_tarif.setModel(listModel);
+              
             }
             
            }

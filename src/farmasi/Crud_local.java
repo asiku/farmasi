@@ -37,6 +37,8 @@ public class Crud_local extends DBKoneksi_local {
     
     public static HashMap<Integer,Integer> cekvalpilih=new HashMap<Integer,Integer>();
     
+    public static HashMap<Integer,Integer> cekvalpilihtemplate=new HashMap<Integer,Integer>();
+    
     public static String usm = "";
     public static String psm = "";
     
@@ -59,14 +61,53 @@ public class Crud_local extends DBKoneksi_local {
     String.class, String.class, Double.class, Double.class, Double.class, Double.class, String.class
              , String.class, String.class, String.class, Boolean.class
 };
+     
+      final Class[] columnClasstemplate = new Class[]{
+            String.class, String.class, Boolean.class
+        };
+     
      String[] poli_title= new String[]{"Id", "Nama Poli"}; 
      
      String[] status_title= new String[]{"Id", "Nama Status"}; 
      
      String[] petugas_title= new String[]{"Nip", "Nama Petugas","Id Poli","Poli","User Name"}; 
      
-     
+     String[] tarif_titletemplate = new String[]{"Id", "Nama Tindakan", "Pilih"};
     
+     
+     public DefaultTableModel modeltariftemplate = new DefaultTableModel(tarif_titletemplate, 0) {
+            public boolean isCellEditable(int row, int column) {
+                if (column == 2) {
+                    return true;
+                } else {
+                    return false;
+
+                }
+
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnClasstemplate[columnIndex];
+            }
+
+            @Override
+            public void setValueAt(Object value, int row, int col) {
+                super.setValueAt(value, row, col);
+                if (col == 2) {
+                    if ((Boolean) this.getValueAt(row, col) == true) {
+                        //code goes here
+                        cekvalpilihtemplate.put(col, row);
+                    } else if ((Boolean) this.getValueAt(row, col) == false) {
+                        //code goes here
+                        cekvalpilihtemplate.remove(col, row);
+                    }
+                }
+            }
+
+        };
+     
+     
      
      public DefaultTableModel modeltariflog = new DefaultTableModel(tarif_title_log, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -140,6 +181,53 @@ public class Crud_local extends DBKoneksi_local {
       
     public Crud_local() throws Exception{
       ConDb();
+    }
+    
+    public void readRec_cariTarifTemplate(String nm,boolean i,int idpoli) throws SQLException {
+    
+     if(i){    
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
+        + helper_tarif.KEY_STATUS_PENGESAH + " =? AND "
+        + helper_tarif.KEY_STATUS_VERIF + " =? AND "        
+        + helper_tarif.KEY_NAMA_TINDAKAN + " like ? ");
+        
+        preparedStatement.setString(1, "ok");
+        preparedStatement.setString(2, "ok");
+        preparedStatement.setString(3, "%" + nm + "%");
+     }
+     else{
+         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE "
+         + helper_tarif.KEY_STATUS_PENGESAH + " =? AND "
+         + helper_tarif.KEY_STATUS_VERIF + " =? AND "        
+         + helper_tarif.KEY_ID_POLI + " =? ");
+          
+         preparedStatement.setString(1, "ok");
+          preparedStatement.setString(2, "ok");
+          preparedStatement.setInt(3, idpoli);
+     }
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+            String nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+//             double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
+//              int presrs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS);
+//              int presdr = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR);
+//              int pressarana = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA);
+//              String poli = resultSet.getString(helper_tarif.KEY_POLI);
+//              String status = resultSet.getString(helper_tarif.KEY_STATUS);
+//              String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
+//              int id_poli = resultSet.getInt(helper_tarif.KEY_ID_POLI);
+//              int id_status= resultSet.getInt(helper_tarif.KEY_ID_STATUS);
+//              String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
+//              String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
+          
+            boolean pilih=false;
+            //modeltariftemplate.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v});
+            modeltariftemplate.addRow(new Object[]{kodetarif, nmtindakan,pilih});
+        }
+     
     }
     
     

@@ -927,7 +927,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="bt_proses">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Proses Verifikasi"/>
+                <Property name="text" type="java.lang.String" value="Proses Untuk Verifikasi"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_prosesActionPerformed"/>

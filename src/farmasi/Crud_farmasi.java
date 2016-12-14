@@ -39,6 +39,8 @@ public class Crud_farmasi extends DBkoneksi {
     String[] pegawai_title = new String[]{"Nip", "Nama Pegawai","Jabatan"};
 
     String[] kamarinap_title = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap"};
+    
+    
 
     public DefaultTableModel modelkamarinap = new DefaultTableModel(kamarinap_title, 0) {
         public boolean isCellEditable(int row, int column) {
