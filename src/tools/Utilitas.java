@@ -20,8 +20,12 @@ import javax.swing.JTextField;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -39,7 +43,7 @@ public class Utilitas {
     
     
     
- public static void filtertb(String text,JTable tb,int col){
+ public static void filtertb(String text,JTable tb,int col,int sortcol){
   
   final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tb.getModel());
   tb.setRowSorter(sorter);
@@ -50,6 +54,14 @@ public class Utilitas {
   } else {
           sorter.setRowFilter(RowFilter.regexFilter("(?i)" +text,col));
    }
+  
+  List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+  
+  sortKeys.add(new RowSorter.SortKey(sortcol, SortOrder.DESCENDING));
+ 
+  sorter.setSortKeys(sortKeys);
+  sorter.sort();
+  
   
   } 
     
@@ -62,8 +74,8 @@ public class Utilitas {
             Client client = Client.create();
             //WebResource webResource = client.resource("http://localhost/rsjul/restfulPHP.php?wonderName=Taj%20Mahal");
 
-            //WebResource webResource = client.resource("http://localhost/rsjul/timeserver.php?waktu=mentawaktujang");
-            WebResource webResource = client.resource("http://192.168.1.31/rsjul/timeserver.php?waktu=mentawaktujang");
+            WebResource webResource = client.resource("http://localhost/rsjul/timeserver.php?waktu=mentawaktujang");
+            //WebResource webResource = client.resource("http://192.168.1.31/rsjul/timeserver.php?waktu=mentawaktujang");
 
             ClientResponse response = webResource.accept("").get(ClientResponse.class);
             if (response.getStatus() != 200) {
