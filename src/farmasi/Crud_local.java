@@ -74,6 +74,25 @@ public class Crud_local extends DBKoneksi_local {
      
      String[] tarif_titletemplate = new String[]{"Id", "Nama Tindakan", "Pilih"};
     
+     String[] tarif_mastertemplate = new String[]{"Nama Template","Nip" ,"Petugas", "Status"};
+     
+     String[] tarif_mastertemplatedetail = new String[]{"Nama Template","Kode Tarif" ,"Nama Tarif"};
+     
+     
+      public DefaultTableModel modeltemplatemasterdetail = new DefaultTableModel(tarif_mastertemplatedetail, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+     
+     public DefaultTableModel modeltemplatemaster = new DefaultTableModel(tarif_mastertemplate, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+     
      
      public DefaultTableModel modeltariftemplate = new DefaultTableModel(tarif_titletemplate, 0) {
             public boolean isCellEditable(int row, int column) {
@@ -182,6 +201,111 @@ public class Crud_local extends DBKoneksi_local {
     public Crud_local() throws Exception{
       ConDb();
     }
+    
+
+    public void Save_mastertemplatedetail(String nmtmp, String trf, String nmtf)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_template_tindakan_detail.TB_NAME + " (" 
+                    + helper_template_tindakan_detail.KEY_NAMA_TEMPLATE + "," 
+                    + helper_template_tindakan_detail.KEY_KODE_TARIF
+                    + "," + helper_template_tindakan_detail.KEY_NAMA_TARIF + ") "
+                    + " values (?,?,?)");
+         
+            preparedStatement.setString(1, nmtmp);
+            preparedStatement.setString(2, trf);
+            preparedStatement.setString(3, nmtf);
+           
+            preparedStatement.execute();
+          //  JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    
+    public void Save_mastertemplate(String nmtmp,String nip ,String ptug, String stat)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_template_tindakan.TB_NAME + " (" 
+                    + helper_template_tindakan.KEY_NAMA_TEMPLATE + "," 
+                    + helper_template_tindakan.KEY_NIP_PETUGAS + ","
+                    + helper_template_tindakan.KEY_PETUGAS  + ","
+                    + helper_template_tindakan.KEY_STATUS + ") "
+                    + " values (?,?,?,?)");
+         
+            preparedStatement.setString(1, nmtmp);
+            preparedStatement.setString(2, nip);
+            preparedStatement.setString(3, ptug);
+            preparedStatement.setString(4, stat);
+           
+            preparedStatement.execute();
+          //  JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void readRec_cariMasterTemplateDetail(String nm) throws SQLException {
+  
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_template_tindakan_detail.TB_NAME+ " WHERE " 
+      + helper_template_tindakan_detail.KEY_NAMA_TEMPLATE + " =? ");
+      
+        preparedStatement.setString(1, nm);
+    
+       ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String namatmp = resultSet.getString(helper_template_tindakan_detail.KEY_NAMA_TEMPLATE);
+            String kdt = resultSet.getString(helper_template_tindakan_detail.KEY_KODE_TARIF);
+            String nmt = resultSet.getString(helper_template_tindakan_detail.KEY_NAMA_TARIF);
+          
+         
+            modeltemplatemasterdetail.addRow(new Object[]{namatmp,kdt,nmt});
+            
+        }
+        
+        
+    }
+    
+    public void readRec_cariMasterTemplate(String nm,int i) throws SQLException {
+  
+    if(i==1){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_template_tindakan.TB_NAME + " WHERE " 
+      + helper_template_tindakan.KEY_NAMA_TEMPLATE + " like ? ");
+
+      preparedStatement.setString(1, "%" + nm + "%");
+    }
+    else{
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_template_tindakan.TB_NAME);
+    }
+        
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String namatmp = resultSet.getString(helper_template_tindakan.KEY_NAMA_TEMPLATE);
+            String nip = resultSet.getString(helper_template_tindakan.KEY_NIP_PETUGAS);
+            String petug = resultSet.getString(helper_template_tindakan.KEY_PETUGAS);
+            String stat = resultSet.getString(helper_template_tindakan.KEY_STATUS);
+         
+            modeltemplatemaster.addRow(new Object[]{namatmp,nip,petug,stat});
+            
+        }
+        
+        
+    }
+    
     
     public void readRec_cariTarifTemplate(String nm,boolean i,int idpoli) throws SQLException {
     

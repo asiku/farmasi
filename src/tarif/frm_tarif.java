@@ -2152,8 +2152,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private void ck_pilih_semuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_pilih_semuaActionPerformed
         // TODO add your handling code here:
         if(ck_pilih_semua.isSelected()) {//checkbox has been selected
-      
-            
+           
             
            for(int i=0;i<this.tb_log_publish.getModel().getRowCount();i++){ 
             this.tb_log_publish.getModel().setValueAt(true,i,10);
