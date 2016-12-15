@@ -242,9 +242,7 @@ public class frm_poli extends javax.swing.JFrame {
 
         }
     }
-
-    
-            
+          
     private void setukurantbcaripetugas() {
       tb_cari_petugas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
       TableColumnModel tr =this.tb_cari_petugas.getColumnModel();
