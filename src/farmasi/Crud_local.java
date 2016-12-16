@@ -38,6 +38,7 @@ public class Crud_local extends DBKoneksi_local {
     public static HashMap<Integer,Integer> cekvalpilih=new HashMap<Integer,Integer>();
     
     public static HashMap<Integer,Integer> cekvalpilihtemplate=new HashMap<Integer,Integer>();
+     public static HashMap<Integer,Integer> cekvalpilihtemplatepilih=new HashMap<Integer,Integer>();
     
     public static String usm = "";
     public static String psm = "";
@@ -117,9 +118,11 @@ public class Crud_local extends DBKoneksi_local {
                     if ((Boolean) this.getValueAt(row, col) == true) {
                         //code goes here
                         cekvalpilihtemplate.put(col, row);
+                        cekvalpilihtemplatepilih.put(row, row);
                     } else if ((Boolean) this.getValueAt(row, col) == false) {
                         //code goes here
                         cekvalpilihtemplate.remove(col, row);
+                        cekvalpilihtemplatepilih.remove(row, row);
                     }
                 }
             }
