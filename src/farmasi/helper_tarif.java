@@ -25,5 +25,6 @@ public class helper_tarif {
     public static String KEY_STATUS_PENGESAH= "status_pengesah";
     public static String KEY_STATUS_VERIF= "status_verif";
     public static String KEY_KETERANGAN= "keterangan";
+    public static String KEY_KELAS= "kelas";
     
 }

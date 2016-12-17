@@ -53,7 +53,7 @@ public class Crud_local extends DBKoneksi_local {
      String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Petugas","Tgl","Nama Barang","Jml", "Harga Satuan", "Total"};
     
      String[] tarif_title= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
-         "% Sarana","Nama Poli","Status","Keterangan","id poli","id status","Status Pengesah","Status Verif"};
+         "% Sarana","Nama Poli","Status","Keterangan","id poli","id status","Status Pengesah","Status Verif","Kelas"};
      
       String[] tarif_title_log= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
          "% Sarana","Nama Poli","Status","Pengesah","Verif","pilih"};
@@ -382,8 +382,9 @@ public class Crud_local extends DBKoneksi_local {
               int id_status= resultSet.getInt(helper_tarif.KEY_ID_STATUS);
               String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
               String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
+              String kelas = resultSet.getString(helper_tarif.KEY_KELAS);
           
-            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v});
+            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v,kelas});
             
         }
         
@@ -471,10 +472,10 @@ public class Crud_local extends DBKoneksi_local {
               String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
                int id_poli = resultSet.getInt(helper_tarif.KEY_ID_POLI);
               int id_status= resultSet.getInt(helper_tarif.KEY_ID_STATUS);
-               String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
+              String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
               String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
-          
-            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v});
+              String kelas = resultSet.getString(helper_tarif.KEY_KELAS);
+            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v,kelas});
             
         }
     }
@@ -979,7 +980,7 @@ public class Crud_local extends DBKoneksi_local {
    
    
     public void updateTarif(String kode_tarif, String nama_tindakan, double tarif_tindakan, int presentase_dr,int presentase_rs,int presentase_sarana
-                         ,int id_poli,int id_status,String status_pengesah,String status_verif,String keterangan) {
+                         ,int id_poli,int id_status,String status_pengesah,String status_verif,String keterangan,String kelas) {
     
         try {
             preparedStatement = connect.prepareStatement("update " + helper_tarif.TB_NAME + " set " 
@@ -992,10 +993,11 @@ public class Crud_local extends DBKoneksi_local {
                     + helper_tarif.KEY_ID_STATUS+"=?," 
                     + helper_tarif.KEY_STATUS_PENGESAH+"=?," 
                     + helper_tarif.KEY_STATUS_VERIF+"=?,"
-                    + helper_tarif.KEY_KETERANGAN+"=?"
+                    + helper_tarif.KEY_KETERANGAN+"=?,"
+                     + helper_tarif.KEY_KELAS+"=?"
                     +" where "+ helper_tarif.KEY_KODE_TARIF + "=?");
             
-            preparedStatement.setString(11, kode_tarif);
+            preparedStatement.setString(12, kode_tarif);
             preparedStatement.setString(1, nama_tindakan);
             preparedStatement.setDouble(2, tarif_tindakan);
             preparedStatement.setInt(3, presentase_dr);
@@ -1006,7 +1008,7 @@ public class Crud_local extends DBKoneksi_local {
             preparedStatement.setString(8, status_pengesah);
             preparedStatement.setString(9, status_verif);
             preparedStatement.setString(10, keterangan);
-             
+             preparedStatement.setString(11, kelas);
             preparedStatement.executeUpdate();
              JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
         } catch (SQLException ex) {
@@ -1024,14 +1026,14 @@ public class Crud_local extends DBKoneksi_local {
    
    //save master tarif
    public void Save_tarif(String kode_tarif, String nama_tindakan, double tarif_tindakan, int presentase_dr,int presentase_rs,int presentase_sarana
-                         ,int id_poli,int id_status,String status_pengesah,String status_verif,String keterangan) {
+                         ,int id_poli,int id_status,String status_pengesah,String status_verif,String keterangan,String kelas) {
 
         try {
             preparedStatement = connect.prepareStatement("insert into " + helper_tarif.TB_NAME + " (" + helper_tarif.KEY_KODE_TARIF + "," + helper_tarif.KEY_NAMA_TINDAKAN
                     + "," + helper_tarif.KEY_TARIF_TINDAKAN + "," + helper_tarif.KEY_PRESENTASE_DR + "," + helper_tarif.KEY_PRESENTASE_RS 
                     + "," + helper_tarif.KEY_PRESENTASE_SARANA + "," + helper_tarif.KEY_ID_POLI + "," + helper_tarif.KEY_ID_STATUS + ","
-                    + helper_tarif.KEY_STATUS_PENGESAH + "," + helper_tarif.KEY_STATUS_VERIF + "," +helper_tarif.KEY_KETERANGAN + ") "
-                    + " values (?,?,?,?,?,?,?,?,?,?,?)");
+                    + helper_tarif.KEY_STATUS_PENGESAH + "," + helper_tarif.KEY_STATUS_VERIF + "," +helper_tarif.KEY_KETERANGAN + "," +helper_tarif.KEY_KELAS + ") "
+                    + " values (?,?,?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setString(1, kode_tarif);
             preparedStatement.setString(2, nama_tindakan);
@@ -1044,7 +1046,7 @@ public class Crud_local extends DBKoneksi_local {
             preparedStatement.setString(9, status_pengesah);
             preparedStatement.setString(10, status_verif);
             preparedStatement.setString(11, keterangan);
-            
+             preparedStatement.setString(12, kelas);
             preparedStatement.execute();
 
 
