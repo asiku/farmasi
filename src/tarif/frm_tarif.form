@@ -948,13 +948,12 @@
                 <Component class="javax.swing.JComboBox" name="cmb_kelas">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="6">
-                        <StringItem index="0" value=""/>
-                        <StringItem index="1" value="-"/>
-                        <StringItem index="2" value="1"/>
-                        <StringItem index="3" value="2"/>
-                        <StringItem index="4" value="3"/>
-                        <StringItem index="5" value="VIP"/>
+                      <StringArray count="5">
+                        <StringItem index="0" value="-"/>
+                        <StringItem index="1" value="Kelas 1"/>
+                        <StringItem index="2" value="Kelas 2"/>
+                        <StringItem index="3" value="Kelas 3"/>
+                        <StringItem index="4" value="Kelas VIP"/>
                       </StringArray>
                     </Property>
                   </Properties>

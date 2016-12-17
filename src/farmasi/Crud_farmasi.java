@@ -38,7 +38,7 @@ public class Crud_farmasi extends DBkoneksi {
     
     String[] pegawai_title = new String[]{"Nip", "Nama Pegawai","Jabatan"};
 
-    String[] kamarinap_title = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap"};
+    String[] kamarinap_title = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas"};
     
     
 
@@ -111,7 +111,8 @@ public class Crud_farmasi extends DBkoneksi {
                 String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
                 String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
                 String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
-                modelkamarinap.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal});
+                String kelas= resultSet.getString(helper_kamar_inap.KEY_KELAS);
+                modelkamarinap.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal,kelas});
               }
             }
 

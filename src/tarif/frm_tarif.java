@@ -1268,7 +1268,7 @@ public class frm_tarif extends javax.swing.JFrame {
 
         jLabel9.setText("Kelas");
 
-        cmb_kelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "-", "1", "2", "3", "VIP" }));
+        cmb_kelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kelas 1", "Kelas 2", "Kelas 3", "Kelas VIP" }));
         cmb_kelas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmb_kelasKeyPressed(evt);

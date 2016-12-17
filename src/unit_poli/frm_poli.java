@@ -430,6 +430,8 @@ public class frm_poli extends javax.swing.JFrame {
         lbl_nip_petugas_pilih = new javax.swing.JLabel();
         txt_petugas_pilih = new javax.swing.JTextField();
         bt_cari_tindakan = new javax.swing.JButton();
+        lbl_kelas = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_unit_detail = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
@@ -796,7 +798,7 @@ public class frm_poli extends javax.swing.JFrame {
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 92, 108, -1));
 
         lbl_tgl_masuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_tgl_masuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 112, 132, 19));
+        jPanel4.add(lbl_tgl_masuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 132, 19));
 
         lbl_kamar_inap.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_kamar_inap, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 163, 228, 19));
@@ -831,12 +833,12 @@ public class frm_poli extends javax.swing.JFrame {
         r_pulang.setText("Pulang");
         jPanel4.add(r_pulang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
-        jLabel5.setText("Petugas");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 203, 60, -1));
+        jLabel5.setText("Kelas");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 60, -1));
 
         lbl_nip_petugas_pilih.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_nip_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 110, 25));
-        jPanel4.add(txt_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, 220, 30));
+        jPanel4.add(lbl_nip_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 110, 25));
+        jPanel4.add(txt_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 220, 30));
 
         bt_cari_tindakan.setText("jButton8");
         bt_cari_tindakan.addActionListener(new java.awt.event.ActionListener() {
@@ -844,7 +846,13 @@ public class frm_poli extends javax.swing.JFrame {
                 bt_cari_tindakanActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_cari_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 42, -1));
+        jPanel4.add(bt_cari_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 42, -1));
+
+        lbl_kelas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.add(lbl_kelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 160, 19));
+
+        jLabel8.setText("Petugas");
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 60, -1));
 
         tb_unit_detail.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_unit_detail.setModel(new javax.swing.table.DefaultTableModel(
@@ -1137,7 +1145,7 @@ public class frm_poli extends javax.swing.JFrame {
                 txt_no_rawat.setText(this.tb_reg.getModel().getValueAt(row, 2).toString());
                 this.lbl_tgl_masuk.setText(this.tb_reg.getModel().getValueAt(row, 3).toString());
                 lbl_kamar_inap.setText(this.tb_reg.getModel().getValueAt(row, 4).toString());
-
+                this.lbl_kelas.setText(this.tb_reg.getModel().getValueAt(row, 5).toString());
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
 
@@ -1280,6 +1288,7 @@ public class frm_poli extends javax.swing.JFrame {
                 txt_no_rawat.setText(this.tb_reg.getModel().getValueAt(row, 2).toString());
                 this.lbl_tgl_masuk.setText(this.tb_reg.getModel().getValueAt(row, 3).toString());
                 lbl_kamar_inap.setText(this.tb_reg.getModel().getValueAt(row, 4).toString());
+                this.lbl_kelas.setText(this.tb_reg.getModel().getValueAt(row, 5).toString());
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
 
@@ -1546,6 +1555,18 @@ public class frm_poli extends javax.swing.JFrame {
 
     private void tb_tindakan_pilihMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tindakan_pilihMouseClicked
         // TODO add your handling code here:
+        if(txt_no_rawat.getText().isEmpty()){
+        int row = this.tb_tindakan_pilih.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.tb_tindakan_pilih.getModel().setValueAt(false, row, 2);
+            }
+          JOptionPane.showMessageDialog(null, "Data Pasien Belum di Pilih!");
+          jTabbedPane2.setSelectedIndex(0);
+        
+        }
 
 
     }//GEN-LAST:event_tb_tindakan_pilihMouseClicked
@@ -1681,6 +1702,7 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -1711,6 +1733,7 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_jam;
     private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kamar_inap;
+    private javax.swing.JLabel lbl_kelas;
     private javax.swing.JLabel lbl_news;
     private javax.swing.JLabel lbl_nip_petugas_pilih;
     private javax.swing.JLabel lbl_petugas;
