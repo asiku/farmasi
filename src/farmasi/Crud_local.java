@@ -309,8 +309,7 @@ public class Crud_local extends DBKoneksi_local {
         
     }
     
-    
-    public void readRec_cariTarifTemplate(String nm,boolean i,int idpoli) throws SQLException {
+     public void readRec_cariTarifTemplateP(String nm,boolean i,int idpoli) throws SQLException {
     
      if(i){    
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
@@ -334,10 +333,14 @@ public class Crud_local extends DBKoneksi_local {
      }
         ResultSet resultSet = preparedStatement.executeQuery();
 
+        String kodetarif="";
+        String nmtindakan="";
+        
         while (resultSet.next()) {
          
-            String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
-            String nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+             kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+             nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+         
 //             double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
 //              int presrs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS);
 //              int presdr = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR);
@@ -353,6 +356,59 @@ public class Crud_local extends DBKoneksi_local {
             boolean pilih=false;
             //modeltariftemplate.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v});
             modeltariftemplate.addRow(new Object[]{kodetarif, nmtindakan,pilih});
+        }
+     
+    }
+    
+    public void readRec_cariTarifTemplate(String nm,boolean i,int idpoli,String kelas) throws SQLException {
+    
+     if(i){    
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
+        + helper_tarif.KEY_STATUS_PENGESAH + " =? AND "
+        + helper_tarif.KEY_STATUS_VERIF + " =? AND "        
+        + helper_tarif.KEY_NAMA_TINDAKAN + " like ? ");
+        
+        preparedStatement.setString(1, "ok");
+        preparedStatement.setString(2, "ok");
+        preparedStatement.setString(3, "%" + nm + "%");
+     }
+     else{
+         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE "
+         + helper_tarif.KEY_STATUS_PENGESAH + " =? AND "
+         + helper_tarif.KEY_STATUS_VERIF + " =? AND "        
+         + helper_tarif.KEY_ID_POLI + " =? ");
+          
+         preparedStatement.setString(1, "ok");
+          preparedStatement.setString(2, "ok");
+          preparedStatement.setInt(3, idpoli);
+     }
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        String kodetarif="";
+        String nmtindakan="";
+        
+        while (resultSet.next()) {
+         if(resultSet.getString(helper_tarif.KEY_KELAS).equalsIgnoreCase(kelas)||resultSet.getString(helper_tarif.KEY_KELAS).equalsIgnoreCase("-")){
+             kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+             nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
+             
+             boolean pilih=false;
+            //modeltariftemplate.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v});
+            modeltariftemplate.addRow(new Object[]{kodetarif, nmtindakan,pilih});
+         }
+//             double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
+//              int presrs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS);
+//              int presdr = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR);
+//              int pressarana = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA);
+//              String poli = resultSet.getString(helper_tarif.KEY_POLI);
+//              String status = resultSet.getString(helper_tarif.KEY_STATUS);
+//              String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
+//              int id_poli = resultSet.getInt(helper_tarif.KEY_ID_POLI);
+//              int id_status= resultSet.getInt(helper_tarif.KEY_ID_STATUS);
+//              String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
+//              String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
+          
+            
         }
      
     }

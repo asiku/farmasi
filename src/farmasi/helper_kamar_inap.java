@@ -24,4 +24,6 @@ public class helper_kamar_inap {
     public static String KEY_JAM_KELUAR ="jam_keluar";
     public static String KEY_STATUS_PULANG ="stts_pulang";
     public static String KEY_KELAS ="kelas";
+    public static String KEY_KODE_STATUS_BAYAR ="kd_pj";
+    public static String KEY_STATUS_BAYAR ="png_jawab";
 }
