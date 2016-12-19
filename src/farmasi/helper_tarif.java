@@ -26,5 +26,10 @@ public class helper_tarif {
     public static String KEY_STATUS_VERIF= "status_verif";
     public static String KEY_KETERANGAN= "keterangan";
     public static String KEY_KELAS= "kelas";
-    
+    public static String KEY_TARIF_TINDAKAN_BPJS = "tarif_tindakan_bpjs";
+    public static String KEY_PRESENTASE_DR_BPJS = "presentase_dr_bpjs";
+    public static String KEY_PRESENTASE_RS_BPJS = "presentase_rs_bpjs";
+    public static String KEY_PRESENTASE_SARANA_BPJS= "presentase_sarana_bpjs";
+    public static String KEY_STATUS_BPJS= "status_bpjs";
+    public static String KEY_KODE_BPJS= "kode_tarif_bpjs";
 }

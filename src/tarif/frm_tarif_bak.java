@@ -54,7 +54,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author jengcool
  */
-public class frm_tarif extends javax.swing.JFrame {
+public class frm_tarif_bak extends javax.swing.JFrame {
 
     /**
      * Creates new form frm_tarif
@@ -104,17 +104,11 @@ public class frm_tarif extends javax.swing.JFrame {
     tr.getColumn(11).setPreferredWidth(120);
     tr.getColumn(12).setPreferredWidth(100);
     tr.getColumn(13).setPreferredWidth(50); 
-    
-    tr.getColumn(14).setPreferredWidth(100);
-    tr.getColumn(15).setPreferredWidth(50);
-    tr.getColumn(16).setPreferredWidth(50);
-    tr.getColumn(17).setPreferredWidth(80);
-    
    }
   
   
      
-    public frm_tarif() {
+    public frm_tarif_bak() {
         initComponents();
         
        txt_stat.setVisible(false);
@@ -192,36 +186,6 @@ public class frm_tarif extends javax.swing.JFrame {
       }
     });
        
-      txt_tarif1.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusGained(FocusEvent e) {
-              if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-              
-              }else{
-                
-                cekpersen1();
-                
-              }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                
-                if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-              
-              }
-               else{
-               
-                cekpersen1();
-                
-                }
-            }
-        });
        
        
        txt_tarif.addFocusListener(new FocusListener() {
@@ -254,50 +218,6 @@ public class frm_tarif extends javax.swing.JFrame {
                 }
             }
         });
-       
-       
-       txt_sarana1.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusGained(FocusEvent e) {
-                if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-                
-                }
-                
-                
-              if(txt_sarana1.getText().isEmpty()){
-              
-                   txt_sarana1.setText("0");
-              
-              }else{
-                
-                cekpersen1();
-                
-              }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-                
-                }
-                if(txt_sarana1.getText().isEmpty()){
-              
-                   txt_sarana1.setText("0");
-              
-              }
-               else{
-               
-                cekpersen1();
-                
-                }
-            }
-        });
-       
        
        txt_sarana.addFocusListener(new FocusListener() {
 
@@ -340,52 +260,6 @@ public class frm_tarif extends javax.swing.JFrame {
                 }
             }
         });
-       
-       
-       txt_dr1.addFocusListener(new FocusListener() {
-
-            
-            @Override
-            public void focusGained(FocusEvent e) {
-                if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-                
-                }
-                
-              if(txt_dr1.getText().isEmpty()){
-              
-                   txt_dr1.setText("0");
-              
-              }else{
-                  int i=0;
-               System.out.println("DR"+i++);
-                  
-                cekpersen1();
-                
-              }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-                
-                }
-                if(txt_dr1.getText().isEmpty()){
-              
-                   txt_dr1.setText("0");
-              
-              }
-               else{
-                
-                  
-                cekpersen1();
-                
-                }
-            }
-        }); 
        
        
         txt_dr.addFocusListener(new FocusListener() {
@@ -433,48 +307,6 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         }); 
         
-        txt_rs1.addFocusListener(new FocusListener() {
-
-           @Override
-            public void focusGained(FocusEvent e) {
-                
-                if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-                
-                }
-              if(txt_rs1.getText().isEmpty()){
-              
-                   txt_rs1.setText("0");
-              
-              }else{
-                
-                cekpersen1();
-                
-              }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if(txt_tarif1.getText().isEmpty()){
-              
-                   txt_tarif1.setText("0");
-                
-                }
-                if(txt_rs1.getText().isEmpty()){
-              
-                   txt_rs1.setText("0");
-              
-              }
-               else{
-               
-                cekpersen1();
-                
-                }
-            }
-        }); 
-        
-        
          txt_rs.addFocusListener(new FocusListener() {
 
            @Override
@@ -516,46 +348,11 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         }); 
         
-         txt_sarana1.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-              
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-               
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                
-                
-                if(!txt_sarana1.getText().isEmpty()){
-                       
-                    hitungpresentasDR1();
-                    hitungpresentaseRS1();
-                    hitungpresentaseSR1();
-                    
-                }
-                
-              
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                   
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-            }
-        }); 
-         
-         
-         
         txt_sarana.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
               
+                    
                 
                hitungpresentasDR();
                hitungpresentaseRS();
@@ -589,41 +386,7 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         }); 
           
-        
-        
-         txt_dr1.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                   
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-               
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-               if(!txt_dr1.getText().isEmpty()){
-                   
-                    hitungpresentasDR1();
-                    hitungpresentaseRS1();
-                    hitungpresentaseSR1();
-                    
-                     
-                }
-                
-              
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                    
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-            }
-        }); 
-        
+         
          
         txt_dr.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -658,42 +421,7 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         }); 
          
-          txt_rs1.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                    
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-               
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                 if(!txt_rs1.getText().isEmpty()){
-                      
-                    hitungpresentasDR1();
-                    hitungpresentaseRS1();
-                    hitungpresentaseSR1();
-                    
-                   
-                }
-               
-                
-              
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                    
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-            }
-        });
          
-        
-        
         txt_rs.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -728,81 +456,6 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
          
-        
-         txt_tarif1.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-               if(txt_rs1.getText().isEmpty()){
-                
-                   txt_rs1.setText("0");
-                }
-                
-                if(txt_dr1.getText().isEmpty()){
-                
-                 txt_dr1.setText("0");
-                }
-                
-                if(txt_sarana1.getText().isEmpty()){
-                
-                  txt_sarana1.setText("0");
-                }
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-               
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                
-                if(txt_rs1.getText().isEmpty()){
-                
-                   txt_rs1.setText("0");
-                }
-                
-                if(txt_dr1.getText().isEmpty()){
-                
-                   txt_dr1.setText("0");
-                }
-                
-                 if(txt_sarana1.getText().isEmpty()){
-                
-                   txt_sarana1.setText("0");
-                }
-                
-                
-                if(!txt_tarif1.getText().isEmpty()){
-                      
-                    hitungpresentasDR1();
-                    hitungpresentaseRS1();
-                    hitungpresentaseSR1();
-                }
-                
-                
-              
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-               if(txt_rs1.getText().isEmpty()){
-                
-                txt_rs1.setText("0");
-                }
-                
-                if(txt_dr1.getText().isEmpty()){
-                
-                  txt_dr1.setText("0");
-                }
-                
-                 if(txt_sarana1.getText().isEmpty()){
-                
-                  txt_sarana1.setText("0");
-                }
-               hitungpresentasDR1();
-               hitungpresentaseRS1();
-               hitungpresentaseSR1();
-            }
-        }); 
          
          txt_tarif.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -877,8 +530,7 @@ public class frm_tarif extends javax.swing.JFrame {
                hitungpresentaseRS();
                hitungpresentaseSR();
             }
-        }); 
-        //end tarif 
+        });
          
          
          txt_cari_tarif.getDocument().addDocumentListener(new DocumentListener() {
@@ -960,7 +612,7 @@ public class frm_tarif extends javax.swing.JFrame {
              tb_poli.setModel(datl.modelpoli);
              
          } catch (Exception ex) {
-             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
          }
          
          try {
@@ -969,7 +621,7 @@ public class frm_tarif extends javax.swing.JFrame {
              tb_status.setModel(datl.modelstatus);
              
          } catch (Exception ex) {
-             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
          }
          
          try {
@@ -978,7 +630,7 @@ public class frm_tarif extends javax.swing.JFrame {
              tb_tarif.setModel(datl.modeltarif);
              
          } catch (Exception ex) {
-             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
          }
          
          
@@ -992,7 +644,7 @@ public class frm_tarif extends javax.swing.JFrame {
              tb_tarif.setModel(datl.modeltarif);
              
          } catch (Exception ex) {
-             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+             Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
          }
          
          
@@ -1029,6 +681,19 @@ public class frm_tarif extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lbl_dokter = new javax.swing.JLabel();
+        lbl_sarana = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txt_rs = new javax.swing.JTextField();
+        txt_dr = new javax.swing.JTextField();
+        txt_sarana = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txt_tarif = new javax.swing.JTextField();
+        lbl_rs = new javax.swing.JLabel();
+        lbl_cepe = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_tarif = new javax.swing.JTable();
         txt_cari_tarif = new javax.swing.JTextField();
@@ -1058,36 +723,7 @@ public class frm_tarif extends javax.swing.JFrame {
         txt_stat = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cmb_kelas = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
-        ck_bpjs = new javax.swing.JCheckBox();
         bt_proses = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        lbl_dokter = new javax.swing.JLabel();
-        lbl_sarana = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        txt_rs = new javax.swing.JTextField();
-        txt_dr = new javax.swing.JTextField();
-        txt_sarana = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txt_tarif = new javax.swing.JTextField();
-        lbl_rs = new javax.swing.JLabel();
-        lbl_cepe = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        txt_tarif1 = new javax.swing.JTextField();
-        lbl_rs1 = new javax.swing.JLabel();
-        txt_rs1 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        lbl_cepe1 = new javax.swing.JLabel();
-        txt_dr1 = new javax.swing.JTextField();
-        txt_sarana1 = new javax.swing.JTextField();
-        lbl_sarana1 = new javax.swing.JLabel();
-        lbl_dokter1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -1365,282 +1001,8 @@ public class frm_tarif extends javax.swing.JFrame {
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(956, 38, -1, -1));
 
-        tb_tarif.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tb_tarif.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tb_tarifMouseReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tb_tarif);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 950, 240));
-        jPanel1.add(txt_cari_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 365, 390, 30));
-
-        bt_cari_tarif.setText("Cari");
-        jPanel1.add(bt_cari_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 70, -1));
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        bt_save.setText("Save");
-        bt_save.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                bt_saveMouseEntered(evt);
-            }
-        });
-        bt_save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_saveActionPerformed(evt);
-            }
-        });
-
-        bt_add.setText("Add");
-        bt_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_addActionPerformed(evt);
-            }
-        });
-
-        bt_delete.setText("Delete");
-        bt_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_deleteActionPerformed(evt);
-            }
-        });
-
-        bt_cetak.setText("Print");
-
-        bt_add1.setText("Edit");
-        bt_add1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_add1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(bt_save)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_add, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_add1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bt_cetak, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(bt_save)
-                    .addComponent(bt_add)
-                    .addComponent(bt_add1)
-                    .addComponent(bt_delete)
-                    .addComponent(bt_cetak))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 305, -1, -1));
-
-        jLabel10.setText("Keterangan");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 112, -1));
-
-        txt_keterangan.setColumns(20);
-        txt_keterangan.setRows(5);
-        txt_keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_keteranganKeyPressed(evt);
-            }
-        });
-        jScrollPane4.setViewportView(txt_keterangan);
-
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 305, 460, 50));
-
-        panel_inputan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel11.setText("Poli");
-
-        lbl_kode_poli.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txt_poli.setEditable(false);
-
-        bt_cari_poli.setText("...");
-        bt_cari_poli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_cari_poliActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Status");
-
-        txt_nama_tarif.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_nama_tarifKeyPressed(evt);
-            }
-        });
-
-        jLabel2.setText("Nama Tarif");
-
-        txt_kode_tarif.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_kode_tarifKeyPressed(evt);
-            }
-        });
-
-        jLabel1.setText("Kode Tarif");
-
-        lbl_kode_status.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txt_status.setEditable(false);
-
-        bt_cari_status.setText("...");
-        bt_cari_status.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_cari_statusActionPerformed(evt);
-            }
-        });
-
-        txt_stat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_statKeyPressed(evt);
-            }
-        });
-
-        jLabel9.setText("Kelas");
-
-        cmb_kelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kelas 1", "Kelas 2", "Kelas 3", "Kelas VIP" }));
-        cmb_kelas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmb_kelasKeyPressed(evt);
-            }
-        });
-
-        jLabel16.setText("BPJS");
-
-        ck_bpjs.setText("Tarif BPJS");
-
-        javax.swing.GroupLayout panel_inputanLayout = new javax.swing.GroupLayout(panel_inputan);
-        panel_inputan.setLayout(panel_inputanLayout);
-        panel_inputanLayout.setHorizontalGroup(
-            panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_inputanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_inputanLayout.createSequentialGroup()
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(23, 23, 23)
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_inputanLayout.createSequentialGroup()
-                                .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_nama_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel11))
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_inputanLayout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panel_inputanLayout.createSequentialGroup()
-                                        .addComponent(lbl_kode_status, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
-                                        .addComponent(lbl_kode_poli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txt_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ck_bpjs, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(82, 82, 82)))
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_cari_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bt_cari_status, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))
-                    .addGroup(panel_inputanLayout.createSequentialGroup()
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel16))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        panel_inputanLayout.setVerticalGroup(
-            panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panel_inputanLayout.createSequentialGroup()
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_nama_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(lbl_kode_status, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bt_cari_status)))
-                .addGap(18, 18, 18)
-                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bt_cari_poli)
-                            .addComponent(txt_poli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(lbl_kode_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(ck_bpjs))
-                .addContainerGap(11, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(panel_inputan, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 23, -1, 240));
-
-        bt_proses.setText("Proses Untuk Verifikasi");
-        bt_proses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_prosesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 460, -1));
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Set Presentase Tarif"));
 
         jLabel13.setText("RS.   %");
 
@@ -1728,7 +1090,7 @@ public class frm_tarif extends javax.swing.JFrame {
                             .addComponent(txt_sarana))
                         .addGap(21, 21, 21)
                         .addComponent(lbl_sarana, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1752,131 +1114,312 @@ public class frm_tarif extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(txt_sarana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_sarana, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_cepe)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_cepe))
         );
 
-        jTabbedPane2.addTab("Tarif Non BPJS", jPanel5);
-
-        jLabel18.setText("Tarif Tindakan                         Rp.");
-
-        txt_tarif1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_tarif1KeyTyped(evt);
+        tb_tarif.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_tarif1KeyPressed(evt);
+        ));
+        tb_tarif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_tarifMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tb_tarif);
+
+        bt_cari_tarif.setText("Cari");
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        bt_save.setText("Save");
+        bt_save.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bt_saveMouseEntered(evt);
+            }
+        });
+        bt_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_saveActionPerformed(evt);
             }
         });
 
-        lbl_rs1.setText("Rp.");
-
-        txt_rs1.setText("0");
-        txt_rs1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_rs1KeyTyped(evt);
-            }
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_rs1KeyPressed(evt);
+        bt_add.setText("Add");
+        bt_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_addActionPerformed(evt);
             }
         });
 
-        jLabel19.setText("RS.   %");
-
-        jLabel20.setText("Dokter %");
-
-        jLabel21.setText("Sarana %");
-
-        lbl_cepe1.setText("              %");
-
-        txt_dr1.setText("0");
-        txt_dr1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_dr1KeyTyped(evt);
-            }
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_dr1KeyPressed(evt);
+        bt_delete.setText("Delete");
+        bt_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_deleteActionPerformed(evt);
             }
         });
 
-        txt_sarana1.setText("0");
-        txt_sarana1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_sarana1KeyTyped(evt);
-            }
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_sarana1KeyPressed(evt);
+        bt_cetak.setText("Print");
+
+        bt_add1.setText("Edit");
+        bt_add1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_add1ActionPerformed(evt);
             }
         });
 
-        lbl_sarana1.setText("Rp.");
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(bt_save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_add, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_add1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bt_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_cetak, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(bt_save)
+                    .addComponent(bt_add)
+                    .addComponent(bt_add1)
+                    .addComponent(bt_delete)
+                    .addComponent(bt_cetak))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        lbl_dokter1.setText("Rp.");
+        jLabel10.setText("Keterangan");
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+        txt_keterangan.setColumns(20);
+        txt_keterangan.setRows(5);
+        txt_keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_keteranganKeyPressed(evt);
+            }
+        });
+        jScrollPane4.setViewportView(txt_keterangan);
+
+        panel_inputan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel11.setText("Poli");
+
+        lbl_kode_poli.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txt_poli.setEditable(false);
+
+        bt_cari_poli.setText("...");
+        bt_cari_poli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_poliActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Status");
+
+        txt_nama_tarif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nama_tarifKeyPressed(evt);
+            }
+        });
+
+        jLabel2.setText("Nama Tarif");
+
+        txt_kode_tarif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_kode_tarifKeyPressed(evt);
+            }
+        });
+
+        jLabel1.setText("Kode Tarif");
+
+        lbl_kode_status.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txt_status.setEditable(false);
+
+        bt_cari_status.setText("...");
+        bt_cari_status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_statusActionPerformed(evt);
+            }
+        });
+
+        txt_stat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_statKeyPressed(evt);
+            }
+        });
+
+        jLabel9.setText("Kelas");
+
+        cmb_kelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kelas 1", "Kelas 2", "Kelas 3", "Kelas VIP" }));
+        cmb_kelas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmb_kelasKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel_inputanLayout = new javax.swing.GroupLayout(panel_inputan);
+        panel_inputan.setLayout(panel_inputanLayout);
+        panel_inputanLayout.setHorizontalGroup(
+            panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_inputanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_inputanLayout.createSequentialGroup()
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(23, 23, 23)
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_inputanLayout.createSequentialGroup()
+                                .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_nama_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel11))
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_inputanLayout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_kode_poli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl_kode_status, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_status, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_poli, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(108, 108, 108)))
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bt_cari_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bt_cari_status, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29))
+                    .addGroup(panel_inputanLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        panel_inputanLayout.setVerticalGroup(
+            panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panel_inputanLayout.createSequentialGroup()
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_nama_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_tarif1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(txt_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(lbl_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(txt_dr1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(lbl_dokter1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_cepe1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                            .addComponent(txt_sarana1))
-                        .addGap(21, 21, 21)
-                        .addComponent(lbl_sarana1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(lbl_kode_status, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bt_cari_status)))
+                .addGap(18, 18, 18)
+                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bt_cari_poli)
+                        .addComponent(txt_poli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11)
+                    .addComponent(lbl_kode_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_tarif1)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(txt_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
-                    .addComponent(txt_dr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_dokter1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
-                    .addComponent(txt_sarana1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_sarana1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+
+        bt_proses.setText("Proses Untuk Verifikasi");
+        bt_proses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_prosesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bt_proses, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel_inputan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txt_cari_tarif)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bt_cari_tarif))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panel_inputan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_cari_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bt_cari_tarif)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_cepe1)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(bt_proses)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
-
-        jTabbedPane2.addTab("Tarif BPJS", jPanel10);
-
-        jPanel1.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 23, 464, 240));
 
         jTabbedPane1.addTab("Master Tarif", jPanel1);
 
@@ -2158,7 +1701,7 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addGap(317, 317, 317))
         );
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 40, 300, 690));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 30, 300, 690));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2234,223 +1777,78 @@ public class frm_tarif extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_keteranganKeyPressed
 
-    private void savenonbpjs(){
-    
-       DefaultListModel<String> listModel = new DefaultListModel<>();
-        
-       int pr= Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText());
-     
-      lbl_cepe.setText(" "+pr +" %");
-    
-    if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))>100){
-            JOptionPane.showMessageDialog(null, "Jumlah Presentase Melebihi 100 % ");
-            this.txt_rs.setText("0");
-            this.txt_dr.setText("0");  
-            this.txt_sarana.setText("0");
-            this.txt_rs.requestFocus();
-        }
-        else{
-                if(this.txt_kode_tarif.getText().isEmpty()||txt_nama_tarif.getText().isEmpty()||
-                        txt_poli.getText().isEmpty()||txt_tarif.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Maaf Data Inputan Ada yg Kosong!");
-                    this.txt_kode_tarif.requestFocus();
-                }
-                else{
-                  if(txt_tarif.getText().equals("0")){
-                      JOptionPane.showMessageDialog(null, "Maaf Tarif/Presentase Tidak Boleh 0!");
-                      this.txt_tarif.requestFocus();
-                  }
-                  else if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))<100){
-                   JOptionPane.showMessageDialog(null, "Maaf Presentase kurang dari 100 !");
-                    this.txt_rs.requestFocus();
-                  }
-                  else{
-                     if(!this.txt_status.getText().isEmpty()){
-                        if(!cmb_kelas.getSelectedItem().toString().isEmpty()){
-                        // 
-                         try {
-                             //save
-                             datl= new Crud_local();
-                 
-                             
-                             datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
-                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"");
-                           
-                             listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
-                             
-                             lst_save_tarif.setModel(listModel);
-                             
-                             refreshtbtarif();
-                             
-                         } catch (Exception ex) {
-                             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-                        
-                        } //
-                        else{
-                           JOptionPane.showMessageDialog(null, "Maaf Kelas Tidak Boleh Kosong !");
-                           this.cmb_kelas.requestFocus();
-                        }
-                     }
-                     else{
-                      JOptionPane.showMessageDialog(null, "Maaf Status Tidak Boleh Kosong !");
-                      this.bt_cari_poli.requestFocus();
-                     
-                     }
-                  }
-                }
-        }
-    }
-    
-  
-  private void savebpjs_fix(){
-  
-       DefaultListModel<String> listModel = new DefaultListModel<>();
-        
-       int pr= Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText());
-     
-      lbl_cepe.setText(" "+pr +" %");
-    
-    if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))>100){
-            JOptionPane.showMessageDialog(null, "Jumlah Presentase Melebihi 100 % ");
-            this.txt_rs.setText("0");
-            this.txt_dr.setText("0");  
-            this.txt_sarana.setText("0");
-            this.txt_rs.requestFocus();
-        }
-        else{
-                if(this.txt_kode_tarif.getText().isEmpty()||txt_nama_tarif.getText().isEmpty()||
-                        txt_poli.getText().isEmpty()||txt_tarif.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Maaf Data Inputan Ada yg Kosong!");
-                    this.txt_kode_tarif.requestFocus();
-                }
-                else{
-                  if(txt_tarif.getText().equals("0")){
-                      JOptionPane.showMessageDialog(null, "Maaf Tarif/Presentase Tidak Boleh 0!");
-                      this.txt_tarif.requestFocus();
-                  }
-                  else if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))<100){
-                   JOptionPane.showMessageDialog(null, "Maaf Presentase kurang dari 100 !");
-                    this.txt_rs.requestFocus();
-                  }
-                  else{
-                     if(!this.txt_status.getText().isEmpty()){
-                        if(!cmb_kelas.getSelectedItem().toString().isEmpty()){
-                        // 
-                         try {
-                             //save
-                            savebpjs();
-                             
-                         } catch (Exception ex) {
-                             listModel.addElement("Gagal Simpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
-                             
-                             lst_save_tarif.setModel(listModel);
-                             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-                        
-                        } //
-                        else{
-                           JOptionPane.showMessageDialog(null, "Maaf Kelas Tidak Boleh Kosong !");
-                           this.cmb_kelas.requestFocus();
-                        }
-                     }
-                     else{
-                      JOptionPane.showMessageDialog(null, "Maaf Status Tidak Boleh Kosong !");
-                      this.bt_cari_poli.requestFocus();
-                     
-                     }
-                  }
-                }
-        }
-  
-  
-  }  
-    
-  private void savebpjs(){
-  
-       DefaultListModel<String> listModel = new DefaultListModel<>();
-        
-       int pr= Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText())+Integer.valueOf(this.txt_sarana1.getText());
-     
-       lbl_cepe1.setText(" "+pr +" %");
-    
-    if((Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText())+Integer.valueOf(this.txt_sarana1.getText()))>100){
-            JOptionPane.showMessageDialog(null, "Jumlah Presentase Melebihi 100 % ");
-            this.txt_rs1.setText("0");
-            this.txt_dr1.setText("0");  
-            this.txt_sarana1.setText("0");
-            this.txt_rs1.requestFocus();
-        }
-        else{
-                if(this.txt_kode_tarif.getText().isEmpty()||txt_nama_tarif.getText().isEmpty()||
-                        txt_poli.getText().isEmpty()||txt_tarif.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Maaf Data Inputan Ada yg Kosong!");
-                    this.txt_kode_tarif.requestFocus();
-                }
-                else{
-                  if(txt_tarif1.getText().equals("0")){
-                      JOptionPane.showMessageDialog(null, "Maaf Tarif/Presentase Tidak Boleh 0!");
-                      this.txt_tarif1.requestFocus();
-                  }
-                  else if((Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText())+Integer.valueOf(this.txt_sarana1.getText()))<100){
-                   JOptionPane.showMessageDialog(null, "Maaf Presentase kurang dari 100 !");
-                    this.txt_rs1.requestFocus();
-                  }
-                  else{
-                     if(!this.txt_status.getText().isEmpty()){
-                        if(!cmb_kelas.getSelectedItem().toString().isEmpty()){
-                        // 
-                         try {
-                             //save
-                             datl= new Crud_local();
-                             
-                             datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
-                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText()), 
-                                     Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()));
-                           
-                             listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
-                             
-                             lst_save_tarif.setModel(listModel);
-                             
-                             refreshtbtarif();
-                             
-                         } catch (Exception ex) {
-                              listModel.addElement("Gagal Simpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
-                             
-                             lst_save_tarif.setModel(listModel);
-                             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-                        
-                        } //
-                        else{
-                           JOptionPane.showMessageDialog(null, "Maaf Kelas Tidak Boleh Kosong !");
-                           this.cmb_kelas.requestFocus();
-                        }
-                     }
-                     else{
-                      JOptionPane.showMessageDialog(null, "Maaf Status Tidak Boleh Kosong !");
-                      this.bt_cari_poli.requestFocus();
-                     
-                     }
-                  }
-                }
-        }
-    
-  }
-    
     private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
         // TODO add your handling code here:
         
-          if(this.ck_bpjs.isSelected()){
-              this.savebpjs();
-          }
-          else{
-              this.savenonbpjs();
-          }
-       
+         DefaultListModel<String> listModel = new DefaultListModel<>();
         
+        
+         int pr= Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText());
+     
+      lbl_cepe.setText(" "+pr +" %");
+        
+        
+        if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))>100){
+            JOptionPane.showMessageDialog(null, "Jumlah Presentase Melebihi 100 % ");
+            this.txt_rs.setText("0");
+            this.txt_dr.setText("0");  
+            this.txt_sarana.setText("0");
+            this.txt_rs.requestFocus();
+        }
+        else{
+                if(this.txt_kode_tarif.getText().isEmpty()||txt_nama_tarif.getText().isEmpty()||
+                        txt_poli.getText().isEmpty()||txt_tarif.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Maaf Data Inputan Ada yg Kosong!");
+                    this.txt_kode_tarif.requestFocus();
+                }
+                else{
+                  if(txt_tarif.getText().equals("0")){
+                      JOptionPane.showMessageDialog(null, "Maaf Tarif/Presentase Tidak Boleh 0!");
+                      this.txt_tarif.requestFocus();
+                  }
+                  else if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))<100){
+                   JOptionPane.showMessageDialog(null, "Maaf Presentase kurang dari 100 !");
+                    this.txt_rs.requestFocus();
+                  }
+                  else{
+                     if(!this.txt_status.getText().isEmpty()){
+                        if(!cmb_kelas.getSelectedItem().toString().isEmpty()){
+                        // 
+                         try {
+                             //save
+                             datl= new Crud_local();
+//                             
+//                             datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+//                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
+//                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString());
+//                           
+                             listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
+                             
+                             lst_save_tarif.setModel(listModel);
+                             
+                             refreshtbtarif();
+                             
+                         } catch (Exception ex) {
+                                 listModel.addElement("Gagal Simpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
+                             
+                             lst_save_tarif.setModel(listModel);
+                             Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                        
+                        } //
+                        else{
+                           JOptionPane.showMessageDialog(null, "Maaf Kelas Tidak Boleh Kosong !");
+                           this.cmb_kelas.requestFocus();
+                        }
+                     }
+                     else{
+                      JOptionPane.showMessageDialog(null, "Maaf Status Tidak Boleh Kosong !");
+                      this.bt_cari_poli.requestFocus();
+                     
+                     }
+                  }
+                }
+        }
     }//GEN-LAST:event_bt_saveActionPerformed
 
     private void hapusinputan(){
@@ -2521,11 +1919,6 @@ public class frm_tarif extends javax.swing.JFrame {
      
       lbl_cepe.setText(" "+pr +" %");
       
-      int pr1= Integer.valueOf(rep_titiknol(this.txt_rs1.getText()))+Integer.valueOf(rep_titiknol(this.txt_dr1.getText()))+Integer.valueOf(rep_titiknol(this.txt_sarana1.getText()));
-     
-      lbl_cepe1.setText(" "+pr1 +" %");
-      
-      
     }//GEN-LAST:event_bt_saveMouseEntered
 
     private void txt_rsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rsKeyPressed
@@ -2577,7 +1970,7 @@ public class frm_tarif extends javax.swing.JFrame {
                     
                  saveImage();
                  } catch (IOException ex) {
-                    Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
                  }
         
     }//GEN-LAST:event_bt_pengesahActionPerformed
@@ -2686,6 +2079,8 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_kode_poli.setText("");
         lbl_cepe.setText("");
         
+        txt_kode_tarif.requestFocus();
+        
     }//GEN-LAST:event_bt_addActionPerformed
 
     private void bt_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_add1ActionPerformed
@@ -2740,7 +2135,7 @@ public class frm_tarif extends javax.swing.JFrame {
                             }
                              
                          } catch (Exception ex) {
-                             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                             Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
                          }
                          }
                          else{
@@ -2925,7 +2320,7 @@ public class frm_tarif extends javax.swing.JFrame {
           // TODO add your handling code here:
           this.saveImagev();
       } catch (IOException ex) {
-          Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
       }
     }//GEN-LAST:event_bt_verifActionPerformed
 
@@ -2977,6 +2372,7 @@ public class frm_tarif extends javax.swing.JFrame {
 
     private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
         // TODO add your handling code here:
+     if(!txt_kode_tarif.getText().isEmpty()){   
          if(this.txt_stat.getText().equals("ok")||this.txt_stat.getText().equals("edit")) {
                                 
              JOptionPane.showMessageDialog(null, "Tidak bisa Delete Karena sudah di Verif!");
@@ -2999,13 +2395,17 @@ public class frm_tarif extends javax.swing.JFrame {
                  
                  
              } catch (SQLException ex) {
-                 Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
              } catch (Exception ex) {
-                 Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
              }
                                 
           }                      
         }
+     }
+     else{
+      JOptionPane.showMessageDialog(null, "Pilih dulu di table untuk menghapus Data!");
+     }
     }//GEN-LAST:event_bt_deleteActionPerformed
 
     private void cmb_kelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmb_kelasKeyPressed
@@ -3036,66 +2436,6 @@ public class frm_tarif extends javax.swing.JFrame {
        cariManualforlog();
         
     }//GEN-LAST:event_bt_cari_tarif1ActionPerformed
-
-    private void txt_tarif1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tarif1KeyTyped
-        // TODO add your handling code here:
-        char enter = evt.getKeyChar();
-        if(!(Character.isDigit(enter))){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_tarif1KeyTyped
-
-    private void txt_tarif1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tarif1KeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txt_rs1.requestFocus();
-        }
-    }//GEN-LAST:event_txt_tarif1KeyPressed
-
-    private void txt_rs1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rs1KeyTyped
-        // TODO add your handling code here:
-         char enter = evt.getKeyChar();
-        if(!(Character.isDigit(enter))){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_rs1KeyTyped
-
-    private void txt_rs1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rs1KeyPressed
-        // TODO add your handling code here:
-          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txt_dr1.requestFocus();
-        }
-    }//GEN-LAST:event_txt_rs1KeyPressed
-
-    private void txt_dr1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dr1KeyTyped
-        // TODO add your handling code here:
-         char enter = evt.getKeyChar();
-        if(!(Character.isDigit(enter))){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_dr1KeyTyped
-
-    private void txt_dr1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dr1KeyPressed
-        // TODO add your handling code here:
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txt_sarana1.requestFocus();
-        }
-    }//GEN-LAST:event_txt_dr1KeyPressed
-
-    private void txt_sarana1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_sarana1KeyTyped
-        // TODO add your handling code here:
-          char enter = evt.getKeyChar();
-        if(!(Character.isDigit(enter))){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_sarana1KeyTyped
-
-    private void txt_sarana1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_sarana1KeyPressed
-        // TODO add your handling code here:
-          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.bt_save.requestFocus();
-        }
-    }//GEN-LAST:event_txt_sarana1KeyPressed
 
     private void cariManualforlog(){
        
@@ -3186,67 +2526,6 @@ public class frm_tarif extends javax.swing.JFrame {
             }
     }
     
-    private void cekpersen1(){
-      
-      
-      int pr= Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText())+Integer.valueOf(this.txt_sarana1.getText());
-     
-      lbl_cepe1.setText(" "+pr +" %");
-      
-
-      
-//     if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText()))==100){
-//        
-//      txt_sarana.setEditable(false);
-//      txt_rs.setEditable(true);
-//      txt_dr.setEditable(true);
-//     }
-//     
-//     
-//     else if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_sarana.getText()))==100){
-//        
-//         txt_dr.setEditable(false);
-//     txt_rs.setEditable(true);
-//       txt_sarana.setEditable(true);
-//     }
-//     
-//    
-//    
-//     else if((Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))==100){
-//        
-//         txt_rs.setEditable(false);
-//      txt_dr.setEditable(true);
-//       txt_sarana.setEditable(true);
-//     }
-//   
-  
-     if(Integer.valueOf(this.txt_rs1.getText())>100){
-     
-         this.txt_rs1.setText("0");
-         
-         
-     
-     }
-     else if(Integer.valueOf(this.txt_dr1.getText())>100){
-     this.txt_dr1.setText("0");
-     
-     }
-     else if(Integer.valueOf(this.txt_sarana1.getText())>100){
-     this.txt_sarana1.setText("0");
-     
-     }
-    
-     else if((Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText()))>100){
-     
-         
-     
-     
-     }
-    
-   
-     
-  
-    }
     
     private void cekpersen(){
       
@@ -3310,21 +2589,6 @@ public class frm_tarif extends javax.swing.JFrame {
   
     }
     
-    private void hitungpresentasDR1(){
-        
-      if(txt_dr1.getText().isEmpty()){
-         txt_dr1.setText("0");
-      }
-      else{
-        
-        Double totdr=(Double.parseDouble(txt_tarif1.getText().toString()) * Double.parseDouble(this.txt_dr1.getText().toString()))/100;
-      
-       lbl_dokter1.setText(Utilitas.formatuang(totdr));
-          
-      }
-         
-          
-    }
     
     
     private void hitungpresentasDR(){
@@ -3347,27 +2611,15 @@ public class frm_tarif extends javax.swing.JFrame {
           
     }
     
-    
-    private void hitungpresentaseRS1(){
-           
-      if(txt_rs1.getText().isEmpty()){
-      txt_rs1.setText("0");
-      }
-      else{
-         
-            Double totrs=(Double.parseDouble(txt_tarif1.getText().toString()) * Double.parseDouble(this.txt_rs1.getText().toString()))/100;
-      
-            lbl_rs1.setText(Utilitas.formatuang(totrs));
-          
-      }
-    }
-    
     private void hitungpresentaseRS(){
            
       if(txt_rs.getText().isEmpty()){
       txt_rs.setText("0");
       }
       else{
+         
+          
+         
          
             Double totrs=(Double.parseDouble(txt_tarif.getText().toString()) * Double.parseDouble(this.txt_rs.getText().toString()))/100;
       
@@ -3376,47 +2628,24 @@ public class frm_tarif extends javax.swing.JFrame {
       }
     }
     
-        private void hitungpresentaseSR(){
-
-          if(txt_sarana.getText().isEmpty()){
-             txt_sarana.setText("0");
-           }
-           else{  
-                 // cekpersen();
-
-
-                    this.txt_sarana.setEditable(true);
-                   Double totsr=(Double.parseDouble(txt_tarif.getText().toString()) * Double.parseDouble(this.txt_sarana.getText().toString()))/100;
-
-                   lbl_sarana.setText(Utilitas.formatuang(totsr));
-
-
-            }
-
-           }
-     
-    
-    
-  private void hitungpresentaseSR1(){
+    private void hitungpresentaseSR(){
         
-   if(txt_sarana1.getText().isEmpty()){
-      txt_sarana1.setText("0");
+   if(txt_sarana.getText().isEmpty()){
+      txt_sarana.setText("0");
     }
     else{  
           // cekpersen();
            
          
-             this.txt_sarana1.setEditable(true);
-            Double totsr=(Double.parseDouble(txt_tarif1.getText().toString()) * Double.parseDouble(this.txt_sarana1.getText().toString()))/100;
+             this.txt_sarana.setEditable(true);
+            Double totsr=(Double.parseDouble(txt_tarif.getText().toString()) * Double.parseDouble(this.txt_sarana.getText().toString()))/100;
       
-            lbl_sarana1.setText(Utilitas.formatuang(totsr));
+            lbl_sarana.setText(Utilitas.formatuang(totsr));
          
             
      }
    
     }
-  
-  
     public void saveImagev() throws IOException {
      
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -3492,7 +2721,7 @@ public class frm_tarif extends javax.swing.JFrame {
           } catch (Exception ex) {
               //JOptionPane.showMessageDialog(null, "Gagal Simpan");
                listModel.addElement("Gagal Simpan:"+this.tb_log_publish.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
           }        }
         catch(IOException ioe)
         {
@@ -3580,7 +2809,7 @@ public class frm_tarif extends javax.swing.JFrame {
           } catch (Exception ex) {
               //JOptionPane.showMessageDialog(null, "Gagal Simpan");
                listModel.addElement("Gagal Simpan:"+this.tb_log_publish.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
           }        }
         catch(IOException ioe)
         {
@@ -3630,7 +2859,7 @@ public class frm_tarif extends javax.swing.JFrame {
           
           datl = new Crud_local();
       } catch (Exception ex) {
-          Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
       }
             
       try {
@@ -3644,7 +2873,7 @@ public class frm_tarif extends javax.swing.JFrame {
          }
           
       } catch (SQLException ex) {
-          Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
       }
             
           
@@ -3661,11 +2890,11 @@ public class frm_tarif extends javax.swing.JFrame {
                
                
           } catch (SQLException ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
           } catch (Exception ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
          
@@ -3684,11 +2913,11 @@ public class frm_tarif extends javax.swing.JFrame {
                
                
           } catch (SQLException ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
           } catch (Exception ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
          
@@ -3718,11 +2947,11 @@ public class frm_tarif extends javax.swing.JFrame {
                
                
           } catch (SQLException ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
           } catch (Exception ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
          
@@ -3763,11 +2992,11 @@ public class frm_tarif extends javax.swing.JFrame {
                
                
           } catch (SQLException ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
           } catch (Exception ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
               JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
          
@@ -3803,20 +3032,21 @@ public class frm_tarif extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frm_tarif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_tarif_bak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frm_tarif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_tarif_bak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frm_tarif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_tarif_bak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frm_tarif.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_tarif_bak.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_tarif().setVisible(true);
+                new frm_tarif_bak().setVisible(true);
             }
         });
     }
@@ -3836,7 +3066,6 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JButton bt_proses;
     private javax.swing.JButton bt_save;
     private javax.swing.JButton bt_verif;
-    private javax.swing.JCheckBox ck_bpjs;
     private javax.swing.JCheckBox ck_pengesah;
     private javax.swing.JCheckBox ck_pilih_semua;
     private javax.swing.JCheckBox ck_verif;
@@ -3852,13 +3081,8 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3867,7 +3091,6 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3884,11 +3107,8 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lbl_cepe;
-    private javax.swing.JLabel lbl_cepe1;
     private javax.swing.JLabel lbl_dokter;
-    private javax.swing.JLabel lbl_dokter1;
     private javax.swing.JLabel lbl_jasa;
     private javax.swing.JLabel lbl_kode_poli;
     private javax.swing.JLabel lbl_kode_status;
@@ -3897,9 +3117,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_nama_pengesah;
     private javax.swing.JLabel lbl_nm_tindakan;
     private javax.swing.JLabel lbl_rs;
-    private javax.swing.JLabel lbl_rs1;
     private javax.swing.JLabel lbl_sarana;
-    private javax.swing.JLabel lbl_sarana1;
     private javax.swing.JLabel lbl_tarif;
     private javax.swing.JLabel lbl_ttd_cek;
     private javax.swing.JLabel lbl_ttd_cek1;
@@ -3918,7 +3136,6 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cari_tarif;
     private javax.swing.JTextField txt_cari_tarif_pengesah;
     private javax.swing.JTextField txt_dr;
-    private javax.swing.JTextField txt_dr1;
     private javax.swing.JTextArea txt_keterangan;
     private javax.swing.JTextField txt_kode_tarif;
     private javax.swing.JTextField txt_nama_tarif;
@@ -3926,13 +3143,10 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JPasswordField txt_pwd;
     private javax.swing.JPasswordField txt_pwdv;
     private javax.swing.JTextField txt_rs;
-    private javax.swing.JTextField txt_rs1;
     private javax.swing.JTextField txt_sarana;
-    private javax.swing.JTextField txt_sarana1;
     private javax.swing.JTextField txt_stat;
     private javax.swing.JTextField txt_status;
     private javax.swing.JTextField txt_tarif;
-    private javax.swing.JTextField txt_tarif1;
     private javax.swing.JTextField txt_username;
     private javax.swing.JTextField txt_usernamev;
     // End of variables declaration//GEN-END:variables
