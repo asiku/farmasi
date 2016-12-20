@@ -109,7 +109,8 @@ public class frm_tarif extends javax.swing.JFrame {
     tr.getColumn(15).setPreferredWidth(50);
     tr.getColumn(16).setPreferredWidth(50);
     tr.getColumn(17).setPreferredWidth(80);
-    
+    tr.getColumn(18).setPreferredWidth(80);
+    tr.getColumn(19).setPreferredWidth(80);
    }
   
   
@@ -117,7 +118,8 @@ public class frm_tarif extends javax.swing.JFrame {
     public frm_tarif() {
         initComponents();
         
-       txt_stat.setVisible(false);
+      txt_stat.setVisible(false);
+      txt_stat_bpjs.setVisible(false);
         
        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
       
@@ -1055,7 +1057,6 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_kode_status = new javax.swing.JLabel();
         txt_status = new javax.swing.JTextField();
         bt_cari_status = new javax.swing.JButton();
-        txt_stat = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cmb_kelas = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
@@ -1088,6 +1089,12 @@ public class frm_tarif extends javax.swing.JFrame {
         txt_sarana1 = new javax.swing.JTextField();
         lbl_sarana1 = new javax.swing.JLabel();
         lbl_dokter1 = new javax.swing.JLabel();
+        bt_edit_bpjs = new javax.swing.JButton();
+        bt_hapus_bpjs = new javax.swing.JButton();
+        txt_stat = new javax.swing.JTextField();
+        txt_stat_bpjs = new javax.swing.JTextField();
+        lbl_status_non_bpjs = new javax.swing.JLabel();
+        lbl_status_bpjs = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -1095,23 +1102,32 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_nama_pengesah = new javax.swing.JLabel();
         bt_pengesah = new javax.swing.JButton();
         bt_verif = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tb_log_publish = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         bt_hapus_ttd = new javax.swing.JButton();
         txt_cari_tarif_pengesah = new javax.swing.JTextField();
         bt_cari_tarif1 = new javax.swing.JButton();
         ck_verif = new javax.swing.JCheckBox();
         ck_pengesah = new javax.swing.JCheckBox();
-        ck_pilih_semua = new javax.swing.JCheckBox();
         bt_hapus_ttd1 = new javax.swing.JButton();
         lbl_ttd_cek = new javax.swing.JLabel();
         lbl_ttd_cek1 = new javax.swing.JLabel();
         lbl_ttd_cek2 = new javax.swing.JLabel();
         lbl_ttd_cek3 = new javax.swing.JLabel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tb_log_publish = new javax.swing.JTable();
+        lbl_tarif = new javax.swing.JLabel();
         lbl_nm_tindakan = new javax.swing.JLabel();
         lbl_jasa = new javax.swing.JLabel();
-        lbl_tarif = new javax.swing.JLabel();
+        ck_pilih_semua = new javax.swing.JCheckBox();
+        jPanel12 = new javax.swing.JPanel();
+        lbl_jasa1 = new javax.swing.JLabel();
+        lbl_tarif1 = new javax.swing.JLabel();
+        lbl_nm_tindakan1 = new javax.swing.JLabel();
+        ck_pilih_semua1 = new javax.swing.JCheckBox();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tb_log_publish1 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -1383,14 +1399,17 @@ public class frm_tarif extends javax.swing.JFrame {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tb_tarifMouseReleased(evt);
             }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_tarifMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(tb_tarif);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 950, 240));
-        jPanel1.add(txt_cari_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 365, 390, 30));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 950, 210));
+        jPanel1.add(txt_cari_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 390, 30));
 
         bt_cari_tarif.setText("Cari");
-        jPanel1.add(bt_cari_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 370, 70, -1));
+        jPanel1.add(bt_cari_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 400, 70, -1));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1459,10 +1478,10 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 305, -1, -1));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, -1, -1));
 
         jLabel10.setText("Keterangan");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 112, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 112, -1));
 
         txt_keterangan.setColumns(20);
         txt_keterangan.setRows(5);
@@ -1473,7 +1492,7 @@ public class frm_tarif extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(txt_keterangan);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 305, 460, 50));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 460, 50));
 
         panel_inputan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1519,12 +1538,6 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
 
-        txt_stat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_statKeyPressed(evt);
-            }
-        });
-
         jLabel9.setText("Kelas");
 
         cmb_kelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kelas 1", "Kelas 2", "Kelas 3", "Kelas VIP" }));
@@ -1537,6 +1550,11 @@ public class frm_tarif extends javax.swing.JFrame {
         jLabel16.setText("BPJS");
 
         ck_bpjs.setText("Tarif BPJS");
+        ck_bpjs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ck_bpjsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_inputanLayout = new javax.swing.GroupLayout(panel_inputan);
         panel_inputan.setLayout(panel_inputanLayout);
@@ -1551,10 +1569,7 @@ public class frm_tarif extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(23, 23, 23)
                         .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_inputanLayout.createSequentialGroup()
-                                .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_nama_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
@@ -1596,8 +1611,7 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_stat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel_inputanLayout.createSequentialGroup()
@@ -1632,13 +1646,14 @@ public class frm_tarif extends javax.swing.JFrame {
 
         jPanel1.add(panel_inputan, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 23, -1, 240));
 
+        bt_proses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/tick_ico.png"))); // NOI18N
         bt_proses.setText("Proses Untuk Verifikasi");
         bt_proses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_prosesActionPerformed(evt);
             }
         });
-        jPanel1.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 460, -1));
+        jPanel1.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 460, 30));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
 
@@ -1759,7 +1774,11 @@ public class frm_tarif extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Tarif Non BPJS", jPanel5);
 
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel18.setText("Tarif Tindakan                         Rp.");
+        jPanel10.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 15, 217, 19));
 
         txt_tarif1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1769,8 +1788,10 @@ public class frm_tarif extends javax.swing.JFrame {
                 txt_tarif1KeyPressed(evt);
             }
         });
+        jPanel10.add(txt_tarif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 15, 173, -1));
 
         lbl_rs1.setText("Rp.");
+        jPanel10.add(lbl_rs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 45, 240, 19));
 
         txt_rs1.setText("0");
         txt_rs1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1781,14 +1802,19 @@ public class frm_tarif extends javax.swing.JFrame {
                 txt_rs1KeyPressed(evt);
             }
         });
+        jPanel10.add(txt_rs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 45, 89, -1));
 
         jLabel19.setText("RS.   %");
+        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 45, 73, -1));
 
         jLabel20.setText("Dokter %");
+        jPanel10.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 75, 73, -1));
 
         jLabel21.setText("Sarana %");
+        jPanel10.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 105, 73, -1));
 
         lbl_cepe1.setText("              %");
+        jPanel10.add(lbl_cepe1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 136, 89, -1));
 
         txt_dr1.setText("0");
         txt_dr1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1799,6 +1825,7 @@ public class frm_tarif extends javax.swing.JFrame {
                 txt_dr1KeyPressed(evt);
             }
         });
+        jPanel10.add(txt_dr1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 75, 89, -1));
 
         txt_sarana1.setText("0");
         txt_sarana1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1809,74 +1836,55 @@ public class frm_tarif extends javax.swing.JFrame {
                 txt_sarana1KeyPressed(evt);
             }
         });
+        jPanel10.add(txt_sarana1, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 105, 89, -1));
 
         lbl_sarana1.setText("Rp.");
+        jPanel10.add(lbl_sarana1, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 105, 240, 19));
 
         lbl_dokter1.setText("Rp.");
+        jPanel10.add(lbl_dokter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 75, 240, 19));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_tarif1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(txt_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(lbl_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(txt_dr1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(lbl_dokter1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_cepe1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                            .addComponent(txt_sarana1))
-                        .addGap(21, 21, 21)
-                        .addComponent(lbl_sarana1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_tarif1)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(txt_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_rs1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
-                    .addComponent(txt_dr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_dokter1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
-                    .addComponent(txt_sarana1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_sarana1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_cepe1)
-                .addContainerGap(64, Short.MAX_VALUE))
-        );
+        bt_edit_bpjs.setText("Edit BPJS");
+        bt_edit_bpjs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_edit_bpjsActionPerformed(evt);
+            }
+        });
+        jPanel10.add(bt_edit_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
+
+        bt_hapus_bpjs.setText("Delete BPJS");
+        bt_hapus_bpjs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_hapus_bpjsActionPerformed(evt);
+            }
+        });
+        jPanel10.add(bt_hapus_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 125, -1));
 
         jTabbedPane2.addTab("Tarif BPJS", jPanel10);
 
         jPanel1.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 23, 464, 240));
+
+        txt_stat.setEditable(false);
+        txt_stat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_statKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txt_stat, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 90, -1));
+
+        txt_stat_bpjs.setEditable(false);
+        txt_stat_bpjs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_stat_bpjsKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txt_stat_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, 90, -1));
+
+        lbl_status_non_bpjs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/proces_ico.png"))); // NOI18N
+        jPanel1.add(lbl_status_non_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, 30));
+
+        lbl_status_bpjs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/proces_ico.png"))); // NOI18N
+        jPanel1.add(lbl_status_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, 30));
 
         jTabbedPane1.addTab("Master Tarif", jPanel1);
 
@@ -1953,27 +1961,6 @@ public class frm_tarif extends javax.swing.JFrame {
         });
         jPanel4.add(bt_verif, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 430, -1));
 
-        tb_log_publish.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
-        tb_log_publish.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tb_log_publish.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_log_publishMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tb_log_publish);
-
-        jPanel4.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 930, 270));
-
         jLabel8.setText("Log Perubahan Data Publish");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 230, -1));
 
@@ -2032,25 +2019,6 @@ public class frm_tarif extends javax.swing.JFrame {
         });
         jPanel4.add(ck_pengesah, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        ck_pilih_semua.setText("Pilih Semua");
-        ck_pilih_semua.setEnabled(false);
-        ck_pilih_semua.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                ck_pilih_semuaItemStateChanged(evt);
-            }
-        });
-        ck_pilih_semua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ck_pilih_semuaActionPerformed(evt);
-            }
-        });
-        ck_pilih_semua.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                ck_pilih_semuaKeyPressed(evt);
-            }
-        });
-        jPanel4.add(ck_pilih_semua, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 300, -1, -1));
-
         bt_hapus_ttd1.setText("Hapus TTD");
         bt_hapus_ttd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2071,14 +2039,148 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_ttd_cek3.setText("%");
         jPanel4.add(lbl_ttd_cek3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 60, -1, -1));
 
-        lbl_nm_tindakan.setText("Nama Tindakan");
-        jPanel4.add(lbl_nm_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 380, 20));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_jasa.setText("Jasa");
-        jPanel4.add(lbl_jasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, 670, -1));
+        tb_log_publish.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
+        tb_log_publish.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_log_publish.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_log_publishMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tb_log_publish);
+
+        jPanel11.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 910, 220));
 
         lbl_tarif.setText("Tarif");
-        jPanel4.add(lbl_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 220, -1));
+        jPanel11.add(lbl_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 220, -1));
+
+        lbl_nm_tindakan.setText("Nama Tindakan");
+        jPanel11.add(lbl_nm_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 380, 20));
+
+        lbl_jasa.setText("Jasa");
+        jPanel11.add(lbl_jasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 640, -1));
+
+        ck_pilih_semua.setText("Pilih Semua");
+        ck_pilih_semua.setEnabled(false);
+        ck_pilih_semua.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ck_pilih_semuaItemStateChanged(evt);
+            }
+        });
+        ck_pilih_semua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ck_pilih_semuaActionPerformed(evt);
+            }
+        });
+        ck_pilih_semua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ck_pilih_semuaKeyPressed(evt);
+            }
+        });
+        jPanel11.add(ck_pilih_semua, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 10, -1, -1));
+
+        jTabbedPane3.addTab("Non BPJS", jPanel11);
+
+        lbl_jasa1.setText("Jasa");
+
+        lbl_tarif1.setText("Tarif");
+
+        lbl_nm_tindakan1.setText("Nama Tindakan");
+
+        ck_pilih_semua1.setText("Pilih Semua");
+        ck_pilih_semua1.setEnabled(false);
+        ck_pilih_semua1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ck_pilih_semua1ItemStateChanged(evt);
+            }
+        });
+        ck_pilih_semua1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ck_pilih_semua1ActionPerformed(evt);
+            }
+        });
+        ck_pilih_semua1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ck_pilih_semua1KeyPressed(evt);
+            }
+        });
+
+        tb_log_publish1.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
+        tb_log_publish1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_log_publish1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_log_publish1MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tb_log_publish1);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 925, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel12Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel12Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel12Layout.createSequentialGroup()
+                                    .addComponent(lbl_nm_tindakan1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(400, 400, 400)
+                                    .addComponent(ck_pilih_semua1))
+                                .addGroup(jPanel12Layout.createSequentialGroup()
+                                    .addComponent(lbl_tarif1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(30, 30, 30)
+                                    .addComponent(lbl_jasa1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 303, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel12Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel12Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(lbl_nm_tindakan1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ck_pilih_semua1))
+                    .addGap(10, 10, 10)
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbl_tarif1)
+                        .addComponent(lbl_jasa1))
+                    .addGap(15, 15, 15)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane3.addTab("BPJS", jPanel12);
+
+        jPanel4.add(jTabbedPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 930, 330));
 
         jTabbedPane1.addTab("Verifikasi dan Pengesahan", jPanel4);
 
@@ -2275,7 +2377,7 @@ public class frm_tarif extends javax.swing.JFrame {
                              
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"");
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"","","");
                            
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
@@ -2408,7 +2510,7 @@ public class frm_tarif extends javax.swing.JFrame {
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText()), 
-                                     Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()));
+                                     Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add");
                            
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
@@ -2661,19 +2763,58 @@ public class frm_tarif extends javax.swing.JFrame {
            this.txt_sarana.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,5).toString())); 
            txt_stat.setText(tb_tarif.getModel().getValueAt(row,12).toString());
            this.cmb_kelas.setSelectedItem(tb_tarif.getModel().getValueAt(row,13).toString());
+           //=====================
            
-//-
-//1
-//2
-//3
-//VIP
+           this.txt_tarif1.setText(tb_tarif.getModel().getValueAt(row,14).toString()); 
+           this.txt_rs1.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,15).toString())); 
+           this.txt_dr1.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,16).toString())); 
+           this.txt_sarana1.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,17).toString())); 
+           
+           
+           try{
+            
+               this.ck_bpjs.setSelected(Boolean.parseBoolean(tb_tarif.getModel().getValueAt(row,18).toString())); 
+          
+           }
+           catch(Exception e){
+           this.ck_bpjs.setSelected(false);
+           }
+           
+           txt_stat_bpjs.setText(tb_tarif.getModel().getValueAt(row,20).toString());
+           
+           
+           if(!lbl_status_non_bpjs.getText().equals("Add")){
+               lbl_status_non_bpjs.setText("Tarif Non BPJS Tidak Bisa Di Edit");
+           }
+           else{
+           lbl_status_non_bpjs.setText("Tarif Non BPJS Bisa Di Edit");
+           
+           }
+           
+           if(!lbl_status_bpjs.getText().equals("Add")){
+               lbl_status_bpjs.setText("Tarif BPJS Bisa Di Edit");
+           }
+           else{
+           lbl_status_bpjs.setText("Tarif BPJS Tidak Bisa Di Edit");
+           
+           }
+           
+           //JOptionPane.showMessageDialog(null, tb_tarif.getModel().getValueAt(row,18).toString());
         }     
     }
+    
+    private void setNolBPJS(){
+      txt_tarif1.setText("0");
+      txt_rs1.setText("0");
+      txt_dr1.setText("0");
+      this.txt_sarana1.setText("0");
+    }
+    
     private void tb_tarifMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tarifMouseReleased
         // TODO add your handling code here:
          if (evt.getClickCount() == 2) {
             
-           settarif();
+           
         }
     }//GEN-LAST:event_tb_tarifMouseReleased
 
@@ -2688,8 +2829,178 @@ public class frm_tarif extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bt_addActionPerformed
 
-    private void bt_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_add1ActionPerformed
+    private void updatebpjs(){
+    
+       DefaultListModel<String> listModel = new DefaultListModel<>();
+        
+       int pr= Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText())+Integer.valueOf(this.txt_sarana1.getText());
+     
+       lbl_cepe1.setText(" "+pr +" %");
+    
+    if((Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText())+Integer.valueOf(this.txt_sarana1.getText()))>100){
+            JOptionPane.showMessageDialog(null, "Jumlah Presentase Melebihi 100 % ");
+            this.txt_rs1.setText("0");
+            this.txt_dr1.setText("0");  
+            this.txt_sarana1.setText("0");
+            this.txt_rs1.requestFocus();
+        }
+        else{
+                if(this.txt_kode_tarif.getText().isEmpty()||txt_nama_tarif.getText().isEmpty()||
+                        txt_poli.getText().isEmpty()||txt_tarif1.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Maaf Data Inputan Ada yg Kosong!");
+                    this.txt_kode_tarif.requestFocus();
+                }
+                else{
+                  if(txt_tarif1.getText().equals("0")){
+                      JOptionPane.showMessageDialog(null, "Maaf Tarif/Presentase Tidak Boleh 0!");
+                      this.txt_tarif1.requestFocus();
+                  }
+                  else if((Integer.valueOf(this.txt_rs1.getText())+Integer.valueOf(this.txt_dr1.getText())+Integer.valueOf(this.txt_sarana1.getText()))<100){
+                   JOptionPane.showMessageDialog(null, "Maaf Presentase kurang dari 100 !");
+                    this.txt_rs1.requestFocus();
+                  }
+                  else{
+                     if(!this.txt_status.getText().isEmpty()){
+                        if(!cmb_kelas.getSelectedItem().toString().isEmpty()){
+                        // 
+                         try {
+                             //save
+                             datl= new Crud_local();
+                           
+                            if(this.txt_stat_bpjs.getText().equals("ok")||this.txt_stat_bpjs.getText().equals("edit")) {
+                              JOptionPane.showMessageDialog(null,"Maaf BPJS Tidak Bisa di Edit Sudah di Verif");  
+                              
+                            }
+                            else{
+                                datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
+                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",2);
+                             
+                             refreshtbtarif();
+                                
+                            }
+                            
+                            
+                            
+                             
+                         } catch (Exception ex) {
+                             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                        
+                        } //
+                        else{
+                           JOptionPane.showMessageDialog(null, "Maaf Kelas Tidak Boleh Kosong !");
+                           this.cmb_kelas.requestFocus();
+                        }
+                     }
+                     else{
+                      JOptionPane.showMessageDialog(null, "Maaf Status Tidak Boleh Kosong !");
+                      this.bt_cari_poli.requestFocus();
+                     
+                     }
+                  }
+                }
+        }
+    }
+    
+    private void updateNonbpjs(){
         // TODO add your handling code here:
+      int pr= Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText());
+     
+      lbl_cepe.setText(" "+pr +" %");
+        
+        
+        if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))>100){
+            JOptionPane.showMessageDialog(null, "Jumlah Presentase Melebihi 100 % ");
+            this.txt_rs.setText("0");
+            this.txt_dr.setText("0");  
+            this.txt_sarana.setText("0");
+            this.txt_rs.requestFocus();
+        }
+        else{
+                if(this.txt_kode_tarif.getText().isEmpty()||txt_nama_tarif.getText().isEmpty()||
+                        txt_poli.getText().isEmpty()||txt_tarif.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Maaf Data Inputan Ada yg Kosong!");
+                    this.txt_kode_tarif.requestFocus();
+                }
+                else{
+                  if(txt_tarif.getText().equals("0")){
+                      JOptionPane.showMessageDialog(null, "Maaf Tarif/Presentase Tidak Boleh 0!");
+                      this.txt_tarif.requestFocus();
+                  }
+                  else if((Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText()))<100){
+                   JOptionPane.showMessageDialog(null, "Maaf Presentase kurang dari 100 !");
+                    this.txt_rs.requestFocus();
+                  }
+                  else{
+                     if(!this.txt_status.getText().isEmpty()){
+                         if(!cmb_kelas.getSelectedItem().toString().isEmpty()){
+                         
+                          
+//                    if(this.ck_bpjs.isSelected()){
+//                      
+//                              this.updatebpjs();
+//                         }
+//                    else{
+                       try {
+                           
+                           
+                             //save
+                             datl= new Crud_local();
+                           
+                            if(this.txt_stat.getText().equals("ok")||this.txt_stat.getText().equals("edit")) {
+                              
+                                JOptionPane.showMessageDialog(null, "Tidak bisa Edit BPJS atau Non BPJS Karena sudah di Verif!");
+                                
+                            }
+                            else{
+                                
+                                this.setNolBPJS();
+                                
+                                 datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
+                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1);
+                             
+                                
+                                
+//                                datl.updateTarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+//                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
+//                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText());
+//                             
+                             refreshtbtarif();
+                                
+                                
+                            }
+                             
+                         } catch (Exception ex) {
+                             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+//          }  //end ceklist bpjs  
+                             
+                         
+                         }
+                         else{
+                           JOptionPane.showMessageDialog(null, "Maaf Kelas Tidak Boleh Kosong !");
+                           this.cmb_kelas.requestFocus();
+                         }
+                        
+                     }
+                     else{
+                      JOptionPane.showMessageDialog(null, "Maaf Status Tidak Boleh Kosong !");
+                      this.bt_cari_poli.requestFocus();
+                     
+                     }
+                  }
+                }
+        }
+
+    }
+    
+    private void bt_add1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_add1ActionPerformed
+     
+                // TODO add your handling code here:
                  int pr= Integer.valueOf(this.txt_rs.getText())+Integer.valueOf(this.txt_dr.getText())+Integer.valueOf(this.txt_sarana.getText());
      
       lbl_cepe.setText(" "+pr +" %");
@@ -2730,17 +3041,23 @@ public class frm_tarif extends javax.swing.JFrame {
                               JOptionPane.showMessageDialog(null, "Tidak bisa Edit Karena sudah di Verif!");
                             }
                             else{
-                                datl.updateTarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+//                                datl.updateTarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+//                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
+//                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString());
+
+                                   datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString());
-                             
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
+                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1);
+              
+
                              refreshtbtarif();
                                 
                                 
                             }
                              
                          } catch (Exception ex) {
-                             Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                             Logger.getLogger(frm_tarif_bak.class.getName()).log(Level.SEVERE, null, ex);
                          }
                          }
                          else{
@@ -2758,6 +3075,12 @@ public class frm_tarif extends javax.swing.JFrame {
                 }
         }
 
+        
+        
+           
+          
+       
+         
     }//GEN-LAST:event_bt_add1ActionPerformed
 
     private void lbl_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_loginMouseClicked
@@ -2977,7 +3300,7 @@ public class frm_tarif extends javax.swing.JFrame {
 
     private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
         // TODO add your handling code here:
-         if(this.txt_stat.getText().equals("ok")||this.txt_stat.getText().equals("edit")) {
+         if(this.txt_stat.getText().equals("ok")||this.txt_stat.getText().equals("edit")||this.txt_stat_bpjs.getText().equals("ok")||this.txt_stat_bpjs.getText().equals("edit")) {
                                 
              JOptionPane.showMessageDialog(null, "Tidak bisa Delete Karena sudah di Verif!");
              
@@ -2997,6 +3320,12 @@ public class frm_tarif extends javax.swing.JFrame {
                  
                  refreshtbtarif();
                  
+                 Utilitas.HapusText(panel_inputan);
+        Utilitas.HapusText(jPanel5);
+        
+        lbl_kode_status.setText("");
+        lbl_kode_poli.setText("");
+        lbl_cepe.setText("");
                  
              } catch (SQLException ex) {
                  Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -3096,6 +3425,114 @@ public class frm_tarif extends javax.swing.JFrame {
             this.bt_save.requestFocus();
         }
     }//GEN-LAST:event_txt_sarana1KeyPressed
+
+    private void ck_bpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_bpjsActionPerformed
+        // TODO add your handling code here:
+        
+       if(this.txt_stat_bpjs.getText().equals("ok")||this.txt_stat_bpjs.getText().equals("edit")) {
+                                
+           JOptionPane.showMessageDialog(null, "BPJS Tidak bisa Edit Karena sudah di Verif!");
+        }
+      else{ 
+        if(!this.ck_bpjs.isSelected()){
+         if(!txt_kode_tarif.getText().isEmpty()){   
+           int dialogResult = JOptionPane.showConfirmDialog(null, "Nilai BPJS akan Di Nolkan?","Warning ",
+           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(dialogResult == JOptionPane.YES_OPTION){  
+              setNolBPJS();
+            }
+         } 
+        }
+      }    
+        
+    }//GEN-LAST:event_ck_bpjsActionPerformed
+
+    private void ck_pilih_semua1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ck_pilih_semua1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ck_pilih_semua1ItemStateChanged
+
+    private void ck_pilih_semua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_pilih_semua1ActionPerformed
+        // TODO add your handling code here:
+         if(ck_pilih_semua1.isSelected()) {//checkbox has been selected
+           
+            
+           for(int i=0;i<this.tb_log_publish1.getModel().getRowCount();i++){ 
+            this.tb_log_publish1.getModel().setValueAt(true,i,10);
+           }
+            
+            
+        } else {
+           for(int i=0;i<this.tb_log_publish1.getModel().getRowCount();i++){ 
+            this.tb_log_publish1.getModel().setValueAt(false,i,10);
+           }
+
+        }
+        
+    }//GEN-LAST:event_ck_pilih_semua1ActionPerformed
+
+    private void ck_pilih_semua1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ck_pilih_semua1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ck_pilih_semua1KeyPressed
+
+    private void tb_log_publish1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_log_publish1MouseClicked
+        // TODO add your handling code here:
+        int row = this.tb_log_publish1.getSelectedRow();
+
+        if (row == -1) {
+            // No row selected
+        } else {  
+          lbl_nm_tindakan1.setText("Nama Tindakan : "+tb_log_publish1.getModel().getValueAt(row, 1).toString());
+          lbl_tarif1.setText("Tarif BPJS"+ Utilitas.formatuang(Double.valueOf(tb_log_publish1.getModel().getValueAt(row, 2).toString())));
+          lbl_jasa1.setText("RS BPJS:"+tb_log_publish1.getModel().getValueAt(row, 3).toString()
+                  +"      Dr BPJS:"+tb_log_publish1.getModel().getValueAt(row, 4).toString()+"      Sarana :"+tb_log_publish1.getModel().getValueAt(row, 5).toString());
+          
+        }
+    }//GEN-LAST:event_tb_log_publish1MouseClicked
+
+    private void txt_stat_bpjsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_stat_bpjsKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_stat_bpjsKeyPressed
+
+    private void bt_edit_bpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_edit_bpjsActionPerformed
+       if(this.ck_bpjs.isSelected()) {
+           this.updatebpjs();
+         
+        }
+       else{         // TODO add your handling code here:
+         JOptionPane.showMessageDialog(null, "BPJS belum di Ceklist!");
+       }
+    }//GEN-LAST:event_bt_edit_bpjsActionPerformed
+
+    private void bt_hapus_bpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapus_bpjsActionPerformed
+int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","Warning ",
+           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+   
+       if(dialogResult == JOptionPane.YES_OPTION){             // TODO add your handling code here:
+        
+        if(this.txt_stat_bpjs.getText().equals("ok")||this.txt_stat_bpjs.getText().equals("edit")) {
+                              JOptionPane.showMessageDialog(null,"Maaf BPJS Tidak Bisa di Edit Sudah di Verif");  
+                              
+                            }
+                            else{
+            
+                                this.setNolBPJS();
+                                
+                                datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
+                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
+                                        ,Integer.valueOf(txt_sarana1.getText()),"","add","add",2);
+                             
+                             refreshtbtarif();
+                                this.ck_bpjs.setSelected(false);
+                            }
+        
+       }
+    }//GEN-LAST:event_bt_hapus_bpjsActionPerformed
+
+    private void tb_tarifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tarifMouseClicked
+        // TODO add your handling code here:
+        settarif();
+    }//GEN-LAST:event_tb_tarifMouseClicked
 
     private void cariManualforlog(){
        
@@ -3830,6 +4267,8 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JButton bt_cari_tarif1;
     private javax.swing.JButton bt_cetak;
     private javax.swing.JButton bt_delete;
+    private javax.swing.JButton bt_edit_bpjs;
+    private javax.swing.JButton bt_hapus_bpjs;
     private javax.swing.JButton bt_hapus_ttd;
     private javax.swing.JButton bt_hapus_ttd1;
     private javax.swing.JButton bt_pengesah;
@@ -3839,6 +4278,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JCheckBox ck_bpjs;
     private javax.swing.JCheckBox ck_pengesah;
     private javax.swing.JCheckBox ck_pilih_semua;
+    private javax.swing.JCheckBox ck_pilih_semua1;
     private javax.swing.JCheckBox ck_verif;
     private javax.swing.JComboBox<String> cmb_kelas;
     private javax.swing.JDialog dlg_cari_poli;
@@ -3868,6 +4308,8 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3878,6 +4320,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
@@ -3885,22 +4328,28 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel lbl_cepe;
     private javax.swing.JLabel lbl_cepe1;
     private javax.swing.JLabel lbl_dokter;
     private javax.swing.JLabel lbl_dokter1;
     private javax.swing.JLabel lbl_jasa;
+    private javax.swing.JLabel lbl_jasa1;
     private javax.swing.JLabel lbl_kode_poli;
     private javax.swing.JLabel lbl_kode_status;
     private javax.swing.JLabel lbl_login;
     private javax.swing.JLabel lbl_loginv;
     private javax.swing.JLabel lbl_nama_pengesah;
     private javax.swing.JLabel lbl_nm_tindakan;
+    private javax.swing.JLabel lbl_nm_tindakan1;
     private javax.swing.JLabel lbl_rs;
     private javax.swing.JLabel lbl_rs1;
     private javax.swing.JLabel lbl_sarana;
     private javax.swing.JLabel lbl_sarana1;
+    private javax.swing.JLabel lbl_status_bpjs;
+    private javax.swing.JLabel lbl_status_non_bpjs;
     private javax.swing.JLabel lbl_tarif;
+    private javax.swing.JLabel lbl_tarif1;
     private javax.swing.JLabel lbl_ttd_cek;
     private javax.swing.JLabel lbl_ttd_cek1;
     private javax.swing.JLabel lbl_ttd_cek2;
@@ -3910,6 +4359,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JList<String> lst_save_tarif;
     private javax.swing.JPanel panel_inputan;
     private javax.swing.JTable tb_log_publish;
+    private javax.swing.JTable tb_log_publish1;
     private javax.swing.JTable tb_poli;
     private javax.swing.JTable tb_status;
     private javax.swing.JTable tb_tarif;
@@ -3930,6 +4380,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private javax.swing.JTextField txt_sarana;
     private javax.swing.JTextField txt_sarana1;
     private javax.swing.JTextField txt_stat;
+    private javax.swing.JTextField txt_stat_bpjs;
     private javax.swing.JTextField txt_status;
     private javax.swing.JTextField txt_tarif;
     private javax.swing.JTextField txt_tarif1;
