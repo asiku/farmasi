@@ -2385,6 +2385,13 @@ public class frm_tarif extends javax.swing.JFrame {
                              
                              refreshtbtarif();
                              
+                             Utilitas.HapusText(panel_inputan);
+        Utilitas.HapusText(jPanel5);
+        
+        lbl_kode_status.setText("");
+        lbl_kode_poli.setText("");
+        lbl_cepe.setText("");
+                             
                          } catch (Exception ex) {
                              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
                          }
@@ -2517,6 +2524,13 @@ public class frm_tarif extends javax.swing.JFrame {
                              lst_save_tarif.setModel(listModel);
                              
                              refreshtbtarif();
+                             
+                             Utilitas.HapusText(panel_inputan);
+        Utilitas.HapusText(jPanel5);
+        
+        lbl_kode_status.setText("");
+        lbl_kode_poli.setText("");
+        lbl_cepe.setText("");
                              
                          } catch (Exception ex) {
                               listModel.addElement("Gagal Simpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
@@ -2783,19 +2797,29 @@ public class frm_tarif extends javax.swing.JFrame {
            txt_stat_bpjs.setText(tb_tarif.getModel().getValueAt(row,20).toString());
            
            
-           if(!lbl_status_non_bpjs.getText().equals("Add")){
-               lbl_status_non_bpjs.setText("Tarif Non BPJS Tidak Bisa Di Edit");
+           if(!txt_stat.getText().equals("add")){
+                lbl_status_non_bpjs.setText("Tarif Non BPJS Tidak Bisa Di Edit");
            }
            else{
+           
            lbl_status_non_bpjs.setText("Tarif Non BPJS Bisa Di Edit");
+          
            
            }
            
-           if(!lbl_status_bpjs.getText().equals("Add")){
-               lbl_status_bpjs.setText("Tarif BPJS Bisa Di Edit");
+           if(!txt_stat_bpjs.getText().equals("add")){
+               if(!txt_stat_bpjs.getText().isEmpty()){
+                   lbl_status_bpjs.setText("Tarif BPJS Tidak Bisa Di Edit");
+                
+               }
+               else{
+               lbl_status_bpjs.setText("Tarif BPJS Belum diset");
+               }
+               
            }
            else{
-           lbl_status_bpjs.setText("Tarif BPJS Tidak Bisa Di Edit");
+                lbl_status_bpjs.setText("Tarif BPJS Bisa Di Edit");
+          
            
            }
            
