@@ -8,6 +8,7 @@ package tarif;
 import farmasi.Crud_local;
 import farmasi.NewJFrame;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -118,8 +119,8 @@ public class frm_tarif extends javax.swing.JFrame {
     public frm_tarif() {
         initComponents();
         
-      txt_stat.setVisible(false);
-      txt_stat_bpjs.setVisible(false);
+//      txt_stat.setVisible(false);
+//      txt_stat_bpjs.setVisible(false);
         
        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
       
@@ -1095,6 +1096,7 @@ public class frm_tarif extends javax.swing.JFrame {
         txt_stat_bpjs = new javax.swing.JTextField();
         lbl_status_non_bpjs = new javax.swing.JLabel();
         lbl_status_bpjs = new javax.swing.JLabel();
+        bt_proses1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -1102,7 +1104,6 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_nama_pengesah = new javax.swing.JLabel();
         bt_pengesah = new javax.swing.JButton();
         bt_verif = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
         bt_hapus_ttd = new javax.swing.JButton();
         txt_cari_tarif_pengesah = new javax.swing.JTextField();
         bt_cari_tarif1 = new javax.swing.JButton();
@@ -1127,7 +1128,9 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_nm_tindakan1 = new javax.swing.JLabel();
         ck_pilih_semua1 = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tb_log_publish1 = new javax.swing.JTable();
+        tb_log_publishBPJS = new javax.swing.JTable();
+        bt_pengesah1 = new javax.swing.JButton();
+        bt_verif1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -1647,13 +1650,13 @@ public class frm_tarif extends javax.swing.JFrame {
         jPanel1.add(panel_inputan, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 23, -1, 240));
 
         bt_proses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/tick_ico.png"))); // NOI18N
-        bt_proses.setText("Proses Untuk Verifikasi");
+        bt_proses.setText("Proses Verifikasi");
         bt_proses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_prosesActionPerformed(evt);
             }
         });
-        jPanel1.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 460, 30));
+        jPanel1.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 210, 30));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
 
@@ -1886,6 +1889,15 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_status_bpjs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/proces_ico.png"))); // NOI18N
         jPanel1.add(lbl_status_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, 30));
 
+        bt_proses1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/tick_ico.png"))); // NOI18N
+        bt_proses1.setText("Proses Verifikasi BPJS");
+        bt_proses1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_proses1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bt_proses1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 220, 30));
+
         jTabbedPane1.addTab("Master Tarif", jPanel1);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1961,9 +1973,6 @@ public class frm_tarif extends javax.swing.JFrame {
         });
         jPanel4.add(bt_verif, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 430, -1));
 
-        jLabel8.setText("Log Perubahan Data Publish");
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 230, -1));
-
         bt_hapus_ttd.setText("Hapus TTD");
         bt_hapus_ttd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1973,7 +1982,7 @@ public class frm_tarif extends javax.swing.JFrame {
         jPanel4.add(bt_hapus_ttd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 430, 20));
 
         txt_cari_tarif_pengesah.setPreferredSize(new java.awt.Dimension(4, 25));
-        jPanel4.add(txt_cari_tarif_pengesah, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 240, 30));
+        jPanel4.add(txt_cari_tarif_pengesah, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, 280, 30));
 
         bt_cari_tarif1.setText("Cari");
         bt_cari_tarif1.addActionListener(new java.awt.event.ActionListener() {
@@ -1981,7 +1990,7 @@ public class frm_tarif extends javax.swing.JFrame {
                 bt_cari_tarif1ActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_cari_tarif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 140, -1));
+        jPanel4.add(bt_cari_tarif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 310, 140, -1));
 
         ck_verif.setText("Verifikator");
         ck_verif.addItemListener(new java.awt.event.ItemListener() {
@@ -2044,13 +2053,13 @@ public class frm_tarif extends javax.swing.JFrame {
         tb_log_publish.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
         tb_log_publish.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tb_log_publish.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2060,16 +2069,16 @@ public class frm_tarif extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tb_log_publish);
 
-        jPanel11.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 910, 220));
+        jPanel11.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 940, 240));
 
         lbl_tarif.setText("Tarif");
-        jPanel11.add(lbl_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 220, -1));
+        jPanel11.add(lbl_tarif, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 220, -1));
 
         lbl_nm_tindakan.setText("Nama Tindakan");
-        jPanel11.add(lbl_nm_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 380, 20));
+        jPanel11.add(lbl_nm_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 640, 20));
 
         lbl_jasa.setText("Jasa");
-        jPanel11.add(lbl_jasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 640, -1));
+        jPanel11.add(lbl_jasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 640, -1));
 
         ck_pilih_semua.setText("Pilih Semua");
         ck_pilih_semua.setEnabled(false);
@@ -2116,71 +2125,83 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
 
-        tb_log_publish1.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
-        tb_log_publish1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_log_publishBPJS.setFont(new java.awt.Font("Dialog", 0, 9)); // NOI18N
+        tb_log_publishBPJS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        tb_log_publish1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_log_publishBPJS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_log_publish1MouseClicked(evt);
+                tb_log_publishBPJSMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(tb_log_publish1);
+        jScrollPane3.setViewportView(tb_log_publishBPJS);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(lbl_nm_tindakan1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                        .addComponent(ck_pilih_semua1))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(lbl_tarif1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(lbl_jasa1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel12Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel12Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel12Layout.createSequentialGroup()
-                                    .addComponent(lbl_nm_tindakan1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(400, 400, 400)
-                                    .addComponent(ck_pilih_semua1))
-                                .addGroup(jPanel12Layout.createSequentialGroup()
-                                    .addComponent(lbl_tarif1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(lbl_jasa1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_nm_tindakan1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ck_pilih_semua1))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_tarif1)
+                    .addComponent(lbl_jasa1))
+                .addContainerGap(246, Short.MAX_VALUE))
             .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel12Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel12Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(lbl_nm_tindakan1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(ck_pilih_semua1))
-                    .addGap(10, 10, 10)
-                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbl_tarif1)
-                        .addComponent(lbl_jasa1))
-                    .addGap(15, 15, 15)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 59, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jTabbedPane3.addTab("BPJS", jPanel12);
 
-        jPanel4.add(jTabbedPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 930, 330));
+        jPanel4.add(jTabbedPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 950, 330));
+
+        bt_pengesah1.setText("Publish Tarif Pengesah BPJS");
+        bt_pengesah1.setEnabled(false);
+        bt_pengesah1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_pengesah1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(bt_pengesah1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 430, -1));
+
+        bt_verif1.setText("Publish Tarif Verifikasi BPJS");
+        bt_verif1.setEnabled(false);
+        bt_verif1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_verif1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(bt_verif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 430, -1));
 
         jTabbedPane1.addTab("Verifikasi dan Pengesahan", jPanel4);
 
@@ -2377,7 +2398,7 @@ public class frm_tarif extends javax.swing.JFrame {
                              
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"","","");
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"","","","");
                            
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
@@ -2385,12 +2406,8 @@ public class frm_tarif extends javax.swing.JFrame {
                              
                              refreshtbtarif();
                              
-                             Utilitas.HapusText(panel_inputan);
-        Utilitas.HapusText(jPanel5);
-        
-        lbl_kode_status.setText("");
-        lbl_kode_poli.setText("");
-        lbl_cepe.setText("");
+                             //cls
+                             cls(); 
                              
                          } catch (Exception ex) {
                              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -2475,7 +2492,17 @@ public class frm_tarif extends javax.swing.JFrame {
   
   
   }  
-    
+  
+
+  private void cls(){
+  Utilitas.HapusText(panel_inputan);
+        Utilitas.HapusText(jPanel5);
+        
+        lbl_kode_status.setText("");
+        lbl_kode_poli.setText("");
+        lbl_cepe.setText("");
+        cmb_kelas.setSelectedIndex(0);
+  }  
   private void savebpjs(){
   
        DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -2517,7 +2544,7 @@ public class frm_tarif extends javax.swing.JFrame {
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText()), 
-                                     Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add");
+                                     Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",txt_kode_tarif.getText()+"-BPJS");
                            
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
@@ -2525,13 +2552,9 @@ public class frm_tarif extends javax.swing.JFrame {
                              
                              refreshtbtarif();
                              
-                             Utilitas.HapusText(panel_inputan);
-        Utilitas.HapusText(jPanel5);
-        
-        lbl_kode_status.setText("");
-        lbl_kode_poli.setText("");
-        lbl_cepe.setText("");
-                             
+                             //cls
+                             cls();   
+                                
                          } catch (Exception ex) {
                               listModel.addElement("Gagal Simpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
@@ -2689,12 +2712,14 @@ public class frm_tarif extends javax.swing.JFrame {
     private void bt_pengesahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pengesahActionPerformed
         
         try {
-                // TODO add your handling code here:
-                    
-                 saveImage();
-                 } catch (IOException ex) {
-                    Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-                 }
+        
+         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+          saveImage();
+        this.setCursor(Cursor.getDefaultCursor());
+        
+        } catch (IOException ex) {
+           Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+       }
         
     }//GEN-LAST:event_bt_pengesahActionPerformed
 
@@ -2850,7 +2875,7 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_kode_status.setText("");
         lbl_kode_poli.setText("");
         lbl_cepe.setText("");
-        
+        cmb_kelas.setSelectedIndex(0);
     }//GEN-LAST:event_bt_addActionPerformed
 
     private void updatebpjs(){
@@ -3270,7 +3295,11 @@ public class frm_tarif extends javax.swing.JFrame {
     private void bt_verifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verifActionPerformed
       try {
           // TODO add your handling code here:
+          
+          
+          this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
           this.saveImagev();
+          this.setCursor(Cursor.getDefaultCursor());
       } catch (IOException ex) {
           Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -3283,7 +3312,9 @@ public class frm_tarif extends javax.swing.JFrame {
            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
    
        if(dialogResult == JOptionPane.YES_OPTION){   
-        
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+           
          this.refreshtbtarif();
         
           DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -3293,10 +3324,19 @@ public class frm_tarif extends javax.swing.JFrame {
             String sv=tb_tarif.getModel().getValueAt(i, 12).toString();
             
             if(!(sv.equals("ok")||sp.equals("pending"))){
+             
+              if(sv.equals("add")||sp.equals("add")){    
               datl.updateTarifStatus(this.tb_tarif.getModel().getValueAt(i, 0).toString(), "edit", "edit");
               listModel.addElement("Proses Untuk Verif:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
                              
               lst_save_tarif.setModel(listModel);
+              }
+              else
+              {
+              listModel.addElement("Tidak Bisa di Proses Verif:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                             
+               lst_save_tarif.setModel(listModel);
+              }
               
             }
             else{
@@ -3308,7 +3348,7 @@ public class frm_tarif extends javax.swing.JFrame {
            }
         
         this.refreshtbtarif();
-        
+         this.setCursor(Cursor.getDefaultCursor());
        }  
         
     }//GEN-LAST:event_bt_prosesActionPerformed
@@ -3446,7 +3486,7 @@ public class frm_tarif extends javax.swing.JFrame {
     private void txt_sarana1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_sarana1KeyPressed
         // TODO add your handling code here:
           if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.bt_save.requestFocus();
+            this.bt_edit_bpjs.requestFocus();
         }
     }//GEN-LAST:event_txt_sarana1KeyPressed
 
@@ -3480,14 +3520,14 @@ public class frm_tarif extends javax.swing.JFrame {
          if(ck_pilih_semua1.isSelected()) {//checkbox has been selected
            
             
-           for(int i=0;i<this.tb_log_publish1.getModel().getRowCount();i++){ 
-            this.tb_log_publish1.getModel().setValueAt(true,i,10);
+           for(int i=0;i<this.tb_log_publishBPJS.getModel().getRowCount();i++){ 
+            this.tb_log_publishBPJS.getModel().setValueAt(true,i,10);
            }
             
             
         } else {
-           for(int i=0;i<this.tb_log_publish1.getModel().getRowCount();i++){ 
-            this.tb_log_publish1.getModel().setValueAt(false,i,10);
+           for(int i=0;i<this.tb_log_publishBPJS.getModel().getRowCount();i++){ 
+            this.tb_log_publishBPJS.getModel().setValueAt(false,i,10);
            }
 
         }
@@ -3498,20 +3538,20 @@ public class frm_tarif extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ck_pilih_semua1KeyPressed
 
-    private void tb_log_publish1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_log_publish1MouseClicked
+    private void tb_log_publishBPJSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_log_publishBPJSMouseClicked
         // TODO add your handling code here:
-        int row = this.tb_log_publish1.getSelectedRow();
+        int row = this.tb_log_publishBPJS.getSelectedRow();
 
         if (row == -1) {
             // No row selected
         } else {  
-          lbl_nm_tindakan1.setText("Nama Tindakan : "+tb_log_publish1.getModel().getValueAt(row, 1).toString());
-          lbl_tarif1.setText("Tarif BPJS"+ Utilitas.formatuang(Double.valueOf(tb_log_publish1.getModel().getValueAt(row, 2).toString())));
-          lbl_jasa1.setText("RS BPJS:"+tb_log_publish1.getModel().getValueAt(row, 3).toString()
-                  +"      Dr BPJS:"+tb_log_publish1.getModel().getValueAt(row, 4).toString()+"      Sarana :"+tb_log_publish1.getModel().getValueAt(row, 5).toString());
+          lbl_nm_tindakan1.setText("Nama Tindakan : "+tb_log_publishBPJS.getModel().getValueAt(row, 1).toString());
+          lbl_tarif1.setText("Tarif BPJS"+ Utilitas.formatuang(Double.valueOf(tb_log_publishBPJS.getModel().getValueAt(row, 2).toString())));
+          lbl_jasa1.setText("RS BPJS:"+tb_log_publishBPJS.getModel().getValueAt(row, 3).toString()
+                  +"      Dr BPJS:"+tb_log_publishBPJS.getModel().getValueAt(row, 4).toString()+"      Sarana :"+tb_log_publishBPJS.getModel().getValueAt(row, 5).toString());
           
         }
-    }//GEN-LAST:event_tb_log_publish1MouseClicked
+    }//GEN-LAST:event_tb_log_publishBPJSMouseClicked
 
     private void txt_stat_bpjsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_stat_bpjsKeyPressed
         // TODO add your handling code here:
@@ -3557,6 +3597,85 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
         // TODO add your handling code here:
         settarif();
     }//GEN-LAST:event_tb_tarifMouseClicked
+
+    private void bt_proses1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_proses1ActionPerformed
+        // TODO add your handling code here:
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Proses Untuk Verifikasi BPJS Pastikan Data Sudah Benar Data Yg Sudah di Proses Verif tidak bisa di Hapus atau Edit?","Warning ",
+           JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+   
+       if(dialogResult == JOptionPane.YES_OPTION){   
+        
+         this.refreshtbtarif();
+        
+          DefaultListModel<String> listModel = new DefaultListModel<>();
+         
+           this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+          
+        for ( int i = 0; i < tb_tarif.getRowCount(); i++) {
+            String sp=tb_tarif.getModel().getValueAt(i, 20).toString();
+            String sv=tb_tarif.getModel().getValueAt(i, 21).toString();
+            
+            if(!(sv.equals("ok")||sp.equals("pending"))){
+                 // JOptionPane.showMessageDialog(null, "tessss: "+sv+" "+sp+" "+tb_tarif.getModel().getValueAt(i, 19).toString().isEmpty());
+             if(!tb_tarif.getModel().getValueAt(i, 19).toString().isEmpty()){  
+                
+             if(sv.equals("add")||sp.equals("add")){  
+                
+              datl.updateTarifStatusBPJS(this.tb_tarif.getModel().getValueAt(i, 0).toString(), "edit", "edit");
+              listModel.addElement("Proses Verif BPJS:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                             
+              lst_save_tarif.setModel(listModel);
+             }
+             else
+              {
+                 listModel.addElement("Tidak Bisa di Proses Verif:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                             
+               lst_save_tarif.setModel(listModel);
+              }
+              
+             }
+              
+            }
+            else{
+               listModel.addElement("Tidak Bisa di Proses Verif:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                             
+               lst_save_tarif.setModel(listModel);
+            }
+            
+           }
+        
+        this.refreshtbtarif();
+        
+        
+          this.setCursor( Cursor.getDefaultCursor());
+       }  
+
+    }//GEN-LAST:event_bt_proses1ActionPerformed
+
+    private void bt_pengesah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pengesah1ActionPerformed
+        // TODO add your handling code here:
+         try {
+                // TODO add your handling code here:
+              this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));      
+                 saveImageBPJS();
+              this.setCursor(Cursor.getDefaultCursor());
+              
+                 } catch (IOException ex) {
+                    Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+    }//GEN-LAST:event_bt_pengesah1ActionPerformed
+
+    private void bt_verif1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_verif1ActionPerformed
+        // TODO add your handling code here:
+       try {
+          this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+          this.saveImagevBPJS();
+          this.setCursor(Cursor.getDefaultCursor());
+          
+      } catch (IOException ex) {
+          Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }//GEN-LAST:event_bt_verif1ActionPerformed
 
     private void cariManualforlog(){
        
@@ -3878,7 +3997,7 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
     }
   
   
-    public void saveImagev() throws IOException {
+public void saveImagev() throws IOException {
      
         DefaultListModel<String> listModel = new DefaultListModel<>();
         
@@ -3934,11 +4053,15 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
               
                 posv=0;
                
-               this.txt_username.setText("");
+               
+//               this.txt_username.setText("");
                this.txt_pwd.setText("");
-               this.txt_usernamev.setText("");
+//               this.txt_usernamev.setText("");
                this.txt_pwdv.setText("");
+               
                pointsv.clear();
+               biv.flush();
+               
                lbl_ttd_cek.setText("0");
                this.jPanel2.repaint();
                
@@ -3963,6 +4086,190 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
          else{ 
                JOptionPane.showMessageDialog(null, "Ttd Belum mencapai 1000 %");
         }//end ttd
+    }  
+  
+    public void saveImagevBPJS() throws IOException {
+     
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        
+        int i = 0;
+        
+    if(Integer.valueOf(lbl_ttd_cek.getText().toString())>1000){      
+         
+      int w=jPanel2.getWidth(),h=jPanel2.getHeight();
+       
+      biv=new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
+       
+     ig2v=biv.createGraphics();
+     
+    
+     ig2v.setColor(java.awt.Color.RED);
+   
+    System.out.println("point "+pointsv.size());
+    
+    for(int ip=1;ip<posv;ip++){  
+         //System.out.println("oldX"+i);
+         
+          ig2v.drawLine(pointsv.get("oldX"+ip), pointsv.get("oldY"+ip), pointsv.get("currentX"+ip),pointsv.get("currentY"+ip));
+    }
+      
+     
+      
+        try
+        {
+            File f=new File("clipv.jpg");
+            ImageIO.write(biv, "jpg", f);
+            
+            pathFile=f.getAbsolutePath();
+            
+       try {
+            
+        
+              datl=new Crud_local();
+         
+            if(datl.cekvalpilihBPJS.size()>0){  
+              
+              for ( i = 0; i < tb_log_publishBPJS.getRowCount(); i++) {
+		    Boolean chked = Boolean.valueOf(tb_log_publishBPJS.getValueAt(i, 10)
+							.toString());
+		   
+		    if (chked) {
+                        
+		       datl.Save_log_tarifBPJS("",txt_usernamev.getText(), this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString(), "pending", "ok", pathFile);
+                       datl.updateTarifStatusBPJS(this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString(), "pending", "ok");
+		       listModel.addElement("Tersimpan BPJS:"+this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                    }
+		}
+              
+               lst_save_publish.setModel(listModel);
+              
+                posv=0;
+               
+//              this.txt_username.setText("");
+               this.txt_pwd.setText("");
+//               this.txt_usernamev.setText("");
+               this.txt_pwdv.setText("");
+               
+               pointsv.clear();
+               biv.flush();
+               
+               lbl_ttd_cek.setText("0");
+               this.jPanel2.repaint();
+               
+               refreshTblogBPJS();
+                
+             }
+             else{
+                JOptionPane.showMessageDialog(null, "Tarif Belum ada yang di ceklist");
+             }
+          
+          
+          } catch (Exception ex) {
+              //JOptionPane.showMessageDialog(null, "Gagal Simpan");
+               listModel.addElement("Gagal Simpan:"+this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          }        }
+        catch(IOException ioe)
+        {
+            System.out.println("Clipv write help: " + ioe.getMessage());
+        }
+       }//end ttd
+         else{ 
+               JOptionPane.showMessageDialog(null, "Ttd Belum mencapai 1000 %");
+        }//end ttd
+    }
+    
+    public void saveImageBPJS() throws IOException {
+         
+      
+    DefaultListModel<String> listModel = new DefaultListModel<>();
+        
+    int i = 0;
+        
+    if(Integer.valueOf(lbl_ttd_cek1.getText().toString())>1000){      
+         
+      int w=jPanel3.getWidth(),h=jPanel3.getHeight();
+       
+      bi=new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
+       
+     ig2=bi.createGraphics();
+     
+    
+     ig2.setColor(java.awt.Color.RED);
+   
+        
+    for(int ip=1;ip<pos;ip++){  
+         //System.out.println("oldX"+i);
+         
+          ig2.drawLine(points.get("oldX"+ip), points.get("oldY"+ip), points.get("currentX"+ip),points.get("currentY"+ip));
+    }
+      
+    
+      
+        try
+        {
+            File f=new File("clip.jpg");
+            ImageIO.write(bi, "jpg", f);
+            
+            pathFile=f.getAbsolutePath();
+            
+       try {
+            
+        
+              datl=new Crud_local();
+         
+            if(datl.cekvalpilihBPJS.size()>0){  
+              
+              for ( i = 0; i < tb_log_publishBPJS.getRowCount(); i++) {
+		    Boolean chked = Boolean.valueOf(tb_log_publishBPJS.getValueAt(i, 10)
+							.toString());
+		   
+		    if (chked) {
+		       datl.updateTarifStatusLogPengesahBPJS(this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString(), "ok",
+                               txt_username.getText(),pathFile);
+                       datl.updateTarifStatusBPJS(this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString(), "ok", "ok");
+		       listModel.addElement("Tersimpan Pengesah:"+this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                    }
+		}
+              
+               lst_save_publish.setModel(listModel);
+              
+                 pos=0;
+                 
+               this.txt_username.setText("");
+//               this.txt_pwd.setText("");
+               this.txt_usernamev.setText("");
+//               this.txt_pwdv.setText("");
+               points.clear();
+               bi.flush();
+               lbl_ttd_cek1.setText("0");
+               this.jPanel3.repaint();
+               
+               refreshTblogPengesahBPJS();
+                
+             }
+             else{
+                JOptionPane.showMessageDialog(null, "Tarif Belum ada yang di ceklist");
+             }
+          
+          
+          } catch (Exception ex) {
+              //JOptionPane.showMessageDialog(null, "Gagal Simpan");
+               listModel.addElement("Gagal Simpan:"+this.tb_log_publish.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          }        }
+        catch(IOException ioe)
+        {
+            System.out.println("Clip write help: " + ioe.getMessage());
+        }
+       }//end ttd
+         else{ 
+               JOptionPane.showMessageDialog(null, "Ttd Belum mencapai 1000 %");
+        }//end ttd
+
+            
+        
+        
     }
     
     public void saveImage() throws IOException {
@@ -4022,11 +4329,12 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
               
                  pos=0;
                  
-               this.txt_username.setText("");
+//               this.txt_username.setText("");
                this.txt_pwd.setText("");
-               this.txt_usernamev.setText("");
+//             this.txt_usernamev.setText("");
                this.txt_pwdv.setText("");
                points.clear();
+               bi.flush();
                lbl_ttd_cek1.setText("0");
                this.jPanel3.repaint();
                
@@ -4056,7 +4364,32 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
         
         
     }
-      
+    
+    private void setukurantbLogBPJS(){
+        
+     this.tb_log_publishBPJS.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+     tb_log_publishBPJS.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    
+    TableColumnModel tr = tb_log_publishBPJS.getColumnModel(); 
+    
+    tr.getColumn(0).setPreferredWidth(100);
+    tr.getColumn(1).setPreferredWidth(240);
+    tr.getColumn(2).setPreferredWidth(100);
+    tr.getColumn(3).setPreferredWidth(50);
+    tr.getColumn(4).setPreferredWidth(50);
+    tr.getColumn(5).setPreferredWidth(70);
+    tr.getColumn(6).setPreferredWidth(70);
+    tr.getColumn(7).setPreferredWidth(70);
+    tr.getColumn(8).setPreferredWidth(70);
+    tr.getColumn(9).setPreferredWidth(50);
+    tr.getColumn(10).setPreferredWidth(50);
+     
+    
+     
+    }
+    
+    
+    
     private void setukurantbLog(){
         
         this.tb_log_publish.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
@@ -4112,6 +4445,28 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
             
     }
     
+    private void refreshTblogPengesahBPJS(){
+            
+          try {
+              datl=new Crud_local();
+               try {
+              datl.readRec_cariTariflogPengesahBPJS();
+              
+               
+               
+          } catch (SQLException ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              JOptionPane.showMessageDialog(null, "Gagal Login!");
+          }
+          } catch (Exception ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              JOptionPane.showMessageDialog(null, "Gagal Login!");
+          }
+         
+              tb_log_publishBPJS.setModel(datl.modeltariflogBPJS);
+               setukurantbLogBPJS();
+    }
+    
      private void refreshTblogPengesah(){
             
           try {
@@ -4135,6 +4490,28 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
     }
     
     
+      private void refreshTblogBPJS(){
+            
+          try {
+              datl=new Crud_local();
+               try {
+              datl.readRec_cariTariflogBPJS();
+              
+               
+               
+          } catch (SQLException ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              JOptionPane.showMessageDialog(null, "Gagal Login!");
+          }
+          } catch (Exception ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+              JOptionPane.showMessageDialog(null, "Gagal Login!");
+          }
+         
+              tb_log_publishBPJS.setModel(datl.modeltariflogBPJS);
+               setukurantbLogBPJS();
+    }
+     
     private void refreshTblog(){
             
           try {
@@ -4161,37 +4538,57 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
     
       if (Crud_local.usm.equals(txt_usernamev.getText()) && Crud_local.psm.equals(txt_pwdv.getText())) {
                 
+         
           try {
               datl=new Crud_local();
-               try {
               datl.readRec_cariTariflog();
-              
-               
-               
-               if(this.ck_pengesah.isSelected()==true){ 
-                   lbl_nama_pengesah.setText("<"+Crud_local.usm+">");
-                    this.bt_pengesah.setEnabled(true);
-                 }
-               else if(this.ck_verif.isSelected()==true){ 
-                   lbl_verif.setText("<"+Crud_local.usm+">");
-                    this.bt_verif.setEnabled(true);
-                }
-               
-               
-          } catch (SQLException ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-              JOptionPane.showMessageDialog(null, "Gagal Login!");
-          }
+              tb_log_publish.setModel(datl.modeltariflog);
           } catch (Exception ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-              JOptionPane.showMessageDialog(null, "Gagal Login!");
           }
          
-              tb_log_publish.setModel(datl.modeltariflog);
-               setukurantbLog();
-                this.dlg_loginv.setVisible(false);
-               
-                this.ck_pilih_semua.setEnabled(true);
+          try {  
+              datl=new Crud_local();
+              datl.readRec_cariTariflogBPJS();
+              tb_log_publishBPJS.setModel(datl.modeltariflogBPJS);
+          }
+              catch (Exception ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          }
+             
+             
+              if(this.ck_pengesah.isSelected()==true){
+                  lbl_nama_pengesah.setText("<"+Crud_local.usm+">");
+                  
+                  if(tb_log_publish.getModel().getRowCount()!=0)  {
+                      this.bt_pengesah.setEnabled(true);
+                  }
+                  if(tb_log_publishBPJS.getModel().getRowCount()!=0)  {
+                      this.bt_pengesah1.setEnabled(true);
+                  }
+              }
+              else if(this.ck_verif.isSelected()==true){
+                  lbl_verif.setText("<"+Crud_local.usm+">");
+                 
+                  if(tb_log_publish.getModel().getRowCount()!=0)  {
+                      
+                      this.bt_verif.setEnabled(true);
+                  }
+                  if(tb_log_publishBPJS.getModel().getRowCount()!=0)  { 
+                      this.bt_verif1.setEnabled(true);
+                  }
+              }
+              
+              
+              
+              setukurantbLog();
+              setukurantbLogBPJS();
+              
+              this.dlg_loginv.setVisible(false);
+              
+              this.ck_pilih_semua.setEnabled(true);
+              this.ck_pilih_semua1.setEnabled(true);
+          
                 
             }else{
               
@@ -4206,38 +4603,64 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
     
       if (Crud_local.usm.equals(txt_username.getText()) && Crud_local.psm.equals(txt_pwd.getText())) {
                 
-          try {
+
+          try {              
               datl=new Crud_local();
-               try {
               datl.readRec_cariTariflogPengesah();
-              
-               
-               
-               if(this.ck_pengesah.isSelected()==true){ 
-                   lbl_nama_pengesah.setText("<"+Crud_local.usm+">");
-                    this.bt_pengesah.setEnabled(true);
-                 }
-               else if(this.ck_verif.isSelected()==true){ 
-                   lbl_verif.setText("<"+Crud_local.usm+">");
-                    this.bt_verif.setEnabled(true);
-                }
-               
-               
-          } catch (SQLException ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-              JOptionPane.showMessageDialog(null, "Gagal Login!");
-          }
-          } catch (Exception ex) {
-              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
-              JOptionPane.showMessageDialog(null, "Gagal Login!");
-          }
-         
               tb_log_publish.setModel(datl.modeltariflog);
-               setukurantbLog();
-                this.dlg_login.setVisible(false);
-                
-                this.ck_pilih_semua.setEnabled(true);
-                
+         } catch (Exception ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          
+          try {              
+          
+              datl=new Crud_local();
+              datl.readRec_cariTariflogPengesahBPJS();
+              tb_log_publishBPJS.setModel(datl.modeltariflogBPJS);
+              } catch (Exception ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          }
+              if(this.ck_pengesah.isSelected()==true){
+                  lbl_nama_pengesah.setText("<"+Crud_local.usm+">");
+                  
+                  if(tb_log_publish.getModel().getRowCount()!=0)  { 
+                      this.bt_pengesah.setEnabled(true);
+                  }
+                  
+                  if(tb_log_publishBPJS.getModel().getRowCount()!=0)  { 
+                      this.bt_pengesah1.setEnabled(true);
+                  }
+                  
+              }
+              else if(this.ck_verif.isSelected()==true){
+                  lbl_verif.setText("<"+Crud_local.usm+">");
+                   
+                  
+                  if(tb_log_publish.getModel().getRowCount()!=0)  {
+                      this.bt_verif.setEnabled(true);
+                  }
+                  
+                  if(tb_log_publishBPJS.getModel().getRowCount()!=0)  {
+                      this.bt_verif1.setEnabled(true);
+                  }
+                  
+                  
+                  
+                  
+                  
+              }     
+              
+              
+              
+              
+              
+              setukurantbLog();
+              setukurantbLogBPJS();
+              this.dlg_login.setVisible(false);
+              
+              this.ck_pilih_semua.setEnabled(true);
+              this.ck_pilih_semua1.setEnabled(true);
+          
             }else{
               
                 JOptionPane.showMessageDialog(null, "Login salah!");
@@ -4296,9 +4719,12 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
     private javax.swing.JButton bt_hapus_ttd;
     private javax.swing.JButton bt_hapus_ttd1;
     private javax.swing.JButton bt_pengesah;
+    private javax.swing.JButton bt_pengesah1;
     private javax.swing.JButton bt_proses;
+    private javax.swing.JButton bt_proses1;
     private javax.swing.JButton bt_save;
     private javax.swing.JButton bt_verif;
+    private javax.swing.JButton bt_verif1;
     private javax.swing.JCheckBox ck_bpjs;
     private javax.swing.JCheckBox ck_pengesah;
     private javax.swing.JCheckBox ck_pilih_semua;
@@ -4328,7 +4754,6 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -4383,7 +4808,7 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
     private javax.swing.JList<String> lst_save_tarif;
     private javax.swing.JPanel panel_inputan;
     private javax.swing.JTable tb_log_publish;
-    private javax.swing.JTable tb_log_publish1;
+    private javax.swing.JTable tb_log_publishBPJS;
     private javax.swing.JTable tb_poli;
     private javax.swing.JTable tb_status;
     private javax.swing.JTable tb_tarif;
