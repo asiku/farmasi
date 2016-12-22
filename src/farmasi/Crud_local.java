@@ -250,6 +250,33 @@ public class Crud_local extends DBKoneksi_local {
       ConDb();
     }
     
+    
+    public void Save_unitAnak(String nmtmp,String nip ,String ptug, String stat)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_template_tindakan.TB_NAME + " (" 
+                    + helper_template_tindakan.KEY_NAMA_TEMPLATE + "," 
+                    + helper_template_tindakan.KEY_NIP_PETUGAS + ","
+                    + helper_template_tindakan.KEY_PETUGAS  + ","
+                    + helper_template_tindakan.KEY_STATUS + ") "
+                    + " values (?,?,?,?)");
+         
+            preparedStatement.setString(1, nmtmp);
+            preparedStatement.setString(2, nip);
+            preparedStatement.setString(3, ptug);
+            preparedStatement.setString(4, stat);
+           
+            preparedStatement.execute();
+          //  JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 
     public void Save_mastertemplatedetail(String nmtmp, String trf, String nmtf)  {
 
@@ -304,7 +331,8 @@ public class Crud_local extends DBKoneksi_local {
 
     public void readRec_cariMasterTemplateDetail(String nm) throws SQLException {
   
-       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_template_tindakan_detail.TB_NAME+ " WHERE " 
+       preparedStatement = connect.prepareStatement("SELECT * FROM " 
+               + helper_template_tindakan_detail.TB_NAME+ " WHERE " 
       + helper_template_tindakan_detail.KEY_NAMA_TEMPLATE + " =? ");
       
         preparedStatement.setString(1, nm);

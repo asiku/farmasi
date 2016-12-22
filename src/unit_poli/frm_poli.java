@@ -43,6 +43,8 @@ import tools.Utilitas;
  */
 public class frm_poli extends javax.swing.JFrame {
 
+    private int irowtindakandetail=0;
+    
     private ScheduledExecutorService executor;
 
     private Crud_farmasi dat;
@@ -160,10 +162,37 @@ public class frm_poli extends javax.swing.JFrame {
         
 
         //settbpilih();
+        
+        
+        txt_no_rawat.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+//             filterNorawat();
+               
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+//                filterNorawat();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+//                 filterNorawat();
+            }
+        });
+
+        
+        
     }
 
+    private void filterNorawat() {
+        Utilitas.filtertb(txt_no_rawat.getText(), tb_unit_detail, 0, 2);
+
+    }
+    
     private void filterceklistTemplatepilih() {
-        Utilitas.filtertb(txt_cari_tindakan_pilih.getText(), tb_tindakan_pilih, 1, 2);
+        Utilitas.filtertb(txt_cari_tindakan_pilih.getText(), tb_tindakan_pilih, 1, 1);
 
     }
 
@@ -197,7 +226,7 @@ public class frm_poli extends javax.swing.JFrame {
 
                 String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
 
-                dat.readRec_kamarinap(b, this.txt_cari_reg.getText(), t);
+                dat.readRec_kamarinap(b, this.txt_cari_reg.getText(), t,this.lbl_tgl_server.getText());
 
                 this.tb_reg.setModel(dat.modelkamarinap);
 
@@ -316,6 +345,8 @@ public class frm_poli extends javax.swing.JFrame {
         tb_cari_petugas = new javax.swing.JTable();
         txt_cari_petugas = new javax.swing.JTextField();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        Popup_hapus = new javax.swing.JPopupMenu();
+        mnu_item_hapus_tindakan = new javax.swing.JMenuItem();
         ToolBar = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         lbl_jam = new javax.swing.JLabel();
@@ -368,8 +399,6 @@ public class frm_poli extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         lbl_nm_status = new javax.swing.JLabel();
         lbl_status = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tb_unit_detail = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         bt_save = new javax.swing.JButton();
         bt_add = new javax.swing.JButton();
@@ -385,6 +414,14 @@ public class frm_poli extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         r_pulang = new javax.swing.JRadioButton();
         r_perawatan = new javax.swing.JRadioButton();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tb_unit_detail = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jDateTimePicker1 = new uz.ncipro.calendar.JDateTimePicker();
+        jDateTimePicker2 = new uz.ncipro.calendar.JDateTimePicker();
 
         dlg_dpjp.setModal(true);
         dlg_dpjp.setResizable(false);
@@ -439,6 +476,15 @@ public class frm_poli extends javax.swing.JFrame {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
+
+        mnu_item_hapus_tindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/hps_ico.png"))); // NOI18N
+        mnu_item_hapus_tindakan.setText("Hapus");
+        mnu_item_hapus_tindakan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_item_hapus_tindakanActionPerformed(evt);
+            }
+        });
+        Popup_hapus.add(mnu_item_hapus_tindakan);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -543,7 +589,7 @@ public class frm_poli extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tb_reg);
 
-        jPanel12.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, 420, 520));
+        jPanel12.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, 420, 540));
 
         txt_cari_reg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -729,20 +775,6 @@ public class frm_poli extends javax.swing.JFrame {
         lbl_status.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 60, 19));
 
-        tb_unit_detail.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        tb_unit_detail.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tb_unit_detail);
-
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -802,11 +834,74 @@ public class frm_poli extends javax.swing.JFrame {
 
         buttonGroup2.add(r_pulang);
         r_pulang.setText("Pulang");
-        jPanel7.add(r_pulang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        jPanel7.add(r_pulang, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
 
         buttonGroup2.add(r_perawatan);
         r_perawatan.setText("Perawatan");
-        jPanel7.add(r_perawatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
+        jPanel7.add(r_perawatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        tb_unit_detail.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_unit_detail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tb_unit_detail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_unit_detailMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_unit_detailMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tb_unit_detail);
+
+        jTabbedPane3.addTab("Input Data Tindakan", jScrollPane2);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jDateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(jDateTimePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jDateTimePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateTimePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane3.addTab("History Tindakan Pasien", jPanel6);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -815,13 +910,13 @@ public class frm_poli extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPane3))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -834,9 +929,9 @@ public class frm_poli extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Input Tindakan", jPanel1);
@@ -1029,9 +1124,6 @@ private void setPJTemplate(int i, int row) {
         }
     }
 
-
-   
-
     
 
     private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
@@ -1186,11 +1278,18 @@ private void setPJTemplate(int i, int row) {
                 // No row selected
             } else {
 
+                
                 setMasukdatInput(row);
                 
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
                 settbpilih();
+                
+                if(tb_unit_detail.getModel().getRowCount()!=0){
+                   
+                   this.filterNorawat();
+                }
+               
             }
 
         }
@@ -1220,7 +1319,8 @@ private void setPJTemplate(int i, int row) {
             if (row == -1) {
                 // No row selected
             } else {
-
+               
+               
                 
                 setMasukdatInput(row);
                 
@@ -1228,10 +1328,70 @@ private void setPJTemplate(int i, int row) {
                 this.txt_cari_reg.requestFocus();
 
                 settbpilih();
-
+               
+                if(tb_unit_detail.getModel().getRowCount()!=0){
+                   
+                   this.filterNorawat();
+                }
             }
         }
     }//GEN-LAST:event_tb_regMouseReleased
+
+    private void tb_unit_detailMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unit_detailMouseReleased
+        // TODO add your handling code here:
+        
+          if (evt.isPopupTrigger()) {
+           
+            int row = tb_unit_detail.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_hapus.show(tb_unit_detail, evt.getX(), evt.getY());
+//                idhapusmaster = (jTable1.getModel().getValueAt(row, 0).toString());
+                  irowtindakandetail = row;
+            }
+
+        }
+          
+          
+    }//GEN-LAST:event_tb_unit_detailMouseReleased
+
+    private void tb_unit_detailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unit_detailMousePressed
+        // TODO add your handling code here:
+         if (evt.isPopupTrigger()) {
+
+              
+            int row = tb_unit_detail.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_hapus.show(tb_unit_detail, evt.getX(), evt.getY());
+               irowtindakandetail = row;
+                
+            }
+
+        }
+          
+          
+    }//GEN-LAST:event_tb_unit_detailMousePressed
+
+    private void HapusRowTindakan(int i){
+      DefaultTableModel dm = (DefaultTableModel) tb_unit_detail.getModel();
+        int rowCount = dm.getRowCount();
+        if (rowCount != 0) {
+            
+                dm.removeRow(i);
+            
+        }
+    }
+    
+    private void mnu_item_hapus_tindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_item_hapus_tindakanActionPerformed
+        // TODO add your handling code here:
+       HapusRowTindakan(irowtindakandetail);
+        
+    }//GEN-LAST:event_mnu_item_hapus_tindakanActionPerformed
 
     private void filterPegawai() {
 
@@ -1289,6 +1449,7 @@ private void setPJTemplate(int i, int row) {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu Popup_hapus;
     private javax.swing.JToolBar ToolBar;
     private javax.swing.JButton bt_add;
     private javax.swing.JButton bt_add_tindakan;
@@ -1302,6 +1463,8 @@ private void setPJTemplate(int i, int row) {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JDialog dlg_dpjp;
+    private uz.ncipro.calendar.JDateTimePicker jDateTimePicker1;
+    private uz.ncipro.calendar.JDateTimePicker jDateTimePicker2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1320,6 +1483,7 @@ private void setPJTemplate(int i, int row) {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JRadioButton jRadioButton1;
@@ -1327,12 +1491,15 @@ private void setPJTemplate(int i, int row) {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_cari;
     private javax.swing.JLabel lbl_jam;
     private javax.swing.JLabel lbl_jamnow;
@@ -1347,6 +1514,7 @@ private void setPJTemplate(int i, int row) {
     private javax.swing.JLabel lbl_status;
     private javax.swing.JLabel lbl_tgl_masuk;
     private javax.swing.JLabel lbl_tgl_server;
+    private javax.swing.JMenuItem mnu_item_hapus_tindakan;
     private javax.swing.JRadioButton r_perawatan;
     private javax.swing.JRadioButton r_pulang;
     private javax.swing.JTable tb_cari_petugas;

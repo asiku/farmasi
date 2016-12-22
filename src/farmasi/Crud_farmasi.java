@@ -9,12 +9,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tools.Utilitas;
 
 /**
  *
@@ -78,7 +80,7 @@ public class Crud_farmasi extends DBkoneksi {
     };
 
     
-    public void readRec_kamarinap(String[] bangsal,String txtcari,String tgl) {
+    public void readRec_kamarinap(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
         try {
             preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
@@ -104,8 +106,13 @@ public class Crud_farmasi extends DBkoneksi {
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[3])||
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[4])||
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[5]))
-                  && resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).substring(5, resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).length() - 3).equals(tgl))
+                 )
               {
+                  // && resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).substring(5, resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).length() - 3).equals(tgl)
+                  
+                 try {
+                     
+               if(Utilitas.Hitungtgl(tglserver,Utilitas.Jam(),resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK), Utilitas.Jam())<=744){  
                 String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
                 String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
                 String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
@@ -115,6 +122,12 @@ public class Crud_farmasi extends DBkoneksi {
                 String kdpj= resultSet.getString(helper_kamar_inap.KEY_KODE_STATUS_BAYAR);
                 String pj= resultSet.getString(helper_kamar_inap.KEY_STATUS_BAYAR);
                 modelkamarinap.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal,kelas,kdpj,pj});
+               }
+                 } catch (ParseException ex) {
+                     Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                
+               
               }
             }
 

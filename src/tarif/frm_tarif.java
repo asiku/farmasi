@@ -119,8 +119,8 @@ public class frm_tarif extends javax.swing.JFrame {
     public frm_tarif() {
         initComponents();
         
-//      txt_stat.setVisible(false);
-//      txt_stat_bpjs.setVisible(false);
+      txt_stat.setVisible(false);
+      txt_stat_bpjs.setVisible(false);
         
        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
       

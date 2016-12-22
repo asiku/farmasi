@@ -18,5 +18,7 @@ public class helper_unit {
     public static String KEY_TGLMASUK = "tgl_masuk";
     public static String KEY_KAMARINAP = "kamar_inap";
     public static String KEY_STATUSINAP = "status_inap";
-    public static String KEY_UNIT = "status_inap";
+    
+    public static String KEY_KELAS = "kelas";
+    
 }

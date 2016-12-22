@@ -248,7 +248,7 @@ public class frm_poli_bak extends javax.swing.JFrame {
 
                 String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
 
-                dat.readRec_kamarinap(b, this.txt_cari_reg.getText(), t);
+                dat.readRec_kamarinap(b, this.txt_cari_reg.getText(), t,this.lbl_tgl_server.getText());
 
                 this.tb_reg.setModel(dat.modelkamarinap);
 
