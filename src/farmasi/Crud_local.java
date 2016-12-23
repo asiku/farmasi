@@ -65,6 +65,16 @@ public class Crud_local extends DBKoneksi_local {
          "% Sarana","Nama Poli","Status","Pengesah","Verif","pilih"};
       
       
+      String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Username"};
+
+    public DefaultTableModel modelunitdetail = new DefaultTableModel(unit_detail, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+
+      
      final Class[] columnClass = new Class[] {
     String.class, String.class, Double.class, Double.class, Double.class, Double.class, String.class
              , String.class, String.class, String.class, Boolean.class
@@ -302,6 +312,65 @@ public class Crud_local extends DBKoneksi_local {
 
     }
 
+     public void Save_inapanakDetail(String norawat,String kodetarif,String nip
+           ,String username)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_unit_detail.TB_NAME + " (" 
+                    + helper_unit_detail.KEY_NO_RAWAT + "," 
+                    + helper_unit_detail.KEY_KODE_TARIF + ","
+                    + helper_unit_detail.KEY_NIP_PETUGAS  + ","
+                    + helper_unit_detail.KEY_USERNAME + ") "
+                    + " values (?,?,?,?)");
+         
+            preparedStatement.setString(1, norawat);
+            preparedStatement.setString(2, kodetarif);
+            preparedStatement.setString(3, nip);
+            preparedStatement.setString(4, username);
+          
+            
+            preparedStatement.execute();
+          //  JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    
+    public void Save_inapanakmaster(String norawat,String nipdpjp ,String nipppjp
+            , boolean statusinap,String perkembangan)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_unit.TB_NAME + " (" 
+                    + helper_unit.KEY_NO_RAWAT + "," 
+                    + helper_unit.KEY_NIP_DPJP + ","
+                    + helper_unit.KEY_NIP_PPJP  + ","
+                    + helper_unit.KEY_STATUSINAP  + ","
+                    + helper_unit.KEY_PERKEMBANGAN + ") "
+                    + " values (?,?,?,?,?)");
+         
+            preparedStatement.setString(1, norawat);
+            preparedStatement.setString(2, nipdpjp);
+            preparedStatement.setString(3, nipppjp);
+            preparedStatement.setBoolean(4, statusinap);
+            preparedStatement.setString(5, perkembangan);
+            
+           
+            preparedStatement.execute();
+          JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     
     public void Save_mastertemplate(String nmtmp,String nip ,String ptug, String stat)  {
 
@@ -352,6 +421,43 @@ public class Crud_local extends DBKoneksi_local {
         
         
     }
+    
+    public void readRec_cariUnitDetailInapanak(String nm,int i) throws SQLException {
+  
+    if(i==1){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE " 
+      + helper_unit_detail.KEY_NAMA_TINDAKAN + " like ? ");
+
+      preparedStatement.setString(1, "%" + nm + "%");
+    }
+    else if(i==2){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE " 
+      + helper_unit_detail.KEY_NO_RAWAT + " =? ");
+
+      preparedStatement.setString(1,  nm );
+    }
+    else{
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME);
+    }
+        
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String norawat = resultSet.getString(helper_unit_detail.KEY_NO_RAWAT);
+            String kdtarif = resultSet.getString(helper_unit_detail.KEY_KODE_TARIF);
+            String namatindakan = resultSet.getString(helper_unit_detail.KEY_NAMA_TINDAKAN);
+            String nama = resultSet.getString(helper_unit_detail.KEY_NAMA);
+            String tgl = resultSet.getString(helper_unit_detail.KEY_TGL);
+            String username = resultSet.getString(helper_unit_detail.KEY_USERNAME);
+            modelunitdetail.addRow(new Object[]{norawat,kdtarif,namatindakan,nama,tgl,username});
+            
+        }
+        
+        
+    }
+    
     
     public void readRec_cariMasterTemplate(String nm,int i) throws SQLException {
   

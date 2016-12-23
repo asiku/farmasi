@@ -10,13 +10,15 @@ package farmasi;
  * @author jengcool
  */
 public class helper_unit_detail {
-    public static String TB_NAME = "tb_unit";
-//    public static String KEY_NO_NOTA = "no_rawat";
-//    public static String KEY_NO_RM = "no_rm";
-//    public static String KEY_NIP_DPJP = "nip_dpjp";
-//    public static String KEY_NIP_PPJP = "nip_ppjp";
-//    public static String KEY_TGLMASUK = "tgl_masuk";
-//    public static String KEY_KAMARINAP = "kamar_inap";
-//    public static String KEY_STATUSINAP = "status_inap";
+    public static String TB_NAME = "tb_detail_unit";
+    public static String TB_VNAME = "v_unit_anak_detail";
+    public static String KEY_NO_RAWAT = "no_rawat";
+    public static String KEY_KODE_TARIF = "kode_tarif";
+    public static String KEY_NAMA_TINDAKAN = "nama_tindakan";
+    public static String KEY_NAMA = "nama";
+    public static String KEY_NIP_PETUGAS = "nip_petugas";
+    public static String KEY_USERNAME = "username";
+    public static String KEY_TGL = "tgl";
+
    
 }
