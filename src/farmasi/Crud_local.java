@@ -311,7 +311,44 @@ public class Crud_local extends DBKoneksi_local {
         }
 
     }
+    
+   
 
+     public void  Update_inapanakmaster(String norawat,String nipdpjp ,String nipppjp
+            , boolean statusinap,String perkembangan) {
+    
+         
+         
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_unit.TB_NAME + " set " 
+                    + helper_unit.KEY_NIP_DPJP+"=?," 
+                    + helper_unit.KEY_NIP_PPJP+"=?,"
+                    + helper_unit.KEY_STATUSINAP  + "=?,"
+                    + helper_unit.KEY_PERKEMBANGAN  + "=?"
+                    +" where "+ helper_unit.KEY_NO_RAWAT + "=?");
+            
+           
+           preparedStatement.setString(5, norawat);
+            preparedStatement.setString(1, nipdpjp);
+            preparedStatement.setString(2, nipppjp);
+            preparedStatement.setBoolean(3, statusinap);
+            preparedStatement.setString(4, perkembangan);
+             
+            preparedStatement.executeUpdate();
+             //JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+//            JOptionPane.showMessageDialog(null, "Gagal Update");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+  
      public void Save_inapanakDetail(String norawat,String kodetarif,String nip
            ,String username)  {
 
@@ -936,7 +973,26 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
-      
+     xpublic void readRec_cariUnitMasterx() throws SQLException {
+
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV);
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+            String nip = resultSet.getString(helper_petugas_poli.KEY_NIP);
+            String nama= resultSet.getString(helper_petugas_poli.KEY_NAMA);
+            String idpoli = resultSet.getString(helper_petugas_poli.KEY_ID_POLI);
+            String nmpoli = resultSet.getString(helper_petugas_poli.KEY_POLI);
+            String username = resultSet.getString(helper_petugas_poli.KEY_USERNAME);
+          
+            modelpetugas.addRow(new Object[]{nip, nama,idpoli,nmpoli,username});
+            
+            
+        }
+    } 
+        
      public void readRec_cariPetugas() throws SQLException {
 
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV);

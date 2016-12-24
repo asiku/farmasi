@@ -859,10 +859,7 @@ public class frm_poli extends javax.swing.JFrame {
 
         tb_unit_detail_history.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -1136,12 +1133,23 @@ public class frm_poli extends javax.swing.JFrame {
 
             try {
                 datl = new Crud_local();
-                
-                datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
+           
+                if(tb_unit_detail_history.getModel().getRowCount()==0){
+                   datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
+                }
+                else{
+                 
+                   
+                   datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
+                   
+                }
             } catch (Exception ex) {
                 Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+              
+
+            //cek apa sudah di billing
+              
             try {
                 datl = new Crud_local();
                 for (int i = rowCount - 1; i >= 0; i--) {
