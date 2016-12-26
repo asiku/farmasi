@@ -35,6 +35,9 @@ import tarif.frm_tarif;
  */
 public class Crud_local extends DBKoneksi_local {
     
+    public static String tgl1="";
+    public static String tgl2="";
+    
     public static HashMap<Integer,Integer> cekvalpilih=new HashMap<Integer,Integer>();
     
     public static HashMap<Integer,Integer> cekvalpilihBPJS=new HashMap<Integer,Integer>();
@@ -48,6 +51,8 @@ public class Crud_local extends DBKoneksi_local {
      public static String namapetugaslogin = "";
      public static String namapoli = "";
     
+     public static String nipdpjp="";
+     public static String nippjp="";
  
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -68,6 +73,15 @@ public class Crud_local extends DBKoneksi_local {
       String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Username"};
 
     public DefaultTableModel modelunitdetail = new DefaultTableModel(unit_detail, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+    
+      String[] unit_anakmaster = new String[]{"No Rawat", "No. RM", "Nama", "Kode Bayar", "Cara Bayar", "Tgl Masuk","Kamar","Kelas","Status Inap","Perkembangan"};
+
+    public DefaultTableModel modelunitanakmaster = new DefaultTableModel(unit_anakmaster, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
 
@@ -472,6 +486,40 @@ public class Crud_local extends DBKoneksi_local {
       + helper_unit_detail.KEY_NO_RAWAT + " =? ");
 
       preparedStatement.setString(1,  nm );
+    }
+    else if(i==4){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE DATE(" 
+      + helper_unit_detail.KEY_TGL + ") BETWEEN ? AND ? AND "
+      + helper_unit_detail.KEY_NO_RAWAT+"=?");
+
+      preparedStatement.setString(1,  tgl1 );
+      preparedStatement.setString(2,  tgl2 );
+      preparedStatement.setString(3,  nm );
+    }
+    else if(i==3){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE " 
+      + helper_unit_detail.KEY_NAMA + " like ? or "
+      + helper_unit_detail.KEY_USERNAME + " like ? or "
+      + helper_unit_detail.KEY_NAMA_TINDAKAN + " like ? ");
+
+      preparedStatement.setString(1,  "%" + nm + "%");
+      preparedStatement.setString(2,  "%" + nm + "%");
+      preparedStatement.setString(3,  "%" + nm + "%");
+      
+       ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String norawat = resultSet.getString(helper_unit_detail.KEY_NO_RAWAT);
+            String kdtarif = resultSet.getString(helper_unit_detail.KEY_KODE_TARIF);
+            String namatindakan = resultSet.getString(helper_unit_detail.KEY_NAMA_TINDAKAN);
+            String nama = resultSet.getString(helper_unit_detail.KEY_NAMA);
+            String tgl = resultSet.getString(helper_unit_detail.KEY_TGL);
+            String username = resultSet.getString(helper_unit_detail.KEY_USERNAME);
+            modelunitdetail.addRow(new Object[]{norawat,kdtarif,namatindakan,nama,tgl,username});
+            
+        }
+        
     }
     else{
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME);
@@ -972,31 +1020,82 @@ public class Crud_local extends DBKoneksi_local {
                
         }
     }
-    
-     xpublic void readRec_cariUnitMasterx() throws SQLException {
+     
+     //edit 26   
+     public void readRec_cariUnitMaster(String txtcari,int i) throws SQLException {
 
-       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV);
+      if(i==1){   
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit.TB_NAME);
+      }
+      else  if(i==3){
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit.TB_NAME+ " WHERE "
+                                             + helper_unit.KEY_NO_RAWAT + " =?");
+
+          preparedStatement.setString(1, txtcari);
+          ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            nipdpjp=resultSet.getString(helper_unit.KEY_NIP_DPJP);
+            nippjp=resultSet.getString(helper_unit.KEY_NIP_PPJP);
+        }
+          
+      }
+      else  if(i==2){
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit.TB_VNAME+ " WHERE "
+                                             + helper_unit.KEY_NO_RAWAT + " =?");
+
+          preparedStatement.setString(1, txtcari);
+           ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+            String norawat = resultSet.getString(helper_unit.KEY_NO_RAWAT);
+            String norm= resultSet.getString(helper_unit.KEY_NO_RM);
+            String nama = resultSet.getString(helper_unit.KEY_NAMA);
+            String kdpj = resultSet.getString(helper_unit.KEY_KODE_PJ);
+            String nmpj = resultSet.getString(helper_unit.KEY_NAMA_PJ);
+            String tglmasuk=resultSet.getString(helper_unit.KEY_TGLMASUK);
+            String kamar=resultSet.getString(helper_unit.KEY_KAMAR_INAP);
+            String kelas=resultSet.getString(helper_unit.KEY_KELAS);
+            boolean statusinap = resultSet.getBoolean(helper_unit.KEY_STATUSINAP);
+            String perkembangan = resultSet.getString(helper_unit.KEY_PERKEMBANGAN);
+          
+          modelunitanakmaster.addRow(new Object[]{norawat, norm,nama,kdpj,nmpj,tglmasuk,kamar,kelas,statusinap,perkembangan});
+            
+       
+      }
+      
+            
+        }
+    } 
+     
+     public int readRec_Hitkasir(String norw) throws SQLException {
+
+       int hit=0;  
+       preparedStatement = connect.prepareStatement("SELECT count(*) as hit FROM " + helper_kasir.TB_NAME +" WHERE "
+       +helper_kasir.KEY_NO_RAWAT+"=?");
     
+        preparedStatement.setString(1, norw);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
   
-            String nip = resultSet.getString(helper_petugas_poli.KEY_NIP);
-            String nama= resultSet.getString(helper_petugas_poli.KEY_NAMA);
-            String idpoli = resultSet.getString(helper_petugas_poli.KEY_ID_POLI);
-            String nmpoli = resultSet.getString(helper_petugas_poli.KEY_POLI);
-            String username = resultSet.getString(helper_petugas_poli.KEY_USERNAME);
-          
-            modelpetugas.addRow(new Object[]{nip, nama,idpoli,nmpoli,username});
-            
+//            String norawat = resultSet.getString(helper_kasir.KEY_NO_RAWAT);
+//            String tgl= resultSet.getString(helper_kasir.KEY_TGL);
+//            String username = resultSet.getString(helper_kasir.KEY_USERNAME);
+//            String stat = resultSet.getString(helper_kasir.KEY_SET_STATUS);
+            hit=resultSet.getInt("hit");
             
         }
-    } 
         
+        return hit;
+    }
+     
      public void readRec_cariPetugas() throws SQLException {
 
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV);
     
+       
         ResultSet resultSet = preparedStatement.executeQuery();
 
         while (resultSet.next()) {
@@ -1763,24 +1862,42 @@ public class Crud_local extends DBKoneksi_local {
 
         }
     }
-        
-     public void DelRec(String kode) throws SQLException  {
+     
+    
+    public void DelRecHistory(String kode,String tgl) throws SQLException  {
   
         
         try {
-            preparedStatement = connect.prepareStatement("delete from " + helper_tarif.TB_NAME + " where " + helper_tarif.KEY_KODE_TARIF + "=?");
-        } catch (SQLException ex) {
-            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_unit_detail.TB_NAME + " where " 
+                    + helper_unit_detail.KEY_KODE_TARIF + "=? and "
+                    + helper_unit_detail.KEY_TGL + "=?"
+                    );
             preparedStatement.setString(1, kode);
+            preparedStatement.setString(2, tgl);
+            preparedStatement.execute();
         } catch (SQLException ex) {
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
         }
     
       
-        preparedStatement.execute();
+        
+       
+        
+    }
+    
+     public void DelRec(String kode) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_tarif.TB_NAME + " where " + helper_tarif.KEY_KODE_TARIF + "=?");
+            preparedStatement.setString(1, kode);
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+      
+      
        
         
     }
@@ -1800,7 +1917,6 @@ public class Crud_local extends DBKoneksi_local {
         }
     
       
-        
        
         
     }

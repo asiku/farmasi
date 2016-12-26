@@ -80,6 +80,7 @@ public class Crud_farmasi extends DBkoneksi {
     };
 
     
+    
     public void readRec_kamarinap(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
         try {
@@ -184,6 +185,28 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    //edit here 26
+    public String readRec_CariPegawaiNM(String nip) throws SQLException{
+          String nama="";
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_pegawai.TB_NAME + " WHERE "
+                + helper_pegawai.KEY_NIP + " = ?");
+
+        preparedStatement.setString(1,  nip );
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+
+//            i++;
+//            String no = String.valueOf(i);
+         
+             nama = resultSet.getString(helper_pegawai.KEY_NAMA);
+         
+            
+        }
+        
+      return nama;
+    }
     public void readRec_pegawaiF(String nm) throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_pegawai.TB_NAME + " WHERE "
