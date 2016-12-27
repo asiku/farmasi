@@ -24,8 +24,7 @@ public class helper_unit {
     public static String KEY_TGLMASUK = "tgl_masuk";
     public static String KEY_STATUSINAP = "status_inap";
     public static String KEY_PERKEMBANGAN = "perkembangan";
-    
-   
+    public static String KEY_STATUS_KAMAR = "status_kamar";
     
     
 }

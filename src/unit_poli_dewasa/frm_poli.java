@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit_poli;
+package unit_poli_dewasa;
 
+import unit_poli.*;
 import farmasi.Crud_farmasi;
 import farmasi.Crud_local;
 import static farmasi.Crud_local.cekvalpilih;
@@ -229,11 +230,11 @@ public class frm_poli extends javax.swing.JFrame {
 
                 dat = new Crud_farmasi();
 
-                String[] b = {"ARJUNO", "MAHAMERU", "LEUSER", "RANAI", "PANGRANGO", "CADANGAN","ARJUNO BPJS","MAHAMERU BPJS", "LEUSER BPJS", "RANAI BPJS", "PANGRANGO BPJS", "CADANGAN BPJS"};
+                String[] b = {"BROMO", "CIREMAI", "KERINCI", "KRAKATAU", "MALABAR","PAPANDAYAN","RAKATA","RINJANI","SEMERU","CADANGAN","BROMO BPJS", "CIREMAI BPJS", "KERINCI BPJS", "KRAKATAU BPJS", "MALABAR BPJS","PAPANDAYAN BPJS","RAKATA BPJS","RINJANI BPJS","SEMERU BPJS","CADANGAN BPJS"};
 
                 String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
 
-                dat.readRec_kamarinap(b, this.txt_cari_reg.getText(), t, this.lbl_tgl_server.getText());
+                dat.readRec_kamarinapDewasa(b, this.txt_cari_reg.getText(), t, this.lbl_tgl_server.getText());
 
                 this.tb_reg.setModel(dat.modelkamarinap);
 
@@ -1191,7 +1192,7 @@ public class frm_poli extends javax.swing.JFrame {
                 datl = new Crud_local();
            
                 if(tb_unit_detail_history.getModel().getRowCount()==0){
-                   datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien(),"anak");
+                   datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien(),"dewasa");
                 }
                 else{
                    
@@ -1436,10 +1437,7 @@ public class frm_poli extends javax.swing.JFrame {
             datl=new Crud_local();
             datl.readRec_cariUnitMaster(txt_no_rawat.getText(), 2);
       
-             if(!datl.modelunitanakmaster.getValueAt(0, 8).toString().isEmpty()){  
             r_pulang.setSelected(Boolean.parseBoolean(datl.modelunitanakmaster.getValueAt(0, 8).toString()));
-             }
-          if(!datl.modelunitanakmaster.getValueAt(0, 9).toString().isEmpty()){  
             
             if(r_belum.getText().equals(datl.modelunitanakmaster.getValueAt(0, 9).toString())){
                r_belum.setSelected(true);
@@ -1456,16 +1454,8 @@ public class frm_poli extends javax.swing.JFrame {
              else if(r_sembuh.getText().equals(datl.modelunitanakmaster.getValueAt(0, 9).toString())){
                r_sembuh.setSelected(true);
             }
-          }
             
         } catch (Exception ex) {
-            r_belum.setSelected(false);
-            r_sembuh.setSelected(false);
-            r_membaik.setSelected(false);
-            r_menurun.setSelected(false);
-            r_kritis.setSelected(false);
-            r_sembuh.setSelected(false);
-            
             Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
       
@@ -1789,6 +1779,7 @@ public class frm_poli extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frm_poli.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

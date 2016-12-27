@@ -393,7 +393,7 @@ public class Crud_local extends DBKoneksi_local {
 
     
     public void Save_inapanakmaster(String norawat,String nipdpjp ,String nipppjp
-            , boolean statusinap,String perkembangan)  {
+            , boolean statusinap,String perkembangan,String statkamar)  {
 
         try {
             preparedStatement = connect.prepareStatement("insert into " + helper_unit.TB_NAME + " (" 
@@ -401,14 +401,16 @@ public class Crud_local extends DBKoneksi_local {
                     + helper_unit.KEY_NIP_DPJP + ","
                     + helper_unit.KEY_NIP_PPJP  + ","
                     + helper_unit.KEY_STATUSINAP  + ","
-                    + helper_unit.KEY_PERKEMBANGAN + ") "
-                    + " values (?,?,?,?,?)");
+                    + helper_unit.KEY_PERKEMBANGAN + ","
+                    + helper_unit.KEY_STATUS_KAMAR + ") "
+                    + " values (?,?,?,?,?,?)");
          
             preparedStatement.setString(1, norawat);
             preparedStatement.setString(2, nipdpjp);
             preparedStatement.setString(3, nipppjp);
             preparedStatement.setBoolean(4, statusinap);
             preparedStatement.setString(5, perkembangan);
+             preparedStatement.setString(6, statkamar);
             
            
             preparedStatement.execute();
