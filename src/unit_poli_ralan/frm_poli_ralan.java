@@ -231,24 +231,16 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
                 dat = new Crud_farmasi();
 
-                String[] b = {"BROMO", "CIREMAI", "KERINCI", "KRAKATAU", "MALABAR","PAPANDAYAN","RAKATA","RINJANI","SEMERU","CADANGAN","BROMO BPJS", "CIREMAI BPJS", "KERINCI BPJS", "KRAKATAU BPJS", "MALABAR BPJS","PAPANDAYAN BPJS","RAKATA BPJS","RINJANI BPJS","SEMERU BPJS","CADANGAN BPJS"};
+                String datePattern = "yyyy-MM-dd";
+                SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 
-                String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
-
-                dat.readRec_kamarinapDewasa(b, this.txt_cari_reg.getText(), t, this.lbl_tgl_server.getText());
-
-                this.tb_reg.setModel(dat.modelkamarinap);
+                dat.readRec_registrasiRalan(dateFormatter.format(dt_tgl_reg.getDate()));
+                
+                this.tb_reg.setModel(dat.modelregralan);
 
                 setukurantbReg();
 
-                //             DefaultTableModel dm = (DefaultTableModel) tb_reg.getModel();
-//                int rowCount = dm.getRowCount();
-//
-//                for (int i = rowCount - 1; i >= 0; i--) {
-//                    if (!dm.getValueAt(i, 3).toString().substring(5, dm.getValueAt(i, 3).toString().length() - 3).equals(t)) {
-//                        dm.removeRow(i);
-//                    }
-//                }
+    
             } catch (SQLException ex) {
                 Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -387,6 +379,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tb_reg = new javax.swing.JTable();
         txt_cari_reg = new javax.swing.JTextField();
         lbl_cari = new javax.swing.JLabel();
+        dt_tgl_reg = new uz.ncipro.calendar.JDateTimePicker();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         tb_tindakan_pilih = new javax.swing.JTable();
@@ -627,7 +620,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tb_reg);
 
-        jPanel12.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, 420, 540));
+        jPanel12.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 420, 500));
 
         txt_cari_reg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -643,6 +636,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
         jPanel12.add(lbl_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
+
+        dt_tgl_reg.setDisplayFormat("yyyy/MM/dd");
+        jPanel12.add(dt_tgl_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jTabbedPane2.addTab("Data Pasien Inap", jPanel12);
 
@@ -1811,6 +1807,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JDialog dlg_dpjp;
+    private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private javax.swing.JMenuItem item_hapus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

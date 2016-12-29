@@ -33,6 +33,8 @@ public class Crud_farmasi extends DBkoneksi {
     private ResultSet resultSet = null;
 
     String[] reg_title = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal"};
+   
+    String[] reg_titleralan = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar"};
 
     String[] brg_title = new String[]{"Kode obat", "Nama Obat", "Satuan"};
 
@@ -72,6 +74,13 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
+    
+    public DefaultTableModel modelregralan = new DefaultTableModel(reg_titleralan, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
     public DefaultTableModel modelreg = new DefaultTableModel(reg_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -371,10 +380,15 @@ public class Crud_farmasi extends DBkoneksi {
 
     public void readRec_registrasiRalan(String tgl) throws SQLException {
 
+        //edit 29 des 2016
+        
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
-                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "+helper_registrasi.KEY_KODE_POLI);
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
 
         preparedStatement.setString(1, tgl);
+        
+        //kode igd=3
+//        preparedStatement.setInt(2, 3);
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -388,8 +402,14 @@ public class Crud_farmasi extends DBkoneksi {
             String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
             String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
             String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
-
-            modelreg.addRow(new Object[]{no, rm, nmp, reg});
+            String kodedokter = resultSet.getString(helper_registrasi.KEY_KODE_DOKTER);
+            String nmdokter = resultSet.getString(helper_registrasi.KEY_NAMA_DOKTER);
+            String kdpoli = resultSet.getString(helper_registrasi.KEY_KODE_POLI);
+            String poli = resultSet.getString(helper_registrasi.KEY_POLI);
+            String kdpj = resultSet.getString(helper_registrasi.KEY_KODE_PJ);
+            String nmpj = resultSet.getString(helper_registrasi.KEY_NAMA_PJ);
+            
+            modelregralan.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj});
         }
     }
 

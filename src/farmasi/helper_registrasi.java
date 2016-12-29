@@ -19,7 +19,7 @@ public class helper_registrasi {
     public static String KEY_NO_RM = "no_rkm_medis";
     public static String KEY_NM_PASIEN = "nm_pasien";
     public static String KEY_TGL_REGISTRASI = "tgl_registrasi";
-    public static String KEY_KODE_POLI = "kode_poli";
+    public static String KEY_KODE_POLI = "kd_poli";
     public static String KEY_POLI = "nm_poli";
     public static String KEY_KODE_PJ = "kd_pj";
     public static String KEY_NAMA_PJ = "png_jawab";
