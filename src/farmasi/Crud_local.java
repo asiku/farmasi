@@ -682,6 +682,8 @@ public class Crud_local extends DBKoneksi_local {
     
      public void readRec_cariTarif(String nm) throws SQLException {
   
+         //edit 29 12 2016
+         
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
       + helper_tarif.KEY_NAMA_TINDAKAN + " like ? ");
 
@@ -691,23 +693,33 @@ public class Crud_local extends DBKoneksi_local {
 
         while (resultSet.next()) {
          
-            String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
+             String kodetarif = resultSet.getString(helper_tarif.KEY_KODE_TARIF);
             String nmtindakan = resultSet.getString(helper_tarif.KEY_NAMA_TINDAKAN);
-             double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
-              int presrs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS);
-              int presdr = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR);
-              int pressarana = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA);
+              double tarif = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN);
+              double presrs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS);
+              double presdr = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR);
+              double pressarana = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA);
               String poli = resultSet.getString(helper_tarif.KEY_POLI);
               String status = resultSet.getString(helper_tarif.KEY_STATUS);
               String ket = resultSet.getString(helper_tarif.KEY_KETERANGAN);
-              int id_poli = resultSet.getInt(helper_tarif.KEY_ID_POLI);
+               int id_poli = resultSet.getInt(helper_tarif.KEY_ID_POLI);
               int id_status= resultSet.getInt(helper_tarif.KEY_ID_STATUS);
               String p = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH);
               String v = resultSet.getString(helper_tarif.KEY_STATUS_VERIF);
               String kelas = resultSet.getString(helper_tarif.KEY_KELAS);
-          
-            modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v,kelas});
-            
+              double tarifbpjs = resultSet.getDouble(helper_tarif.KEY_TARIF_TINDAKAN_BPJS);
+              double presrsbpjs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_RS_BPJS);
+              double presdrbpjs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_DR_BPJS);
+              double pressaranabpjs = resultSet.getInt(helper_tarif.KEY_PRESENTASE_SARANA_BPJS);
+              
+              String statusbpjs = resultSet.getString(helper_tarif.KEY_STATUS_BPJS);
+              String kodebpjs = resultSet.getString(helper_tarif.KEY_KODE_BPJS);
+             
+              String pbpjs = resultSet.getString(helper_tarif.KEY_STATUS_PENGESAH_BPJS);
+              String vbpjs = resultSet.getString(helper_tarif.KEY_STATUS_VERIF_BPJS);
+              
+              modeltarif.addRow(new Object[]{kodetarif, nmtindakan,tarif,presrs,presdr,pressarana,poli,status,ket,id_poli,id_status,p,v,kelas,
+                                           tarifbpjs,presrsbpjs,presdrbpjs,pressaranabpjs,statusbpjs,kodebpjs,pbpjs,vbpjs});
         }
         
         

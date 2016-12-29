@@ -369,6 +369,31 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    public void readRec_registrasiRalan(String tgl) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "+helper_registrasi.KEY_KODE_POLI);
+
+        preparedStatement.setString(1, tgl);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0; 
+
+        while (resultSet.next()) {
+
+            i++;
+
+            String no = String.valueOf(i);
+            String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
+            String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
+
+            modelreg.addRow(new Object[]{no, rm, nmp, reg});
+        }
+    }
+
+    
     public void readRec_registrasi(String tgl) throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_NAME + " WHERE "

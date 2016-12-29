@@ -2495,13 +2495,16 @@ public class frm_tarif extends javax.swing.JFrame {
   
 
   private void cls(){
-  Utilitas.HapusText(panel_inputan);
+        Utilitas.HapusText(panel_inputan);
         Utilitas.HapusText(jPanel5);
+        Utilitas.HapusText(jPanel10);
         
         lbl_kode_status.setText("");
         lbl_kode_poli.setText("");
         lbl_cepe.setText("");
         cmb_kelas.setSelectedIndex(0);
+        ck_bpjs.setSelected(false);
+        
   }  
   private void savebpjs(){
   
@@ -2546,6 +2549,7 @@ public class frm_tarif extends javax.swing.JFrame {
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText()), 
                                      Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",txt_kode_tarif.getText()+"-BPJS");
                            
+                             
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
                              lst_save_tarif.setModel(listModel);
@@ -2871,11 +2875,14 @@ public class frm_tarif extends javax.swing.JFrame {
         // TODO add your handling code here:
         Utilitas.HapusText(panel_inputan);
         Utilitas.HapusText(jPanel5);
+        Utilitas.HapusText(jPanel10);
         
         lbl_kode_status.setText("");
         lbl_kode_poli.setText("");
         lbl_cepe.setText("");
         cmb_kelas.setSelectedIndex(0);
+        ck_bpjs.setSelected(false);
+        
     }//GEN-LAST:event_bt_addActionPerformed
 
     private void updatebpjs(){
@@ -3390,7 +3397,9 @@ public class frm_tarif extends javax.swing.JFrame {
         lbl_kode_status.setText("");
         lbl_kode_poli.setText("");
         lbl_cepe.setText("");
-                 
+        ck_bpjs.setSelected(false);
+        cmb_kelas.setSelectedIndex(0);
+    
              } catch (SQLException ex) {
                  Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
              } catch (Exception ex) {

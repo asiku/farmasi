@@ -215,17 +215,20 @@ public class frm_login_poli extends javax.swing.JFrame {
             Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+        
             if (Crud_local.usm.equals(txt_username.getText()) && Crud_local.psm.equals(txt_pwd.getText())) {
                
             try {
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
-              if(Crud_local.namapoli.equals("RANAP ANAK")){   
+              if(Crud_local.namapoli.equals("RANAP ANAK")){  
+                  
                 frm_poli pol=new frm_poli(namapetugaslogin,Crud_local.namapoli);
                 
                 pol.setVisible(true);
                 
                 dispose();
               }
+             
                  
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Login Koneksi Data Bermasalah!");
