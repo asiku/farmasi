@@ -34,7 +34,7 @@ public class Crud_farmasi extends DBkoneksi {
 
     String[] reg_title = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal"};
    
-    String[] reg_titleralan = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar"};
+    String[] reg_titleralan = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat"};
 
     String[] brg_title = new String[]{"Kode obat", "Nama Obat", "Satuan"};
 
@@ -127,7 +127,11 @@ public class Crud_farmasi extends DBkoneksi {
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[16])||
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[17])||
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[18])||
-                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[19])
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[19])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[20])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[21])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[22])
+                     
                      ))
                              
                  
@@ -159,6 +163,60 @@ public class Crud_farmasi extends DBkoneksi {
             Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void readRec_kamarinapPerina(String[] bangsal,String txtcari,String tgl,String tglserver) {
+
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
+                    + helper_kamar_inap.KEY_NO_RM + " like ? OR "
+                    + helper_kamar_inap.KEY_NM_PASIEN + " like ?");
+            
+            preparedStatement.setString(1, "%"+ txtcari +"%");
+            preparedStatement.setString(2, "%"+ txtcari +"%");
+           
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+//        int i = 0;
+           // System.out.println("No RM" + resultSet.getFetchSize());
+
+            while (resultSet.next()) {
+
+//            i++;
+//            String no = String.valueOf(i);
+             if((resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[0])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[1])
+                             ))
+                 
+              {
+                  // && resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).substring(5, resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).length() - 3).equals(tgl)
+                  
+                 try {
+                     
+               if(Utilitas.Hitungtgl(tglserver,Utilitas.Jam(),resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK), Utilitas.Jam())<=744){  
+                String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
+                String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
+                String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
+                String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
+                String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
+                String kelas= resultSet.getString(helper_kamar_inap.KEY_KELAS);
+                String kdpj= resultSet.getString(helper_kamar_inap.KEY_KODE_STATUS_BAYAR);
+                String pj= resultSet.getString(helper_kamar_inap.KEY_STATUS_BAYAR);
+                modelkamarinap.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal,kelas,kdpj,pj});
+               }
+                 } catch (ParseException ex) {
+                     Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                
+               
+              }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     
     public void readRec_kamarinap(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
@@ -378,15 +436,23 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
-    public void readRec_registrasiRalan(String tgl) throws SQLException {
+    public void readRec_registrasiRalan(String tgl,int s) throws SQLException {
 
+        
+     if(s==1){   
         //edit 29 des 2016
         
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
                 + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
 
         preparedStatement.setString(1, tgl);
-        
+     }
+     else{
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
         //kode igd=3
 //        preparedStatement.setInt(2, 3);
 
@@ -394,10 +460,11 @@ public class Crud_farmasi extends DBkoneksi {
 
         int i = 0; 
 
-        while (resultSet.next()) {
+      while (resultSet.next()) {
 
-            i++;
-
+          
+       if(resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT).equals("Ralan")){
+         i++;
             String no = String.valueOf(i);
             String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
             String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
@@ -408,9 +475,12 @@ public class Crud_farmasi extends DBkoneksi {
             String poli = resultSet.getString(helper_registrasi.KEY_POLI);
             String kdpj = resultSet.getString(helper_registrasi.KEY_KODE_PJ);
             String nmpj = resultSet.getString(helper_registrasi.KEY_NAMA_PJ);
-            
-            modelregralan.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj});
-        }
+            String norawat = resultSet.getString(helper_registrasi.KEY_NO_RAWAT);
+             
+            modelregralan.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj,norawat});
+         }    
+     }
+        
     }
 
     

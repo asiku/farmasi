@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit_poli_dewasa;
+package unit_poli_perinatology;
 
 import unit_poli.*;
 import farmasi.Crud_local;
@@ -49,13 +49,13 @@ public class frm_login_poli extends javax.swing.JFrame {
         bt_cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Poli Dewasa");
+        setTitle("Poli Perinatology");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli_dewasa/dewasa_ico.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/anak_ico.png"))); // NOI18N
 
         jLabel2.setText("User Name");
 
@@ -216,11 +216,13 @@ public class frm_login_poli extends javax.swing.JFrame {
             Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+        
             if (Crud_local.usm.equals(txt_username.getText()) && Crud_local.psm.equals(txt_pwd.getText())) {
                
             try {
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
-            if(Crud_local.namapoli.equals("RANAP DEWASA")){   
+              if(Crud_local.namapoli.equals("PERINATOLOGI")){  
+                  
                 frm_poli pol=new frm_poli(namapetugaslogin,Crud_local.namapoli);
                 
                 pol.setVisible(true);
@@ -228,9 +230,9 @@ public class frm_login_poli extends javax.swing.JFrame {
                 dispose();
               }
               else{
-                 JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Terdaftar!");
-              }  
-            
+              JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Terdaftar!");
+              }
+                 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Login Koneksi Data Bermasalah!");
                 Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);

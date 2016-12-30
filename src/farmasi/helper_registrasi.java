@@ -23,5 +23,6 @@ public class helper_registrasi {
     public static String KEY_POLI = "nm_poli";
     public static String KEY_KODE_PJ = "kd_pj";
     public static String KEY_NAMA_PJ = "png_jawab";
+    public static String KEY_STATUS_LANJUT = "status_lanjut";
     
 }

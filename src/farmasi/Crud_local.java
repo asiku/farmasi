@@ -349,7 +349,7 @@ public class Crud_local extends DBKoneksi_local {
             preparedStatement.setString(4, perkembangan);
              
             preparedStatement.executeUpdate();
-             //JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Disimpan");
         } catch (SQLException ex) {
 //             if(ex.getErrorCode() == 1062 ){
 //            //duplicate primary key 
@@ -391,6 +391,40 @@ public class Crud_local extends DBKoneksi_local {
 
     }
 
+    public void Save_tindakanralan(String norawat)  {
+
+//         public void Save_tindakanralan(String norawat,String nipdpjp ,String nipppjp
+//            , boolean statusinap,String perkembangan,String statkamar)
+        
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_unit.TB_NAME + " (" 
+//                    + helper_unit.KEY_NO_RAWAT + "," 
+//                    + helper_unit.KEY_NIP_DPJP + ","
+//                    + helper_unit.KEY_NIP_PPJP  + ","
+//                    + helper_unit.KEY_STATUSINAP  + ","
+//                    + helper_unit.KEY_PERKEMBANGAN + ","
+                    + helper_unit.KEY_NO_RAWAT + ") "
+                    + " values (?)");
+         
+            preparedStatement.setString(1, norawat);
+//            preparedStatement.setString(2, nipdpjp);
+//            preparedStatement.setString(3, nipppjp);
+//            preparedStatement.setBoolean(4, statusinap);
+//            preparedStatement.setString(5, perkembangan);
+//             preparedStatement.setString(6, statkamar);
+            
+           
+            preparedStatement.execute();
+          JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+ 
     
     public void Save_inapanakmaster(String norawat,String nipdpjp ,String nipppjp
             , boolean statusinap,String perkembangan,String statkamar)  {
@@ -642,7 +676,7 @@ public class Crud_local extends DBKoneksi_local {
          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE "
          + helper_tarif.KEY_STATUS_PENGESAH + " =? AND "
          + helper_tarif.KEY_STATUS_VERIF + " =? AND "        
-         + helper_tarif.KEY_ID_POLI + " =? ");
+         + helper_tarif.KEY_ID_STATUS + " =? ");
           
          preparedStatement.setString(1, "ok");
           preparedStatement.setString(2, "ok");

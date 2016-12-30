@@ -230,7 +230,7 @@ public class frm_poli extends javax.swing.JFrame {
 
                 dat = new Crud_farmasi();
 
-                String[] b = {"BROMO", "CIREMAI", "KERINCI", "KRAKATAU", "MALABAR","PAPANDAYAN","RAKATA","RINJANI","SEMERU","CADANGAN","BROMO BPJS", "CIREMAI BPJS", "KERINCI BPJS", "KRAKATAU BPJS", "MALABAR BPJS","PAPANDAYAN BPJS","RAKATA BPJS","RINJANI BPJS","SEMERU BPJS","CADANGAN BPJS"};
+                String[] b = {"BROMO", "CIREMAI", "KERINCI", "KRAKATAU", "MALABAR","PAPANDAYAN","RAKATA","RINJANI","SEMERU","CADANGAN","BROMO BPJS", "CIREMAI BPJS", "KERINCI BPJS", "KRAKATAU BPJS", "MALABAR BPJS","PAPANDAYAN BPJS","RAKATA BPJS","RINJANI BPJS","SEMERU BPJS","CADANGAN BPJS","KAMAR ODC IBU","RUANG BERSALIN","RUANG BERSALIN BPJS"};
 
                 String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
 
@@ -299,11 +299,12 @@ public class frm_poli extends javax.swing.JFrame {
     }
 
     private void setukurantbtindakanpilih() {
+       this.tb_tindakan_pilih.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
         tb_tindakan_pilih.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         TableColumnModel tr = tb_tindakan_pilih.getColumnModel();
 
-        tr.getColumn(0).setPreferredWidth(70);
+        tr.getColumn(0).setPreferredWidth(75);
         tr.getColumn(1).setPreferredWidth(280);
         tr.getColumn(2).setPreferredWidth(50);
 
@@ -600,6 +601,7 @@ public class frm_poli extends javax.swing.JFrame {
 
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tb_reg.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_reg.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1265,7 +1267,7 @@ public class frm_poli extends javax.swing.JFrame {
         try {
             datl = new Crud_local();
 
-            datl.readRec_cariTarifTemplate("", false, 1, lbl_kelas.getText());
+            datl.readRec_cariTarifTemplate("", false, 2, lbl_kelas.getText());
 
             this.tb_tindakan_pilih.setModel(datl.modeltariftemplate);
 
@@ -1287,6 +1289,12 @@ public class frm_poli extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bt_cari_tindakanActionPerformed
 
+    private void clsceklist(){
+          for (int i = 0; i < this.tb_tindakan_pilih.getRowCount(); i++) {
+                   tb_tindakan_pilih.setValueAt(false, i, 2);
+          }
+    }
+    
     private void bt_add_tindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_add_tindakanActionPerformed
         // TODO add your handling code here:
         if(cekkasir()>0){
@@ -1324,6 +1332,7 @@ public class frm_poli extends javax.swing.JFrame {
                     }
                 }
 
+                clsceklist();
             } //end if
 
         } else {

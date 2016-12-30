@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit_poli;
+package unit_poli_perinatology;
 
+import unit_poli.*;
 import farmasi.Crud_farmasi;
 import farmasi.Crud_local;
 import static farmasi.Crud_local.cekvalpilih;
@@ -229,11 +230,11 @@ public class frm_poli extends javax.swing.JFrame {
 
                 dat = new Crud_farmasi();
 
-                String[] b = {"ARJUNO", "MAHAMERU", "LEUSER", "RANAI", "PANGRANGO", "CADANGAN","ARJUNO BPJS","MAHAMERU BPJS", "LEUSER BPJS", "RANAI BPJS", "PANGRANGO BPJS", "CADANGAN BPJS"};
+                String[] b = {"PERINATOLOGI", "PERINATOLOGI BPJS"};
 
                 String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
 
-                dat.readRec_kamarinap(b, this.txt_cari_reg.getText(), t, this.lbl_tgl_server.getText());
+                dat.readRec_kamarinapPerina(b, this.txt_cari_reg.getText(), t, this.lbl_tgl_server.getText());
 
                 this.tb_reg.setModel(dat.modelkamarinap);
 
@@ -1193,7 +1194,7 @@ public class frm_poli extends javax.swing.JFrame {
                 datl = new Crud_local();
            
                 if(tb_unit_detail_history.getModel().getRowCount()==0){
-                   datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien(),"anak");
+                   datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien(),"perinatologi");
                 }
                 else{
                    
@@ -1799,6 +1800,7 @@ public class frm_poli extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frm_poli.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

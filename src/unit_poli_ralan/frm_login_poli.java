@@ -220,6 +220,9 @@ public class frm_login_poli extends javax.swing.JFrame {
                 
                 dispose();
               }
+              else{
+                 JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Terdaftar!");
+              }
                  
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Login Koneksi Data Bermasalah!");
