@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit_poli_ralan;
+package kasir;
 
+import unit_poli_ralan.*;
 import unit_poli.*;
 import farmasi.Crud_local;
 import static farmasi.Crud_local.namapetugaslogin;
@@ -49,11 +50,11 @@ public class frm_login_poli extends javax.swing.JFrame {
         bt_cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Poli Ralan");
+        setTitle("Kasir");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/doc.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/kasir_ico.png"))); // NOI18N
 
         jLabel2.setText("User Name");
 
@@ -217,7 +218,10 @@ public class frm_login_poli extends javax.swing.JFrame {
             try {
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
               if(Crud_local.namapoli.equals("RALAN")){   
-                frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,Crud_local.namapoli);
+                
+//                frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,Crud_local.namapoli);
+                
+                frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,"Kasir");
                 
                 pol.setVisible(true);
                 
@@ -271,6 +275,8 @@ public class frm_login_poli extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frm_login_poli.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

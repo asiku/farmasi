@@ -398,20 +398,21 @@ public class Crud_local extends DBKoneksi_local {
         
         try {
             preparedStatement = connect.prepareStatement("insert into " + helper_unit.TB_NAME + " (" 
-//                    + helper_unit.KEY_NO_RAWAT + "," 
-//                    + helper_unit.KEY_NIP_DPJP + ","
-//                    + helper_unit.KEY_NIP_PPJP  + ","
-//                    + helper_unit.KEY_STATUSINAP  + ","
-//                    + helper_unit.KEY_PERKEMBANGAN + ","
-                    + helper_unit.KEY_NO_RAWAT + ") "
-                    + " values (?)");
+                                 + helper_unit.KEY_NO_RAWAT + "," 
+//                                 + helper_unit.KEY_NIP_DPJP + ","
+//                                 + helper_unit.KEY_NIP_PPJP  + ","
+//                                 + helper_unit.KEY_STATUSINAP  + ","
+//                                 + helper_unit.KEY_PERKEMBANGAN + ","
+                                 + helper_unit.KEY_STATUS_KAMAR + ") "
+                    + " values (?,?)");
+                 
          
             preparedStatement.setString(1, norawat);
 //            preparedStatement.setString(2, nipdpjp);
 //            preparedStatement.setString(3, nipppjp);
 //            preparedStatement.setBoolean(4, statusinap);
 //            preparedStatement.setString(5, perkembangan);
-//             preparedStatement.setString(6, statkamar);
+             preparedStatement.setString(2, "ralan");
             
            
             preparedStatement.execute();
@@ -542,20 +543,20 @@ public class Crud_local extends DBKoneksi_local {
       preparedStatement.setString(2,  "%" + nm + "%");
       preparedStatement.setString(3,  "%" + nm + "%");
       
-       ResultSet resultSet = preparedStatement.executeQuery();
-
-        while (resultSet.next()) {
-         
-            String norawat = resultSet.getString(helper_unit_detail.KEY_NO_RAWAT);
-            String kdtarif = resultSet.getString(helper_unit_detail.KEY_KODE_TARIF);
-            String namatindakan = resultSet.getString(helper_unit_detail.KEY_NAMA_TINDAKAN);
-            String nama = resultSet.getString(helper_unit_detail.KEY_NAMA);
-            String tgl = resultSet.getString(helper_unit_detail.KEY_TGL);
-            String username = resultSet.getString(helper_unit_detail.KEY_USERNAME);
-            modelunitdetail.addRow(new Object[]{norawat,kdtarif,namatindakan,nama,tgl,username});
-            
-        }
-        
+//       ResultSet resultSet = preparedStatement.executeQuery();
+//
+//        while (resultSet.next()) {
+//         
+//            String norawat = resultSet.getString(helper_unit_detail.KEY_NO_RAWAT);
+//            String kdtarif = resultSet.getString(helper_unit_detail.KEY_KODE_TARIF);
+//            String namatindakan = resultSet.getString(helper_unit_detail.KEY_NAMA_TINDAKAN);
+//            String nama = resultSet.getString(helper_unit_detail.KEY_NAMA);
+//            String tgl = resultSet.getString(helper_unit_detail.KEY_TGL);
+//            String username = resultSet.getString(helper_unit_detail.KEY_USERNAME);
+//            modelunitdetail.addRow(new Object[]{norawat,kdtarif,namatindakan,nama,tgl,username});
+//            
+//        }
+//        
     }
     else{
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME);

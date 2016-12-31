@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unit_poli_ralan;
+package kasir;
 
+import unit_poli_ralan.*;
 import unit_poli_dewasa.*;
 import unit_poli.*;
 import farmasi.Crud_farmasi;
@@ -95,6 +96,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+        jLabel10.setVisible(false);
+        lbl_nip_petugas_pilih.setVisible(false);
+        txt_petugas_pilih.setVisible(false);
         
         bt_cari_tindakan.setVisible(false);
         
@@ -124,6 +128,24 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
 
+        txt_cari_rm.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filtertxtRM();
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filtertxtRM();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filtertxtRM();
+            }
+        });
+        
         txt_cari_reg.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -208,16 +230,21 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }
 
     private void filterceklistTemplatepilih() {
-        Utilitas.filtertb(txt_cari_tindakan_pilih.getText(), tb_tindakan_pilih, 1, 1);
+      Utilitas.filtertb(txt_cari_tindakan_pilih.getText(), tb_tindakan_pilih, 1, 1);
 
     }
 
+    private void filtertxtRM() {
+
+      Utilitas.filtertb(txt_cari_rm.getText(), tb_reg, 1,1);
+    }
+    
     private void filtertxt() {
 
 //            for (int i = 0; i < txt_cari_reg.getText().length(); i++) {
 //                if (Character.isDigit(txt_cari_reg.getText().charAt(i))) {
 //                    Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 0);
-//                } else {
+//                } else { Utilitas
                    Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
 //                }
 //            }
@@ -237,9 +264,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 String datePattern = "yyyy-MM-dd";
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
                 //dateFormatter.format(dt_tgl_reg.getDate())
-                dat.readRec_registrasiRalan(this.lbl_tgl_server.getText(),1);
+                dat.readRec_registrasiKasir(this.lbl_tgl_server.getText(),1);
                 
-                this.tb_reg.setModel(dat.modelregralan);
+                this.tb_reg.setModel(dat.modelregralankasir);
 
                 setukurantbReg();
                 lbl_stat_tgl.setText("Hasil Pencarian Pasien TGl: "+this.lbl_tgl_server.getText());
@@ -387,6 +414,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         dt_tgl_reg = new uz.ncipro.calendar.JDateTimePicker();
         bt_cari_tgl = new javax.swing.JButton();
         lbl_stat_tgl = new javax.swing.JLabel();
+        dt_tgl_reg1 = new uz.ncipro.calendar.JDateTimePicker();
+        jLabel1 = new javax.swing.JLabel();
+        txt_cari_rm = new javax.swing.JTextField();
+        lbl_cari1 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         tb_tindakan_pilih = new javax.swing.JTable();
@@ -415,6 +446,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_kode_poli = new javax.swing.JLabel();
         lbl_nm_poli = new javax.swing.JLabel();
         bt_save = new javax.swing.JButton();
+        bt_save1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        lbl_stat_pasien = new javax.swing.JLabel();
+        lbl_no_sep = new javax.swing.JLabel();
+        lbl = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_unit_detail = new javax.swing.JTable();
@@ -611,38 +647,75 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jPanel12.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 460, 480));
 
+        txt_cari_reg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cari_regActionPerformed(evt);
+            }
+        });
         txt_cari_reg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_cari_regKeyPressed(evt);
             }
         });
-        jPanel12.add(txt_cari_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 400, 32));
+        jPanel12.add(txt_cari_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 190, 32));
 
-        lbl_cari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        lbl_cari.setText("Cari Nama");
         lbl_cari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_cariMouseClicked(evt);
             }
         });
-        jPanel12.add(lbl_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        jPanel12.add(lbl_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, -1));
 
         dt_tgl_reg.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         dt_tgl_reg.setDisplayFormat("yyyy/MM/dd");
+        dt_tgl_reg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dt_tgl_regActionPerformed(evt);
+            }
+        });
         jPanel12.add(dt_tgl_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 120, 20));
 
         bt_cari_tgl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/edit_ico.png"))); // NOI18N
-        bt_cari_tgl.setText("Cari Tanggal");
+        bt_cari_tgl.setText("Cari Tgl");
         bt_cari_tgl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_cari_tglActionPerformed(evt);
             }
         });
-        jPanel12.add(bt_cari_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 290, 40));
+        jPanel12.add(bt_cari_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 150, 40));
 
         lbl_stat_tgl.setText("Hasil Pencarian pasien TGL :");
         jPanel12.add(lbl_stat_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 400, -1));
 
-        jTabbedPane2.addTab("Data Pasien", jPanel12);
+        dt_tgl_reg1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        dt_tgl_reg1.setDisplayFormat("yyyy/MM/dd");
+        dt_tgl_reg1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dt_tgl_reg1ActionPerformed(evt);
+            }
+        });
+        jPanel12.add(dt_tgl_reg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 120, 20));
+
+        jLabel1.setText("S/d");
+        jPanel12.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
+
+        txt_cari_rm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cari_rmActionPerformed(evt);
+            }
+        });
+        jPanel12.add(txt_cari_rm, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 90, 30));
+
+        lbl_cari1.setText("Cari RM");
+        lbl_cari1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_cari1MouseClicked(evt);
+            }
+        });
+        jPanel12.add(lbl_cari1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 60, -1));
+
+        jTabbedPane2.addTab("Data Pasien Inap", jPanel12);
 
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -734,7 +807,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 111, -1, -1));
 
         jLabel10.setText("Dokter yang Dituju");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 150, -1));
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 150, -1));
 
         jLabel11.setText("Tgl Registrasi");
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 108, -1));
@@ -743,10 +816,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(lbl_tgl_masuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 132, 19));
 
         lbl_nip_petugas_pilih.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_nip_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 180, 19));
+        jPanel4.add(lbl_nip_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 180, 19));
 
         jLabel5.setText("Status");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 60, -1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 60, -1));
 
         bt_cari_tindakan.setText("jButton8");
         bt_cari_tindakan.addActionListener(new java.awt.event.ActionListener() {
@@ -754,34 +827,55 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_cari_tindakanActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_cari_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 42, -1));
+        jPanel4.add(bt_cari_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 20, 42, -1));
 
         txt_petugas_pilih.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(txt_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 230, 19));
+        jPanel4.add(txt_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 60, 230, 19));
 
         lbl_nm_status.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_nm_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 170, 19));
+        jPanel4.add(lbl_nm_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 170, 19));
 
         lbl_status.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 60, 19));
+        jPanel4.add(lbl_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 60, 19));
 
         jLabel6.setText("Poli");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 60, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 60, -1));
 
         lbl_kode_poli.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_kode_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 60, 19));
+        jPanel4.add(lbl_kode_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 60, 19));
 
         lbl_nm_poli.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_nm_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 230, 19));
+        jPanel4.add(lbl_nm_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 230, 19));
 
-        bt_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
-        bt_save.setText("Save");
+        bt_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/kasir_kecil_ico.png"))); // NOI18N
+        bt_save.setText("Print");
         bt_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_saveActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 210, 40));
+        jPanel4.add(bt_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 220, 60));
+
+        bt_save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
+        bt_save1.setText("Save");
+        bt_save1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_save1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(bt_save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 220, 40));
+
+        jLabel7.setText("Status Pasien");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 130, -1));
+
+        lbl_stat_pasien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.add(lbl_stat_pasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 170, 19));
+
+        lbl_no_sep.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel4.add(lbl_no_sep, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 170, 19));
+
+        lbl.setText("No. SEP");
+        jPanel4.add(lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 130, -1));
 
         jTabbedPane3.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -808,7 +902,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tb_unit_detail);
 
-        jTabbedPane3.addTab("Input Data Tindakan", jScrollPane2);
+        jTabbedPane3.addTab("Data Tagihan", jScrollPane2);
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -876,7 +970,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_petugas_input_history.setText("Petugas Input");
         jPanel6.add(lbl_petugas_input_history, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 290, 20));
 
-        jTabbedPane3.addTab("History Tindakan Pasien", jPanel6);
+        jTabbedPane3.addTab("History Tagihan Pasien", jPanel6);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1257,8 +1351,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void lbl_cariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cariMouseClicked
         // TODO add your handling code here:
-        filterReg();
-        this.filtertxt();
+//        filterReg();
+//        this.filtertxt();
+
+     //edit 31 des 2016
+     //cari RM
+     Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 1,1);
     }//GEN-LAST:event_lbl_cariMouseClicked
 
     private void txt_cari_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_regKeyPressed
@@ -1285,7 +1383,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         this.lbl_nm_status.setText(this.tb_reg.getModel().getValueAt(row, 9).toString());
         
         lbl_kode_poli.setText(this.tb_reg.getModel().getValueAt(row, 6).toString());
-        lbl_nm_poli.setText(this.tb_reg.getModel().getValueAt(row, 7).toString());        
+        lbl_nm_poli.setText(this.tb_reg.getModel().getValueAt(row, 7).toString());   
+        
+        lbl_stat_pasien.setText(this.tb_reg.getModel().getValueAt(row, 11).toString());
+        
+        lbl_no_sep.setText(this.tb_reg.getModel().getValueAt(row, 12).toString());
+        
+        
     }
  
   private void filterTindakanhistory(){
@@ -1644,9 +1748,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 String datePattern = "yyyy-MM-dd";
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
                
-              dat.readRec_registrasiRalan( dateFormatter.format(dt_tgl_reg.getDate()),1);
+              dat.readRec_registrasiKasir( dateFormatter.format(dt_tgl_reg.getDate()),1);
                 
-                this.tb_reg.setModel(dat.modelregralan);
+                this.tb_reg.setModel(dat.modelregralankasir);
 
                 setukurantbReg();
                
@@ -1658,6 +1762,30 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_bt_cari_tglActionPerformed
+
+    private void bt_save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_save1ActionPerformed
+
+    private void dt_tgl_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dt_tgl_regActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dt_tgl_regActionPerformed
+
+    private void dt_tgl_reg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dt_tgl_reg1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dt_tgl_reg1ActionPerformed
+
+    private void txt_cari_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cari_regActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cari_regActionPerformed
+
+    private void txt_cari_rmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cari_rmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cari_rmActionPerformed
+
+    private void lbl_cari1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_cari1MouseClicked
 
     private void filterPegawai() {
 
@@ -1706,6 +1834,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1729,11 +1861,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JButton bt_cari_tindakan;
     private javax.swing.JButton bt_cari_tindakan_pilih;
     private javax.swing.JButton bt_save;
+    private javax.swing.JButton bt_save1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JDialog dlg_dpjp;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
+    private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
     private javax.swing.JMenuItem item_hapus;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1745,6 +1880,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
@@ -1761,7 +1897,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JLabel lbl;
     private javax.swing.JLabel lbl_cari;
+    private javax.swing.JLabel lbl_cari1;
     private javax.swing.JLabel lbl_jam;
     private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kode_poli;
@@ -1769,11 +1907,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_nip_petugas_pilih;
     private javax.swing.JLabel lbl_nm_poli;
     private javax.swing.JLabel lbl_nm_status;
+    private javax.swing.JLabel lbl_no_sep;
     private javax.swing.JLabel lbl_petugas;
     private javax.swing.JLabel lbl_petugas_history;
     private javax.swing.JLabel lbl_petugas_input_history;
     private javax.swing.JLabel lbl_poli;
     private javax.swing.JLabel lbl_poli1;
+    private javax.swing.JLabel lbl_stat_pasien;
     private javax.swing.JLabel lbl_stat_tgl;
     private javax.swing.JLabel lbl_status;
     private javax.swing.JLabel lbl_tgl_masuk;
@@ -1787,6 +1927,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cari_nama_tindakan;
     private javax.swing.JTextField txt_cari_petugas;
     private javax.swing.JTextField txt_cari_reg;
+    private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextField txt_cari_tindakan_pilih;
     private javax.swing.JTextField txt_nm_pasien;
     private javax.swing.JTextField txt_no_rawat;

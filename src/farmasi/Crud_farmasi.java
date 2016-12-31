@@ -35,6 +35,7 @@ public class Crud_farmasi extends DBkoneksi {
     String[] reg_title = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal"};
    
     String[] reg_titleralan = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat"};
+     String[] reg_titleralankasir = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat","Status Lanjut","No. SEP"};
 
     String[] brg_title = new String[]{"Kode obat", "Nama Obat", "Satuan"};
 
@@ -74,6 +75,13 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
+    
+    public DefaultTableModel modelregralankasir = new DefaultTableModel(reg_titleralankasir, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
     
     public DefaultTableModel modelregralan = new DefaultTableModel(reg_titleralan, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -436,6 +444,58 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    public void readRec_registrasiKasir(String tgl,int s) throws SQLException {
+
+        
+     if(s==1){   
+        //edit 29 des 2016
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+     else{
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+        //kode igd=3
+//        preparedStatement.setInt(2, 3);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0; 
+
+      while (resultSet.next()) {
+
+          
+//       if(resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT).equals("Ralan")||resultSet.getString(helper_registrasi.KEY_KODE_POLI).equals("3")){
+        
+            i++;
+            
+            String no = String.valueOf(i);
+            String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
+            String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
+            String kodedokter = resultSet.getString(helper_registrasi.KEY_KODE_DOKTER);
+            String nmdokter = resultSet.getString(helper_registrasi.KEY_NAMA_DOKTER);
+            String kdpoli = resultSet.getString(helper_registrasi.KEY_KODE_POLI);
+            String poli = resultSet.getString(helper_registrasi.KEY_POLI);
+            String kdpj = resultSet.getString(helper_registrasi.KEY_KODE_PJ);
+            String nmpj = resultSet.getString(helper_registrasi.KEY_NAMA_PJ);
+            String norawat = resultSet.getString(helper_registrasi.KEY_NO_RAWAT);
+            String statlanjut = resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT);
+            String nosep = resultSet.getString(helper_registrasi.KEY_NO_SEP);
+             
+            modelregralankasir.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj,norawat,statlanjut,nosep});
+//         }    
+     }
+        
+    }
+    
+    
     public void readRec_registrasiRalan(String tgl,int s) throws SQLException {
 
         
@@ -463,8 +523,9 @@ public class Crud_farmasi extends DBkoneksi {
       while (resultSet.next()) {
 
           
-       if(resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT).equals("Ralan")){
-         i++;
+       if(resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT).equals("Ralan")||resultSet.getString(helper_registrasi.KEY_KODE_POLI).equals("3")){
+        
+           i++;
             String no = String.valueOf(i);
             String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
             String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);

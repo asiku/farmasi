@@ -1201,6 +1201,7 @@ public class frm_poli extends javax.swing.JFrame {
                    datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
                    
                 }
+                 
             } catch (Exception ex) {
                 Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1214,6 +1215,8 @@ public class frm_poli extends javax.swing.JFrame {
                 datl.Save_inapanakDetail(dm.getValueAt(i, 0).toString(), dm.getValueAt(i, 1).toString()
                         , this.lbl_nip_petugas_pilih.getText(), lbl_petugas.getText());
                  }
+                
+                hapusmodelunitdetail();
             } catch (Exception ex) {
                 Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
