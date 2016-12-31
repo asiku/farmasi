@@ -393,6 +393,7 @@ public class frm_poli extends javax.swing.JFrame {
         txt_cari_tindakan_pilih = new javax.swing.JTextField();
         bt_cari_tindakan_pilih = new javax.swing.JButton();
         bt_add_tindakan = new javax.swing.JButton();
+        lbl_nama_tindakan = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -433,7 +434,7 @@ public class frm_poli extends javax.swing.JFrame {
         r_belum = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        r_pulang = new javax.swing.JRadioButton();
+        r_pulang = new javax.swing.JCheckBox();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_unit_detail = new javax.swing.JTable();
@@ -649,6 +650,7 @@ public class frm_poli extends javax.swing.JFrame {
 
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tb_tindakan_pilih.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_tindakan_pilih.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -670,7 +672,7 @@ public class frm_poli extends javax.swing.JFrame {
         });
         jScrollPane9.setViewportView(tb_tindakan_pilih);
 
-        jPanel13.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 420, 470));
+        jPanel13.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 420, 450));
         jPanel13.add(txt_cari_tindakan_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 320, 33));
 
         bt_cari_tindakan_pilih.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
@@ -689,6 +691,10 @@ public class frm_poli extends javax.swing.JFrame {
             }
         });
         jPanel13.add(bt_add_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 420, 29));
+
+        lbl_nama_tindakan.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        lbl_nama_tindakan.setText("Nama Tindakan");
+        jPanel13.add(lbl_nama_tindakan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 410, -1));
 
         jTabbedPane2.addTab("Data Tindakan Inap", jPanel13);
 
@@ -863,7 +869,6 @@ public class frm_poli extends javax.swing.JFrame {
 
         jPanel7.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 60));
 
-        buttonGroup2.add(r_pulang);
         r_pulang.setText("Pulang");
         jPanel7.add(r_pulang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
@@ -1185,7 +1190,10 @@ public class frm_poli extends javax.swing.JFrame {
         hapusmodelunitdetail();
         
     }
+    
     private void saveTindakan() {
+        
+        //edit 31 des
         DefaultTableModel dm = (DefaultTableModel) tb_unit_detail.getModel();
         int rowCount = dm.getRowCount();
         if (rowCount != 0) {
@@ -1194,14 +1202,18 @@ public class frm_poli extends javax.swing.JFrame {
                 datl = new Crud_local();
            
                 if(tb_unit_detail_history.getModel().getRowCount()==0){
-                   datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien(),"dewasa");
+                   datl.Save_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_pulang.isSelected(), kondisipasien(),"dewasa");
                 }
                 else{
-                   
-                   datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
+                  
+                   datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_pulang.isSelected(), kondisipasien());
                    
                 }
-                 
+                
+                //edit 31 des
+                filterhistorytindakan(txt_no_rawat.getText(),2);
+                setukurantbulunitHistory();
+                
             } catch (Exception ex) {
                 Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1216,7 +1228,7 @@ public class frm_poli extends javax.swing.JFrame {
                         , this.lbl_nip_petugas_pilih.getText(), lbl_petugas.getText());
                  }
                 
-                hapusmodelunitdetail();
+                 hapusmodelunitdetail();
             } catch (Exception ex) {
                 Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1224,6 +1236,37 @@ public class frm_poli extends javax.swing.JFrame {
              
            
             
+        }
+        
+        
+        else{
+//           JOptionPane.showMessageDialog(null, "Tindakan Belum di Isi!");
+            
+            //begin
+            
+            try {
+                datl = new Crud_local();
+           
+                if(tb_unit_detail_history.getModel().getRowCount()==0){
+              
+                }
+                else{
+                  
+                   datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_pulang.isSelected(), kondisipasien());
+//                    JOptionPane.showMessageDialog(null, r_belum.isSelected());
+                }
+                
+                //edit 31 des
+                filterhistorytindakan(txt_no_rawat.getText(),2);
+                setukurantbulunitHistory();
+                
+            } catch (Exception ex) {
+                Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              
+
+            
+         //end
         }
 
     }
@@ -1353,20 +1396,34 @@ public class frm_poli extends javax.swing.JFrame {
 
     private void tb_tindakan_pilihMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tindakan_pilihMouseClicked
         // TODO add your handling code here:
+      //edit 31 des
+        
         if (txt_no_rawat.getText().isEmpty()) {
             int row = this.tb_tindakan_pilih.getSelectedRow();
 
             if (row == -1) {
                 // No row selected
             } else {
-                this.tb_tindakan_pilih.getModel().setValueAt(false, row, 2);
+                int srow = tb_tindakan_pilih.convertRowIndexToModel(row);
+                this.tb_tindakan_pilih.getModel().setValueAt(false, srow, 2);
+                
             }
 
             JOptionPane.showMessageDialog(null, "Data Pasien Belum di Pilih!");
             jTabbedPane2.setSelectedIndex(0);
 
         }
+        else{
+           
+            int row = this.tb_tindakan_pilih.getSelectedRow();
 
+            if (row == -1) {
+                // No row selected
+            } else {
+                int srow = tb_tindakan_pilih.convertRowIndexToModel(row);
+                lbl_nama_tindakan.setText(tb_tindakan_pilih.getModel().getValueAt(srow, 1).toString()); 
+            }
+        }
     }//GEN-LAST:event_tb_tindakan_pilihMouseClicked
 
     private void tb_tindakan_pilihMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tindakan_pilihMouseReleased
@@ -1444,12 +1501,22 @@ public class frm_poli extends javax.swing.JFrame {
     }
     
     //edit 26
-    public void cariStatDPJPPPJP(){
-        try {
+ public void cariStatDPJPPPJP(){
+             //edit 31 des
+   try {
             datl=new Crud_local();
             datl.readRec_cariUnitMaster(txt_no_rawat.getText(), 2);
       
-            r_pulang.setSelected(Boolean.parseBoolean(datl.modelunitanakmaster.getValueAt(0, 8).toString()));
+       
+             if(!datl.modelunitanakmaster.getValueAt(0, 8).toString().isEmpty()){  
+                r_pulang.setSelected(Boolean.parseBoolean(datl.modelunitanakmaster.getValueAt(0, 8).toString()));
+             }
+             else{
+              r_pulang.setSelected(false);
+             }
+     
+             
+          if(!datl.modelunitanakmaster.getValueAt(0, 9).toString().isEmpty()){  
             
             if(r_belum.getText().equals(datl.modelunitanakmaster.getValueAt(0, 9).toString())){
                r_belum.setSelected(true);
@@ -1466,8 +1533,16 @@ public class frm_poli extends javax.swing.JFrame {
              else if(r_sembuh.getText().equals(datl.modelunitanakmaster.getValueAt(0, 9).toString())){
                r_sembuh.setSelected(true);
             }
+          }
             
         } catch (Exception ex) {
+            r_belum.setSelected(false);
+            r_sembuh.setSelected(false);
+            r_membaik.setSelected(false);
+            r_menurun.setSelected(false);
+            r_kritis.setSelected(false);
+            r_sembuh.setSelected(false);
+            r_pulang.setSelected(false);
             Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
       
@@ -1494,11 +1569,11 @@ public class frm_poli extends javax.swing.JFrame {
             Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-       
-            
         
         
     }
+
+ 
     
     private void tb_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_regKeyPressed
         // TODO add your handling code here:
@@ -1860,6 +1935,7 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kamar_inap;
     private javax.swing.JLabel lbl_kelas;
+    private javax.swing.JLabel lbl_nama_tindakan;
     private javax.swing.JLabel lbl_news;
     private javax.swing.JLabel lbl_nip_petugas_pilih;
     private javax.swing.JLabel lbl_nm_status;
@@ -1876,7 +1952,7 @@ public class frm_poli extends javax.swing.JFrame {
     private javax.swing.JRadioButton r_kritis;
     private javax.swing.JRadioButton r_membaik;
     private javax.swing.JRadioButton r_menurun;
-    private javax.swing.JRadioButton r_pulang;
+    private javax.swing.JCheckBox r_pulang;
     private javax.swing.JRadioButton r_sembuh;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_reg;

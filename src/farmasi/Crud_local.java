@@ -677,11 +677,14 @@ public class Crud_local extends DBKoneksi_local {
          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE "
          + helper_tarif.KEY_STATUS_PENGESAH + " =? AND "
          + helper_tarif.KEY_STATUS_VERIF + " =? AND "        
+         + helper_tarif.KEY_ID_STATUS + " =? OR "                 
          + helper_tarif.KEY_ID_STATUS + " =? ");
           
          preparedStatement.setString(1, "ok");
-          preparedStatement.setString(2, "ok");
-          preparedStatement.setInt(3, idpoli);
+         preparedStatement.setString(2, "ok");
+         preparedStatement.setInt(3, idpoli);
+         preparedStatement.setInt(4, 5);
+         
      }
         ResultSet resultSet = preparedStatement.executeQuery();
 

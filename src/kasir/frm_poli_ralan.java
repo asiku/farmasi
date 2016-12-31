@@ -452,8 +452,15 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_no_sep = new javax.swing.JLabel();
         lbl = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
         tb_unit_detail = new javax.swing.JTable();
+        jPanel8 = new javax.swing.JPanel();
+        txt_bayar = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lbl_total_tagihan = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_unit_detail_history = new javax.swing.JTable();
@@ -715,7 +722,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         });
         jPanel12.add(lbl_cari1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 60, -1));
 
-        jTabbedPane2.addTab("Data Pasien Inap", jPanel12);
+        jTabbedPane2.addTab("Data Pasien", jPanel12);
 
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -883,26 +890,51 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
 
-        tb_unit_detail.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         tb_unit_detail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-
+                "Title 1", "Title 2"
             }
         ));
-        tb_unit_detail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tb_unit_detailMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tb_unit_detailMouseReleased(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tb_unit_detail);
+        jScrollPane3.setViewportView(tb_unit_detail);
 
-        jTabbedPane3.addTab("Data Tagihan", jScrollPane2);
+        jPanel7.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, 390));
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel8.add(txt_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 330, 37));
+
+        jLabel8.setText("Jumlah Bayar");
+        jPanel8.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        jLabel9.setText("Total Tagihan");
+        jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        lbl_total_tagihan.setText("0");
+        jPanel8.add(lbl_total_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 320, 30));
+
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 360, 380));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+        );
+
+        jTabbedPane3.addTab("Tagihan Pasien", jPanel5);
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -979,17 +1011,17 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane3)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Input Tindakan", jPanel1);
@@ -1567,45 +1599,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tb_regMouseReleased
 
-    private void tb_unit_detailMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unit_detailMouseReleased
-        // TODO add your handling code here:
-
-        if (evt.isPopupTrigger()) {
-
-            int row = tb_unit_detail.getSelectedRow();
-
-            if (row == -1) {
-                // No row selected
-            } else {
-                this.Popup_hapus.show(tb_unit_detail, evt.getX(), evt.getY());
-//                idhapusmaster = (jTable1.getModel().getValueAt(row, 0).toString());
-                irowtindakandetail = row;
-            }
-
-        }
-
-
-    }//GEN-LAST:event_tb_unit_detailMouseReleased
-
-    private void tb_unit_detailMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_unit_detailMousePressed
-        // TODO add your handling code here:
-        if (evt.isPopupTrigger()) {
-
-            int row = tb_unit_detail.getSelectedRow();
-
-            if (row == -1) {
-                // No row selected
-            } else {
-                this.Popup_hapus.show(tb_unit_detail, evt.getX(), evt.getY());
-                irowtindakandetail = row;
-
-            }
-
-        }
-
-
-    }//GEN-LAST:event_tb_unit_detailMousePressed
-
     private int cekkasir(){
         int a=0;
         try {
@@ -1881,16 +1874,21 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane9;
@@ -1918,12 +1916,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_status;
     private javax.swing.JLabel lbl_tgl_masuk;
     private javax.swing.JLabel lbl_tgl_server;
+    private javax.swing.JLabel lbl_total_tagihan;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_reg;
     private javax.swing.JTable tb_tindakan_pilih;
     private javax.swing.JTable tb_unit_detail;
     private javax.swing.JTable tb_unit_detail_history;
+    private javax.swing.JTextField txt_bayar;
     private javax.swing.JTextField txt_cari_nama_tindakan;
     private javax.swing.JTextField txt_cari_petugas;
     private javax.swing.JTextField txt_cari_reg;
