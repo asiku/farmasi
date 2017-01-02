@@ -96,6 +96,84 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
+    
+    public void readRec_kamarinapFisio(String[] bangsal,String txtcari,String tgl,String tglserver) {
+
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
+                    + helper_kamar_inap.KEY_NO_RM + " like ? OR "
+                    + helper_kamar_inap.KEY_NM_PASIEN + " like ?");
+            
+            preparedStatement.setString(1, "%"+ txtcari +"%");
+            preparedStatement.setString(2, "%"+ txtcari +"%");
+           
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+//        int i = 0;
+           // System.out.println("No RM" + resultSet.getFetchSize());
+
+            while (resultSet.next()) {
+
+//            i++;
+//            String no = String.valueOf(i);
+//             if((resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[0])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[1])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[2])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[3])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[4])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[5])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[6])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[7])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[8])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[9])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[10])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[11])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[12])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[13])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[14])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[15])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[16])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[17])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[18])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[19])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[20])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[21])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[22])
+//                     
+//                     ))
+//                             
+//                 
+//              {
+                  // && resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).substring(5, resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).length() - 3).equals(tgl)
+                  
+                 try {
+                     
+               if(Utilitas.Hitungtgl(tglserver,Utilitas.Jam(),resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK), Utilitas.Jam())<=744){  
+                String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
+                String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
+                String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
+                String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
+                String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
+                String kelas= resultSet.getString(helper_kamar_inap.KEY_KELAS);
+                String kdpj= resultSet.getString(helper_kamar_inap.KEY_KODE_STATUS_BAYAR);
+                String pj= resultSet.getString(helper_kamar_inap.KEY_STATUS_BAYAR);
+                modelkamarinap.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal,kelas,kdpj,pj});
+               }
+                 } catch (ParseException ex) {
+                     Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                
+               
+//              }
+             
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void readRec_kamarinapDewasa(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
         try {
