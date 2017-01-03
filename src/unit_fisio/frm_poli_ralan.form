@@ -869,14 +869,14 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/unit_poli/save_ico.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Print"/>
+                    <Property name="text" type="java.lang.String" value="Save"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_saveActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="650" y="110" width="210" height="40"/>
+                      <AbsoluteConstraints x="650" y="170" width="210" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -907,16 +907,16 @@
                 <Component class="javax.swing.JButton" name="bt_save1">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/unit_poli/save_ico.png"/>
+                      <Image iconType="3" name="/kasir/proces_ico.png"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Save"/>
+                    <Property name="text" type="java.lang.String" value="Print"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_save1ActionPerformed"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="650" y="170" width="210" height="40"/>
+                      <AbsoluteConstraints x="650" y="120" width="210" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>

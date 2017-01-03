@@ -412,7 +412,7 @@ public class Crud_local extends DBKoneksi_local {
 //            preparedStatement.setString(3, nipppjp);
 //            preparedStatement.setBoolean(4, statusinap);
 //            preparedStatement.setString(5, perkembangan);
-             preparedStatement.setString(2, "ralan");
+             preparedStatement.setString(2, "fisio");
             
            
             preparedStatement.execute();
@@ -510,6 +510,94 @@ public class Crud_local extends DBKoneksi_local {
         
     }
     
+    
+    public void readRec_cariUnitDetailInapanakFisio(String nm,int i,String usn,String noraw) throws SQLException {
+  
+    if(i==1){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE " 
+      + helper_unit_detail.KEY_NAMA_TINDAKAN + " like ? ");
+
+      preparedStatement.setString(1, "%" + nm + "%");
+    }
+    else if(i==2){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE " 
+      + helper_unit_detail.KEY_NO_RAWAT + " =? ");
+
+      preparedStatement.setString(1,  nm );
+    }
+    else if(i==5){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE " 
+      + helper_unit_detail.KEY_NO_RAWAT + " =? AND "
+      + helper_unit_detail.KEY_USERNAME + " =?"        
+      );
+
+      preparedStatement.setString(1,  nm );
+      preparedStatement.setString(2,  usn );
+      
+    }
+    
+    else if(i==4){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE DATE(" 
+      + helper_unit_detail.KEY_TGL + ") BETWEEN ? AND ? AND "
+      + helper_unit_detail.KEY_NO_RAWAT+"=? AND "
+      + helper_unit_detail.KEY_USERNAME + " =?"
+      );
+
+      preparedStatement.setString(1,  tgl1 );
+      preparedStatement.setString(2,  tgl2 );
+      preparedStatement.setString(3,  nm );
+      preparedStatement.setString(4,  usn );
+    }
+    else if(i==3){    
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE " 
+      + helper_unit_detail.KEY_NAMA + " like ? or "
+      + helper_unit_detail.KEY_USERNAME + " = ? AND "
+      + helper_unit_detail.KEY_NO_RAWAT + " = ? AND "        
+      + helper_unit_detail.KEY_NAMA_TINDAKAN + " like ? ");
+
+      preparedStatement.setString(1,  "%" + nm + "%");
+      preparedStatement.setString(2,   usn );
+      preparedStatement.setString(3,   noraw );
+      preparedStatement.setString(4,  "%" + nm + "%");
+      
+//       ResultSet resultSet = preparedStatement.executeQuery();
+//
+//        while (resultSet.next()) {
+//         
+//            String norawat = resultSet.getString(helper_unit_detail.KEY_NO_RAWAT);
+//            String kdtarif = resultSet.getString(helper_unit_detail.KEY_KODE_TARIF);
+//            String namatindakan = resultSet.getString(helper_unit_detail.KEY_NAMA_TINDAKAN);
+//            String nama = resultSet.getString(helper_unit_detail.KEY_NAMA);
+//            String tgl = resultSet.getString(helper_unit_detail.KEY_TGL);
+//            String username = resultSet.getString(helper_unit_detail.KEY_USERNAME);
+//            modelunitdetail.addRow(new Object[]{norawat,kdtarif,namatindakan,nama,tgl,username});
+//            
+//        }
+//        
+    }
+    else{
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME);
+    }
+        
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String norawat = resultSet.getString(helper_unit_detail.KEY_NO_RAWAT);
+            String kdtarif = resultSet.getString(helper_unit_detail.KEY_KODE_TARIF);
+            String namatindakan = resultSet.getString(helper_unit_detail.KEY_NAMA_TINDAKAN);
+            String nama = resultSet.getString(helper_unit_detail.KEY_NAMA);
+            String tgl = resultSet.getString(helper_unit_detail.KEY_TGL);
+            String username = resultSet.getString(helper_unit_detail.KEY_USERNAME);
+            modelunitdetail.addRow(new Object[]{norawat,kdtarif,namatindakan,nama,tgl,username});
+            
+        }
+        
+        
+    }
+    
+    
     public void readRec_cariUnitDetailInapanak(String nm,int i) throws SQLException {
   
     if(i==1){    
@@ -524,6 +612,7 @@ public class Crud_local extends DBKoneksi_local {
 
       preparedStatement.setString(1,  nm );
     }
+    
     else if(i==4){    
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit_detail.TB_VNAME + " WHERE DATE(" 
       + helper_unit_detail.KEY_TGL + ") BETWEEN ? AND ? AND "

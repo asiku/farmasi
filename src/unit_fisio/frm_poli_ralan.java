@@ -188,18 +188,20 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         txt_cari_nama_tindakan.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                filterTindakanhistory();
+              filterTindakanFisio();
 
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                filterTindakanhistory();
+//                filterTindakanhistory();
+filterTindakanFisio();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                filterTindakanhistory();
+//                filterTindakanhistory();
+filterTindakanFisio();
             }
         });
         
@@ -281,6 +283,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tr.getColumn(3).setPreferredWidth(220);
         tr.getColumn(4).setPreferredWidth(150);
 
+        
+        this.tb_reg_inap.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_reg_inap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tri = this.tb_reg_inap.getColumnModel();
+
+        tri.getColumn(0).setPreferredWidth(120);
+        tri.getColumn(1).setPreferredWidth(320);
+        tri.getColumn(2).setPreferredWidth(100);
+        tri.getColumn(3).setPreferredWidth(220);
+        tri.getColumn(4).setPreferredWidth(150);
+
+        
     }
     
     private void setukurantbulunitdetail() {
@@ -848,13 +862,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(lbl_nm_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 230, 19));
 
         bt_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
-        bt_save.setText("Print");
+        bt_save.setText("Save");
         bt_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_saveActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 210, 40));
+        jPanel4.add(bt_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 210, 40));
 
         jLabel7.setText("Kelas");
         jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 60, -1));
@@ -862,14 +876,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_kelas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_kelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 150, 19));
 
-        bt_save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
-        bt_save1.setText("Save");
+        bt_save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/proces_ico.png"))); // NOI18N
+        bt_save1.setText("Print");
         bt_save1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_save1ActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 210, 40));
+        jPanel4.add(bt_save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, 210, 40));
 
         jTabbedPane3.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1164,7 +1178,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 }
                 else{
                    
-//                   datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
+                  // datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
                    
                 }
                 
@@ -1411,7 +1425,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
      filterhistorytindakan(txt_cari_nama_tindakan.getText(),3);
    }
   }
-    
+  
+private void filterTindakanFisio(){
+if(!this.txt_no_rawat.getText().isEmpty()){   
+     Utilitas.filtertb(txt_cari_nama_tindakan.getText(), tb_unit_detail_history, 2, 2);
+   }
+}  
+  
+  
   private void filterhistorytindakan(String txt,int i){
     
         try {
@@ -1421,7 +1442,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
              datl.tgl1=dateFormatter.format(Dttgl1.getDate());
             datl.tgl2=dateFormatter.format(Dttgl2.getDate());
             
-            datl.readRec_cariUnitDetailInapanak(txt, i);
+            datl.readRec_cariUnitDetailInapanakFisio(txt, i,lbl_petugas.getText(),txt_no_rawat.getText());
         
             tb_unit_detail_history.setModel(datl.modelunitdetail);
             setukurantbulunitHistory();
@@ -1690,7 +1711,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 // No row selected
             } else {
                 this.Popup_history.show(tb_unit_detail_history, evt.getX(), evt.getY());
-                irowhistory = row;
+                int srow = tb_unit_detail_history.convertRowIndexToModel(row);
+                irowhistory = srow;
 
             }
 
@@ -1716,8 +1738,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             if (row == -1) {
                 // No row selected
             } else {
-               lbl_petugas_history.setText(tb_unit_detail_history.getModel().getValueAt(row, 3).toString());
-               lbl_petugas_input_history.setText(tb_unit_detail_history.getModel().getValueAt(row, 5).toString());
+                int srow = tb_unit_detail_history.convertRowIndexToModel(row);
+               lbl_petugas_history.setText(tb_unit_detail_history.getModel().getValueAt(srow, 3).toString());
+               lbl_petugas_input_history.setText(tb_unit_detail_history.getModel().getValueAt(srow, 5).toString());
                
             }
     }//GEN-LAST:event_tb_unit_detail_historyMouseClicked
@@ -1737,7 +1760,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 // No row selected
             } else {
                 this.Popup_history.show(tb_unit_detail_history, evt.getX(), evt.getY());
-                irowhistory = row;
+                int srow = tb_unit_detail_history.convertRowIndexToModel(row);
+                irowhistory = srow;
 
             }
 

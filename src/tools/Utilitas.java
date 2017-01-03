@@ -78,8 +78,8 @@ public class Utilitas {
 
             Client client = Client.create();
 
-            WebResource webResource = client.resource("http://localhost/rsjul/timeserver.php?waktu=mentawaktujang");
-//            WebResource webResource = client.resource("http://192.168.1.31/rsjul/timeserver.php?waktu=mentawaktujang");
+//            WebResource webResource = client.resource("http://localhost/rsjul/timeserver.php?waktu=mentawaktujang");
+            WebResource webResource = client.resource("http://192.168.1.31/rsjul/timeserver.php?waktu=mentawaktujang");
 
             ClientResponse response = webResource.accept("").get(ClientResponse.class);
             if (response.getStatus() != 200) {

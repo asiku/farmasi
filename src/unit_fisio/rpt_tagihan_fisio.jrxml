@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="509" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3a6bd0e-f868-40dc-b4c4-710b2f9a490f">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="41"/>
+	<property name="ireport.y" value="192"/>
+	<parameter name="noraw" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="username" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tgl" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+   *
+FROM
+     V_tagihan_fisio WHERE no_rawat=$P{noraw} AND username=$P{username}]]>
+	</queryString>
+	<field name="no_rawat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_rkm_medis" class="java.lang.String"/>
+	<field name="nm_pasien" class="java.lang.String"/>
+	<field name="kd_poli" class="java.lang.String"/>
+	<field name="nm_poli" class="java.lang.String"/>
+	<field name="tgl_registrasi" class="java.sql.Date"/>
+	<field name="kd_pj" class="java.lang.String"/>
+	<field name="png_jawab" class="java.lang.String"/>
+	<field name="nama_tindakan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tarif_tindakan" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tarif_tindakan_bpjs" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="username" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="no_rawat">
+		<groupExpression><![CDATA[$F{no_rawat}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="118" y="14" width="324" height="18" uuid="1321a536-9739-4594-9e0a-444dc0665461"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RS JULIANA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="50" width="324" height="18" uuid="e4a9769f-2cc6-4414-b209-6cebea144d62"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telp: 0251 - 83395993, E-mail : rsiajuliana@gmail.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="32" width="324" height="18" uuid="4f322e4a-d1cd-4727-b06c-fc0d6c0e8cb7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Tajur No. 75, Bogor, Jawa Barat]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="118" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="27" width="60" height="20" uuid="cff6336c-ad81-46f9-9699-37c799e7a023"/>
+				<text><![CDATA[No. Rm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="47" width="73" height="20" uuid="0d83dd06-7ab4-4fe3-9787-5fd8a88b9eb8"/>
+				<text><![CDATA[Nama Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="47" width="19" height="23" uuid="da79e893-f986-4eb8-9f4b-bc4ce04958ee"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="27" width="19" height="23" uuid="b0365c92-8aca-48ad-94ee-6d1b53962809"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="69" width="73" height="20" uuid="8137c536-3009-4d3a-9f23-59d977b41468"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="72" y="69" width="19" height="23" uuid="590a2327-ab40-426a-a977-274d5a8eeedf"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="30" width="100" height="20" uuid="94916e04-781a-4d9c-ace5-c97686b9e640"/>
+				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="7" width="60" height="20" uuid="a6d2ea4c-edc2-42a1-ad45-3205f9d15cd5"/>
+				<text><![CDATA[No. Rawat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="7" width="19" height="23" uuid="ad1410d4-0e0b-4442-9063-9d1df4e82398"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="7" width="100" height="20" uuid="6c77d7df-885d-403b-a66c-996f8be17ac4"/>
+				<textFieldExpression><![CDATA[$F{no_rawat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="50" width="100" height="20" uuid="afac1cfa-2ff4-4b69-9831-6795eafe478d"/>
+				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="72" width="116" height="20" uuid="f05c673f-ec3a-4565-987f-1c14b8392ed0"/>
+				<textFieldExpression><![CDATA[$F{png_jawab}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="394" y="7" width="147" height="20" uuid="440cccc6-b278-44f9-b2f7-cf7c84892a58"/>
+				<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="7" width="19" height="23" uuid="e5afcbff-741d-4a3d-8d57-d8e3e2c1f160"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="7" width="60" height="20" uuid="ec3fcc82-1c08-46a9-9f37-f2261ef32e44"/>
+				<text><![CDATA[Petugas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="34" width="60" height="20" uuid="935a55a4-598d-4d8b-b901-129aaed8ade1"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="34" width="19" height="23" uuid="30e1d9ca-d9d8-48f7-8873-930228dc5bab"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="394" y="34" width="147" height="20" uuid="abdfe548-72be-40ed-ba36-7970a62da8ac"/>
+				<textFieldExpression><![CDATA[$P{tgl}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="102" width="73" height="14" uuid="a961270b-faaa-4933-b68c-4d3a4f333c00"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
