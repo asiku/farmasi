@@ -324,16 +324,15 @@ filterTindakanFisio();
     }
     
     private void setukurantbRegInap() {
-        this.tb_reg_inap.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+      this.tb_reg_inap.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
         tb_reg_inap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tri = this.tb_reg_inap.getColumnModel();
 
-        TableColumnModel tr = tb_reg_inap.getColumnModel();
-
-        tr.getColumn(0).setPreferredWidth(60);
-        tr.getColumn(1).setPreferredWidth(320);
-        tr.getColumn(2).setPreferredWidth(50);
-        tr.getColumn(3).setPreferredWidth(100);
-        tr.getColumn(4).setPreferredWidth(100);
+        tri.getColumn(0).setPreferredWidth(120);
+        tri.getColumn(1).setPreferredWidth(320);
+        tri.getColumn(2).setPreferredWidth(100);
+        tri.getColumn(3).setPreferredWidth(220);
+        tri.getColumn(4).setPreferredWidth(150);
     }
 
 
@@ -343,9 +342,9 @@ filterTindakanFisio();
 
         TableColumnModel tr = tb_reg.getColumnModel();
 
-        tr.getColumn(0).setPreferredWidth(60);
-        tr.getColumn(1).setPreferredWidth(100);
-        tr.getColumn(2).setPreferredWidth(300);
+        tr.getColumn(0).setPreferredWidth(50);
+        tr.getColumn(1).setPreferredWidth(80);
+        tr.getColumn(2).setPreferredWidth(305);
         tr.getColumn(3).setPreferredWidth(100);
         tr.getColumn(4).setPreferredWidth(100);
     }
@@ -648,7 +647,7 @@ filterTindakanFisio();
         });
         jScrollPane4.setViewportView(tb_reg);
 
-        jPanel12.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 460, 480));
+        jPanel12.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 460, 450));
 
         txt_cari_reg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1175,6 +1174,7 @@ filterTindakanFisio();
            
                 if(tb_unit_detail_history.getModel().getRowCount()==0){
                    datl.Save_tindakanralan(txt_no_rawat.getText());
+//                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "");
                 }
                 else{
                    
@@ -1207,6 +1207,11 @@ filterTindakanFisio();
             
         }
 
+        else{
+        
+            JOptionPane.showMessageDialog(null, "Maaf anda Belum Memilih Tindakan!");
+        
+        }
     }
 
     private String kondisipasien() {
@@ -1233,7 +1238,7 @@ filterTindakanFisio();
     
     private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
         // TODO add your handling code here:
-        if (!(txt_no_rawat.getText().isEmpty() || lbl_nip_petugas_pilih.getText().isEmpty())) {
+        if (!txt_no_rawat.getText().isEmpty() ) {
 //            if ( r_pulang.isSelected()) {
                
                     saveTindakan();
@@ -1302,7 +1307,7 @@ filterTindakanFisio();
               }
            else{
             
-        if (!this.lbl_nip_petugas_pilih.getText().isEmpty()) {
+        if (!this.lbl_petugas.getText().isEmpty()) {
             tb_tindakan_pilih.requestFocus();
             tb_tindakan_pilih.setRowSelectionInterval(0, 0);
 
@@ -1394,14 +1399,27 @@ filterTindakanFisio();
 
     
     private void setMasukdatInputInap(int row) {
-         txt_no_rm.setText(this.tb_reg_inap.getModel().getValueAt(row, 0).toString());
-        this.txt_nm_pasien.setText(this.tb_reg_inap.getModel().getValueAt(row, 1).toString());
-        txt_no_rawat.setText(this.tb_reg_inap.getModel().getValueAt(row, 2).toString());
-        this.lbl_tgl_masuk.setText(this.tb_reg_inap.getModel().getValueAt(row, 3).toString());
+        try {
+            txt_no_rm.setText(this.tb_reg_inap.getModel().getValueAt(row, 0).toString());
+            this.txt_nm_pasien.setText(this.tb_reg_inap.getModel().getValueAt(row, 1).toString());
+            txt_no_rawat.setText(this.tb_reg_inap.getModel().getValueAt(row, 2).toString());
+            
+            dat = new Crud_farmasi();
+            
+            dat.readRec_registrasiFisio(txt_no_rawat.getText());
+            
+            lbl_nip_petugas_pilih.setText(dat.kddokterfisio);
+            txt_petugas_pilih.setText(dat.nmdokterfisio);
+            
+            
+            this.lbl_tgl_masuk.setText(this.tb_reg_inap.getModel().getValueAt(row, 3).toString());
 //        lbl_kamar_inap.setText(this.tb_reg.getModel().getValueAt(row, 4).toString());
-        this.lbl_kelas.setText(this.tb_reg_inap.getModel().getValueAt(row, 5).toString());
-        this.lbl_status.setText(this.tb_reg_inap.getModel().getValueAt(row, 6).toString());
-        this.lbl_nm_status.setText(this.tb_reg_inap.getModel().getValueAt(row, 7).toString());
+            this.lbl_kelas.setText(this.tb_reg_inap.getModel().getValueAt(row, 5).toString());
+            this.lbl_status.setText(this.tb_reg_inap.getModel().getValueAt(row, 6).toString());
+            this.lbl_nm_status.setText(this.tb_reg_inap.getModel().getValueAt(row, 7).toString());
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
  
     
@@ -1772,6 +1790,8 @@ if(!this.txt_no_rawat.getText().isEmpty()){
 
     private void item_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_hapusActionPerformed
         // TODO add your handling code here:
+        
+     if(tb_unit_detail_history.getModel().getValueAt(irowhistory, 5).toString().equals(lbl_petugas.getText()))  { 
         int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus Tindakan :  "+ tb_unit_detail_history.getModel().getValueAt(irowhistory, 2),"Warning ",
          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
    
@@ -1779,6 +1799,10 @@ if(!this.txt_no_rawat.getText().isEmpty()){
               this.HapusRowHistory(irowhistory);
               
         }
+     }
+     else{
+       JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Berhak Menghapus Data Tersebut Karena Berbeda Penginput Data!");
+     } 
     }//GEN-LAST:event_item_hapusActionPerformed
 
     private void bt_cari_tglActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_tglActionPerformed
@@ -1940,6 +1964,31 @@ if(!this.txt_no_rawat.getText().isEmpty()){
     
     private void bt_save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save1ActionPerformed
         // TODO add your handling code here:
+          try {
+                datl = new Crud_local();
+           
+                if(!txt_no_rawat.getText().isEmpty()){
+                  
+                  if(lbl_status.getText().equals("2"))  {
+                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "",2);
+                  }
+                  else{
+                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "",1);
+                  }
+                }
+                else{
+                   JOptionPane.showMessageDialog(null, "Data Pasien Belum di Pilih!");
+                  // datl.Update_inapanakmaster(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_belum.isSelected(), kondisipasien());
+                   
+                }
+                
+                 
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Maaf Data Tersebut tidak bisa dicetak!");
+                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              
+        
     }//GEN-LAST:event_bt_save1ActionPerformed
 
     private void filterPegawai() {

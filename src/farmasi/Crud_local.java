@@ -367,6 +367,7 @@ public class Crud_local extends DBKoneksi_local {
            ,String username)  {
 
         try {
+            
             preparedStatement = connect.prepareStatement("insert into " + helper_unit_detail.TB_NAME + " (" 
                     + helper_unit_detail.KEY_NO_RAWAT + "," 
                     + helper_unit_detail.KEY_KODE_TARIF + ","
@@ -387,6 +388,7 @@ public class Crud_local extends DBKoneksi_local {
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+           
         }
 
     }
@@ -2150,6 +2152,40 @@ public class Crud_local extends DBKoneksi_local {
         }
 
     }
+   
+   
+  public void CetakTagihanFisio(String nonota,String username,String tampil,int i) throws JRException {
+
+        InputStream is = null;
+        
+      if(i==1){  
+        is = getClass().getResourceAsStream("/unit_fisio/rpt_tagihan_fisio.jrxml");
+      }
+      else{
+        is = getClass().getResourceAsStream("/unit_fisio/rpt_tagihan_fisio_BPJS.jrxml");
+      }
+
+        //set parameters
+        Map map = new HashMap();
+        map.put("noraw", nonota);
+        map.put("username", username);
+        
+     
+
+       JasperReport jr = JasperCompileManager.compileReport(is);
+//
+        JasperPrint jp = JasperFillManager.fillReport(jr, map, connect);
+      
+
+      
+        JasperPrintManager.printReport(jp,false);
+        JasperViewer.viewReport(jp, false);
+        if(tampil.equals("ok")){
+            JasperViewer.viewReport(jp, false);
+        }
+       
+    }    
+   
    
   public void CetakNota(String nonota,String tampil) throws JRException {
 

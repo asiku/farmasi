@@ -28,6 +28,10 @@ public class Crud_farmasi extends DBkoneksi {
         ConDb();
     }
 
+    
+    public static String kddokterfisio="";
+    public static String nmdokterfisio="";
+    
     // public static int rcount;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -415,6 +419,9 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    
+    
+    
     //edit here 26
     public String readRec_CariPegawaiNM(String nip) throws SQLException{
           String nama="";
@@ -620,6 +627,32 @@ public class Crud_farmasi extends DBkoneksi {
          }    
      }
         
+    }
+
+    
+    public void readRec_registrasiFisio(String noraw) throws SQLException {
+
+       
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_NO_RAWAT + " =?");
+
+        preparedStatement.setString(1, noraw);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        
+
+        while (resultSet.next()) {
+
+        
+           kddokterfisio = resultSet.getString(helper_registrasi.KEY_KODE_DOKTER);
+           nmdokterfisio= resultSet.getString(helper_registrasi.KEY_NAMA_DOKTER);
+          
+        
+        }
+        
+      
     }
 
     

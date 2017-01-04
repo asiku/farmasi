@@ -795,6 +795,8 @@ public class frm_poli extends javax.swing.JFrame {
 
         lbl_nip_petugas_pilih.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_nip_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 110, 25));
+
+        txt_petugas_pilih.setEditable(false);
         jPanel4.add(txt_petugas_pilih, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 220, 30));
 
         bt_cari_tindakan.setText("jButton8");

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="509" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3a6bd0e-f868-40dc-b4c4-710b2f9a490f">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="80"/>
-	<property name="ireport.y" value="152"/>
+	<property name="ireport.x" value="99"/>
+	<property name="ireport.y" value="167"/>
 	<parameter name="noraw" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -46,8 +46,9 @@ FROM
 	<field name="username" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="v_total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{tarif_tindakan}]]></variableExpression>
+        
+        <variable name="v_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{tarif_tindakan_bpjs}]]></variableExpression>
 	</variable>
 	<group name="no_rawat">
 		<groupExpression><![CDATA[$F{no_rawat}]]></groupExpression>
@@ -160,7 +161,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{tgl}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="320" y="6" width="227" height="20" uuid="a0818c13-958e-450a-985f-691d8a4e445d"/>
+				<reportElement x="316" y="7" width="227" height="20" uuid="a0818c13-958e-450a-985f-691d8a4e445d"/>
 				<textFieldExpression><![CDATA[$F{almt_pj}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -174,6 +175,18 @@ FROM
 			<textField>
 				<reportElement x="318" y="61" width="147" height="20" uuid="1f179d99-450b-424f-bae6-85f0f1573214"/>
 				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="292" y="83" width="19" height="23" uuid="4dc770c9-71bc-49ed-8352-b2f711bfe1d1"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="83" width="60" height="20" uuid="e201e410-e90f-461b-9c26-9a62d88f00ff"/>
+				<text><![CDATA[No. SEP]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="318" y="83" width="215" height="20" uuid="8ad26c5c-6e92-47b9-8c9f-db9a239e0b24"/>
+				<textFieldExpression><![CDATA[$F{no_sep}]]></textFieldExpression>
 			</textField>
 			<rectangle>
 				<reportElement mode="Transparent" x="0" y="103" width="555" height="20" uuid="988dfa66-fa6c-404c-950e-25b84aa9cf9c"/>
@@ -192,9 +205,9 @@ FROM
 	</columnHeader>
 	<detail>
 		<band height="23" splitType="Stretch">
-			<textField pattern="#,##0">
+			<textField>
 				<reportElement x="393" y="3" width="154" height="20" uuid="3f1f3dc0-107a-4f50-aaee-88ae8edb1dba"/>
-				<textFieldExpression><![CDATA[$F{tarif_tindakan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{tarif_tindakan_bpjs}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="-1" width="1" height="24" uuid="8aca545a-cc95-4a53-adcd-aae85c3867b8"/>
@@ -240,21 +253,21 @@ FROM
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[)]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="520" y="49" width="27" height="20" uuid="2983b84e-b8d6-45da-95fc-6fab482868d8"/>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="454" y="49" width="60" height="20" uuid="51046e38-be2c-430e-9875-d2cb91ef21fa"/>
-				<text><![CDATA[Halaman :]]></text>
-			</staticText>
 			<textField pattern="#,##0">
-				<reportElement x="393" y="10" width="145" height="20" uuid="337443fc-e803-4a04-a621-9fef476fe912"/>
+				<reportElement x="396" y="7" width="145" height="20" uuid="cc231342-c220-423a-8b64-6bc8a1072cae"/>
 				<textFieldExpression><![CDATA[$V{v_total}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="364" y="10" width="18" height="20" uuid="c053baca-b273-4511-99f9-ba7c4dd8db2b"/>
+				<reportElement x="367" y="7" width="18" height="20" uuid="feebf601-2f00-45eb-9e3d-79a3137343ca"/>
 				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="523" y="46" width="27" height="20" uuid="710bf033-9c2f-4fea-b68b-c5ad0446dcf8"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="457" y="46" width="60" height="20" uuid="d856bb02-c902-49cb-999e-1b3d8de4664d"/>
+				<text><![CDATA[Halaman :]]></text>
 			</staticText>
 		</band>
 	</summary>
