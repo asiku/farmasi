@@ -580,6 +580,65 @@ public class Crud_farmasi extends DBkoneksi {
         
     }
     
+    public void readRec_registrasiRalanFisio(String tgl,String name,int s) throws SQLException {
+
+         //edit 05 jan 2016
+     if(s==1){   
+       
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+     if(s==2){   
+        
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "
+                + helper_registrasi.KEY_NM_PASIEN + " like ?" );
+
+        preparedStatement.setString(1, tgl);
+        preparedStatement.setString(2, "%" + name + "%");
+     }
+     
+     else{
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+        //kode igd=3
+//        preparedStatement.setInt(2, 3);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0; 
+
+      while (resultSet.next()) {
+
+          
+       if(resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT).equals("Ralan")||resultSet.getString(helper_registrasi.KEY_KODE_POLI).equals("3")){
+        
+           i++;
+            String no = String.valueOf(i);
+            String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
+            String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
+            String kodedokter = resultSet.getString(helper_registrasi.KEY_KODE_DOKTER);
+            String nmdokter = resultSet.getString(helper_registrasi.KEY_NAMA_DOKTER);
+            String kdpoli = resultSet.getString(helper_registrasi.KEY_KODE_POLI);
+            String poli = resultSet.getString(helper_registrasi.KEY_POLI);
+            String kdpj = resultSet.getString(helper_registrasi.KEY_KODE_PJ);
+            String nmpj = resultSet.getString(helper_registrasi.KEY_NAMA_PJ);
+            String norawat = resultSet.getString(helper_registrasi.KEY_NO_RAWAT);
+             
+            modelregralan.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj,norawat});
+         }    
+     }
+        
+    }
+
     
     public void readRec_registrasiRalan(String tgl,int s) throws SQLException {
 
@@ -592,6 +651,17 @@ public class Crud_farmasi extends DBkoneksi {
 
         preparedStatement.setString(1, tgl);
      }
+     if(s==2){   
+        //edit 29 des 2016
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "
+                + helper_registrasi.KEY_NM_PASIEN + " like ?" );
+
+        preparedStatement.setString(1, tgl);
+         preparedStatement.setString(1, tgl);
+     }
+     
      else{
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
                 + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );

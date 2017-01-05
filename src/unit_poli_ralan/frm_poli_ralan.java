@@ -214,14 +214,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void filtertxt() {
 
-//            for (int i = 0; i < txt_cari_reg.getText().length(); i++) {
-//                if (Character.isDigit(txt_cari_reg.getText().charAt(i))) {
-//                    Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 0);
-//                } else {
-                   Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
-//                }
-//            }
-//        filterReg();
+//                   Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
+
+       try {
+            //                   Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
+
+            dat = new Crud_farmasi();
+            dat.readRec_registrasiRalanFisio(this.lbl_tgl_server.getText(),txt_cari_reg.getText(),2);
+            
+            this.tb_reg.setModel(dat.modelregralan);
+
+            setukurantbReg();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(unit_poli_ralan.frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
 
     }
 
