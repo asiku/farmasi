@@ -70,8 +70,18 @@ public class Crud_local extends DBKoneksi_local {
          "% Sarana","Nama Poli","Status","Pengesah","Verif","pilih"};
       
       
-      String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Username"};
+    String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Username"};
+      
+    String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS"};
 
+    
+    public DefaultTableModel modelbiayatindakan = new DefaultTableModel(biaya_tindakan_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };  
+      
     public DefaultTableModel modelunitdetail = new DefaultTableModel(unit_detail, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -117,7 +127,7 @@ public class Crud_local extends DBKoneksi_local {
      String[] tarif_mastertemplatedetail = new String[]{"Nama Template","Kode Tarif" ,"Nama Tarif"};
      
      
-      public DefaultTableModel modeltemplatemasterdetail = new DefaultTableModel(tarif_mastertemplatedetail, 0) {
+    public DefaultTableModel modeltemplatemasterdetail = new DefaultTableModel(tarif_mastertemplatedetail, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
 
@@ -1270,6 +1280,8 @@ public class Crud_local extends DBKoneksi_local {
         }
     } 
      
+     
+     
      public int readRec_Hitkasir(String norw) throws SQLException {
 
        int hit=0;  
@@ -1344,8 +1356,7 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
-    
-     public void readRec_cariTrans(String nm_p, String tgl) throws SQLException {
+    public void readRec_cariTrans(String nm_p, String tgl) throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME + " WHERE "
                 + helper_v_trans.KEY_NM_PASIEN + " like ? AND " + helper_v_trans.KEY_TGL + " =?");
@@ -1373,6 +1384,31 @@ public class Crud_local extends DBKoneksi_local {
             Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
 
             modelctrans.addRow(new Object[]{no, nonota, rm, nmp,petugas,tglc,brg,jml,hargasat,totalc});
+        }
+    }
+     
+    
+     public void readRec_Biayatindakankasir(String noraw) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_biaya_tindakan.TB_VNAME + " WHERE "
+                                                     + helper_v_biaya_tindakan.KEY_NO_RAWAT + " =?");
+
+        preparedStatement.setString(1, noraw);
+       
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+
+
+            String norawat = resultSet.getString(helper_v_biaya_tindakan.KEY_NO_RAWAT);
+            String kdtarif = resultSet.getString(helper_v_biaya_tindakan.KEY_KODE_TARIF);
+            String nmt = resultSet.getString(helper_v_biaya_tindakan.KEY_NAMA_TINDAKAN);
+            Double tarif = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN);
+            Double tarifbpjs = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN_BPJS);
+
+            modelbiayatindakan.addRow(new Object[]{norawat, kdtarif, nmt, tarif,tarifbpjs});
+            
         }
     }
     

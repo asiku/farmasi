@@ -58,11 +58,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private int pilihcari;
 
+    
+    String[] biaya_title = new String[]{"Nama Tagihan", "Tarif"};
+    
     String[] template_title = new String[]{"Nama Template", "Petugas", "Status", "Tanggal"};
     String[] template_detail = new String[]{"Nama Template", "Kode Tindakan", "Tindakan"};
 
     String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Nip Petugas"};
 
+    DefaultTableModel modelbiaya = new DefaultTableModel(biaya_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+    
+    
     DefaultTableModel modelunitdetail = new DefaultTableModel(unit_detail, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -212,7 +223,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }
 
     private void filterNorawat() {
-        Utilitas.filtertb(txt_no_rawat.getText(), tb_unit_detail, 0, 2);
+//    t        Utilitas.filtertb(txt_no_rawat.getText(), tb_biaya_tindakan, 0, 2);
 
     }
 
@@ -230,15 +241,40 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     
     private void filtertxt() {
 
-//            for (int i = 0; i < txt_cari_reg.getText().length(); i++) {
-//                if (Character.isDigit(txt_cari_reg.getText().charAt(i))) {
-//                    Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 0);
-//                } else { Utilitas
-                   Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
-//                }
-//            }
-//        filterReg();
+// try {
+//            //                   Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
+//
+//            dat = new Crud_farmasi();
+//            dat.readRec_registrasiRalanFisio(this.lbl_tgl_server.getText(),txt_cari_reg.getText(),2);
+//            
+//            this.tb_reg.setModel(dat.modelregralan);
+//
+//            setukurantbReg();
+//            
+//        } catch (Exception ex) {
+//            Logger.getLogger(unit_fisio.frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
+ try {
+
+                dat = new Crud_farmasi();
+
+                String datePattern = "yyyy-MM-dd";
+                SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+                //dateFormatter.format(dt_tgl_reg.getDate())
+                dat.readRec_registrasiKasir(this.lbl_tgl_server.getText(),txt_cari_reg.getText(),2);
+                
+                this.tb_reg.setModel(dat.modelregralankasir);
+
+                setukurantbReg();
+                lbl_stat_tgl.setText("Hasil Pencarian Pasien TGl: "+this.lbl_tgl_server.getText());
+    
+            } catch (SQLException ex) {
+                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       
     }
 
     private void setukurantbRegInap() {
@@ -304,7 +340,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 String datePattern = "yyyy-MM-dd";
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
                 //dateFormatter.format(dt_tgl_reg.getDate())
-                dat.readRec_registrasiKasir(this.lbl_tgl_server.getText(),1);
+                dat.readRec_registrasiKasir(this.lbl_tgl_server.getText(),txt_cari_reg.getText(),1);
                 
                 this.tb_reg.setModel(dat.modelregralankasir);
 
@@ -349,9 +385,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     
     private void setukurantbulunitdetail() {
 
-        this.tb_unit_detail.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
-        tb_unit_detail.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        TableColumnModel tr = this.tb_unit_detail.getColumnModel();
+        this.tb_biaya_tindakan.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_biaya_tindakan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr = this.tb_biaya_tindakan.getColumnModel();
 
         tr.getColumn(0).setPreferredWidth(120);
         tr.getColumn(1).setPreferredWidth(100);
@@ -369,9 +405,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         TableColumnModel tr = tb_reg.getColumnModel();
 
-        tr.getColumn(0).setPreferredWidth(60);
-        tr.getColumn(1).setPreferredWidth(100);
-        tr.getColumn(2).setPreferredWidth(300);
+        tr.getColumn(0).setPreferredWidth(50);
+        tr.getColumn(1).setPreferredWidth(71);
+        tr.getColumn(2).setPreferredWidth(320);
         tr.getColumn(3).setPreferredWidth(100);
         tr.getColumn(4).setPreferredWidth(100);
     }
@@ -488,7 +524,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tb_unit_detail = new javax.swing.JTable();
+        tb_biaya_tindakan = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         txt_bayar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -673,6 +709,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tb_reg.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tb_regMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_regMouseClicked(evt);
             }
         });
         tb_reg.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -940,7 +979,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tb_unit_detail.setModel(new javax.swing.table.DefaultTableModel(
+        tb_biaya_tindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -948,9 +987,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
-        jScrollPane3.setViewportView(tb_unit_detail);
+        jScrollPane3.setViewportView(tb_biaya_tindakan);
 
-        jPanel7.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, 390));
+        jPanel7.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 14, -1, 310));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -965,7 +1004,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_total_tagihan.setText("0");
         jPanel8.add(lbl_total_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 320, 30));
 
-        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 360, 380));
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 360, 300));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1220,7 +1259,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void hapusmodelunitdetail() {
-        DefaultTableModel dm = (DefaultTableModel) tb_unit_detail.getModel();
+        DefaultTableModel dm = (DefaultTableModel) tb_biaya_tindakan.getModel();
         int rowCount = dm.getRowCount();
         if (rowCount != 0) {
             for (int i = rowCount - 1; i >= 0; i--) {
@@ -1237,7 +1276,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         
     }
     private void saveTindakan() {
-        DefaultTableModel dm = (DefaultTableModel) tb_unit_detail.getModel();
+        DefaultTableModel dm = (DefaultTableModel) tb_biaya_tindakan.getModel();
         int rowCount = dm.getRowCount();
         if (rowCount != 0) {
 
@@ -1338,7 +1377,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
      //edit 31 des 2016
      //cari RM
-     Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 1,1);
+//     Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 1,1);
     }//GEN-LAST:event_lbl_cariMouseClicked
 
     private void txt_cari_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_regKeyPressed
@@ -1368,7 +1407,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_nm_poli.setText(this.tb_reg.getModel().getValueAt(row, 7).toString());   
         
         lbl_stat_pasien.setText(this.tb_reg.getModel().getValueAt(row, 11).toString());
-        
+//        
         lbl_no_sep.setText(this.tb_reg.getModel().getValueAt(row, 12).toString());
         
         
@@ -1483,13 +1522,17 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
                  int srow = tb_reg.convertRowIndexToModel(row);
                 
-                setMasukdatInput(srow);
-
+                hpsTbbiaya();
+                    
+                 setMasukdatInput(srow);
+                 setBiayaTindakan();
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
-//                settbpilih();
 
-                if (tb_unit_detail.getModel().getRowCount() != 0) {
+//                settbpilih();
+ 
+
+                if (tb_biaya_tindakan.getModel().getRowCount() != 0) {
 
                     this.filterNorawat();
                 }
@@ -1521,6 +1564,57 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tb_regKeyTyped
 
+    
+    private void hpsTbbiaya(){
+    
+    DefaultTableModel dm = (DefaultTableModel) tb_biaya_tindakan.getModel();
+            int rowCount = dm.getRowCount();
+    if(rowCount!=0){
+            for (int i = rowCount - 1; i >= 0; i--) {
+                dm.removeRow(i);
+            }
+            }
+    }
+    private void hpsbiaya(){
+    
+    DefaultTableModel dm = (DefaultTableModel) datl.modelbiayatindakan;
+            int rowCount = dm.getRowCount();
+    if(rowCount!=0){
+            for (int i = rowCount - 1; i >= 0; i--) {
+                dm.removeRow(i);
+            }
+            }
+    }
+    
+    private void setBiayaTindakan(){
+      
+        try {
+            
+          datl=new Crud_local();
+
+            datl.readRec_Biayatindakankasir(txt_no_rawat.getText());
+        if(datl.modelbiayatindakan.getRowCount()!=0){
+          if(modelbiaya.getRowCount()==0){  
+            for(int i=0;i<datl.modelbiayatindakan.getRowCount();i++){
+               
+                this.modelbiaya.addRow(new Object[]{datl.modelbiayatindakan.getValueAt(i, 2).toString(),datl.modelbiayatindakan.getValueAt(i, 3).toString()});
+            }
+            
+            tb_biaya_tindakan.setModel(modelbiaya);
+            
+            hpsbiaya();
+          } 
+            
+        } 
+        
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+     
+    }
+    
     private void tb_regMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_regMouseReleased
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
@@ -1532,14 +1626,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
                 int srow = tb_reg.convertRowIndexToModel(row);
                 
-                setMasukdatInput(srow);
-
+               hpsTbbiaya();
+                    
+                 setMasukdatInput(srow);
+                 setBiayaTindakan();
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
 
 //                settbpilih();
+ 
+           
 
-                if (tb_unit_detail.getModel().getRowCount() != 0) {
+                if (tb_biaya_tindakan.getModel().getRowCount() != 0) {
 
                     this.filterNorawat();
                 }
@@ -1592,7 +1690,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }
     
     private void HapusRowTindakan(int i) {
-        DefaultTableModel dm = (DefaultTableModel) tb_unit_detail.getModel();
+        DefaultTableModel dm = (DefaultTableModel) tb_biaya_tindakan.getModel();
         int rowCount = dm.getRowCount();
         if (rowCount != 0) {
 
@@ -1694,7 +1792,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 String datePattern = "yyyy-MM-dd";
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
                
-              dat.readRec_registrasiKasir( dateFormatter.format(dt_tgl_reg.getDate()),1);
+              dat.readRec_registrasiKasir( dateFormatter.format(dt_tgl_reg.getDate()),txt_cari_reg.getText(),1);
                 
                 this.tb_reg.setModel(dat.modelregralankasir);
 
@@ -1749,7 +1847,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
 //                settbpilihInap(2);
 
-                if (tb_unit_detail.getModel().getRowCount() != 0) {
+                if (tb_biaya_tindakan.getModel().getRowCount() != 0) {
 
                     this.filterNorawat();
                 }
@@ -1821,7 +1919,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 this.txt_cari_reg.requestFocus();
 //                settbpilihInap(2);
 
-                if (tb_unit_detail.getModel().getRowCount() != 0) {
+                if (tb_biaya_tindakan.getModel().getRowCount() != 0) {
 
                     this.filterNorawat();
                 }
@@ -1853,6 +1951,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         filterReg();
         this.filtertxt();
     }//GEN-LAST:event_lbl_cari2MouseClicked
+
+    private void tb_regMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_regMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_regMouseClicked
 
     private void filterPegawai() {
 
@@ -1995,10 +2097,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JLabel lbl_total_tagihan;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
+    private javax.swing.JTable tb_biaya_tindakan;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_reg;
     private javax.swing.JTable tb_reg_inap;
-    private javax.swing.JTable tb_unit_detail;
     private javax.swing.JTable tb_unit_detail_history;
     private javax.swing.JTextField txt_bayar;
     private javax.swing.JTextField txt_cari_nama_tindakan;

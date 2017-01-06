@@ -529,7 +529,7 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
-    public void readRec_registrasiKasir(String tgl,int s) throws SQLException {
+    public void readRec_registrasiKasir(String tgl,String nm,int s) throws SQLException {
 
         
      if(s==1){   
@@ -542,9 +542,11 @@ public class Crud_farmasi extends DBkoneksi {
      }
      else{
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
-                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+               + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND " 
+               + helper_registrasi.KEY_NM_PASIEN + " like ?" );
 
         preparedStatement.setString(1, tgl);
+        preparedStatement.setString(2, "%"+ nm +"%");
      }
         //kode igd=3
 //        preparedStatement.setInt(2, 3);
