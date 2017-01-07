@@ -530,6 +530,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lbl_total_tagihan = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lbl_biaya_reg = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lbl_total_tagihan2 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        lbl_total_tagihan3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_unit_detail_history = new javax.swing.JTable();
@@ -979,6 +985,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tb_biaya_tindakan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_biaya_tindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -993,16 +1000,34 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel8.add(txt_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 330, 37));
+        jPanel8.add(txt_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 330, 30));
 
         jLabel8.setText("Jumlah Bayar");
-        jPanel8.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel8.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jLabel9.setText("Total Tagihan");
-        jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         lbl_total_tagihan.setText("0");
-        jPanel8.add(lbl_total_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 320, 30));
+        jPanel8.add(lbl_total_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 320, 30));
+
+        jLabel18.setText("Biaya Adm.");
+        jPanel8.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        lbl_biaya_reg.setText("0");
+        jPanel8.add(lbl_biaya_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 120, 30));
+
+        jLabel19.setText("Jasa Pelayanan");
+        jPanel8.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+
+        lbl_total_tagihan2.setText("0");
+        jPanel8.add(lbl_total_tagihan2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 120, 30));
+
+        jLabel20.setText("Sisa Tagihan");
+        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+
+        lbl_total_tagihan3.setText("0");
+        jPanel8.add(lbl_total_tagihan3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 30));
 
         jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 360, 300));
 
@@ -1088,7 +1113,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_petugas_input_history.setText("Petugas Input");
         jPanel6.add(lbl_petugas_input_history, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, 290, 20));
 
-        jTabbedPane3.addTab("History Tagihan Pasien", jPanel6);
+        jTabbedPane3.addTab("History Tindakan Pasien", jPanel6);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1099,7 +1124,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane3)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1596,8 +1621,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         if(datl.modelbiayatindakan.getRowCount()!=0){
           if(modelbiaya.getRowCount()==0){  
             for(int i=0;i<datl.modelbiayatindakan.getRowCount();i++){
-               
+             if(lbl_nm_status.getText().equalsIgnoreCase("BPJS")){
+                this.modelbiaya.addRow(new Object[]{datl.modelbiayatindakan.getValueAt(i, 2).toString(),datl.modelbiayatindakan.getValueAt(i, 4).toString()});
+                }
+             else
+               {
                 this.modelbiaya.addRow(new Object[]{datl.modelbiayatindakan.getValueAt(i, 2).toString(),datl.modelbiayatindakan.getValueAt(i, 3).toString()});
+               }
+             lbl_biaya_reg.setText(datl.modelbiayatindakan.getValueAt(i, 5).toString());
             }
             
             tb_biaya_tindakan.setModel(modelbiaya);
@@ -1715,7 +1746,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             if (row == -1) {
                 // No row selected
             } else {
-                this.Popup_history.show(tb_unit_detail_history, evt.getX(), evt.getY());
+                 //maatiin heula dieumah teu penting
+//                this.Popup_history.show(tb_unit_detail_history, evt.getX(), evt.getY());
                 irowhistory = row;
 
             }
@@ -1762,7 +1794,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             if (row == -1) {
                 // No row selected
             } else {
-                this.Popup_history.show(tb_unit_detail_history, evt.getX(), evt.getY());
+                //maatiin heula dieumah teu penting
+//                this.Popup_history.show(tb_unit_detail_history, evt.getX(), evt.getY());
                 irowhistory = row;
 
             }
@@ -2044,7 +2077,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2072,6 +2108,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JLabel lbl;
+    private javax.swing.JLabel lbl_biaya_reg;
     private javax.swing.JLabel lbl_cari;
     private javax.swing.JLabel lbl_cari1;
     private javax.swing.JLabel lbl_cari2;
@@ -2096,6 +2133,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_tgl_masuk;
     private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JLabel lbl_total_tagihan;
+    private javax.swing.JLabel lbl_total_tagihan2;
+    private javax.swing.JLabel lbl_total_tagihan3;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
     private javax.swing.JTable tb_biaya_tindakan;
     private javax.swing.JTable tb_cari_petugas;

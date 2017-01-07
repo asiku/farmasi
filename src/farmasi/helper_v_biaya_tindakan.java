@@ -16,5 +16,7 @@ public class helper_v_biaya_tindakan {
     public static String KEY_NAMA_TINDAKAN = "nama_tindakan";
     public static String KEY_TARIF_TINDAKAN = "tarif_tindakan";
     public static String KEY_TARIF_TINDAKAN_BPJS = "tarif_tindakan_bpjs";
+    public static String KEY_TARIF_BIAYA_REG = "biaya_reg";
+    
     
 }

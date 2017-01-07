@@ -72,7 +72,7 @@ public class Crud_local extends DBKoneksi_local {
       
     String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Username"};
       
-    String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS"};
+    String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","Biaya Reg"};
 
     
     public DefaultTableModel modelbiayatindakan = new DefaultTableModel(biaya_tindakan_title, 0) {
@@ -1406,8 +1406,9 @@ public class Crud_local extends DBKoneksi_local {
             String nmt = resultSet.getString(helper_v_biaya_tindakan.KEY_NAMA_TINDAKAN);
             Double tarif = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN);
             Double tarifbpjs = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN_BPJS);
+            Double breg = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_BIAYA_REG);
 
-            modelbiayatindakan.addRow(new Object[]{norawat, kdtarif, nmt, tarif,tarifbpjs});
+            modelbiayatindakan.addRow(new Object[]{norawat, kdtarif, nmt, tarif,tarifbpjs,breg});
             
         }
     }
