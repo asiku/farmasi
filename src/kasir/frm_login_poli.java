@@ -217,9 +217,14 @@ public class frm_login_poli extends javax.swing.JFrame {
                
             try {
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
+                
+                
+                
               if(Crud_local.namapoli.equals("RALAN")){   
                 
 //                frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,Crud_local.namapoli);
+                
+//                datl.CloseCon();
                 
                 frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,"Kasir");
                 

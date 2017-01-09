@@ -48,6 +48,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import net.sf.jasperreports.engine.JRException;
 import tools.ScreenImage;
 import tools.Utilitas;
 import org.apache.commons.lang3.StringUtils;
@@ -1443,6 +1444,11 @@ public class frm_tarif extends javax.swing.JFrame {
         });
 
         bt_cetak.setText("Print");
+        bt_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cetakActionPerformed(evt);
+            }
+        });
 
         bt_add1.setText("Edit");
         bt_add1.addActionListener(new java.awt.event.ActionListener() {
@@ -3685,6 +3691,15 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
           Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
       }
     }//GEN-LAST:event_bt_verif1ActionPerformed
+
+    private void bt_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cetakActionPerformed
+      try {
+          // TODO add your handling code here:
+          datl.CetakTarif();
+      } catch (JRException ex) {
+          Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }//GEN-LAST:event_bt_cetakActionPerformed
 
     private void cariManualforlog(){
        

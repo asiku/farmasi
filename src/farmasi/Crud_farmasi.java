@@ -49,7 +49,14 @@ public class Crud_farmasi extends DBkoneksi {
 
     String[] kamarinap_title = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas","Kode Status","Status"};
     
+    String[] kamarinap_title_biaya = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas","Kode Status","Status","Tarif"};
     
+    public DefaultTableModel modelkamarinapbiaya = new DefaultTableModel(kamarinap_title_biaya, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
 
     public DefaultTableModel modelkamarinap = new DefaultTableModel(kamarinap_title, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -307,6 +314,54 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+  public void readRec_BiayatindakankasirInap(String noraw,String tglserver){
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
+                    + helper_kamar_inap.KEY_NO_RAWAT + " =?");
+            
+            preparedStatement.setString(1,  noraw );
+            
+           
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+//        int i = 0;
+           // System.out.println("No RM" + resultSet.getFetchSize());
+
+            while (resultSet.next()) {
+
+//            i++;
+//            String no = String.valueOf(i);
+          
+                  // && resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).substring(5, resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).length() - 3).equals(tgl)
+                  
+             try {
+                     
+               if(Utilitas.Hitungtgl(tglserver,Utilitas.Jam(),resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK), Utilitas.Jam())<=744){  
+                String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
+                String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
+                String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
+                String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
+                String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
+                String kelas= resultSet.getString(helper_kamar_inap.KEY_KELAS);
+                String kdpj= resultSet.getString(helper_kamar_inap.KEY_KODE_STATUS_BAYAR);
+                String pj= resultSet.getString(helper_kamar_inap.KEY_STATUS_BAYAR);
+                Double trf=resultSet.getDouble(helper_kamar_inap.KEY_TRF_KAMAR);
+                
+                modelkamarinapbiaya.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal,kelas,kdpj,pj,trf});
+               }
+                 } catch (ParseException ex) {
+                     Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                
+               
+              
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void readRec_kamarinap(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
@@ -529,16 +584,20 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
-    public void readRec_registrasiKasir(String tgl,String nm,int s) throws SQLException {
+    public void readRec_registrasiKasir(String tgl,String nm,int s)  {
 
+    try {    
+        
         
      if(s==1){   
-        //edit 29 des 2016
+         
+             //edit 29 des 2016
+             
+             preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                     + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+             
+             preparedStatement.setString(1, tgl);
         
-        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
-                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
-
-        preparedStatement.setString(1, tgl);
      }
      else{
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
@@ -579,7 +638,21 @@ public class Crud_farmasi extends DBkoneksi {
             modelregralankasir.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj,norawat,statlanjut,nosep});
 //         }    
      }
-        
+         } catch (SQLException ex) {
+             Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    finally{
+//        try {
+//            preparedStatement.close();
+//            resultSet.close();
+//            connect.close();
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+       
+    }
+    
     }
     
     public void readRec_registrasiRalanFisio(String tgl,String name,int s) throws SQLException {
@@ -856,4 +929,28 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    
+    public void CloseCon(){
+     try {
+           if(resultSet != null){  
+             resultSet.close();
+             System.out.println("result close");
+           }
+         
+            if(preparedStatement != null){   
+                 preparedStatement.close();
+                 System.out.println("prep close");
+            }
+           
+           if(connect != null){ 
+            connect.close();
+            System.out.println("Con close");
+           }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    
+    
 }

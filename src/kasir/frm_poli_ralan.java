@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -49,7 +50,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private int irowtindakandetail = 0;
     private int irowhistory = 0;
 
-    
+    private int hitcol=0;   
+     
     private ScheduledExecutorService executor;
 
     private Crud_farmasi dat;
@@ -201,6 +203,23 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
 
+        txt_cari_reg_ranap.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               filtertxtRanap();
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               filtertxtRanap();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               
+            }
+        });
         
         txt_cari_nama_tindakan.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -239,6 +258,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
       Utilitas.filtertb(txt_cari_rm.getText(), tb_reg, 1,1);
     }
     
+   private void filtertxtRanap() {
+
+      Utilitas.filtertb(txt_cari_reg_ranap.getText(), tb_reg_inap, 1,1);
+    } 
+    
     private void filtertxt() {
 
 // try {
@@ -268,6 +292,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
                 setukurantbReg();
                 lbl_stat_tgl.setText("Hasil Pencarian Pasien TGl: "+this.lbl_tgl_server.getText());
+                
+                dat.CloseCon();
+                
     
             } catch (SQLException ex) {
                 Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
@@ -346,6 +373,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
                 setukurantbReg();
                 lbl_stat_tgl.setText("Hasil Pencarian Pasien TGl: "+this.lbl_tgl_server.getText());
+                dat.CloseCon();
     
             } catch (SQLException ex) {
                 Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
@@ -487,7 +515,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tb_reg_inap = new javax.swing.JTable();
-        txt_cari_reg1 = new javax.swing.JTextField();
+        txt_cari_reg_ranap = new javax.swing.JTextField();
         lbl_cari2 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -833,12 +861,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jPanel13.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, 460, 520));
 
-        txt_cari_reg1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_cari_reg_ranap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_cari_reg1KeyPressed(evt);
+                txt_cari_reg_ranapKeyPressed(evt);
             }
         });
-        jPanel13.add(txt_cari_reg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 410, 32));
+        jPanel13.add(txt_cari_reg_ranap, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 410, 32));
 
         lbl_cari2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
         lbl_cari2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1457,6 +1485,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         
             tb_unit_detail_history.setModel(datl.modelunitdetail);
             setukurantbulunitHistory();
+            
+            datl.CloseCon();
+            
         } catch (Exception ex) {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1611,6 +1642,81 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
     }
     
+  
+   private void setRalanB(){
+         
+            
+   } 
+        
+   private void setBiayaTindakanRanap(){
+     
+        
+   
+        try {
+            
+          dat=new Crud_farmasi();
+
+            dat.readRec_BiayatindakankasirInap(txt_no_rawat.getText(),this.lbl_tgl_server.getText());
+            dat.CloseCon();
+            hitcol=dat.modelkamarinapbiaya.getRowCount();
+            
+            if(hitcol>0){
+              hitcol=hitcol-1;   
+            }
+        if(dat.modelkamarinapbiaya.getRowCount()!=0){
+          if(modelbiaya.getRowCount()==0){  
+            for(int i=0;i<dat.modelkamarinapbiaya.getRowCount();i++){
+                this.modelbiaya.addRow(new Object[]{dat.modelkamarinapbiaya.getValueAt(i, 4).toString(),dat.modelkamarinapbiaya.getValueAt(i, 8).toString()});
+
+            }
+          } 
+            
+        } 
+        
+
+        
+        datl=new Crud_local();
+
+        datl.readRec_Biayatindakankasir(txt_no_rawat.getText());
+                 datl.CloseCon();
+                 
+        if(datl.modelbiayatindakan.getRowCount()!=0){
+          if(modelbiaya.getRowCount()!=0){  
+            for(int i=0;i<datl.modelbiayatindakan.getRowCount();i++){
+             if(lbl_nm_status.getText().equalsIgnoreCase("BPJS")){
+                 
+                this.modelbiaya.insertRow(hitcol+i,new Object[]{datl.modelbiayatindakan.getValueAt(i, 2).toString(),datl.modelbiayatindakan.getValueAt(i, 4).toString()});
+                }
+             else
+               {
+                this.modelbiaya.insertRow(hitcol+i,new Object[]{datl.modelbiayatindakan.getValueAt(i, 2).toString(),datl.modelbiayatindakan.getValueAt(i, 3).toString()});
+               }
+           
+             
+             lbl_biaya_reg.setText(datl.modelbiayatindakan.getValueAt(i, 5).toString());
+            }
+            
+          
+            
+              System.out.println("hiiitt: "+hitcol);
+   
+            
+          } 
+        }
+        
+          tb_biaya_tindakan.setModel(modelbiaya);
+            
+          hpsbiaya();
+        
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+     
+    }
+    
+    
     private void setBiayaTindakan(){
       
         try {
@@ -1634,6 +1740,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             tb_biaya_tindakan.setModel(modelbiaya);
             
             hpsbiaya();
+            
+            //close b
+            datl.CloseCon();
+            
           } 
             
         } 
@@ -1832,6 +1942,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 setukurantbReg();
                
                 lbl_stat_tgl.setText("Hasil Pencarian Pasien TGl: "+dateFormatter.format(dt_tgl_reg.getDate()));
+                
+                dat.CloseCon();
     
             } catch (SQLException ex) {
                 Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
@@ -1873,12 +1985,19 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 // No row selected
             } else {
 
-                setMasukdatInputInap(row);
+                int srow = tb_reg_inap.convertRowIndexToModel(row);
+                
+               hpsTbbiaya();
+                setMasukdatInputInap(srow);
+//                setMasukdatInput(srow);
+               
 
+                   setBiayaTindakanRanap();
+                
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
 
-//                settbpilihInap(2);
+             
 
                 if (tb_biaya_tindakan.getModel().getRowCount() != 0) {
 
@@ -1923,6 +2042,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             
             dat.readRec_registrasiFisio(txt_no_rawat.getText());
             
+            dat.CloseCon();
+            
             lbl_nip_petugas_pilih.setText(dat.kddokterfisio);
             txt_petugas_pilih.setText(dat.nmdokterfisio);
             
@@ -1950,7 +2071,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
-//                settbpilihInap(2);
+                setBiayaTindakanRanap();
 
                 if (tb_biaya_tindakan.getModel().getRowCount() != 0) {
 
@@ -1967,7 +2088,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tb_reg_inapKeyPressed
 
-    private void txt_cari_reg1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_reg1KeyPressed
+    private void txt_cari_reg_ranapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_reg_ranapKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.filtertxt();
@@ -1977,7 +2098,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             tb_reg.setRowSelectionInterval(0, 0);
 
         }
-    }//GEN-LAST:event_txt_cari_reg1KeyPressed
+    }//GEN-LAST:event_txt_cari_reg_ranapKeyPressed
 
     private void lbl_cari2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari2MouseClicked
         // TODO add your handling code here:
@@ -2145,7 +2266,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cari_nama_tindakan;
     private javax.swing.JTextField txt_cari_petugas;
     private javax.swing.JTextField txt_cari_reg;
-    private javax.swing.JTextField txt_cari_reg1;
+    private javax.swing.JTextField txt_cari_reg_ranap;
     private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextField txt_nm_pasien;
     private javax.swing.JTextField txt_no_rawat;

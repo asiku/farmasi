@@ -2248,7 +2248,56 @@ public class Crud_local extends DBKoneksi_local {
             JasperViewer.viewReport(jp, false);
         }
        
+    }
+  
+public void CetakTarif() throws JRException {
+
+        InputStream is = null;
+        is = getClass().getResourceAsStream("/tarif/report_tarif.jrxml");
+
+        //set parameters
+//        Map map = new HashMap();
+//        map.put("nonota", nonota);
+       // map.put("Imgpath",null);
+
+        JasperReport jr = JasperCompileManager.compileReport(is);
+
+        JasperPrint jp = JasperFillManager.fillReport(jr, null, connect);
+        //jp.setPageWidth(200);
+        //jp.setPageHeight(180);
+       // jp.setOrientation(OrientationEnum.PORTRAIT);
+
+      
+//        JasperPrintManager.printReport(jp,false);
+       
+//        if(tampil.equals("ok")){
+            JasperViewer.viewReport(jp, false);
+//        }
+       
     }    
+      
+   public void CloseCon(){
     
- 
+        try {
+            
+           if(resultSet != null){  
+            resultSet.close();
+            System.out.println("result close");
+           }
+            
+            if(preparedStatement != null){   
+                 preparedStatement.close();
+                 System.out.println("prep close");
+            }
+          
+           if(connect != null){ 
+            connect.close();
+            System.out.println("Con close");
+           }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    }
 }
