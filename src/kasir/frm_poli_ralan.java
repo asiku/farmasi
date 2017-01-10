@@ -4,22 +4,17 @@
  * and open the template in the editor.
  */
 package kasir;
+import java.util.Calendar;
+import java.util.Date;
 
-import unit_poli_ralan.*;
-import unit_poli_dewasa.*;
-import unit_poli.*;
 import farmasi.Crud_farmasi;
 import farmasi.Crud_local;
-import static farmasi.Crud_local.cekvalpilih;
-import static farmasi.Crud_local.cekvalpilihtemplatepilih;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +26,6 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -47,6 +41,11 @@ import tools.Utilitas;
  */
 public class frm_poli_ralan extends javax.swing.JFrame {
 
+    private  int nilai_jam = 0;
+    private  int nilai_menit = 0;
+    private  int nilai_detik = 0;
+    
+    
     private int irowtindakandetail = 0;
     private int irowhistory = 0;
 
@@ -435,7 +434,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         tr.getColumn(0).setPreferredWidth(50);
         tr.getColumn(1).setPreferredWidth(71);
-        tr.getColumn(2).setPreferredWidth(320);
+        tr.getColumn(2).setPreferredWidth(328);
         tr.getColumn(3).setPreferredWidth(100);
         tr.getColumn(4).setPreferredWidth(100);
     }
@@ -548,6 +547,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_kelas = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         lbl_kamar_inap = new javax.swing.JLabel();
+        dt_tgl_reg2 = new uz.ncipro.calendar.JDateTimePicker();
+        jLabel21 = new javax.swing.JLabel();
+        CmbJam = new javax.swing.JComboBox<>();
+        CmbMenit = new javax.swing.JComboBox<>();
+        CmbDetik = new javax.swing.JComboBox<>();
+        ChkJln = new javax.swing.JCheckBox();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -922,10 +927,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 111, -1, -1));
 
         jLabel10.setText("Dokter yang Dituju");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 150, -1));
+        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 150, -1));
 
-        jLabel11.setText("Tgl Registrasi");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 108, -1));
+        jLabel11.setText("Tgl Pulang dan Jam Pulang Ranap");
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 290, -1));
 
         lbl_tgl_masuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_tgl_masuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 132, 19));
@@ -960,7 +965,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(lbl_kode_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 60, 19));
 
         lbl_nm_poli.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_nm_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 230, 19));
+        jPanel4.add(lbl_nm_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 210, 19));
 
         bt_save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/kasir_kecil_ico.png"))); // NOI18N
         bt_save.setText("Print");
@@ -969,7 +974,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_saveActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 170, 120, 40));
+        jPanel4.add(bt_save, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, 260, 40));
 
         bt_save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
         bt_save1.setText("Save");
@@ -978,7 +983,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_save1ActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 130, 40));
+        jPanel4.add(bt_save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 260, 40));
 
         jLabel7.setText("Status Pasien");
         jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 170, 130, -1));
@@ -1003,6 +1008,34 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_kamar_inap.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_kamar_inap, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 180, 19));
+
+        dt_tgl_reg2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        dt_tgl_reg2.setDisplayFormat("yyyy/MM/dd");
+        dt_tgl_reg2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dt_tgl_reg2ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(dt_tgl_reg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 140, 20));
+
+        jLabel21.setText("Tgl Registrasi");
+        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 108, -1));
+
+        CmbJam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        jPanel4.add(CmbJam, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
+
+        CmbMenit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        jPanel4.add(CmbMenit, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, -1, -1));
+
+        CmbDetik.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        jPanel4.add(CmbDetik, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 70, -1, -1));
+
+        ChkJln.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkJlnActionPerformed(evt);
+            }
+        });
+        jPanel4.add(ChkJln, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, -1, -1));
 
         jTabbedPane3.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -2110,6 +2143,65 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tb_regMouseClicked
 
+    private void dt_tgl_reg2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dt_tgl_reg2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dt_tgl_reg2ActionPerformed
+
+    private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed
+        // TODO add your handling code here:
+        jam();
+    }//GEN-LAST:event_ChkJlnActionPerformed
+
+      private void jam(){
+      
+           
+          
+                String nol_jam = "";
+                String nol_menit = "";
+                String nol_detik = "";
+                
+                Date now = Calendar.getInstance().getTime();
+
+                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
+                if(ChkJln.isSelected()==true){
+                    nilai_jam = now.getHours();
+                    nilai_menit = now.getMinutes();
+                    nilai_detik = now.getSeconds();
+                }else if(ChkJln.isSelected()==false){
+                    nilai_jam =CmbJam.getSelectedIndex();
+                    nilai_menit =CmbMenit.getSelectedIndex();
+                    nilai_detik =CmbDetik.getSelectedIndex();
+                }
+
+                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_jam <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_jam = "0";
+                }
+                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_menit <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_menit = "0";
+                }
+                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_detik <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_detik = "0";
+                }
+                // Membuat String JAM, MENIT, DETIK
+                String jam = nol_jam + Integer.toString(nilai_jam);
+                String menit = nol_menit + Integer.toString(nilai_menit);
+                String detik = nol_detik + Integer.toString(nilai_detik);
+                // Menampilkan pada Layar
+                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
+                CmbJam.setSelectedItem(jam);
+                CmbMenit.setSelectedItem(menit);
+                CmbDetik.setSelectedItem(detik);
+            
+       
+            }
+    
+    
     private void filterPegawai() {
 
         try {
@@ -2173,6 +2265,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox ChkJln;
+    private javax.swing.JComboBox<String> CmbDetik;
+    private javax.swing.JComboBox<String> CmbJam;
+    private javax.swing.JComboBox<String> CmbMenit;
     private uz.ncipro.calendar.JDateTimePicker Dttgl1;
     private uz.ncipro.calendar.JDateTimePicker Dttgl2;
     private javax.swing.JPopupMenu Popup_hapus;
@@ -2188,6 +2284,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JDialog dlg_dpjp;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
+    private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg2;
     private javax.swing.JMenuItem item_hapus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2202,6 +2299,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

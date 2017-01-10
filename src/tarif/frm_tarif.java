@@ -962,7 +962,8 @@ public class frm_tarif extends javax.swing.JFrame {
              datl=new Crud_local();
              datl.readRec_cariPoli();
              tb_poli.setModel(datl.modelpoli);
-             
+              //edit 10 jan 
+                    datl.CloseCon();
          } catch (Exception ex) {
              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -971,7 +972,8 @@ public class frm_tarif extends javax.swing.JFrame {
              datl=new Crud_local();
              datl.readRec_cariStatus();
              tb_status.setModel(datl.modelstatus);
-             
+              //edit 10 jan 
+                    datl.CloseCon();
          } catch (Exception ex) {
              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -980,7 +982,8 @@ public class frm_tarif extends javax.swing.JFrame {
              datl=new Crud_local();
              datl.readRec_cariTarif();
              tb_tarif.setModel(datl.modeltarif);
-             
+              //edit 10 jan 
+                    datl.CloseCon();
          } catch (Exception ex) {
              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -994,7 +997,8 @@ public class frm_tarif extends javax.swing.JFrame {
              datl=new Crud_local();
              datl.readRec_cariTarif();
              tb_tarif.setModel(datl.modeltarif);
-             
+              //edit 10 jan 
+                    datl.CloseCon();
          } catch (Exception ex) {
              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -2406,12 +2410,15 @@ public class frm_tarif extends javax.swing.JFrame {
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"","","","");
                            
+                              datl.CloseCon();
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
                              lst_save_tarif.setModel(listModel);
                              
                              refreshtbtarif();
                              
+                              //edit 10 jan 
+                   
                              //cls
                              cls(); 
                              
@@ -2555,7 +2562,8 @@ public class frm_tarif extends javax.swing.JFrame {
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText()), 
                                      Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",txt_kode_tarif.getText()+"-BPJS");
                            
-                             
+                             //edit 10 jan
+                              datl.CloseCon();
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
                              
                              lst_save_tarif.setModel(listModel);
@@ -2939,6 +2947,8 @@ public class frm_tarif extends javax.swing.JFrame {
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
                                         ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",2);
                              
+                                //edit 10 jan
+                                datl.CloseCon();
                              refreshtbtarif();
                                 
                             }
@@ -3025,7 +3035,8 @@ public class frm_tarif extends javax.swing.JFrame {
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
                                         ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1);
                              
-                                
+                                 //edit 10 jan
+                                 datl.CloseCon();
                                 
 //                                datl.updateTarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
 //                                     Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
@@ -3111,8 +3122,10 @@ public class frm_tarif extends javax.swing.JFrame {
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
                                         ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1);
-              
-
+                             
+                             //edit 10 jan      
+                             datl.CloseCon();
+                             
                              refreshtbtarif();
                                 
                                 
@@ -3340,6 +3353,10 @@ public class frm_tarif extends javax.swing.JFrame {
              
               if(sv.equals("add")||sp.equals("add")){    
               datl.updateTarifStatus(this.tb_tarif.getModel().getValueAt(i, 0).toString(), "edit", "edit");
+              
+              //edit 10 jan 
+              datl.CloseCon();
+               
               listModel.addElement("Proses Untuk Verif:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
                              
               lst_save_tarif.setModel(listModel);
@@ -3394,6 +3411,9 @@ public class frm_tarif extends javax.swing.JFrame {
                  datl= new Crud_local();
                 
                  datl.DelRec(txt_kode_tarif.getText());
+                 
+                 //edit 10 jan
+                  datl.CloseCon();
                  
                  refreshtbtarif();
                  
@@ -3601,6 +3621,9 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
                                         ,Integer.valueOf(txt_sarana1.getText()),"","add","add",2);
                              
+                                //edit 10 jan
+                                 datl.CloseCon();
+                                
                              refreshtbtarif();
                                 this.ck_bpjs.setSelected(false);
                             }
@@ -3637,6 +3660,10 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
              if(sv.equals("add")||sp.equals("add")){  
                 
               datl.updateTarifStatusBPJS(this.tb_tarif.getModel().getValueAt(i, 0).toString(), "edit", "edit");
+              
+              //edit 10 jan 
+              datl.CloseCon();
+               
               listModel.addElement("Proses Verif BPJS:"+this.tb_tarif.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
                              
               lst_save_tarif.setModel(listModel);
@@ -3694,8 +3721,15 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
 
     private void bt_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cetakActionPerformed
       try {
-          // TODO add your handling code here:
+          try {
+              // TODO add your handling code here:
+              datl=new Crud_local();
+          } catch (Exception ex) {
+              Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+          }
           datl.CetakTarif();
+          
+          datl.CloseCon();
       } catch (JRException ex) {
           Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -3723,6 +3757,9 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
 
                 try {
                     datl.readRec_cariTarif(txt_cari_tarif.getText());
+                    
+                    //edit 10 jan 
+                    datl.CloseCon();
                 } catch (SQLException ex) {
                     Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -3743,6 +3780,8 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
 
                 try {
                     datl.readRec_cariTarif();
+                     //edit 10 jan 
+                    datl.CloseCon();
                 } catch (SQLException ex) {
                     Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -3763,6 +3802,8 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
 
                 try {
                     datl.readRec_cariStatus(txt_cari_status.getText());
+                     //edit 10 jan 
+                    datl.CloseCon();
                 } catch (SQLException ex) {
                     Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -3780,6 +3821,8 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
 
                 try {
                     datl.readRec_cariPoli(txt_cari_poli.getText());
+                     //edit 10 jan 
+                    datl.CloseCon();
                 } catch (SQLException ex) {
                     Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -4070,6 +4113,9 @@ public void saveImagev() throws IOException {
 		       datl.Save_log_tarif("",txt_usernamev.getText(), this.tb_log_publish.getModel().getValueAt(i, 0).toString(), "pending", "ok", pathFile);
                        datl.updateTarifStatus(this.tb_log_publish.getModel().getValueAt(i, 0).toString(), "pending", "ok");
 		       listModel.addElement("Tersimpan:"+this.tb_log_publish.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                    
+                     //edit 10 jan 
+                    datl.CloseCon();
                     }
 		}
               
@@ -4162,6 +4208,9 @@ public void saveImagev() throws IOException {
 		       datl.Save_log_tarifBPJS("",txt_usernamev.getText(), this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString(), "pending", "ok", pathFile);
                        datl.updateTarifStatusBPJS(this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString(), "pending", "ok");
 		       listModel.addElement("Tersimpan BPJS:"+this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                   
+                       //edit 10 jan 
+                    datl.CloseCon();
                     }
 		}
               
@@ -4253,6 +4302,9 @@ public void saveImagev() throws IOException {
                                txt_username.getText(),pathFile);
                        datl.updateTarifStatusBPJS(this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString(), "ok", "ok");
 		       listModel.addElement("Tersimpan Pengesah:"+this.tb_log_publishBPJS.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                    
+                     //edit 10 jan 
+                    datl.CloseCon();
                     }
 		}
               
@@ -4346,6 +4398,8 @@ public void saveImagev() throws IOException {
                                txt_username.getText(),pathFile);
                        datl.updateTarifStatus(this.tb_log_publish.getModel().getValueAt(i, 0).toString(), "ok", "ok");
 		       listModel.addElement("Tersimpan Pengesah:"+this.tb_log_publish.getModel().getValueAt(i, 0).toString()+" "+Utilitas.tglsekarangJam());
+                    //edit 10 jan 
+                    datl.CloseCon();
                     }
 		}
               
@@ -4454,10 +4508,15 @@ public void saveImagev() throws IOException {
       try {
          if(this.ck_pengesah.isSelected()==true){ 
           datl.Cek(txt_username.getText(),"p");
+           //edit 10 jan 
+                    datl.CloseCon();
            setloginp();
          }
          else if(this.ck_verif.isSelected()==true){ 
           datl.Cek(txt_usernamev.getText(),"v");
+          
+          //edit 10 jan
+          datl.CloseCon();
           setloginv();
          }
           
@@ -4476,7 +4535,8 @@ public void saveImagev() throws IOException {
                try {
               datl.readRec_cariTariflogPengesahBPJS();
               
-               
+              //edit 10 jan
+                datl.CloseCon();
                
           } catch (SQLException ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -4498,7 +4558,8 @@ public void saveImagev() throws IOException {
                try {
               datl.readRec_cariTariflogPengesah();
               
-               
+              //edit 10 jan
+               datl.CloseCon();
                
           } catch (SQLException ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -4521,7 +4582,8 @@ public void saveImagev() throws IOException {
                try {
               datl.readRec_cariTariflogBPJS();
               
-               
+              //edit 10 jan
+                datl.CloseCon();
                
           } catch (SQLException ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -4543,7 +4605,8 @@ public void saveImagev() throws IOException {
                try {
               datl.readRec_cariTariflog();
               
-               
+              //edit 10 jan
+                datl.CloseCon();
                
           } catch (SQLException ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -4566,7 +4629,11 @@ public void saveImagev() throws IOException {
           try {
               datl=new Crud_local();
               datl.readRec_cariTariflog();
-              tb_log_publish.setModel(datl.modeltariflog);
+              
+              //edit 10 jan 
+              datl.CloseCon();
+              
+               tb_log_publish.setModel(datl.modeltariflog);
           } catch (Exception ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -4574,6 +4641,9 @@ public void saveImagev() throws IOException {
           try {  
               datl=new Crud_local();
               datl.readRec_cariTariflogBPJS();
+              
+               //edit 10 jan 
+              datl.CloseCon();
               tb_log_publishBPJS.setModel(datl.modeltariflogBPJS);
           }
               catch (Exception ex) {
@@ -4631,6 +4701,8 @@ public void saveImagev() throws IOException {
           try {              
               datl=new Crud_local();
               datl.readRec_cariTariflogPengesah();
+               //edit 10 jan 
+                    datl.CloseCon();
               tb_log_publish.setModel(datl.modeltariflog);
          } catch (Exception ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
@@ -4640,6 +4712,8 @@ public void saveImagev() throws IOException {
           
               datl=new Crud_local();
               datl.readRec_cariTariflogPengesahBPJS();
+               //edit 10 jan 
+                    datl.CloseCon();
               tb_log_publishBPJS.setModel(datl.modeltariflogBPJS);
               } catch (Exception ex) {
               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
