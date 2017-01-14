@@ -11,6 +11,7 @@ package farmasi;
  */
 public class helper_kamar_inap {
     public static String TB_NAMEV = "v_kamar_inap_anak";
+    public static String TB_NAMEVBIAYA = "v_biaya_kamar_inap";
     public static String TB_NAME = "kamar_inap";
     public static String KEY_NO_RAWAT = "no_rawat";
     public static String KEY_NO_RM = "no_rkm_medis";
@@ -26,6 +27,8 @@ public class helper_kamar_inap {
     public static String KEY_KELAS ="kelas";
     public static String KEY_KODE_STATUS_BAYAR ="kd_pj";
     public static String KEY_STATUS_BAYAR ="png_jawab";
+    public static String KEY_LAMA ="lama_inap";
+    
     
     
 }

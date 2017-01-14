@@ -206,6 +206,8 @@ public class frm_login_poli extends javax.swing.JFrame {
        
             datl.CekPetugas(txt_username.getText());
             
+           
+            
         } catch (SQLException ex) {
             Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -225,6 +227,9 @@ public class frm_login_poli extends javax.swing.JFrame {
 //                frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,Crud_local.namapoli);
                 
 //                datl.CloseCon();
+                
+
+                datl.CloseCon();
                 
                 frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,"Kasir");
                 

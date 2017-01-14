@@ -51,6 +51,15 @@ public class Crud_farmasi extends DBkoneksi {
     
     String[] kamarinap_title_biaya = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas","Kode Status","Status","Tarif"};
     
+    String[] kamarinap_title_biayakasir = new String[]{"Kamar","Tarif","Tgl Masuk","Jam Masuk","Tgl Keluar","Jam Keluar","Lama","Total","No. Rawat","Kode"};
+    
+    public DefaultTableModel modelkamarinapbiayakasir = new DefaultTableModel(kamarinap_title_biayakasir, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+    
     public DefaultTableModel modelkamarinapbiaya = new DefaultTableModel(kamarinap_title_biaya, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -107,6 +116,80 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
+    
+    
+    public void readRec_BiayaRanapKasir(String noraw){
+        
+        String tglkeluar="";
+        String jamkeluar="";
+       
+        
+        int lama=0;
+        double tot=0.0;
+        
+      try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEVBIAYA + " WHERE "
+                    + helper_kamar_inap.KEY_NO_RAWAT + " =?");
+            
+            preparedStatement.setString(1,  noraw );
+            
+           
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+//        int i = 0;
+           // System.out.println("No RM" + resultSet.getFetchSize());
+
+           
+           
+            while (resultSet.next()) {
+                
+                String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
+                String kode = resultSet.getString(helper_kamar_inap.KEY_KODE_KAMAR);
+                double tarif=resultSet.getDouble(helper_kamar_inap.KEY_TRF_KAMAR);
+                String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
+                 String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
+                String jammasuk= resultSet.getString(helper_kamar_inap.KEY_JAM_MASUK);
+                 
+                
+                
+               if(resultSet.getString(helper_kamar_inap.KEY_TGL_KELUAR)!=null){
+                   
+                   tglkeluar= resultSet.getDate(helper_kamar_inap.KEY_TGL_KELUAR).toString();
+                   
+                   lama=resultSet.getInt(helper_kamar_inap.KEY_LAMA);
+                   
+                   jamkeluar= resultSet.getString(helper_kamar_inap.KEY_JAM_KELUAR);
+                   
+                   if(lama>=6){
+                       tot=tarif*(lama/24);
+                       
+                   }
+                   
+                }
+                else{
+                  
+                   tglkeluar="-";
+                   lama=0;
+                   jamkeluar="-";
+                }
+             
+                  lama=resultSet.getInt(helper_kamar_inap.KEY_LAMA)/24;
+            
+//                    int lama=resultSet.getInt(helper_kamar_inap.KEY_LAMA);
+                
+               modelkamarinapbiayakasir.addRow(new Object[]{nmbangsal,tarif,tglmasuk,jammasuk,tglkeluar,jamkeluar,lama,tot,norawat,kode});
+               tot=0;
+               lama=0;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+    
+    }
+    
     
     public void readRec_kamarinapFisio(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
