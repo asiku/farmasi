@@ -186,41 +186,46 @@ public class frm_login_poli extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
              loginActPetugas();
-            this.bt_login.requestFocus();
+//            this.bt_login.requestFocus();
         }
     }//GEN-LAST:event_txt_pwdKeyReleased
 
     private void bt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginActionPerformed
         // TODO add your handling code here:
+      
+    if(!(txt_username.getText().isEmpty()||txt_pwd.getText().isEmpty()))
+     { 
         loginActPetugas();
+         }
+     else
+     {
+       JOptionPane.showMessageDialog(this, "Username atau Password Kosong!");
+     }
+  
     }//GEN-LAST:event_bt_loginActionPerformed
 
     private void bt_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelActionPerformed
         // TODO add your handling code here:
+      
         dispose();
     }//GEN-LAST:event_bt_cancelActionPerformed
 
     private void loginActPetugas(){
    
-     if(!(this.txt_username.getText().isEmpty()||this.txt_username.getText().isEmpty()))
-     {   
-        try {
+      
+       try {
             datl = new Crud_local();
        
             datl.CekPetugas(txt_username.getText());
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (Exception ex) {
-            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-        
+            datl.CloseCon();
+         
             if (Crud_local.usm.equals(txt_username.getText()) && Crud_local.psm.equals(txt_pwd.getText())) {
                
-            try {
+            datl = new Crud_local();
+                
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
+                datl.CloseCon();
+                
               if(Crud_local.namapoli.equals("PERINATOLOGI")){  
                   
                 frm_poli pol=new frm_poli(namapetugaslogin,Crud_local.namapoli);
@@ -230,28 +235,30 @@ public class frm_login_poli extends javax.swing.JFrame {
                 dispose();
               }
               else{
-              JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Terdaftar!");
+              JOptionPane.showMessageDialog(this, "Maaf Anda Tidak Terdaftar!");
               }
                  
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal Login Koneksi Data Bermasalah!");
-                Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
             
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Password Salah!");
+                JOptionPane.showMessageDialog(this, "Password Salah!");
                 txt_pwd.requestFocus();
                 txt_pwd.setText("");
                 
             }
-      }
-     else
-     {
-       JOptionPane.showMessageDialog(null, "Username atau Password Kosong!");
-     }
-  
+            ///
+          } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Gagal Login Koneksi Data Bermasalah!");
+                 dispose();
+                Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {  
+                 JOptionPane.showMessageDialog(this, "Maaf Anda Tidak Terdaftar!");
+                 dispose();
+             Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
+         }  
+            
+            
+      
      }
 
     

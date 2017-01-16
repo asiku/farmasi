@@ -118,6 +118,56 @@ public class Crud_farmasi extends DBkoneksi {
 
     
     
+    
+     public void readRec_periksa_lab(String noraw) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_periksa_lab.TB_NAME + " WHERE "
+                                                      + helper_periksa_lab.KEY_NO_RAWAT + " =?");
+
+        preparedStatement.setString(1,noraw);
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+      
+
+        while (resultSet.next()) {
+
+            String kodeobat = resultSet.getString(helper_periksa_lab.KEY_KODE_TARIF);
+           
+
+            modelbrg.addRow(new Object[]{kodeobat, nm_pasien, satuan});
+        }
+    }
+
+    
+    
+    
+    
+    public double readRec_JasaPelayanan(String kodekamar){
+        
+       double biaya =0;
+        
+       try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_jasa_pelayanan.TB_NAME + " WHERE "
+                    + helper_jasa_pelayanan.KEY_KODE_KAMAR + " =?");
+            
+            preparedStatement.setString(1,kodekamar);
+        
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+           
+            while (resultSet.next()) {
+                
+                 biaya = resultSet.getDouble(helper_jasa_pelayanan.KEY_BESAR_BIAYA);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+       return biaya;
+    }
+    
     public void readRec_BiayaRanapKasir(String noraw){
         
         String tglkeluar="";

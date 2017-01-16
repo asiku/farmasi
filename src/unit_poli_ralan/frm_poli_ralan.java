@@ -1634,6 +1634,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void item_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_hapusActionPerformed
         // TODO add your handling code here:
+       if(tb_unit_detail_history.getModel().getValueAt(irowhistory, 5).toString().equals(lbl_petugas.getText()))  { 
         int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus Tindakan :  "+ tb_unit_detail_history.getModel().getValueAt(irowhistory, 2),"Warning ",
          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
    
@@ -1641,6 +1642,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
               this.HapusRowHistory(irowhistory);
               
         }
+     }
+     else{
+       JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Berhak Menghapus Data Tersebut Karena Berbeda Penginput Data!");
+     } 
     }//GEN-LAST:event_item_hapusActionPerformed
 
     private void bt_cari_tglActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_tglActionPerformed
