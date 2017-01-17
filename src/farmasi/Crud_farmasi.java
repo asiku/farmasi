@@ -53,6 +53,9 @@ public class Crud_farmasi extends DBkoneksi {
     
     String[] kamarinap_title_biayakasir = new String[]{"Kamar","Tarif","Tgl Masuk","Jam Masuk","Tgl Keluar","Jam Keluar","Lama","Total","No. Rawat","Kode"};
     
+
+    
+            
     public DefaultTableModel modelkamarinapbiayakasir = new DefaultTableModel(kamarinap_title_biayakasir, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -119,27 +122,7 @@ public class Crud_farmasi extends DBkoneksi {
     
     
     
-     public void readRec_periksa_lab(String noraw) throws SQLException {
-
-        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_periksa_lab.TB_NAME + " WHERE "
-                                                      + helper_periksa_lab.KEY_NO_RAWAT + " =?");
-
-        preparedStatement.setString(1,noraw);
-        
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-      
-
-        while (resultSet.next()) {
-
-            String kodeobat = resultSet.getString(helper_periksa_lab.KEY_KODE_TARIF);
-           
-
-            modelbrg.addRow(new Object[]{kodeobat, nm_pasien, satuan});
-        }
-    }
-
-    
+     
     
     
     

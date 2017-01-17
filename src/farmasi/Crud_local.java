@@ -74,6 +74,15 @@ public class Crud_local extends DBKoneksi_local {
       
     String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","Biaya Reg"};
 
+    String[] periksa_lab_title = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif","Tarif BPJS"
+                                            ,"status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs"};
+    
+   public DefaultTableModel modelperiksalab = new DefaultTableModel(periksa_lab_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };         
     
     public DefaultTableModel modelbiayatindakan = new DefaultTableModel(biaya_tindakan_title, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -283,6 +292,36 @@ public class Crud_local extends DBKoneksi_local {
     public Crud_local() throws Exception{
       ConDb();
     }
+    
+    
+    
+    public void readRec_periksa_lab(String noraw) throws SQLException {
+
+         
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_periksa_lab.TB_VNAME + " WHERE "
+                                                      + helper_periksa_lab.KEY_NO_RAWAT + " =?");
+
+        preparedStatement.setString(1,noraw);
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        
+        while (resultSet.next()) {
+//helper_periksa_lab
+            String norawat = resultSet.getString(helper_periksa_lab.KEY_NO_RAWAT);
+            String kodeobat = resultSet.getString(helper_periksa_lab.KEY_KODE_TARIF);
+            String namatindakan = resultSet.getString(helper_periksa_lab.KEY_NAMA_TINDAKAN);
+            double tarif = resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN);
+            double tarifbpjs = resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN_BPJS);
+            String status_pengesah = resultSet.getString(helper_periksa_lab.KEY_STATP);
+            String status_verif = resultSet.getString(helper_periksa_lab.KEY_STATV);
+            String status_pengesah_bpjs = resultSet.getString(helper_periksa_lab.KEY_STATP_BPJS);
+            String status_verif_bpjs = resultSet.getString(helper_periksa_lab.KEY_STATV_BPJS);
+            
+             modelperiksalab.addRow(new Object[]{norawat,kodeobat,namatindakan,tarif,tarifbpjs,status_pengesah,status_verif,status_pengesah_bpjs,status_verif_bpjs});
+        }
+    }
+
     
     
     public void Save_unitAnak(String nmtmp,String nip ,String ptug, String stat)  {
