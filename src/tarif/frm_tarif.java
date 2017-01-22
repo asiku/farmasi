@@ -1067,6 +1067,8 @@ public class frm_tarif extends javax.swing.JFrame {
         cmb_kelas = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         ck_bpjs = new javax.swing.JCheckBox();
+        cmb_kategori = new javax.swing.JComboBox<>();
+        bt_save_kategori = new javax.swing.JButton();
         bt_proses = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -1569,6 +1571,15 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
 
+        cmb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Pilih Kategori=", "obs igd", "dr umum", "dr spesialis", "assisten dr", "penata anestesi", "assisten operasi", "konsul dr", "visit dr umum", "visit dr spesialis", "tindakan", "labor", "usg", "darah", "rontgen", "sewa alat", "fisiotherapi", "ambulance" }));
+
+        bt_save_kategori.setText("Save Kategori");
+        bt_save_kategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_save_kategoriActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_inputanLayout = new javax.swing.GroupLayout(panel_inputan);
         panel_inputan.setLayout(panel_inputanLayout);
         panel_inputanLayout.setHorizontalGroup(
@@ -1589,7 +1600,7 @@ public class frm_tarif extends javax.swing.JFrame {
                         .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel11))
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panel_inputanLayout.createSequentialGroup()
                                 .addGap(54, 54, 54)
                                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1601,16 +1612,19 @@ public class frm_tarif extends javax.swing.JFrame {
                                         .addComponent(lbl_kode_poli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txt_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_inputanLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bt_cari_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bt_cari_status, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panel_inputanLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ck_bpjs, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(82, 82, 82)))
-                        .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_cari_poli, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bt_cari_status, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ck_bpjs, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bt_save_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(29, 29, 29))
                     .addGroup(panel_inputanLayout.createSequentialGroup()
                         .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1649,12 +1663,14 @@ public class frm_tarif extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(ck_bpjs))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(ck_bpjs)
+                    .addComponent(bt_save_kategori))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(panel_inputan, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 23, -1, 240));
@@ -2408,7 +2424,7 @@ public class frm_tarif extends javax.swing.JFrame {
                              
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
-                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"","","","");
+                                     Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),0,0,0,0,"","","","",cmb_kategori.getSelectedItem().toString());
                            
                               datl.CloseCon();
                              listModel.addElement("Tersimpan:"+this.txt_kode_tarif.getText()+" "+Utilitas.tglsekarangJam());
@@ -2560,7 +2576,7 @@ public class frm_tarif extends javax.swing.JFrame {
                              datl.Save_tarif(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText()), 
-                                     Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",txt_kode_tarif.getText()+"-BPJS");
+                                     Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",txt_kode_tarif.getText()+"-BPJS",cmb_kategori.getSelectedItem().toString());
                            
                              //edit 10 jan
                               datl.CloseCon();
@@ -2601,10 +2617,24 @@ public class frm_tarif extends javax.swing.JFrame {
         // TODO add your handling code here:
         
           if(this.ck_bpjs.isSelected()){
+              if(!cmb_kategori.getSelectedItem().equals("=Pilih Kategori=")){
               this.savebpjs();
+              }
+              else{
+            
+            JOptionPane.showMessageDialog(null, "Data tidak ada yang dipilih!");
+            
+             }
           }
           else{
+               if(!cmb_kategori.getSelectedItem().equals("=Pilih Kategori=")){
               this.savenonbpjs();
+               }
+               else{
+            
+            JOptionPane.showMessageDialog(null, "Data tidak ada yang dipilih!");
+            
+             }
           }
        
         
@@ -2820,6 +2850,20 @@ public class frm_tarif extends javax.swing.JFrame {
            this.txt_sarana.setText(rep_titiknol(tb_tarif.getModel().getValueAt(row,5).toString())); 
            txt_stat.setText(tb_tarif.getModel().getValueAt(row,12).toString());
            this.cmb_kelas.setSelectedItem(tb_tarif.getModel().getValueAt(row,13).toString());
+           
+           
+            try{
+            
+           this.cmb_kategori.setSelectedItem(tb_tarif.getModel().getValueAt(row,22).toString());
+          
+           }
+           catch(Exception e){
+               this.cmb_kategori.setSelectedItem("=Pilih Kategori=");
+               
+               Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, e);
+           }
+           
+           
            //=====================
            
            this.txt_tarif1.setText(tb_tarif.getModel().getValueAt(row,14).toString()); 
@@ -2945,7 +2989,7 @@ public class frm_tarif extends javax.swing.JFrame {
                                 datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
-                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",2);
+                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",2,this.cmb_kategori.getSelectedItem().toString());
                              
                                 //edit 10 jan
                                 datl.CloseCon();
@@ -3033,7 +3077,7 @@ public class frm_tarif extends javax.swing.JFrame {
                                  datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
-                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1);
+                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1,this.cmb_kategori.getSelectedItem().toString());
                              
                                  //edit 10 jan
                                  datl.CloseCon();
@@ -3121,7 +3165,7 @@ public class frm_tarif extends javax.swing.JFrame {
                                    datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
-                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1);
+                                        ,Integer.valueOf(txt_sarana1.getText()),String.valueOf(this.ck_bpjs.isSelected()),"add","add",1,this.cmb_kategori.getSelectedItem().toString());
                              
                              //edit 10 jan      
                              datl.CloseCon();
@@ -3619,7 +3663,7 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
                                 datl.updateTarifBPJS(txt_kode_tarif.getText(), txt_nama_tarif.getText(),Double.valueOf(txt_tarif.getText()),Integer.valueOf(txt_dr.getText()), Integer.valueOf(txt_rs.getText()), 
                                      Integer.valueOf(txt_sarana.getText()), Integer.valueOf(lbl_kode_poli.getText()) ,
                                      Integer.valueOf(lbl_kode_status.getText()) , "add", "add", txt_keterangan.getText(),this.cmb_kelas.getSelectedItem().toString(),Double.valueOf(txt_tarif1.getText()),Integer.valueOf(txt_dr1.getText()), Integer.valueOf(txt_rs1.getText())
-                                        ,Integer.valueOf(txt_sarana1.getText()),"","add","add",2);
+                                        ,Integer.valueOf(txt_sarana1.getText()),"","add","add",2,this.cmb_kategori.getSelectedItem().toString());
                              
                                 //edit 10 jan
                                  datl.CloseCon();
@@ -3734,6 +3778,36 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
           Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
       }
     }//GEN-LAST:event_bt_cetakActionPerformed
+
+    private void bt_save_kategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save_kategoriActionPerformed
+        // TODO add your handling code here:
+        if(!cmb_kategori.getSelectedItem().equals("=Pilih Kategori=")){
+        
+         if(!txt_kode_tarif.getText().isEmpty())
+         {
+             try {
+                 datl=new Crud_local();
+                 datl.updateTarifkategori(txt_kode_tarif.getText(), cmb_kategori.getSelectedItem().toString());
+                 datl.CloseCon();
+                 
+                 refreshtbtarif();
+                 
+             } catch (Exception ex) {
+                 Logger.getLogger(frm_tarif.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }
+         else{
+         JOptionPane.showMessageDialog(null, "Kode Tarif Kosong!");
+         
+         }
+         
+        }
+        else{
+            
+            JOptionPane.showMessageDialog(null, "Data tidak ada yang dipilih!");
+            
+        }
+    }//GEN-LAST:event_bt_save_kategoriActionPerformed
 
     private void cariManualforlog(){
        
@@ -4741,15 +4815,9 @@ public void saveImagev() throws IOException {
                   if(tb_log_publishBPJS.getModel().getRowCount()!=0)  {
                       this.bt_verif1.setEnabled(true);
                   }
-                  
-                  
-                  
-                  
+        
                   
               }     
-              
-              
-              
               
               
               setukurantbLog();
@@ -4821,6 +4889,7 @@ public void saveImagev() throws IOException {
     private javax.swing.JButton bt_proses;
     private javax.swing.JButton bt_proses1;
     private javax.swing.JButton bt_save;
+    private javax.swing.JButton bt_save_kategori;
     private javax.swing.JButton bt_verif;
     private javax.swing.JButton bt_verif1;
     private javax.swing.JCheckBox ck_bpjs;
@@ -4828,6 +4897,7 @@ public void saveImagev() throws IOException {
     private javax.swing.JCheckBox ck_pilih_semua;
     private javax.swing.JCheckBox ck_pilih_semua1;
     private javax.swing.JCheckBox ck_verif;
+    private javax.swing.JComboBox<String> cmb_kategori;
     private javax.swing.JComboBox<String> cmb_kelas;
     private javax.swing.JDialog dlg_cari_poli;
     private javax.swing.JDialog dlg_cari_status;

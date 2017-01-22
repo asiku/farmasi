@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kasir;
+package farmasi;
 
 import unit_poli_ralan.*;
 import unit_poli.*;
@@ -54,7 +54,7 @@ public class frm_login_poli extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/kasir_ico.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/farmasi_ico.png"))); // NOI18N
 
         jLabel2.setText("User Name");
 
@@ -195,7 +195,7 @@ public class frm_login_poli extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_bt_cancelActionPerformed
 
-    private void loginActPetugas(){
+    private void loginActPetugas() {
    
      if(!(this.txt_username.getText().isEmpty()||this.txt_username.getText().isEmpty()))
      {   
@@ -207,10 +207,10 @@ public class frm_login_poli extends javax.swing.JFrame {
            
             
         } catch (SQLException ex) {
-            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (Exception ex) {
-            Logger.getLogger(frm_petugas_poli.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
         }
             
             if (Crud_local.usm.equals(txt_username.getText()) && Crud_local.psm.equals(txt_pwd.getText())) {
@@ -220,7 +220,7 @@ public class frm_login_poli extends javax.swing.JFrame {
                 
                 
                 
-              if(Crud_local.namapoli.equals("RALAN")){   
+              if(Crud_local.namapoli.equals("Farmasi")){   
                 
 //                frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,Crud_local.namapoli);
                 
@@ -229,7 +229,7 @@ public class frm_login_poli extends javax.swing.JFrame {
 
                 datl.CloseCon();
                 
-                frm_poli_ralan pol=new frm_poli_ralan(namapetugaslogin,"Kasir");
+                NewJFrame pol=new NewJFrame(namapetugaslogin,"Farmasi Unit 1","c1");
                 
                 pol.setVisible(true);
                 
@@ -241,6 +241,8 @@ public class frm_login_poli extends javax.swing.JFrame {
                  
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Gagal Login Koneksi Data Bermasalah!");
+                Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
                 Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
                 
@@ -283,6 +285,10 @@ public class frm_login_poli extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frm_login_poli.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

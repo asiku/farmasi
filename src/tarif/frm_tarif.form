@@ -583,7 +583,7 @@
                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -598,20 +598,24 @@
                                                   <Component id="txt_poli" min="-2" pref="155" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="bt_cari_poli" min="-2" pref="50" max="-2" attributes="0"/>
+                                              <Component id="bt_cari_status" min="-2" pref="50" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cmb_kelas" min="-2" pref="154" max="-2" attributes="0"/>
-                                              <Component id="ck_bpjs" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <Component id="ck_bpjs" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                                              <Component id="cmb_kelas" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="bt_save_kategori" min="-2" pref="148" max="-2" attributes="0"/>
+                                              <Component id="cmb_kategori" min="-2" pref="148" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="bt_cari_poli" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="bt_cari_status" min="-2" pref="50" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
@@ -667,13 +671,15 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmb_kelas" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmb_kategori" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="ck_bpjs" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="bt_save_kategori" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="11" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -788,6 +794,43 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ck_bpjsActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cmb_kategori">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="18">
+                        <StringItem index="0" value="=Pilih Kategori="/>
+                        <StringItem index="1" value="obs igd"/>
+                        <StringItem index="2" value="dr umum"/>
+                        <StringItem index="3" value="dr spesialis"/>
+                        <StringItem index="4" value="assisten dr"/>
+                        <StringItem index="5" value="penata anestesi"/>
+                        <StringItem index="6" value="assisten operasi"/>
+                        <StringItem index="7" value="konsul dr"/>
+                        <StringItem index="8" value="visit dr umum"/>
+                        <StringItem index="9" value="visit dr spesialis"/>
+                        <StringItem index="10" value="tindakan"/>
+                        <StringItem index="11" value="labor"/>
+                        <StringItem index="12" value="usg"/>
+                        <StringItem index="13" value="darah"/>
+                        <StringItem index="14" value="rontgen"/>
+                        <StringItem index="15" value="sewa alat"/>
+                        <StringItem index="16" value="fisiotherapi"/>
+                        <StringItem index="17" value="ambulance"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="bt_save_kategori">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Save Kategori"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_save_kategoriActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
