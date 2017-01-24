@@ -1183,7 +1183,7 @@
                 <Component class="javax.swing.JButton" name="bt_save1">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/kasir/proces_ico.png"/>
+                      <Image iconType="3" name="/unit_poli/proces_ico.png"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Print"/>
                   </Properties>

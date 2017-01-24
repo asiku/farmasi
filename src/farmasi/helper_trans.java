@@ -17,4 +17,8 @@ public class helper_trans {
     public static String KEY_NM_PASIEN = "nama_pasien";
     public static String KEY_CATATAN = "catatan";
     public static String KEY_PETUGAS = "petugas";
+    public static String KEY_NAMA_JUAL_BEBAS= "nama_jual_bebas";
+    public static String KEY_NO_RAWAT="no_rawat"; 
+    public static String KEY_CARA_BELI="cara_beli";         
+            
 }

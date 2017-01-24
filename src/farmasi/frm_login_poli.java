@@ -50,7 +50,7 @@ public class frm_login_poli extends javax.swing.JFrame {
         bt_cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Kasir");
+        setTitle("Farmasi");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

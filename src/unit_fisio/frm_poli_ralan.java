@@ -1008,7 +1008,7 @@ filterTindakanFisio();
             }
         });
 
-        bt_save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/proces_ico.png"))); // NOI18N
+        bt_save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/proces_ico.png"))); // NOI18N
         bt_save1.setText("Print");
         bt_save1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1481,6 +1481,7 @@ filterTindakanFisio();
             dat = new Crud_farmasi();
             
             dat.readRec_registrasiFisio(txt_no_rawat.getText());
+            dat.CloseCon();
             
             lbl_nip_petugas_pilih.setText(dat.kddokterfisio);
             txt_petugas_pilih.setText(dat.nmdokterfisio);
@@ -1889,7 +1890,9 @@ if(!this.txt_no_rawat.getText().isEmpty()){
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
                
               dat.readRec_registrasiRalan( dateFormatter.format(dt_tgl_reg.getDate()),1);
-                
+              
+               dat.CloseCon();
+              
                 this.tb_reg.setModel(dat.modelregralan);
 
                 setukurantbReg();
@@ -1911,10 +1914,10 @@ if(!this.txt_no_rawat.getText().isEmpty()){
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.filtertxtInap();
-            this.tb_reg.requestFocus();
+            this.tb_reg_inap.requestFocus();
             //jtb_barang.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-            tb_reg.setRowSelectionInterval(0, 0);
+            tb_reg_inap.setRowSelectionInterval(0, 0);
 
         }
     }//GEN-LAST:event_txt_cari_reg_inapKeyPressed
@@ -1934,7 +1937,8 @@ if(!this.txt_no_rawat.getText().isEmpty()){
                 // No row selected
             } else {
 
-                setMasukdatInputInap(row);
+                int srow = tb_reg_inap.convertRowIndexToModel(row);
+                setMasukdatInputInap(srow);
 
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
@@ -1956,17 +1960,17 @@ if(!this.txt_no_rawat.getText().isEmpty()){
 
     private void tb_reg_inapKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inapKeyTyped
         // TODO add your handling code here:
-        char keyChar = evt.getKeyChar();
+       char keyChar = evt.getKeyChar();
 
-        this.txt_cari_reg.requestFocus();
+        this.txt_cari_reg_inap.requestFocus();
 
         if (evt.getKeyCode() != KeyEvent.VK_ENTER) {
 
-            this.txt_cari_reg.setText(String.valueOf(keyChar).trim());
+            this.txt_cari_reg_inap.setText(String.valueOf(keyChar).trim());
         }
 
-        if (!txt_cari_reg.getText().isEmpty()) {
-            tb_reg.setRowSelectionInterval(0, 0);
+        if (!txt_cari_reg_inap.getText().isEmpty()) {
+            tb_reg_inap.setRowSelectionInterval(0, 0);
         }
     }//GEN-LAST:event_tb_reg_inapKeyTyped
 
@@ -1979,7 +1983,8 @@ if(!this.txt_no_rawat.getText().isEmpty()){
                 // No row selected
             } else {
 
-                setMasukdatInputInap(row);
+               int srow = tb_reg_inap.convertRowIndexToModel(row);
+                setMasukdatInputInap(srow);
 
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
@@ -2015,6 +2020,8 @@ if(!this.txt_no_rawat.getText().isEmpty()){
 
                 dat.readRec_kamarinapFisio(b, this.txt_cari_reg.getText(), t, this.lbl_tgl_server.getText());
 
+                dat.CloseCon();
+                
                 this.tb_reg_inap.setModel(dat.modelkamarinap);
 
                 setukurantbRegInap();

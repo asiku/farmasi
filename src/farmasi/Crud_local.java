@@ -76,7 +76,17 @@ public class Crud_local extends DBKoneksi_local {
 
     String[] periksa_lab_title = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif","Tarif BPJS"
                                             ,"status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs"};
+   
     
+   String[] brg_title = new String[]{"Kode Barang", "Nama", "Harga Jual", "Harga Jual Karyawan","Harga Beli", "Kategori"}; 
+            
+   public DefaultTableModel modelbrg = new DefaultTableModel(brg_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };         
+            
    public DefaultTableModel modelperiksalab = new DefaultTableModel(periksa_lab_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -1696,20 +1706,74 @@ public class Crud_local extends DBKoneksi_local {
 
     }
    
+    public void readRec_brgF(String namabrg) throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_TBNAME + " WHERE "
+                + helper_brg.KEY_NAMA_BRG + " like ?");
+
+        preparedStatement.setString(1, "%" + namabrg + "%");
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+
+            String kodeobat = resultSet.getString(helper_brg.KEY_KODE_BRG);
+            String nmbrg = resultSet.getString(helper_brg.KEY_NAMA_BRG);
+            double hrgbeli = resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+            double hrgralan = resultSet.getDouble(helper_brg.KEY_RAWAT_JALAN);
+            double hrgkary = resultSet.getDouble(helper_brg.KEY_KARYAWAN);
+            String kat = resultSet.getString(helper_brg.KEY_KATEGORI);
+           
+            modelbrg.addRow(new Object[]{kodeobat, nmbrg, hrgralan,hrgkary,hrgbeli,kat});
+        }
+    }
+
    
+     public void readRec_brg() throws SQLException {
+
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_TBNAME);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+      
+        while (resultSet.next()) {
+ 
+           
+            String kodeobat = resultSet.getString(helper_brg.KEY_KODE_BRG);
+            String nmbrg = resultSet.getString(helper_brg.KEY_NAMA_BRG);
+            double hrgbeli = resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+            double hrgralan = resultSet.getDouble(helper_brg.KEY_RAWAT_JALAN);
+            double hrgkary = resultSet.getDouble(helper_brg.KEY_KARYAWAN);
+            String kat = resultSet.getString(helper_brg.KEY_KATEGORI);
+           
+            modelbrg.addRow(new Object[]{kodeobat, nmbrg, hrgralan,hrgkary,hrgbeli,kat});
+        }
+    }
+    
    
-   public void Save_trans(String no_nota, String no_rm, String nama_pasien, String catatan, String petugas) {
+   public void Save_trans(String no_nota, String no_rm, String nama_pasien, String catatan
+           , String petugas, String carabeli, String noraw, String nmjualbebas) {
 
         try {
-            preparedStatement = connect.prepareStatement("insert into " + helper_trans.TB_NAME + " (" + helper_trans.KEY_NO_NOTA + "," + helper_trans.KEY_NO_RM
-                    + "," + helper_trans.KEY_NM_PASIEN + "," + helper_trans.KEY_CATATAN + "," + helper_trans.KEY_PETUGAS + ") "
-                    + " values (?,?,?,?,?)");
+            preparedStatement = connect.prepareStatement("insert into " + helper_trans.TB_NAME + " (" 
+                    + helper_trans.KEY_NO_NOTA + "," 
+                    + helper_trans.KEY_NO_RM + ","
+                    + helper_trans.KEY_NM_PASIEN + "," 
+                    + helper_trans.KEY_CATATAN + "," 
+                    + helper_trans.KEY_PETUGAS + ","
+                    + helper_trans.KEY_CARA_BELI + ","
+                    + helper_trans.KEY_NO_RAWAT + ","
+                    + helper_trans.KEY_NAMA_JUAL_BEBAS + ") "
+                    + " values (?,?,?,?,?,?,?,?)");
 
             preparedStatement.setString(1, no_nota);
             preparedStatement.setString(2, no_rm);
             preparedStatement.setString(3, nama_pasien);
             preparedStatement.setString(4, catatan);
             preparedStatement.setString(5, petugas);
+            preparedStatement.setString(6, carabeli);
+            preparedStatement.setString(7, noraw);
+            preparedStatement.setString(8, nmjualbebas);
             
             preparedStatement.execute();
 

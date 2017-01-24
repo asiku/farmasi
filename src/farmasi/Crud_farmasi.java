@@ -39,7 +39,10 @@ public class Crud_farmasi extends DBkoneksi {
     String[] reg_title = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal"};
    
     String[] reg_titleralan = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat"};
-     String[] reg_titleralankasir = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat","Status Lanjut","No. SEP"};
+    
+    String[] reg_titleralanfarmasi = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat","No. SEP"};
+  
+    String[] reg_titleralankasir = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat","Status Lanjut","No. SEP"};
 
     String[] brg_title = new String[]{"Kode obat", "Nama Obat", "Satuan"};
 
@@ -48,6 +51,8 @@ public class Crud_farmasi extends DBkoneksi {
     String[] pegawai_title = new String[]{"Nip", "Nama Pegawai","Jabatan"};
 
     String[] kamarinap_title = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas","Kode Status","Status"};
+    
+    String[] kamarinap_titlefarmasi = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas","Kode Status","Status","No SEP"};
     
     String[] kamarinap_title_biaya = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas","Kode Status","Status","Tarif"};
     
@@ -70,6 +75,13 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
+    public DefaultTableModel modelkamarinapfarmasi = new DefaultTableModel(kamarinap_titlefarmasi, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+    
     public DefaultTableModel modelkamarinap = new DefaultTableModel(kamarinap_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -106,12 +118,20 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
     
+    public DefaultTableModel modelregralanfarmasi = new DefaultTableModel(reg_titleralanfarmasi, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+    
     public DefaultTableModel modelregralan = new DefaultTableModel(reg_titleralan, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
 
         }
     };
+    
     public DefaultTableModel modelreg = new DefaultTableModel(reg_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -223,6 +243,84 @@ public class Crud_farmasi extends DBkoneksi {
     
     }
     
+    
+     public void readRec_kamarinapFisioFarmasi(String[] bangsal,String txtcari,String tgl,String tglserver) {
+
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEVF + " WHERE "
+                    + helper_kamar_inap.KEY_NO_RM + " like ? OR "
+                    + helper_kamar_inap.KEY_NM_PASIEN + " like ?");
+            
+            preparedStatement.setString(1, "%"+ txtcari +"%");
+            preparedStatement.setString(2, "%"+ txtcari +"%");
+           
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+//        int i = 0;
+           // System.out.println("No RM" + resultSet.getFetchSize());
+
+            while (resultSet.next()) {
+
+//            i++;
+//            String no = String.valueOf(i);
+//             if((resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[0])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[1])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[2])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[3])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[4])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[5])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[6])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[7])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[8])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[9])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[10])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[11])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[12])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[13])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[14])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[15])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[16])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[17])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[18])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[19])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[20])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[21])||
+//                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[22])
+//                     
+//                     ))
+//                             
+//                 
+//              {
+                  // && resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).substring(5, resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK).length() - 3).equals(tgl)
+                  
+                 try {
+                     
+               if(Utilitas.Hitungtgl(tglserver,Utilitas.Jam(),resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK), Utilitas.Jam())<=744){  
+                String norm = resultSet.getString(helper_kamar_inap.KEY_NO_RM);
+                String nmp = resultSet.getString(helper_kamar_inap.KEY_NM_PASIEN);
+                String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
+                String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
+                String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
+                String kelas= resultSet.getString(helper_kamar_inap.KEY_KELAS);
+                String kdpj= resultSet.getString(helper_kamar_inap.KEY_KODE_STATUS_BAYAR);
+                String pj= resultSet.getString(helper_kamar_inap.KEY_STATUS_BAYAR);
+                String nosep= resultSet.getString(helper_kamar_inap.KEY_NO_SEP);
+                modelkamarinapfarmasi.addRow(new Object[]{norm, nmp, norawat,tglmasuk,nmbangsal,kelas,kdpj,pj,nosep});
+               }
+                 } catch (ParseException ex) {
+                     Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                
+               
+//              }
+             
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void readRec_kamarinapFisio(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
@@ -825,6 +923,126 @@ public class Crud_farmasi extends DBkoneksi {
             String norawat = resultSet.getString(helper_registrasi.KEY_NO_RAWAT);
              
             modelregralan.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj,norawat});
+         }    
+     }
+        
+    }
+
+    public void readRec_registrasiRalanFisioFarmasi(String tgl,String name,int s) throws SQLException {
+
+         //edit 05 jan 2016
+     if(s==1){   
+       
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+     if(s==2){   
+        
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "
+                + helper_registrasi.KEY_NM_PASIEN + " like ?" );
+
+        preparedStatement.setString(1, tgl);
+        preparedStatement.setString(2, "%" + name + "%");
+     }
+     
+     else{
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+        //kode igd=3
+//        preparedStatement.setInt(2, 3);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0; 
+
+      while (resultSet.next()) {
+
+          
+       if(resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT).equals("Ralan")||resultSet.getString(helper_registrasi.KEY_KODE_POLI).equals("3")){
+        
+           i++;
+            String no = String.valueOf(i);
+            String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
+            String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
+            String kodedokter = resultSet.getString(helper_registrasi.KEY_KODE_DOKTER);
+            String nmdokter = resultSet.getString(helper_registrasi.KEY_NAMA_DOKTER);
+            String kdpoli = resultSet.getString(helper_registrasi.KEY_KODE_POLI);
+            String poli = resultSet.getString(helper_registrasi.KEY_POLI);
+            String kdpj = resultSet.getString(helper_registrasi.KEY_KODE_PJ);
+            String nmpj = resultSet.getString(helper_registrasi.KEY_NAMA_PJ);
+            String norawat = resultSet.getString(helper_registrasi.KEY_NO_RAWAT);
+             String nosep = resultSet.getString(helper_registrasi.KEY_NO_SEP);
+             
+            modelregralanfarmasi.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj,norawat,nosep});
+         }    
+     }
+        
+    }
+
+    public void readRec_registrasiRalanFarmasi(String tgl,int s) throws SQLException {
+
+        
+     if(s==1){   
+        //edit 29 des 2016
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+     if(s==2){   
+        //edit 29 des 2016
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "
+                + helper_registrasi.KEY_NM_PASIEN + " like ?" );
+
+        preparedStatement.setString(1, tgl);
+         preparedStatement.setString(1, tgl);
+     }
+     
+     else{
+       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =?" );
+
+        preparedStatement.setString(1, tgl);
+     }
+        //kode igd=3
+//        preparedStatement.setInt(2, 3);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        int i = 0; 
+
+      while (resultSet.next()) {
+
+          
+       if(resultSet.getString(helper_registrasi.KEY_STATUS_LANJUT).equals("Ralan")||resultSet.getString(helper_registrasi.KEY_KODE_POLI).equals("3")){
+        
+           i++;
+            String no = String.valueOf(i);
+            String rm = resultSet.getString(helper_registrasi.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_registrasi.KEY_NM_PASIEN);
+            String reg = resultSet.getString(helper_registrasi.KEY_TGL_REGISTRASI);
+            String kodedokter = resultSet.getString(helper_registrasi.KEY_KODE_DOKTER);
+            String nmdokter = resultSet.getString(helper_registrasi.KEY_NAMA_DOKTER);
+            String kdpoli = resultSet.getString(helper_registrasi.KEY_KODE_POLI);
+            String poli = resultSet.getString(helper_registrasi.KEY_POLI);
+            String kdpj = resultSet.getString(helper_registrasi.KEY_KODE_PJ);
+            String nmpj = resultSet.getString(helper_registrasi.KEY_NAMA_PJ);
+            String norawat = resultSet.getString(helper_registrasi.KEY_NO_RAWAT);
+            String nosep = resultSet.getString(helper_registrasi.KEY_NO_SEP);
+             
+            modelregralanfarmasi.addRow(new Object[]{no, rm, nmp, reg,kodedokter,nmdokter,kdpoli,poli,kdpj,nmpj,norawat,nosep});
          }    
      }
         
