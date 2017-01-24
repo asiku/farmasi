@@ -604,13 +604,13 @@
                                       <Group type="102" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="ck_bpjs" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                                               <Component id="cmb_kelas" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
+                                              <Component id="ck_bpjs" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="bt_save_kategori" min="-2" pref="148" max="-2" attributes="0"/>
-                                              <Component id="cmb_kategori" min="-2" pref="148" max="-2" attributes="0"/>
+                                              <Component id="bt_save_kategori" min="-2" pref="184" max="-2" attributes="0"/>
+                                              <Component id="cmb_kategori" min="-2" pref="184" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -794,7 +794,7 @@
                 <Component class="javax.swing.JComboBox" name="cmb_kategori">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="18">
+                      <StringArray count="29">
                         <StringItem index="0" value="=Pilih Kategori="/>
                         <StringItem index="1" value="obs igd"/>
                         <StringItem index="2" value="dr umum"/>
@@ -813,6 +813,17 @@
                         <StringItem index="15" value="sewa alat"/>
                         <StringItem index="16" value="fisiotherapi"/>
                         <StringItem index="17" value="ambulance"/>
+                        <StringItem index="18" value="ruangan"/>
+                        <StringItem index="19" value="dr anestesi"/>
+                        <StringItem index="20" value="pj dr anestesi"/>
+                        <StringItem index="21" value="plk penata anestesi"/>
+                        <StringItem index="22" value="penata anestesi"/>
+                        <StringItem index="23" value="pj dr spesialis"/>
+                        <StringItem index="24" value="plk dr umum"/>
+                        <StringItem index="25" value="plk bidan"/>
+                        <StringItem index="26" value="jasa perawatan"/>
+                        <StringItem index="27" value="obs-vk/ok"/>
+                        <StringItem index="28" value="administrasi"/>
                       </StringArray>
                     </Property>
                   </Properties>

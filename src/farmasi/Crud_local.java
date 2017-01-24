@@ -79,7 +79,19 @@ public class Crud_local extends DBKoneksi_local {
    
     
    String[] brg_title = new String[]{"Kode Barang", "Nama", "Harga Jual", "Harga Jual Karyawan","Harga Beli", "Kategori"}; 
-            
+  
+   String[] transfarmasi_title = new String[]{"No RM", 
+       "Nama Pasien", "Cara beli","No rawat", "Nama Jual Bebas","Nik","Nama Karyawan","Status Cetak","Petugas","Catatan","No Nota"}; 
+   
+   
+   public DefaultTableModel modeltransfarmasi = new DefaultTableModel(transfarmasi_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };         
+           
+           
    public DefaultTableModel modelbrg = new DefaultTableModel(brg_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -1243,7 +1255,9 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
-      public void readRec_cariPetugasF(String nm_petugas) throws SQLException {
+    
+    
+    public void readRec_cariPetugasF(String nm_petugas) throws SQLException {
 
       preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_petugas_poli.TB_NAMEV + " WHERE "
                 + helper_petugas_poli.KEY_NAMA + " like ? ");
@@ -1264,6 +1278,42 @@ public class Crud_local extends DBKoneksi_local {
           
             modelpetugas.addRow(new Object[]{nip, nama,idpoli,nmpoli,username});
             
+            
+        }
+    }
+    
+    
+    
+   public void readRec_transfarmasi(String nm) throws SQLException {
+      
+          
+    preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_NAME + " WHERE "
+                + helper_trans.KEY_NM_PASIEN + " like ? ");
+
+        preparedStatement.setString(1, "%" + nm + "%");    
+          
+       
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+            
+            String nota = resultSet.getString(helper_trans.KEY_NO_NOTA);
+            String nmrm= resultSet.getString(helper_trans.KEY_NO_RM);
+            String nama_pasien= resultSet.getString(helper_trans.KEY_NM_PASIEN);
+            String petugas = resultSet.getString(helper_trans.KEY_PETUGAS);
+            String carabeli = resultSet.getString(helper_trans.KEY_CARA_BELI);
+            String noraw = resultSet.getString(helper_trans.KEY_NO_RAWAT);
+            String jb = resultSet.getString(helper_trans.KEY_NAMA_JUAL_BEBAS);
+            String nik = resultSet.getString(helper_trans.KEY_NIK);
+            String nmp = resultSet.getString(helper_trans.KEY_NAMA_KARYAWAN);
+            String statcetak = resultSet.getString(helper_trans.KEY_STATUS_CETAK);
+            String catatan = resultSet.getString(helper_trans.KEY_CATATAN);
+            
+            modeltransfarmasi.addRow(new Object[]{nmrm,nama_pasien,carabeli,noraw,jb,nik,nmp
+                                                   ,statcetak,petugas,catatan,nota});
+           
             
         }
     }
@@ -1752,7 +1802,7 @@ public class Crud_local extends DBKoneksi_local {
     
    
    public void Save_trans(String no_nota, String no_rm, String nama_pasien, String catatan
-           , String petugas, String carabeli, String noraw, String nmjualbebas) {
+           , String petugas, String carabeli, String noraw, String nmjualbebas,String tgl) {
 
         try {
             preparedStatement = connect.prepareStatement("insert into " + helper_trans.TB_NAME + " (" 
@@ -1763,8 +1813,9 @@ public class Crud_local extends DBKoneksi_local {
                     + helper_trans.KEY_PETUGAS + ","
                     + helper_trans.KEY_CARA_BELI + ","
                     + helper_trans.KEY_NO_RAWAT + ","
-                    + helper_trans.KEY_NAMA_JUAL_BEBAS + ") "
-                    + " values (?,?,?,?,?,?,?,?)");
+                    + helper_trans.KEY_NAMA_JUAL_BEBAS + "," 
+                    + helper_trans.KEY_TGL + ") "
+                    + " values (?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setString(1, no_nota);
             preparedStatement.setString(2, no_rm);
@@ -1774,6 +1825,7 @@ public class Crud_local extends DBKoneksi_local {
             preparedStatement.setString(6, carabeli);
             preparedStatement.setString(7, noraw);
             preparedStatement.setString(8, nmjualbebas);
+             preparedStatement.setString(9, tgl);
             
             preparedStatement.execute();
 
@@ -2412,14 +2464,14 @@ public class Crud_local extends DBKoneksi_local {
         //jp.setPageWidth(200);
         //jp.setPageHeight(180);
        // jp.setOrientation(OrientationEnum.PORTRAIT);
-
+       
       
         JasperPrintManager.printReport(jp,false);
        
         if(tampil.equals("ok")){
             JasperViewer.viewReport(jp, false);
         }
-       
+        
     }
   
 public void CetakTarif() throws JRException {

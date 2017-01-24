@@ -1571,7 +1571,7 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
 
-        cmb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Pilih Kategori=", "obs igd", "dr umum", "dr spesialis", "assisten dr", "penata anestesi", "assisten operasi", "konsul dr", "visit dr umum", "visit dr spesialis", "tindakan", "labor", "usg", "darah", "rontgen", "sewa alat", "fisiotherapi", "ambulance" }));
+        cmb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Pilih Kategori=", "obs igd", "dr umum", "dr spesialis", "assisten dr", "penata anestesi", "assisten operasi", "konsul dr", "visit dr umum", "visit dr spesialis", "tindakan", "labor", "usg", "darah", "rontgen", "sewa alat", "fisiotherapi", "ambulance", "ruangan", "dr anestesi", "pj dr anestesi", "plk penata anestesi", "penata anestesi", "pj dr spesialis", "plk dr umum", "plk bidan", "jasa perawatan", "obs-vk/ok", "administrasi" }));
 
         bt_save_kategori.setText("Save Kategori");
         bt_save_kategori.addActionListener(new java.awt.event.ActionListener() {
@@ -1617,12 +1617,12 @@ public class frm_tarif extends javax.swing.JFrame {
                             .addGroup(panel_inputanLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ck_bpjs, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
+                                    .addComponent(cmb_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ck_bpjs, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bt_save_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(bt_save_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(29, 29, 29))
                     .addGroup(panel_inputanLayout.createSequentialGroup()
                         .addGroup(panel_inputanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3801,7 +3801,7 @@ int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus?","
         }
         else{
             
-            JOptionPane.showMessageDialog(null, "Data tidak ada yang dipilih!");
+            JOptionPane.showMessageDialog(null, "Kategori tidak ada yang dipilih!");
             
         }
     }//GEN-LAST:event_bt_save_kategoriActionPerformed

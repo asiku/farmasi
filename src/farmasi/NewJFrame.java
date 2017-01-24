@@ -7,6 +7,7 @@ package farmasi;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
@@ -181,6 +182,7 @@ public class NewJFrame extends javax.swing.JFrame {
                lbl_cara_beli.setText("Ralan");
             }
             
+             Set_Nonota();
            // jp_rm.setVisible(false);
         }
     
@@ -192,7 +194,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //        int row = this.jtb_barang.getSelectedRow();
         int row = rows;
         
-        JOptionPane.showMessageDialog(null, row);
+//        JOptionPane.showMessageDialog(null, row);
         
         if (row == -1) {
             // No row selected
@@ -214,7 +216,7 @@ public class NewJFrame extends javax.swing.JFrame {
             
           }
           else{
-              JOptionPane.showMessageDialog(null, cbrg.containsKey(jtb_barang.getModel().getValueAt(row, 1))+" "+jtb_barang.getModel().getValueAt(row, 1));
+//              JOptionPane.showMessageDialog(null, cbrg.containsKey(jtb_barang.getModel().getValueAt(row, 1))+" "+jtb_barang.getModel().getValueAt(row, 1));
               
               if(!cbrg.containsKey(jtb_barang.getModel().getValueAt(row, 1)))
               {       
@@ -286,7 +288,17 @@ public class NewJFrame extends javax.swing.JFrame {
             
         //} catch (SQLException ex) {
           
-        this.txt_nota.setText("PJ-"+LocalDateTime.now().getSecond()+"-"+String.valueOf(LocalDateTime.now().getSecond()+1));
+        if(lbl_cara_beli.getText().equals("Jual Bebas")){
+           this.txt_nota.setText("JB"+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+        }
+        
+        else if(lbl_cara_beli.getText().equals("Karyawan")){
+                this.txt_nota.setText("KRY"+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+         }
+        else{
+            this.txt_nota.setText(this.txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+        }
+        
     }
     
     public NewJFrame(){
@@ -302,8 +314,8 @@ public class NewJFrame extends javax.swing.JFrame {
       lbl_jamnow.setVisible(false);
       txt_nip.setVisible(false);
       jcmb_catatan.setVisible(false);
-      jLabel3.setVisible(false);
-      txt_tgl.setVisible(false);
+//      jLabel3.setVisible(false);
+//      txt_tgl.setVisible(false);
 
       this.lbl_kode.setVisible(false);
       
@@ -315,7 +327,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         this.txt_no_rm.requestFocus();
 
-        txt_tgl.setText(tglsekarang());
+        
+//        txt_tgl.setText(tglsekarang());
 
         //this.jp_barang.setVisible(false);
 //        this.jp_rm.setVisible(false); 
@@ -324,7 +337,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //        this.jck_rpt.setSelected(true);
         
        //set No nota
-       Set_Nonota();
+      
        
        txt_cari_petugas.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -493,6 +506,8 @@ public class NewJFrame extends javax.swing.JFrame {
         
         refreshdatatb();
 
+        caridata();
+        
         this.jtb_transaksi.setModel(modeltrans);
 
         setlebartbl();
@@ -560,6 +575,9 @@ public class NewJFrame extends javax.swing.JFrame {
          
          
          setukurantbbarang();
+         
+                 txt_tgl.setText(lbl_tgl_server.getText().toString());
+
     }
 
     
@@ -571,6 +589,7 @@ public class NewJFrame extends javax.swing.JFrame {
             datl.readRec_brg();
             datl.CloseCon();
             this.jtb_barang.setModel(datl.modelbrg);
+            this.setukurantb_ralan_ranap();
             
         } catch (SQLException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -737,7 +756,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txt_nama_pasien = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txt_nota = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -754,6 +772,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         ck_jual_karyawan_bebas = new javax.swing.JCheckBox();
         ck_jual_bebas = new javax.swing.JCheckBox();
+        txt_tgl = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtb_transaksi = new javax.swing.JTable();
@@ -762,7 +782,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jck_rpt = new javax.swing.JCheckBox();
         lbl_grand_tot = new javax.swing.JLabel();
         bt_print_ulang = new javax.swing.JButton();
-        txt_tgl = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txt_no_sep = new javax.swing.JTextField();
         txt_catatan = new javax.swing.JTextField();
@@ -807,9 +826,17 @@ public class NewJFrame extends javax.swing.JFrame {
         txt_cari_reg_inap1 = new javax.swing.JTextField();
         lbl_cari2 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        tb_reg_inap1 = new javax.swing.JTable();
+        tb_ralan_ranap = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        tb_reg_inap2 = new javax.swing.JTable();
+        txt_cari_reg_inap2 = new javax.swing.JTextField();
+        lbl_cari3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tb_reg_inap3 = new javax.swing.JTable();
+        txt_cari_reg_inap3 = new javax.swing.JTextField();
+        lbl_cari4 = new javax.swing.JLabel();
         lbl_kode = new javax.swing.JLabel();
         ToolBar = new javax.swing.JToolBar();
         jPanel6 = new javax.swing.JPanel();
@@ -1023,9 +1050,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel2.setText("Nama ");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 117, 19));
 
-        jLabel3.setText("tgl");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 117, 19));
-
         txt_nota.setEditable(false);
         txt_nota.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1143,6 +1167,12 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jp_barang.add(ck_jual_bebas, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
+        txt_tgl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jp_barang.add(txt_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 140, 20));
+
+        jLabel3.setText("tgl");
+        jp_barang.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 10, 30, 19));
+
         jPanel3.add(jp_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 860, 210));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1220,7 +1250,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.add(bt_print_ulang, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 15, 160, 30));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 860, 230));
-        jPanel3.add(txt_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 220, 20));
 
         jLabel11.setText("Keterangan");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
@@ -1293,6 +1322,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jPanel3.add(txt_nip, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 60, -1));
 
+        txt_nama_pegawai.setEditable(false);
         txt_nama_pegawai.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nama_pegawaiKeyPressed(evt);
@@ -1552,8 +1582,8 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jPanel5.add(lbl_cari2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 40, -1));
 
-        tb_reg_inap1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        tb_reg_inap1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_ralan_ranap.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_ralan_ranap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1564,47 +1594,162 @@ public class NewJFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tb_reg_inap1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_ralan_ranap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tb_reg_inap1MouseReleased(evt);
+                tb_ralan_ranapMouseReleased(evt);
             }
         });
-        tb_reg_inap1.addKeyListener(new java.awt.event.KeyAdapter() {
+        tb_ralan_ranap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tb_reg_inap1KeyTyped(evt);
+                tb_ralan_ranapKeyTyped(evt);
             }
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tb_reg_inap1KeyPressed(evt);
+                tb_ralan_ranapKeyPressed(evt);
             }
         });
-        jScrollPane8.setViewportView(tb_reg_inap1);
+        jScrollPane8.setViewportView(tb_ralan_ranap);
 
-        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 350, 420));
+        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 350, 500));
 
         jTabbedPane3.addTab("Ralan/Ranap", jPanel5);
+
+        tb_reg_inap2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_reg_inap2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_reg_inap2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_reg_inap2MouseReleased(evt);
+            }
+        });
+        tb_reg_inap2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tb_reg_inap2KeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tb_reg_inap2KeyPressed(evt);
+            }
+        });
+        jScrollPane9.setViewportView(tb_reg_inap2);
+
+        txt_cari_reg_inap2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_cari_reg_inap2KeyPressed(evt);
+            }
+        });
+
+        lbl_cari3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        lbl_cari3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_cari3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(txt_cari_reg_inap2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(lbl_cari3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(txt_cari_reg_inap2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_cari3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane3.addTab("Karyawan Jual Bebas", jPanel7);
+
+        tb_reg_inap3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_reg_inap3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_reg_inap3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_reg_inap3MouseReleased(evt);
+            }
+        });
+        tb_reg_inap3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tb_reg_inap3KeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tb_reg_inap3KeyPressed(evt);
+            }
+        });
+        jScrollPane10.setViewportView(tb_reg_inap3);
+
+        txt_cari_reg_inap3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_cari_reg_inap3KeyPressed(evt);
+            }
+        });
+
+        lbl_cari4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        lbl_cari4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_cari4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(0, 5, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(txt_cari_reg_inap3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(lbl_cari4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 565, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(txt_cari_reg_inap3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_cari4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Jual Bebas", jPanel8);
@@ -1904,6 +2049,26 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txt_cari_rmKeyPressed
 
+    
+    private void caridata(){
+        
+        try {
+             
+             datl = new Crud_local();
+             datl.readRec_transfarmasi("");
+             
+             datl.CloseCon();
+             
+             tb_ralan_ranap.setModel(datl.modeltransfarmasi);
+             
+        } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
+    
+    }
+    
     private void bt_proses_cari_registrasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_proses_cari_registrasiActionPerformed
 
         // TODO add your handling code here:
@@ -2053,20 +2218,31 @@ public class NewJFrame extends javax.swing.JFrame {
 private void Cetak(){
     try {
     if(lbl_nm_status.getText().equals("BPJS")){
-        
+            
+       
+            datl=new Crud_local();
             datl.CetakNota(this.txt_nota.getText(),tampilrpt,2,lbl_nm_status.getText(),txt_no_sep.getText());
+            datl.CloseCon();
+       
+            
        
             }
             else{
                  if(lbl_cara_beli.getText().equals("Jual Bebas")){
+                   datl=new Crud_local();  
                    datl.CetakNota(this.txt_nota.getText(),tampilrpt,4,lbl_nm_status.getText(),txt_no_sep.getText());
+                   datl.CloseCon();
                  }
                  
-                else if(lbl_cara_beli.getText().equals("Penjualan Karyawan")){
+                else if(lbl_cara_beli.getText().equals("Karyawan")){
+                 datl=new Crud_local();
                  datl.CetakNota(this.txt_nota.getText(),tampilrpt,3,lbl_nm_status.getText(),txt_no_sep.getText());
+                 datl.CloseCon();
                  }
                 else{
+                  datl=new Crud_local();  
                   datl.CetakNota(this.txt_nota.getText(),tampilrpt,1,lbl_nm_status.getText(),txt_no_sep.getText());
+                  datl.CloseCon();
                 }       
                                 
       }  
@@ -2074,6 +2250,9 @@ private void Cetak(){
                 
             JOptionPane.showMessageDialog(null, "Gagal Print! ");
                 
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    catch (Exception ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -2104,7 +2283,7 @@ private void savePrint(){
                datl = new Crud_local();
                datl.Save_trans(this.txt_nota.getText(), this.txt_no_rm.getText(), this.txt_nama_pasien.getText()
                 , this.txt_catatan.getText(), this.txt_petugas.getText(),lbl_cara_beli.getText()
-                       ,txt_no_rawat.getText(),txt_nama_jual_bebas.getText());
+                       ,txt_no_rawat.getText(),txt_nama_jual_bebas.getText(),txt_tgl.getText());
                
                 datl.CloseCon();    
       
@@ -2121,7 +2300,7 @@ private void savePrint(){
              
              this.txt_no_rm.requestFocus();
              
-             Set_Nonota();
+             
              
          }
          else{
@@ -2140,9 +2319,14 @@ private void savePrint(){
     }
     
     private void bt_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_simpanActionPerformed
+      
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
         if(lbl_cara_beli.getText().equals("Ralan")||lbl_cara_beli.getText().equals("Ranap")){
               if(!(txt_no_rawat.getText().isEmpty()||this.txt_nota.getText().isEmpty()||this.txt_no_rm.getText().isEmpty()||this.txt_nama_pasien.getText().isEmpty())){       
-                savePrint();
+               
+                  savePrint();
+        
               }//end
     
              else{
@@ -2171,6 +2355,7 @@ private void savePrint(){
                } //end
        } 
         
+      this.setCursor(Cursor.getDefaultCursor());   
     }//GEN-LAST:event_bt_simpanActionPerformed
 
     private void jtb_transaksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_transaksiKeyPressed
@@ -2213,7 +2398,7 @@ private void savePrint(){
                   
                   rows=row;
                   
-                  JOptionPane.showMessageDialog(null, row);
+//                  JOptionPane.showMessageDialog(null, row);
                   
                 lbl_barang.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
 //                txt_hit_jml.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
@@ -2464,13 +2649,26 @@ private void savePrint(){
         }
     }
 
+    
+    private void setukurantb_ralan_ranap() {
+      this.tb_ralan_ranap.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_ralan_ranap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tri = this.tb_ralan_ranap.getColumnModel();
+
+        tri.getColumn(0).setPreferredWidth(70);
+        tri.getColumn(1).setPreferredWidth(285);
+        tri.getColumn(2).setPreferredWidth(100);
+        tri.getColumn(3).setPreferredWidth(220);
+        tri.getColumn(4).setPreferredWidth(150);
+    }
+    
     private void setukurantbRegInap() {
       this.tb_reg_inap.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
         tb_reg_inap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel tri = this.tb_reg_inap.getColumnModel();
 
         tri.getColumn(0).setPreferredWidth(70);
-        tri.getColumn(1).setPreferredWidth(285);
+        tri.getColumn(1).setPreferredWidth(282);
         tri.getColumn(2).setPreferredWidth(100);
         tri.getColumn(3).setPreferredWidth(220);
         tri.getColumn(4).setPreferredWidth(150);
@@ -2489,7 +2687,7 @@ private void savePrint(){
                 
                
                 setMasukdatInputInap(srow);
-              
+               Set_Nonota();
                 //txt_tarif.requestFocus();
           
             }
@@ -2561,7 +2759,7 @@ private void savePrint(){
                 int srow = tb_reg_inap.convertRowIndexToModel(row);
                 
                 setMasukdatInputInap(srow);
-              
+               Set_Nonota();
             }
 
         }
@@ -2640,7 +2838,7 @@ private void savePrint(){
             lbl_cara_beli.setText("Karyawan");
             Utilitas.HapusText(jPanel3);
             filterPegawai(); 
-            
+             Set_Nonota();
             ck_jual_karyawan_bebas.setSelected(true);
             ck_jual_bebas.setSelected(false);
             
@@ -2663,7 +2861,7 @@ private void savePrint(){
             Utilitas.HapusText(jPanel3);
             
             lbl_cara_beli.setText("Jual Bebas");
-           
+            Set_Nonota();
             ck_jual_bebas.setSelected(true);
             ck_jual_karyawan_bebas.setSelected(false);
             
@@ -2679,12 +2877,14 @@ private void savePrint(){
 
     private void bt_print_ulangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_print_ulangActionPerformed
         // TODO add your handling code here:
+         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
         if(lbl_nm_status.getText().equals("BPJS")){
         
         }
         else{
         
         }
+        this.setCursor(Cursor.getDefaultCursor());
         
     }//GEN-LAST:event_bt_print_ulangActionPerformed
 
@@ -2726,17 +2926,57 @@ private void savePrint(){
         // TODO add your handling code here:
     }//GEN-LAST:event_lbl_cari2MouseClicked
 
-    private void tb_reg_inap1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_reg_inap1MouseReleased
+    private void tb_ralan_ranapMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_ralan_ranapMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_tb_reg_inap1MouseReleased
+    }//GEN-LAST:event_tb_ralan_ranapMouseReleased
 
-    private void tb_reg_inap1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap1KeyTyped
+    private void tb_ralan_ranapKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_ralan_ranapKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_tb_reg_inap1KeyTyped
+    }//GEN-LAST:event_tb_ralan_ranapKeyTyped
 
-    private void tb_reg_inap1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap1KeyPressed
+    private void tb_ralan_ranapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_ralan_ranapKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tb_reg_inap1KeyPressed
+    }//GEN-LAST:event_tb_ralan_ranapKeyPressed
+
+    private void tb_reg_inap2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_reg_inap2MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_reg_inap2MouseReleased
+
+    private void tb_reg_inap2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap2KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_reg_inap2KeyTyped
+
+    private void tb_reg_inap2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_reg_inap2KeyPressed
+
+    private void txt_cari_reg_inap2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_reg_inap2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cari_reg_inap2KeyPressed
+
+    private void lbl_cari3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_cari3MouseClicked
+
+    private void tb_reg_inap3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_reg_inap3MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_reg_inap3MouseReleased
+
+    private void tb_reg_inap3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap3KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_reg_inap3KeyTyped
+
+    private void tb_reg_inap3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_reg_inap3KeyPressed
+
+    private void txt_cari_reg_inap3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_reg_inap3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cari_reg_inap3KeyPressed
+
+    private void lbl_cari4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_cari4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -2953,6 +3193,7 @@ private void savePrint(){
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2960,6 +3201,7 @@ private void savePrint(){
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
@@ -2976,6 +3218,8 @@ private void savePrint(){
     private javax.swing.JLabel lbl_cara_beli;
     private javax.swing.JLabel lbl_cari1;
     private javax.swing.JLabel lbl_cari2;
+    private javax.swing.JLabel lbl_cari3;
+    private javax.swing.JLabel lbl_cari4;
     private javax.swing.JLabel lbl_grand_tot;
     private javax.swing.JLabel lbl_hit_total;
     private javax.swing.JLabel lbl_jam;
@@ -2989,12 +3233,16 @@ private void savePrint(){
     private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JLabel lbl_total;
     private javax.swing.JTable tb_cari_petugas;
+    private javax.swing.JTable tb_ralan_ranap;
     private javax.swing.JTable tb_reg_inap;
-    private javax.swing.JTable tb_reg_inap1;
+    private javax.swing.JTable tb_reg_inap2;
+    private javax.swing.JTable tb_reg_inap3;
     private javax.swing.JTextField txt_barang;
     private javax.swing.JTextField txt_cari_petugas;
     private javax.swing.JTextField txt_cari_reg_inap;
     private javax.swing.JTextField txt_cari_reg_inap1;
+    private javax.swing.JTextField txt_cari_reg_inap2;
+    private javax.swing.JTextField txt_cari_reg_inap3;
     private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextField txt_catatan;
     private javax.swing.JTextField txt_harga_satuan;

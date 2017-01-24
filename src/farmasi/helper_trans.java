@@ -20,5 +20,11 @@ public class helper_trans {
     public static String KEY_NAMA_JUAL_BEBAS= "nama_jual_bebas";
     public static String KEY_NO_RAWAT="no_rawat"; 
     public static String KEY_CARA_BELI="cara_beli";         
-            
+    public static String KEY_NIK="nik";
+    public static String KEY_NAMA_KARYAWAN="nama_karyawan";
+    public static String KEY_STATUS_CETAK="status_cetak";
+    public static String KEY_TGL="tgl";
+    
+                    
+                    
 }
