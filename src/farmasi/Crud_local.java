@@ -2363,14 +2363,47 @@ public class Crud_local extends DBKoneksi_local {
     }    
    
    
-  public void CetakNota(String nonota,String tampil) throws JRException {
+  public void CetakNota(String nonota,String tampil,int i,String statpasien,String nosep) throws JRException {
 
         InputStream is = null;
-        is = getClass().getResourceAsStream("rpt_cetak.jrxml");
-
-        //set parameters
-        Map map = new HashMap();
+        
+          Map map = new HashMap();
+        
+       if (i==1){
+         is = getClass().getResourceAsStream("rpt_cetak.jrxml");
+           //set parameters
+      
         map.put("nonota", nonota);
+        map.put("statuspasien", statpasien);
+        
+        }
+       else if (i==2)
+       {
+        is = getClass().getResourceAsStream("rpt_cetak_bpjs.jrxml");
+          //set parameters
+      
+        map.put("nonota", nonota);
+        map.put("statuspasien", statpasien);
+        map.put("nosep", nosep);
+        
+       }
+       else if (i==3)
+       {
+        is = getClass().getResourceAsStream("rpt_cetak_karyawan.jrxml");
+          //set parameters
+      
+        map.put("nonota", nonota);
+        
+       }
+        else if (i==4)
+       {
+        is = getClass().getResourceAsStream("rpt_cetak_jual_lepas.jrxml");
+          //set parameters
+      
+        map.put("nonota", nonota);
+        
+       }
+        
        // map.put("Imgpath",null);
 
         JasperReport jr = JasperCompileManager.compileReport(is);
