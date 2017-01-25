@@ -574,7 +574,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
          
          
-         setukurantbbarang();
+        
          
                  txt_tgl.setText(lbl_tgl_server.getText().toString());
 
@@ -589,7 +589,8 @@ public class NewJFrame extends javax.swing.JFrame {
             datl.readRec_brg();
             datl.CloseCon();
             this.jtb_barang.setModel(datl.modelbrg);
-            this.setukurantb_ralan_ranap();
+             setukurantbbarang();
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -642,6 +643,20 @@ public class NewJFrame extends javax.swing.JFrame {
         tr.getColumn(2).setPreferredWidth(150);
         tr.getColumn(3).setPreferredWidth(150);
         tr.getColumn(4).setPreferredWidth(0);
+    }
+    
+    
+    private void setukurantbralanranap() {
+        this.tb_ralan_ranap.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_ralan_ranap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        TableColumnModel tr = tb_ralan_ranap.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(80);
+        tr.getColumn(1).setPreferredWidth(208);
+        tr.getColumn(2).setPreferredWidth(150);
+        tr.getColumn(3).setPreferredWidth(150);
+//        tr.getColumn(4).setPreferredWidth(0);
     }
     
      private void setukurantbReg() {
@@ -2050,6 +2065,35 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_cari_rmKeyPressed
 
     
+    private void set_Historyralanranap(){
+     
+//        {nmrm,nama_pasien,carabeli,noraw,jb,nik,nmp
+//                                                   ,statcetak,petugas,catatan,nota})
+//        
+       int row = this.tb_ralan_ranap.getSelectedRow();
+
+        if (row == -1) {
+            // No row selected
+        } else {
+            
+            this.txt_no_rm.setText(tb_ralan_ranap.getValueAt(row, 0).toString());
+            this.txt_nama_pasien.setText(tb_ralan_ranap.getValueAt(row, 2).toString());
+            this.txt_no_rawat.setText(tb_ralan_ranap.getValueAt(row, 10).toString());
+            this.txt_status_pasien.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 8).toString());
+            this.lbl_nm_status.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 9).toString());
+            this.txt_no_sep.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 11).toString());
+            
+            if(!this.txt_no_rawat.getText().isEmpty()){
+               lbl_cara_beli.setText("Ralan");
+            }
+            
+             Set_Nonota();
+           // jp_rm.setVisible(false);
+        }
+                                                  
+    
+    }
+    
     private void caridata(){
         
         try {
@@ -2060,6 +2104,7 @@ public class NewJFrame extends javax.swing.JFrame {
              datl.CloseCon();
              
              tb_ralan_ranap.setModel(datl.modeltransfarmasi);
+             setukurantbralanranap();
              
         } catch (Exception ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
