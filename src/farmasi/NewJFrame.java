@@ -194,6 +194,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
             
              Set_Nonota();
+              this.Hapussemua();
            // jp_rm.setVisible(false);
         }
     
@@ -690,6 +691,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     
     
+    
     private void setukurantbbarang() {
         this.jtb_barang.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
         jtb_barang.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -748,6 +750,15 @@ public class NewJFrame extends javax.swing.JFrame {
     
           Thread thread = new Thread(runnable);
           thread.start();
+    }
+    
+    private void setlebartbldetail() {
+        TableColumnModel colm = this.jtb_transaksi.getColumnModel();
+        colm.getColumn(0).setPreferredWidth(1);
+        colm.getColumn(1).setPreferredWidth(1);
+        colm.getColumn(2).setPreferredWidth(150);
+        colm.getColumn(3).setPreferredWidth(1);
+
     }
     
     private void setlebartbl() {
@@ -2169,13 +2180,35 @@ public class NewJFrame extends javax.swing.JFrame {
        if(tb_jual_bebas.getValueAt(srow, 2)!=null){
           txt_tgl.setText(tb_jual_bebas.getValueAt(srow, 2).toString());
         }
-            
+             set_Historydetail();
+             
+             ck_jual_karyawan_bebas.setSelected(false);
+             ck_jual_bebas.setSelected(false);
+             ck_jual_karyawan.setSelected(false);
            // jp_rm.setVisible(false);
             }
      
     
     }
     
+    private void set_Historydetail(){
+       try {
+            
+            datl = new Crud_local();
+            datl.readRec_transfarmasidetail(txt_nota.getText());
+            datl.CloseCon();
+            this.jtb_transaksi.setModel(datl.modeltrans);
+            
+            setlebartbldetail();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    
+    }
     
     private void set_Historyralanranap(){
      
@@ -2247,6 +2280,11 @@ public class NewJFrame extends javax.swing.JFrame {
           txt_tgl.setText(tb_ralan_ranap.getValueAt(srow, 14).toString());
         }
             
+       
+        set_Historydetail();
+        ck_jual_karyawan_bebas.setSelected(false);
+             ck_jual_bebas.setSelected(false);
+             ck_jual_karyawan.setSelected(false);
            // jp_rm.setVisible(false);
             }
         
@@ -2298,7 +2336,12 @@ public class NewJFrame extends javax.swing.JFrame {
        if(tb_karyawan_jual_bebas.getValueAt(srow, 7)!=null){
           txt_tgl.setText(tb_karyawan_jual_bebas.getValueAt(srow, 7).toString());
         }
-            
+          
+        set_Historydetail();
+        
+        ck_jual_karyawan_bebas.setSelected(false);
+             ck_jual_bebas.setSelected(false);
+             ck_jual_karyawan.setSelected(false);
            // jp_rm.setVisible(false);
             }
         
@@ -2978,10 +3021,11 @@ private void savePrint(){
 
         if (dialogResult == JOptionPane.YES_OPTION) {
 
+          dispose();
           
 
             new frm_login_poli().setVisible(true);
-            dispose();
+            
         }
     }//GEN-LAST:event_lbl_poli3MouseClicked
 
@@ -3167,6 +3211,9 @@ private void savePrint(){
 //            this.lbl_kelas.setText(this.tb_reg_inap.getModel().getValueAt(row, 5).toString());
             this.txt_status_pasien.setText(this.tb_reg_inap.getModel().getValueAt(row, 6).toString());
             this.lbl_nm_status.setText(this.tb_reg_inap.getModel().getValueAt(row, 7).toString());
+            
+             this.Hapussemua();
+             
         } catch (Exception ex) {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3260,10 +3307,11 @@ private void savePrint(){
     private void ck_jual_karyawan_bebasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_jual_karyawan_bebasActionPerformed
         // TODO add your handling code here:
          if(ck_jual_karyawan_bebas.isSelected()){
-               
+               this.Hapussemua();
             lbl_cara_beli.setText("Karyawan");
             Utilitas.HapusText(jPanel3);
             filterPegawai(); 
+             
              Set_Nonota();
              bt_simpan.setEnabled(true);
             ck_jual_karyawan_bebas.setSelected(true);
@@ -3284,10 +3332,12 @@ private void savePrint(){
     private void ck_jual_bebasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_jual_bebasActionPerformed
         // TODO add your handling code here:
          if(ck_jual_bebas.isSelected()){
-             
+              this.Hapussemua();
             Utilitas.HapusText(jPanel3);
             bt_simpan.setEnabled(true);
+            
             lbl_cara_beli.setText("Jual Bebas");
+            
             Set_Nonota();
             ck_jual_bebas.setSelected(true);
             ck_jual_karyawan_bebas.setSelected(false);
@@ -3304,8 +3354,9 @@ private void savePrint(){
 
     private void bt_print_ulangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_print_ulangActionPerformed
         // TODO add your handling code here:
+        jck_rpt.setSelected(true);
        Cetak();
-        
+        this.setCursor(Cursor.getDefaultCursor());   
     }//GEN-LAST:event_bt_print_ulangActionPerformed
 
     private void bt_det_prosesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bt_det_prosesKeyPressed
@@ -3364,6 +3415,7 @@ private void savePrint(){
         if (evt.getClickCount() == 2) {
             this.clstxt();
            set_Historyralanranap();
+          
            bt_simpan.setEnabled(false);
         }        
         

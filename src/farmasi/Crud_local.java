@@ -337,7 +337,54 @@ public class Crud_local extends DBKoneksi_local {
       ConDb();
     }
     
+    public void readRec_transfarmasidetail(String nota) throws SQLException {
+
+        
+//        public static String TB_NAME = "v_trans";
+//    public static String KEY_NO_NOTA = "no_nota";
+//    public static String KEY_NO_RM = "no_rm";
+//    public static String KEY_NM_PASIEN = "nama_pasien";
+//    public static String KEY_PETUGAS = "petugas";
+//    public static String KEY_JML = "jml";
+//    public static String KEY_SATUAN = "satuan";
+//    public static String KEY_HARGA_SATUAN = "harga_satuan";
+//    public static String KEY_NAMA_BRG = "nama_barang";
+//    public static String KEY_TOTAL = "total";
+//    public static String KEY_TGL = "tgl";
+        
+         
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME + " WHERE "
+                + helper_v_trans.KEY_NO_NOTA + " = ? ");
+
+        preparedStatement.setString(1, nota);    
+          
+       
     
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+       int i=0;
+     
+        while (resultSet.next()) {
+
+            i++;
+//{"No.", "Jml", "Nama Barang", "Harga Satuan", "Total"}
+            String no = String.valueOf(i);
+//            String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
+//            String rm = resultSet.getString(helper_v_trans.KEY_NO_RM);
+//            String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+//            String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
+//            String tglc = resultSet.getString(helper_v_trans.KEY_TGL);
+            String brg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            int jml = resultSet.getInt(helper_v_trans.KEY_JML);
+            Double hargasat = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
+            Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
+
+            modeltrans.addRow(new Object[]{no,jml,brg,hargasat,totalc});     
+            
+        }
+        
+    }
+
     
     public void readRec_periksa_lab(String noraw) throws SQLException {
 

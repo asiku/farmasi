@@ -227,6 +227,9 @@ public class frm_login_poli extends javax.swing.JFrame {
 //                datl.CloseCon();
                 
 
+                Crud_local.usm="";
+                Crud_local.psm="";
+                
                 datl.CloseCon();
                 
                 NewJFrame pol=new NewJFrame(namapetugaslogin,"Farmasi Unit 1","c1");
