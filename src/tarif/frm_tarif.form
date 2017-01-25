@@ -794,7 +794,7 @@
                 <Component class="javax.swing.JComboBox" name="cmb_kategori">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="29">
+                      <StringArray count="31">
                         <StringItem index="0" value="=Pilih Kategori="/>
                         <StringItem index="1" value="obs igd"/>
                         <StringItem index="2" value="dr umum"/>
@@ -814,16 +814,18 @@
                         <StringItem index="16" value="fisiotherapi"/>
                         <StringItem index="17" value="ambulance"/>
                         <StringItem index="18" value="ruangan"/>
-                        <StringItem index="19" value="dr anestesi"/>
-                        <StringItem index="20" value="pj dr anestesi"/>
-                        <StringItem index="21" value="plk penata anestesi"/>
-                        <StringItem index="22" value="penata anestesi"/>
-                        <StringItem index="23" value="pj dr spesialis"/>
-                        <StringItem index="24" value="plk dr umum"/>
-                        <StringItem index="25" value="plk bidan"/>
-                        <StringItem index="26" value="jasa perawatan"/>
-                        <StringItem index="27" value="obs-vk/ok"/>
-                        <StringItem index="28" value="administrasi"/>
+                        <StringItem index="19" value="ruangan ok"/>
+                        <StringItem index="20" value="ruangan vk"/>
+                        <StringItem index="21" value="dr anestesi"/>
+                        <StringItem index="22" value="pj dr anestesi"/>
+                        <StringItem index="23" value="plk penata anestesi"/>
+                        <StringItem index="24" value="penata anestesi"/>
+                        <StringItem index="25" value="pj dr spesialis"/>
+                        <StringItem index="26" value="plk dr umum"/>
+                        <StringItem index="27" value="plk bidan"/>
+                        <StringItem index="28" value="jasa perawatan"/>
+                        <StringItem index="29" value="obs-vk/ok"/>
+                        <StringItem index="30" value="administrasi"/>
                       </StringArray>
                     </Property>
                   </Properties>

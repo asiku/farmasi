@@ -88,7 +88,16 @@ public class Crud_local extends DBKoneksi_local {
     String[] transfarmasikaryawanjualbebas_title = new String[]{"No Nota","Nik","Nama Karyawan"
             ,"Cara beli","Status Cetak","Petugas","Catatan","tgl","Nama Jual Bebas"}; 
    
-                                                  
+   
+     String[] trans_title = new String[]{"No.", "Jml", "Nama Barang", "Harga Satuan", "Total"};
+    
+     public DefaultTableModel modeltrans = new DefaultTableModel(trans_title, 0) {
+         public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+     };
+     
    public DefaultTableModel modeltransfarmasikaryawanjualbebas = new DefaultTableModel(transfarmasikaryawanjualbebas_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;

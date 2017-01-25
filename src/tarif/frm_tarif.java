@@ -1571,7 +1571,7 @@ public class frm_tarif extends javax.swing.JFrame {
             }
         });
 
-        cmb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Pilih Kategori=", "obs igd", "dr umum", "dr spesialis", "assisten dr", "penata anestesi", "assisten operasi", "konsul dr", "visit dr umum", "visit dr spesialis", "tindakan", "labor", "usg", "darah", "rontgen", "sewa alat", "fisiotherapi", "ambulance", "ruangan", "dr anestesi", "pj dr anestesi", "plk penata anestesi", "penata anestesi", "pj dr spesialis", "plk dr umum", "plk bidan", "jasa perawatan", "obs-vk/ok", "administrasi" }));
+        cmb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Pilih Kategori=", "obs igd", "dr umum", "dr spesialis", "assisten dr", "penata anestesi", "assisten operasi", "konsul dr", "visit dr umum", "visit dr spesialis", "tindakan", "labor", "usg", "darah", "rontgen", "sewa alat", "fisiotherapi", "ambulance", "ruangan", "ruangan ok", "ruangan vk", "dr anestesi", "pj dr anestesi", "plk penata anestesi", "penata anestesi", "pj dr spesialis", "plk dr umum", "plk bidan", "jasa perawatan", "obs-vk/ok", "administrasi" }));
 
         bt_save_kategori.setText("Save Kategori");
         bt_save_kategori.addActionListener(new java.awt.event.ActionListener() {
