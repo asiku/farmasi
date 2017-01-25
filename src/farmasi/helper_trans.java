@@ -12,6 +12,7 @@ package farmasi;
 public class helper_trans {
 
     public static String TB_NAME = "trans_farmasi";
+    public static String TB_VNAME = "v_history_farmasi";
     public static String KEY_NO_NOTA = "no_nota";
     public static String KEY_NO_RM = "no_rm";
     public static String KEY_NM_PASIEN = "nama_pasien";
@@ -24,7 +25,9 @@ public class helper_trans {
     public static String KEY_NAMA_KARYAWAN="nama_karyawan";
     public static String KEY_STATUS_CETAK="status_cetak";
     public static String KEY_TGL="tgl";
-    
+    public static String KEY_KODE_PJ = "kd_pj";
+    public static String KEY_NAMA_PJ = "png_jawab";
+    public static String KEY_NO_SEP = "no_sep";
                     
                     
 }

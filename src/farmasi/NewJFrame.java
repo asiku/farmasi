@@ -88,6 +88,17 @@ public class NewJFrame extends javax.swing.JFrame {
 
     String[] trans_title = new String[]{"No.", "Jml", "Nama Barang", "Harga Satuan", "Total", "Hapus"};
 
+    
+    String[] karyawan_title = new String[]{"No. Nota", "Nama Karyawan", "Nik"};
+    
+     public DefaultTableModel modelkaryawanjualbebashistory = new DefaultTableModel(karyawan_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+    
+    
     public DefaultTableModel modeltrans = new DefaultTableModel(trans_title, 0) {
 
         public boolean isCellEditable(int row, int column) {
@@ -788,7 +799,8 @@ public class NewJFrame extends javax.swing.JFrame {
         ck_jual_karyawan_bebas = new javax.swing.JCheckBox();
         ck_jual_bebas = new javax.swing.JCheckBox();
         txt_tgl = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_petugas_input = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtb_transaksi = new javax.swing.JTable();
@@ -844,7 +856,7 @@ public class NewJFrame extends javax.swing.JFrame {
         tb_ralan_ranap = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        tb_reg_inap2 = new javax.swing.JTable();
+        tb_karyawan_jual_bebas = new javax.swing.JTable();
         txt_cari_reg_inap2 = new javax.swing.JTextField();
         lbl_cari3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -1183,10 +1195,14 @@ public class NewJFrame extends javax.swing.JFrame {
         jp_barang.add(ck_jual_bebas, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
         txt_tgl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jp_barang.add(txt_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 140, 20));
+        jp_barang.add(txt_tgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 120, 20));
 
-        jLabel3.setText("tgl");
-        jp_barang.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 10, 30, 19));
+        lbl_petugas_input.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        lbl_petugas_input.setText("Petugas Input:");
+        jp_barang.add(lbl_petugas_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 200, 19));
+
+        jLabel19.setText("tgl");
+        jp_barang.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, 19));
 
         jPanel3.add(jp_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 860, 210));
 
@@ -1282,7 +1298,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 txt_catatanKeyPressed(evt);
             }
         });
-        jPanel3.add(txt_catatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 290, -1));
+        jPanel3.add(txt_catatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 270, -1));
 
         jLabel14.setText("No SEP");
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, -1, -1));
@@ -1324,6 +1340,9 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
         jPanel3.add(lbl_nm_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 170, -1));
+
+        lbl_cara_beli.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        lbl_cara_beli.setText("       ");
         jPanel3.add(lbl_cara_beli, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 120, -1));
 
         jLabel17.setText("No. Nota");
@@ -1628,8 +1647,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Ralan/Ranap", jPanel5);
 
-        tb_reg_inap2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        tb_reg_inap2.setModel(new javax.swing.table.DefaultTableModel(
+        tb_karyawan_jual_bebas.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_karyawan_jual_bebas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1640,20 +1659,20 @@ public class NewJFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tb_reg_inap2.addMouseListener(new java.awt.event.MouseAdapter() {
+        tb_karyawan_jual_bebas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tb_reg_inap2MouseReleased(evt);
+                tb_karyawan_jual_bebasMouseReleased(evt);
             }
         });
-        tb_reg_inap2.addKeyListener(new java.awt.event.KeyAdapter() {
+        tb_karyawan_jual_bebas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                tb_reg_inap2KeyTyped(evt);
+                tb_karyawan_jual_bebasKeyTyped(evt);
             }
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tb_reg_inap2KeyPressed(evt);
+                tb_karyawan_jual_bebasKeyPressed(evt);
             }
         });
-        jScrollPane9.setViewportView(tb_reg_inap2);
+        jScrollPane9.setViewportView(tb_karyawan_jual_bebas);
 
         txt_cari_reg_inap2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2067,31 +2086,92 @@ public class NewJFrame extends javax.swing.JFrame {
     
     private void set_Historyralanranap(){
      
-//        {nmrm,nama_pasien,carabeli,noraw,jb,nik,nmp
-//                                                   ,statcetak,petugas,catatan,nota})
-//        
+      
        int row = this.tb_ralan_ranap.getSelectedRow();
 
         if (row == -1) {
             // No row selected
         } else {
             
-            this.txt_no_rm.setText(tb_ralan_ranap.getValueAt(row, 0).toString());
-            this.txt_nama_pasien.setText(tb_ralan_ranap.getValueAt(row, 2).toString());
-            this.txt_no_rawat.setText(tb_ralan_ranap.getValueAt(row, 10).toString());
-            this.txt_status_pasien.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 8).toString());
-            this.lbl_nm_status.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 9).toString());
-            this.txt_no_sep.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 11).toString());
+//{nmrm,nama_pasien,carabeli,noraw,jb,nik,nmp
+//                                                   ,statcetak,petugas,catatan,nota,kdpj,nmpj,nosep,tgl});
             
-            if(!this.txt_no_rawat.getText().isEmpty()){
-               lbl_cara_beli.setText("Ralan");
-            }
             
-             Set_Nonota();
-           // jp_rm.setVisible(false);
+        if(tb_ralan_ranap.getValueAt(row, 0)!=null){
+           this.txt_no_rm.setText(tb_ralan_ranap.getValueAt(row, 0).toString());
         }
+        
+        if(tb_ralan_ranap.getValueAt(row, 1)!=null){
+            this.txt_nama_pasien.setText(tb_ralan_ranap.getValueAt(row, 1).toString());
+        }
+        
+        if(tb_ralan_ranap.getValueAt(row, 2)!=null){
+         lbl_cara_beli.setText(tb_ralan_ranap.getValueAt(row, 2).toString());
+        } 
+        
+        if(tb_ralan_ranap.getValueAt(row, 3)!=null){
+         this.txt_no_rawat.setText(tb_ralan_ranap.getValueAt(row, 3).toString());
+        }
+        
+        if(tb_ralan_ranap.getValueAt(row, 4)!=null){
+            txt_nama_jual_bebas.setText(tb_ralan_ranap.getValueAt(row, 4).toString());
+        }
+       
+        if(tb_ralan_ranap.getValueAt(row, 5)!=null){
+             txt_nip.setText(tb_ralan_ranap.getValueAt(row, 5).toString());
+        }
+        
+        if(tb_ralan_ranap.getValueAt(row, 6)!=null){
+         txt_nama_pegawai.setText(tb_ralan_ranap.getValueAt(row, 6).toString());
+        }
+        
+        if(tb_ralan_ranap.getValueAt(row, 8)!=null){
+          lbl_petugas_input.setText("Petugas Input: "+tb_ralan_ranap.getValueAt(row, 8).toString());
+        }
+        
+        if(tb_ralan_ranap.getValueAt(row, 9)!=null){
+         txt_catatan.setText(tb_ralan_ranap.getValueAt(row, 9).toString());
+        }
+        
+       if(tb_ralan_ranap.getValueAt(row, 10)!=null){
+         txt_nota.setText(tb_ralan_ranap.getValueAt(row, 10).toString());
+        }
+        
+        if(tb_ralan_ranap.getValueAt(row, 11)!=null){
+          this.txt_status_pasien.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 11).toString());
+        }
+        
+        if(tb_ralan_ranap.getValueAt(row, 12)!=null){
+          this.lbl_nm_status.setText(this.tb_ralan_ranap.getModel().getValueAt(row, 12).toString());
+        }
+        
+        
+       if(tb_ralan_ranap.getValueAt(row, 13)!=null){
+          txt_no_sep.setText(tb_ralan_ranap.getValueAt(row, 13).toString());
+        }
+      
+       if(tb_ralan_ranap.getValueAt(row, 14)!=null){
+          txt_tgl.setText(tb_ralan_ranap.getValueAt(row, 14).toString());
+        }
+            
+            
+            
+           // jp_rm.setVisible(false);
+            }
+        
                                                   
     
+    }
+    
+    private void hapusjualkaryawanbebas(){
+     
+        DefaultTableModel dm = (DefaultTableModel) tb_karyawan_jual_bebas.getModel();
+        int rowCount = dm.getRowCount();
+        if (rowCount != 0) {
+            for (int i = rowCount - 1; i >= 0; i--) {
+                dm.removeRow(i);
+            }
+        }
     }
     
     private void caridata(){
@@ -2105,6 +2185,29 @@ public class NewJFrame extends javax.swing.JFrame {
              
              tb_ralan_ranap.setModel(datl.modeltransfarmasi);
              setukurantbralanranap();
+             
+             
+            hapusjualkaryawanbebas();
+            
+            
+//            nmrm,nama_pasien,carabeli,noraw,jb,nik,nmp
+//                                                   ,statcetak,petugas,catatan,nota,kdpj,nmpj,nosep,tgl
+//          
+
+            if(datl.modeltransfarmasi.getRowCount()!=0){
+             
+             for(int i=0;i<datl.modeltransfarmasi.getRowCount();i++){
+                 if(datl.modeltransfarmasi.getValueAt(i, 5)!=null&&datl.modeltransfarmasi.getValueAt(i, 6)!=null)
+                 {    
+                  modelkaryawanjualbebashistory.addRow(new Object[]{datl.modeltransfarmasi.getValueAt(i, 3),
+                  datl.modeltransfarmasi.getValueAt(i, 5),datl.modeltransfarmasi.getValueAt(i, 6)});
+                 }
+             }
+             
+                 tb_karyawan_jual_bebas.setModel(modelkaryawanjualbebashistory);
+             
+             }
+             
              
         } catch (Exception ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -2328,7 +2431,8 @@ private void savePrint(){
                datl = new Crud_local();
                datl.Save_trans(this.txt_nota.getText(), this.txt_no_rm.getText(), this.txt_nama_pasien.getText()
                 , this.txt_catatan.getText(), this.txt_petugas.getText(),lbl_cara_beli.getText()
-                       ,txt_no_rawat.getText(),txt_nama_jual_bebas.getText(),txt_tgl.getText());
+                       ,txt_no_rawat.getText(),txt_nama_jual_bebas.getText(),txt_tgl.getText()
+                       ,txt_nip.getText(),txt_nama_pegawai.getText());
                
                 datl.CloseCon();    
       
@@ -2343,7 +2447,8 @@ private void savePrint(){
             
              this.Hapussemua();
              
-             this.txt_no_rm.requestFocus();
+             caridata();
+//             this.txt_no_rm.requestFocus();
              
              
              
@@ -2547,6 +2652,7 @@ private void savePrint(){
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             set_pasien();
+            bt_simpan.setEnabled(true);
         }
     }//GEN-LAST:event_jtb_registrasiMouseReleased
 
@@ -2734,7 +2840,7 @@ private void savePrint(){
                 setMasukdatInputInap(srow);
                Set_Nonota();
                 //txt_tarif.requestFocus();
-          
+          bt_simpan.setEnabled(true);
             }
         }
     }//GEN-LAST:event_tb_reg_inapMouseReleased
@@ -2805,6 +2911,7 @@ private void savePrint(){
                 
                 setMasukdatInputInap(srow);
                Set_Nonota();
+               bt_simpan.setEnabled(true);
             }
 
         }
@@ -2886,7 +2993,7 @@ private void savePrint(){
              Set_Nonota();
             ck_jual_karyawan_bebas.setSelected(true);
             ck_jual_bebas.setSelected(false);
-            
+            ck_jual_karyawan.setSelected(false);
             this.dlg_dpjp.setLocationRelativeTo(this);
             this.dlg_dpjp.setVisible(true);
        }
@@ -2972,7 +3079,13 @@ private void savePrint(){
     }//GEN-LAST:event_lbl_cari2MouseClicked
 
     private void tb_ralan_ranapMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_ralan_ranapMouseReleased
-        // TODO add your handling code here:
+       
+        if (evt.getClickCount() == 2) {
+           set_Historyralanranap();
+           bt_simpan.setEnabled(false);
+        }        
+        
+        
     }//GEN-LAST:event_tb_ralan_ranapMouseReleased
 
     private void tb_ralan_ranapKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_ralan_ranapKeyTyped
@@ -2983,17 +3096,17 @@ private void savePrint(){
         // TODO add your handling code here:
     }//GEN-LAST:event_tb_ralan_ranapKeyPressed
 
-    private void tb_reg_inap2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_reg_inap2MouseReleased
+    private void tb_karyawan_jual_bebasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_karyawan_jual_bebasMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_tb_reg_inap2MouseReleased
+    }//GEN-LAST:event_tb_karyawan_jual_bebasMouseReleased
 
-    private void tb_reg_inap2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap2KeyTyped
+    private void tb_karyawan_jual_bebasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_karyawan_jual_bebasKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_tb_reg_inap2KeyTyped
+    }//GEN-LAST:event_tb_karyawan_jual_bebasKeyTyped
 
-    private void tb_reg_inap2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_reg_inap2KeyPressed
+    private void tb_karyawan_jual_bebasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_karyawan_jual_bebasKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tb_reg_inap2KeyPressed
+    }//GEN-LAST:event_tb_karyawan_jual_bebasKeyPressed
 
     private void txt_cari_reg_inap2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_reg_inap2KeyPressed
         // TODO add your handling code here:
@@ -3218,8 +3331,8 @@ private void savePrint(){
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3273,14 +3386,15 @@ private void savePrint(){
     private javax.swing.JLabel lbl_kode;
     private javax.swing.JLabel lbl_news;
     private javax.swing.JTextField lbl_nm_status;
+    private javax.swing.JLabel lbl_petugas_input;
     private javax.swing.JLabel lbl_poli;
     private javax.swing.JLabel lbl_poli3;
     private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JLabel lbl_total;
     private javax.swing.JTable tb_cari_petugas;
+    private javax.swing.JTable tb_karyawan_jual_bebas;
     private javax.swing.JTable tb_ralan_ranap;
     private javax.swing.JTable tb_reg_inap;
-    private javax.swing.JTable tb_reg_inap2;
     private javax.swing.JTable tb_reg_inap3;
     private javax.swing.JTextField txt_barang;
     private javax.swing.JTextField txt_cari_petugas;

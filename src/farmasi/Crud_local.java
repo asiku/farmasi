@@ -81,7 +81,8 @@ public class Crud_local extends DBKoneksi_local {
    String[] brg_title = new String[]{"Kode Barang", "Nama", "Harga Jual", "Harga Jual Karyawan","Harga Beli", "Kategori"}; 
   
    String[] transfarmasi_title = new String[]{"No RM", 
-       "Nama Pasien", "Cara beli","No rawat", "Nama Jual Bebas","Nik","Nama Karyawan","Status Cetak","Petugas","Catatan","No Nota"}; 
+       "Nama Pasien", "Cara beli","No rawat", "Nama Jual Bebas","Nik","Nama Karyawan","Status Cetak","Petugas","Catatan","No Nota",
+   "kd pj","nama pj","No Sep","tgl"}; 
    
    
    public DefaultTableModel modeltransfarmasi = new DefaultTableModel(transfarmasi_title, 0) {
@@ -1287,7 +1288,7 @@ public class Crud_local extends DBKoneksi_local {
    public void readRec_transfarmasi(String nm) throws SQLException {
       
           
-    preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_NAME + " WHERE "
+    preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_VNAME + " WHERE "
                 + helper_trans.KEY_NM_PASIEN + " like ? ");
 
         preparedStatement.setString(1, "%" + nm + "%");    
@@ -1310,9 +1311,13 @@ public class Crud_local extends DBKoneksi_local {
             String nmp = resultSet.getString(helper_trans.KEY_NAMA_KARYAWAN);
             String statcetak = resultSet.getString(helper_trans.KEY_STATUS_CETAK);
             String catatan = resultSet.getString(helper_trans.KEY_CATATAN);
+            String kdpj = resultSet.getString(helper_trans.KEY_KODE_PJ);
+            String nmpj = resultSet.getString(helper_trans.KEY_NAMA_PJ);
+            String nosep = resultSet.getString(helper_trans.KEY_NO_SEP);
+            String tgl = resultSet.getString(helper_trans.KEY_TGL);
             
             modeltransfarmasi.addRow(new Object[]{nmrm,nama_pasien,carabeli,noraw,jb,nik,nmp
-                                                   ,statcetak,petugas,catatan,nota});
+                                                   ,statcetak,petugas,catatan,nota,kdpj,nmpj,nosep,tgl});
            
             
         }
@@ -1802,7 +1807,7 @@ public class Crud_local extends DBKoneksi_local {
     
    
    public void Save_trans(String no_nota, String no_rm, String nama_pasien, String catatan
-           , String petugas, String carabeli, String noraw, String nmjualbebas,String tgl) {
+           , String petugas, String carabeli, String noraw, String nmjualbebas,String tgl,String nik,String namakary) {
 
         try {
             preparedStatement = connect.prepareStatement("insert into " + helper_trans.TB_NAME + " (" 
@@ -1814,8 +1819,10 @@ public class Crud_local extends DBKoneksi_local {
                     + helper_trans.KEY_CARA_BELI + ","
                     + helper_trans.KEY_NO_RAWAT + ","
                     + helper_trans.KEY_NAMA_JUAL_BEBAS + "," 
-                    + helper_trans.KEY_TGL + ") "
-                    + " values (?,?,?,?,?,?,?,?,?)");
+                    + helper_trans.KEY_TGL + "," 
+                    + helper_trans.KEY_NIK + "," 
+                    + helper_trans.KEY_NAMA_KARYAWAN + ") "
+                    + " values (?,?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setString(1, no_nota);
             preparedStatement.setString(2, no_rm);
@@ -1825,7 +1832,9 @@ public class Crud_local extends DBKoneksi_local {
             preparedStatement.setString(6, carabeli);
             preparedStatement.setString(7, noraw);
             preparedStatement.setString(8, nmjualbebas);
-             preparedStatement.setString(9, tgl);
+            preparedStatement.setString(9, tgl);
+            preparedStatement.setString(10, nik);
+            preparedStatement.setString(11, namakary);
             
             preparedStatement.execute();
 
