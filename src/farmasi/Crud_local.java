@@ -84,7 +84,19 @@ public class Crud_local extends DBKoneksi_local {
        "Nama Pasien", "Cara beli","No rawat", "Nama Jual Bebas","Nik","Nama Karyawan","Status Cetak","Petugas","Catatan","No Nota",
    "kd pj","nama pj","No Sep","tgl"}; 
    
+  
+    String[] transfarmasikaryawanjualbebas_title = new String[]{"No Nota","Nik","Nama Karyawan"
+            ,"Cara beli","Status Cetak","Petugas","Catatan","tgl","Nama Jual Bebas"}; 
    
+                                                  
+   public DefaultTableModel modeltransfarmasikaryawanjualbebas = new DefaultTableModel(transfarmasikaryawanjualbebas_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };         
+   
+                                                   
    public DefaultTableModel modeltransfarmasi = new DefaultTableModel(transfarmasi_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -1283,7 +1295,44 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
+    public void readRec_transfarmasiKaryawanJualbebas(String nm) throws SQLException {
+      
+          
+    preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_NAME + " WHERE "
+                + helper_trans.KEY_NM_PASIEN + " like ? ");
+
+        preparedStatement.setString(1, "%" + nm + "%");    
+          
+       
     
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+//     if(!resultSet.getString(helper_trans.KEY_NAMA_JUAL_BEBAS).isEmpty()){       
+            String nota = resultSet.getString(helper_trans.KEY_NO_NOTA);
+//            String nmrm= resultSet.getString(helper_trans.KEY_NO_RM);
+//            String nama_pasien= resultSet.getString(helper_trans.KEY_NM_PASIEN);
+            String petugas = resultSet.getString(helper_trans.KEY_PETUGAS);
+            String carabeli = resultSet.getString(helper_trans.KEY_CARA_BELI);
+//            String noraw = resultSet.getString(helper_trans.KEY_NO_RAWAT);
+            String jb = resultSet.getString(helper_trans.KEY_NAMA_JUAL_BEBAS);
+            String nik = resultSet.getString(helper_trans.KEY_NIK);
+            String nmp = resultSet.getString(helper_trans.KEY_NAMA_KARYAWAN);
+            String statcetak = resultSet.getString(helper_trans.KEY_STATUS_CETAK);
+            String catatan = resultSet.getString(helper_trans.KEY_CATATAN);
+//            String kdpj = resultSet.getString(helper_trans.KEY_KODE_PJ);
+//            String nmpj = resultSet.getString(helper_trans.KEY_NAMA_PJ);
+//            String nosep = resultSet.getString(helper_trans.KEY_NO_SEP);
+            String tgl = resultSet.getString(helper_trans.KEY_TGL);
+            
+            modeltransfarmasikaryawanjualbebas.addRow(new Object[]{nota,nik,nmp
+                                                   ,carabeli,statcetak,petugas,catatan,tgl,jb});
+//     }
+            
+        }
+    }
+  
     
    public void readRec_transfarmasi(String nm) throws SQLException {
       
