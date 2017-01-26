@@ -52,6 +52,9 @@ import unit_poli.frm_petugas_poli;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
+    
+     
+    private Double gr=0.0;
     //frm_detail formdetail=new frm_detail();
     String aX="";
     
@@ -102,8 +105,8 @@ public class NewJFrame extends javax.swing.JFrame {
     public DefaultTableModel modeltrans = new DefaultTableModel(trans_title, 0) {
 
         public boolean isCellEditable(int row, int column) {
-            if (column == 1 || column == 3) {
-                return true;
+            if (column == 1 ) {
+                return true; //|| column == 3
             } else {
                 return false;
 
@@ -268,7 +271,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     public Double hitung() {
         
-        Double tot=0.0;
+      Double tot=0.0;
 
         if ((txt_hit_jml.getText().isEmpty() || txt_hit_harga.getText().isEmpty())) {
             //Double tot=Double.valueOf(this.txt_jml.getText())*Double.valueOf(this.txt_harga_satuan.getText());
@@ -280,8 +283,10 @@ public class NewJFrame extends javax.swing.JFrame {
 
             String fr = formatuang(tot);
             this.lbl_hit_total.setText(fr);
+            
         }
         
+//        lbl_grand_tot.setText(formatuang(tot));
         return tot;
     }
 
@@ -566,7 +571,7 @@ public class NewJFrame extends javax.swing.JFrame {
             @Override
             public void tableChanged(TableModelEvent e) {
 
-                Double tot=0.0;
+               
                 
                 int row = e.getFirstRow();
                 int column = e.getColumn();
@@ -587,7 +592,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     Double price = Double.valueOf(model.getValueAt(row, 3).toString());
                     Double value = quantity * price;
                     
-                    
+                    Double tot=0.0;
                     
                     model.setValueAt(value, row, 4);
                     
@@ -2549,11 +2554,14 @@ public class NewJFrame extends javax.swing.JFrame {
                     
                    //hapus hashmap temp brg
                   if(cbrg.size()!=0){  
+                      
                     this.cbrg.remove(model.getValueAt(row, 2));
+                    
                   }
                   
                     model.removeRow(modelIndex);
-                    
+                    gr=0.0;
+                    this.sumobat();
                     
                 }
             }
@@ -2597,7 +2605,9 @@ public class NewJFrame extends javax.swing.JFrame {
                     
                     
 //                    this.refreshdatatb();
-                    
+                 
+
+ 
                 jDlg_itung.setLocationRelativeTo(this);
                 this.jDlg_itung.setVisible(true);
                 
@@ -2986,14 +2996,33 @@ private void savePrint(){
         
     }//GEN-LAST:event_txt_hit_hargaKeyPressed
 
+    private void sumobat(){
+      if(jtb_transaksi.getModel().getRowCount()>0){
+         
+         
+          for(int i=0;i<jtb_transaksi.getModel().getRowCount();i++){
+               gr=gr+ Double.valueOf(jtb_transaksi.getModel().getValueAt(i, 4).toString());
+//               JOptionPane.showMessageDialog(null, gr);
+          }
+          
+          this.lbl_grand_tot.setText(this.formatuang(gr));
+      }
+      else{
+      Double nol=0.0;    
+      this.lbl_grand_tot.setText(this.formatuang(nol));
+      }
+    }
     private void bt_det_prosesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_det_prosesActionPerformed
         // TODO add your handling code here:
         set_trans();
            
+          gr=0.0;
+        
+          sumobat();
            this.jDlg_itung.setVisible(false);
-           this.txt_hit_harga.setText("0");
-           this.txt_hit_jml.setText("0");
-           this.lbl_hit_total.setText("0");
+//           this.txt_hit_harga.setText("0");
+//           this.txt_hit_jml.setText("0");
+//           this.lbl_hit_total.setText("0");
     }//GEN-LAST:event_bt_det_prosesActionPerformed
 
     private void jtb_barangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_barangKeyTyped
