@@ -44,6 +44,7 @@ import net.sf.jasperreports.engine.JRException;
 import tools.Utilitas;
 import unit_fisio.frm_poli_ralan;
 import unit_poli.frm_petugas_poli;
+import unit_poli.frm_poli;
 
 
 /**
@@ -52,7 +53,8 @@ import unit_poli.frm_petugas_poli;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
-    
+    private int irowhistory = 0;
+    private int irowhistoryDetail = 0;
      
     private Double gr=0.0;
     //frm_detail formdetail=new frm_detail();
@@ -198,6 +200,7 @@ public class NewJFrame extends javax.swing.JFrame {
             
              Set_Nonota();
               this.Hapussemua();
+              tab_trans.setSelectedIndex(0);
            // jp_rm.setVisible(false);
         }
     
@@ -327,6 +330,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
       //  this.setUndecorated(true);
+      
+      jLabel10.setVisible(false);
       
       lbl_jamnow.setVisible(false);
       txt_nip.setVisible(false);
@@ -838,6 +843,19 @@ public class NewJFrame extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         tb_cari_petugas = new javax.swing.JTable();
         txt_cari_petugas = new javax.swing.JTextField();
+        Popup_history = new javax.swing.JPopupMenu();
+        item_hapus = new javax.swing.JMenuItem();
+        Popup_detail_trans = new javax.swing.JPopupMenu();
+        item_edit_detail_trans = new javax.swing.JMenuItem();
+        item_hapus_detail_trans = new javax.swing.JMenuItem();
+        dlg_edit_trans = new javax.swing.JDialog();
+        lbl_barang1 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        txt_hit_harga1 = new javax.swing.JTextField();
+        bt_det_proses1 = new javax.swing.JButton();
+        lbl_hit_total1 = new javax.swing.JLabel();
+        txt_hit_jml1 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         bt_cari_rm = new javax.swing.JButton();
@@ -865,13 +883,17 @@ public class NewJFrame extends javax.swing.JFrame {
         lbl_petugas_input = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtb_transaksi = new javax.swing.JTable();
         bt_hapus = new javax.swing.JButton();
         bt_simpan = new javax.swing.JButton();
         jck_rpt = new javax.swing.JCheckBox();
         lbl_grand_tot = new javax.swing.JLabel();
         bt_print_ulang = new javax.swing.JButton();
+        tab_trans = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtb_transaksi = new javax.swing.JTable();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jtb_transaksi1 = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         txt_no_sep = new javax.swing.JTextField();
         txt_catatan = new javax.swing.JTextField();
@@ -889,6 +911,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         txt_nama_jual_bebas = new javax.swing.JTextField();
         ck_jual_karyawan = new javax.swing.JCheckBox();
+        ck_kasbon = new javax.swing.JCheckBox();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -1090,6 +1113,127 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
+        item_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/delete_ic.png"))); // NOI18N
+        item_hapus.setText("Hapus");
+        item_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_hapusActionPerformed(evt);
+            }
+        });
+        Popup_history.add(item_hapus);
+
+        item_edit_detail_trans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/edit_ic.png"))); // NOI18N
+        item_edit_detail_trans.setText("Edit");
+        item_edit_detail_trans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_edit_detail_transActionPerformed(evt);
+            }
+        });
+        Popup_detail_trans.add(item_edit_detail_trans);
+
+        item_hapus_detail_trans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/hps_ico.png"))); // NOI18N
+        item_hapus_detail_trans.setText("Hapus");
+        item_hapus_detail_trans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                item_hapus_detail_transActionPerformed(evt);
+            }
+        });
+        Popup_detail_trans.add(item_hapus_detail_trans);
+
+        dlg_edit_trans.setPreferredSize(new java.awt.Dimension(418, 222));
+        dlg_edit_trans.setSize(new java.awt.Dimension(400, 250));
+
+        jLabel20.setText("Jml");
+
+        jLabel21.setText("Harga");
+
+        txt_hit_harga1.setEditable(false);
+        txt_hit_harga1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txt_hit_harga1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_hit_harga1ActionPerformed(evt);
+            }
+        });
+        txt_hit_harga1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_hit_harga1KeyPressed(evt);
+            }
+        });
+
+        bt_det_proses1.setText("Proses");
+        bt_det_proses1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_det_proses1ActionPerformed(evt);
+            }
+        });
+        bt_det_proses1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                bt_det_proses1KeyPressed(evt);
+            }
+        });
+
+        lbl_hit_total1.setText("RP.");
+
+        txt_hit_jml1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txt_hit_jml1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_hit_jml1ActionPerformed(evt);
+            }
+        });
+        txt_hit_jml1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_hit_jml1KeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_hit_jml1KeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlg_edit_transLayout = new javax.swing.GroupLayout(dlg_edit_trans.getContentPane());
+        dlg_edit_trans.getContentPane().setLayout(dlg_edit_transLayout);
+        dlg_edit_transLayout.setHorizontalGroup(
+            dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlg_edit_transLayout.createSequentialGroup()
+                .addGroup(dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(dlg_edit_transLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGroup(dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_hit_harga1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_hit_jml1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(dlg_edit_transLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bt_det_proses1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                            .addComponent(lbl_hit_total1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlg_edit_transLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lbl_barang1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dlg_edit_transLayout.setVerticalGroup(
+            dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlg_edit_transLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lbl_barang1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_hit_jml1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addGap(18, 18, 18)
+                .addGroup(dlg_edit_transLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_hit_harga1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_hit_total1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(bt_det_proses1)
+                .addGap(20, 20, 20))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1184,7 +1328,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jtb_barang);
 
-        jp_barang.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 68, 840, 128));
+        jp_barang.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 68, 840, 110));
 
         txt_barang.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txt_barang.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1267,38 +1411,10 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel19.setText("tgl");
         jp_barang.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, 19));
 
-        jPanel3.add(jp_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 860, 210));
+        jPanel3.add(jp_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 860, 190));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jtb_transaksi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jtb_transaksi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jtb_transaksiMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jtb_transaksiMouseReleased(evt);
-            }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtb_transaksiMouseClicked(evt);
-            }
-        });
-        jtb_transaksi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtb_transaksiKeyPressed(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jtb_transaksi);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 50, 832, 170));
 
         bt_hapus.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         bt_hapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/hps_ico.png"))); // NOI18N
@@ -1343,7 +1459,86 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jPanel1.add(bt_print_ulang, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 15, 160, 30));
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 860, 230));
+        jtb_transaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtb_transaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtb_transaksiMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtb_transaksiMouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtb_transaksiMouseClicked(evt);
+            }
+        });
+        jtb_transaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtb_transaksiKeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jtb_transaksi);
+
+        tab_trans.addTab("Input Data", jScrollPane2);
+
+        jtb_transaksi1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtb_transaksi1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtb_transaksi1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtb_transaksi1MouseReleased(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtb_transaksi1MouseClicked(evt);
+            }
+        });
+        jtb_transaksi1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtb_transaksi1KeyPressed(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jtb_transaksi1);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 825, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel9Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 825, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 163, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel9Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        tab_trans.addTab("Data History Obat", jPanel9);
+
+        jPanel1.add(tab_trans, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 830, 190));
+
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 860, 260));
 
         jLabel11.setText("Keterangan");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
@@ -1361,7 +1556,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 txt_catatanKeyPressed(evt);
             }
         });
-        jPanel3.add(txt_catatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 270, -1));
+        jPanel3.add(txt_catatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 170, -1));
 
         jLabel14.setText("No SEP");
         jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, -1, -1));
@@ -1452,6 +1647,9 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jPanel3.add(ck_jual_karyawan, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 140, 150, -1));
 
+        ck_kasbon.setText("Kasbon");
+        jPanel3.add(ck_kasbon, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+
         jTabbedPane1.addTab("Penjualan", jPanel3);
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1535,7 +1733,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap(379, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("History Penjualan", jLayeredPane1);
+        jTabbedPane1.addTab("History Penjualan Obat", jLayeredPane1);
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -1579,7 +1777,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jtb_registrasi);
 
-        jLayeredPane4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 360, 530));
+        jLayeredPane4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 360, 500));
 
         jTabbedPane2.addTab("Ralan", jLayeredPane4);
 
@@ -1692,6 +1890,9 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         ));
         tb_ralan_ranap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_ralan_ranapMousePressed(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tb_ralan_ranapMouseReleased(evt);
             }
@@ -1723,6 +1924,9 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         ));
         tb_karyawan_jual_bebas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_karyawan_jual_bebasMousePressed(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tb_karyawan_jual_bebasMouseReleased(evt);
             }
@@ -1774,8 +1978,8 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(txt_cari_karyawan_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lbl_cari3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1794,6 +1998,9 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         ));
         tb_jual_bebas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_jual_bebasMousePressed(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tb_jual_bebasMouseReleased(evt);
             }
@@ -2202,8 +2409,8 @@ public class NewJFrame extends javax.swing.JFrame {
             datl = new Crud_local();
             datl.readRec_transfarmasidetail(txt_nota.getText());
             datl.CloseCon();
-            this.jtb_transaksi.setModel(datl.modeltrans);
-            
+            this.jtb_transaksi1.setModel(datl.modeltrans);
+            tab_trans.setSelectedIndex(1);
             setlebartbldetail();
             
         } catch (SQLException ex) {
@@ -2412,7 +2619,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private void caridata(){
         
         try {
-             
+               this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+               
              datl = new Crud_local();
              datl.readRec_transfarmasi("");
              
@@ -2461,7 +2669,7 @@ public class NewJFrame extends javax.swing.JFrame {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        
+        this.setCursor(Cursor.getDefaultCursor());
     
     }
     
@@ -2530,8 +2738,8 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jtb_transaksiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_transaksiMousePressed
         // TODO add your handling code here:
-
-
+        
+   
     }//GEN-LAST:event_jtb_transaksiMousePressed
 
     private void jtb_transaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_transaksiMouseClicked
@@ -2568,6 +2776,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
         }
 
+         
+     
+        
     }//GEN-LAST:event_jtb_transaksiMouseReleased
 
     private void jtb_barangMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_barangMouseReleased
@@ -2586,16 +2797,7 @@ public class NewJFrame extends javax.swing.JFrame {
                   
                 lbl_barang.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
 //                txt_hit_jml.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
-                    if(ck_jual_karyawan_bebas.isSelected()){
-                        txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 3).toString());
-                    }
-                    else
-                    {
-                        txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 2).toString());
-                    }
-                    
-                    
-                    if(ck_jual_karyawan.isSelected()){
+                     if(ck_jual_karyawan_bebas.isSelected()||ck_jual_karyawan.isSelected()){
                         txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 3).toString());
                     }
                     else
@@ -2631,11 +2833,13 @@ public class NewJFrame extends javax.swing.JFrame {
             for (int i = rowCount - 1; i >= 0; i--) {
                 dm.removeRow(i);
             }
-            
+         
+             lbl_grand_tot.setText("");
          cbrg.clear();
        
          lbl_grand_tot.setText("");
          this.txt_catatan.setText("");
+         txt_nama_pegawai.setText("");
          
          JTextField temp=null;
 
@@ -2648,6 +2852,17 @@ public class NewJFrame extends javax.swing.JFrame {
     
   }
         }
+        
+         DefaultTableModel dm1 = (DefaultTableModel) jtb_transaksi1.getModel();
+        int rowCount1 = dm1.getRowCount();
+        if (rowCount1!= 0) {
+            for (int i = rowCount1 - 1; i >= 0; i--) {
+                dm1.removeRow(i);
+            }
+            
+        }   
+        gr=0.0;
+        lbl_grand_tot.setText("");
     }
     
     private void bt_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_hapusActionPerformed
@@ -2853,7 +3068,7 @@ private void savePrint(){
                   
                 lbl_barang.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
 //                txt_hit_jml.setText(jtb_barang.getModel().getValueAt(row, 1).toString());
-                    if(ck_jual_karyawan_bebas.isSelected()){
+                    if(ck_jual_karyawan_bebas.isSelected()||ck_jual_karyawan.isSelected()){
                         txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 3).toString());
                     }
                     else
@@ -2862,13 +3077,13 @@ private void savePrint(){
                     }
                     
                     
-                    if(ck_jual_karyawan.isSelected()){
-                        txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 3).toString());
-                    }
-                    else
-                    {
-                        txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 2).toString());
-                    }
+//                    if(ck_jual_karyawan.isSelected()){
+//                        txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 3).toString());
+//                    }
+//                    else
+//                    {
+//                        txt_hit_harga.setText(jtb_barang.getModel().getValueAt(row, 2).toString());
+//                    }
                     
                     
 //                    this.refreshdatatb();
@@ -2953,6 +3168,9 @@ private void savePrint(){
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             set_pasien();
+             
+            
+            txt_nama_pegawai.setText("");
             bt_simpan.setEnabled(true);
         }
     }//GEN-LAST:event_jtb_registrasiMouseReleased
@@ -2968,6 +3186,13 @@ private void savePrint(){
     private void txt_hit_jmlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_jmlKeyPressed
         // TODO add your handling code here:
        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+           
+           set_trans();
+           
+          gr=0.0;
+        
+          sumobat_detail();
+           this.jDlg_itung.setVisible(false);
            bt_det_proses.requestFocus();
 //           txt_hit_harga.requestFocus();
        }
@@ -2996,12 +3221,31 @@ private void savePrint(){
         
     }//GEN-LAST:event_txt_hit_hargaKeyPressed
 
-    private void sumobat(){
-      if(jtb_transaksi.getModel().getRowCount()>0){
+    private void sumobat_detail(){
+     if(jtb_transaksi.getModel().getRowCount()>0){
          
          
           for(int i=0;i<jtb_transaksi.getModel().getRowCount();i++){
                gr=gr+ Double.valueOf(jtb_transaksi.getModel().getValueAt(i, 4).toString());
+//               JOptionPane.showMessageDialog(null, gr);
+          }
+          
+          this.lbl_grand_tot.setText(this.formatuang(gr));
+      }
+      else{
+      Double nol=0.0;    
+      this.lbl_grand_tot.setText(this.formatuang(nol));
+      }
+    
+    }
+    
+    
+    private void sumobat(){
+      if(jtb_transaksi1.getModel().getRowCount()>0){
+         
+         
+          for(int i=0;i<jtb_transaksi1.getModel().getRowCount();i++){
+               gr=gr+ Double.valueOf(jtb_transaksi1.getModel().getValueAt(i, 4).toString());
 //               JOptionPane.showMessageDialog(null, gr);
           }
           
@@ -3018,7 +3262,7 @@ private void savePrint(){
            
           gr=0.0;
         
-          sumobat();
+          sumobat_detail();
            this.jDlg_itung.setVisible(false);
 //           this.txt_hit_harga.setText("0");
 //           this.txt_hit_jml.setText("0");
@@ -3182,11 +3426,14 @@ private void savePrint(){
             } else {
                 
                 int srow = tb_reg_inap.convertRowIndexToModel(row);
-                
+               
                
                 setMasukdatInputInap(srow);
                Set_Nonota();
+               
+                tab_trans.setSelectedIndex(0);
                 //txt_tarif.requestFocus();
+                txt_nama_pegawai.setText("");
           bt_simpan.setEnabled(true);
             }
         }
@@ -3260,6 +3507,7 @@ private void savePrint(){
                 int srow = tb_reg_inap.convertRowIndexToModel(row);
                 
                 setMasukdatInputInap(srow);
+                txt_nama_pegawai.setText("");
                Set_Nonota();
                bt_simpan.setEnabled(true);
             }
@@ -3391,11 +3639,11 @@ private void savePrint(){
     private void bt_det_prosesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bt_det_prosesKeyPressed
 //        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 //           set_trans();
-//           this.Set_Nonota();
+//           
+//          gr=0.0;
+//        
+//          sumobat_detail();
 //           this.jDlg_itung.setVisible(false);
-//           this.txt_hit_harga.setText("0");
-//           this.txt_hit_jml.setText("0");
-//           this.lbl_hit_total.setText("0");
 //       }
     }//GEN-LAST:event_bt_det_prosesKeyPressed
 
@@ -3424,6 +3672,7 @@ private void savePrint(){
 
     private void lbl_cari2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari2MouseClicked
         // TODO add your handling code here:
+        caridata();
     }//GEN-LAST:event_lbl_cari2MouseClicked
 
     
@@ -3441,12 +3690,29 @@ private void savePrint(){
     
     private void tb_ralan_ranapMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_ralan_ranapMouseReleased
        
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             this.clstxt();
            set_Historyralanranap();
-          
+           lbl_grand_tot.setText("");
+           gr=0.0;
+          this.sumobat();
            bt_simpan.setEnabled(false);
         }        
+        
+        if (evt.isPopupTrigger()) {
+
+            int row = tb_ralan_ranap.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_history.show(tb_ralan_ranap, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+        
         
         
     }//GEN-LAST:event_tb_ralan_ranapMouseReleased
@@ -3518,12 +3784,28 @@ private void savePrint(){
     
     private void tb_karyawan_jual_bebasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_karyawan_jual_bebasMouseReleased
         // TODO add your handling code here:
-          if (evt.getClickCount() == 2) {
+          if (evt.getClickCount() == 1) {
              this.clstxt();
            this.set_HistoryKaryawanjualBebas();
+           lbl_grand_tot.setText("");
+           gr=0.0;
+          this.sumobat();
            bt_simpan.setEnabled(false);
         }        
-        
+          
+        if (evt.isPopupTrigger()) {
+
+            int row = tb_karyawan_jual_bebas.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_history.show(tb_karyawan_jual_bebas, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
     }//GEN-LAST:event_tb_karyawan_jual_bebasMouseReleased
 
     private void tb_karyawan_jual_bebasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_karyawan_jual_bebasKeyTyped
@@ -3540,15 +3822,33 @@ private void savePrint(){
 
     private void lbl_cari3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari3MouseClicked
         // TODO add your handling code here:
+        caridata();
     }//GEN-LAST:event_lbl_cari3MouseClicked
 
     private void tb_jual_bebasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_jual_bebasMouseReleased
         // TODO add your handling code here:
-         if (evt.getClickCount() == 2) {
+         if (evt.getClickCount() == 1) {
             this.clstxt();
            set_Historyjualbebas();
+           gr=0.0;
+          this.sumobat();
            bt_simpan.setEnabled(false);
         }        
+         
+         if (evt.isPopupTrigger()) {
+
+            int row = tb_jual_bebas.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_history.show(tb_jual_bebas, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        } 
+         
     }//GEN-LAST:event_tb_jual_bebasMouseReleased
 
     private void tb_jual_bebasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_jual_bebasKeyTyped
@@ -3560,13 +3860,275 @@ private void savePrint(){
     }//GEN-LAST:event_tb_jual_bebasKeyPressed
 
     private void txt_cari_reg_inap3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_reg_inap3KeyPressed
-        // TODO add your handling code here:
+        // TODO add your haulndling code here:
     }//GEN-LAST:event_txt_cari_reg_inap3KeyPressed
 
     private void lbl_cari4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari4MouseClicked
         // TODO add your handling code here:
+        caridata();
     }//GEN-LAST:event_lbl_cari4MouseClicked
 
+    private void item_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_hapusActionPerformed
+        // TODO add your handling code here:
+            
+                this.HapusRowHistory(irowhistory);
+ 
+           
+        
+        
+    }//GEN-LAST:event_item_hapusActionPerformed
+
+    private void tb_ralan_ranapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_ralan_ranapMousePressed
+        // TODO add your handling code here:
+         if (evt.isPopupTrigger()) {
+
+            int row = tb_ralan_ranap.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_history.show(tb_ralan_ranap, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_tb_ralan_ranapMousePressed
+
+    private void tb_karyawan_jual_bebasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_karyawan_jual_bebasMousePressed
+        // TODO add your handling code here:
+         if (evt.isPopupTrigger()) {
+
+            int row = tb_karyawan_jual_bebas.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_history.show(tb_karyawan_jual_bebas, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_tb_karyawan_jual_bebasMousePressed
+
+    private void tb_jual_bebasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_jual_bebasMousePressed
+        // TODO add your handling code here:
+          if (evt.isPopupTrigger()) {
+
+            int row = tb_jual_bebas.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_history.show(tb_jual_bebas, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_tb_jual_bebasMousePressed
+
+    private void item_hapus_detail_transActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_hapus_detail_transActionPerformed
+        // TODO add your handling code here:
+        this.HapusRowHistoryDetail(irowhistoryDetail);
+    }//GEN-LAST:event_item_hapus_detail_transActionPerformed
+
+    private void jtb_transaksi1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_transaksi1MousePressed
+        // TODO add your handling code here:
+         if (evt.isPopupTrigger()) {
+
+            int row = jtb_transaksi1.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_detail_trans.show(jtb_transaksi1, evt.getX(), evt.getY());
+                irowhistoryDetail = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_jtb_transaksi1MousePressed
+
+    private void jtb_transaksi1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_transaksi1MouseReleased
+        // TODO add your handling code here:
+         if (evt.isPopupTrigger()) {
+
+            int row = jtb_transaksi1.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.Popup_detail_trans.show(jtb_transaksi1, evt.getX(), evt.getY());
+                irowhistoryDetail = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_jtb_transaksi1MouseReleased
+
+    private void jtb_transaksi1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_transaksi1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtb_transaksi1MouseClicked
+
+    private void jtb_transaksi1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_transaksi1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtb_transaksi1KeyPressed
+
+    private void item_edit_detail_transActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_edit_detail_transActionPerformed
+        // TODO add your handling code here:
+        dlg_edit_trans.setLocationRelativeTo(this);
+                this.dlg_edit_trans.setVisible(true);
+    }//GEN-LAST:event_item_edit_detail_transActionPerformed
+
+    private void txt_hit_harga1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hit_harga1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hit_harga1ActionPerformed
+
+    private void txt_hit_harga1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_harga1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hit_harga1KeyPressed
+
+    private void bt_det_proses1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_det_proses1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_det_proses1ActionPerformed
+
+    private void bt_det_proses1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bt_det_proses1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_det_proses1KeyPressed
+
+    private void txt_hit_jml1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hit_jml1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hit_jml1ActionPerformed
+
+    private void txt_hit_jml1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_jml1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hit_jml1KeyTyped
+
+    private void txt_hit_jml1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_jml1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_hit_jml1KeyPressed
+
+    private void HapusRowHistoryDetail(int i){
+      int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus No. Nota :  "+ jtb_transaksi1.getModel().getValueAt(irowhistoryDetail, 2),"Warning ",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if(dialogResult == JOptionPane.YES_OPTION){
+                  DefaultTableModel dm = (DefaultTableModel) jtb_transaksi1.getModel();
+        int rowCount = dm.getRowCount();
+        if (rowCount != 0) {
+            try {
+                
+                datl=new Crud_local();
+                datl.DelRecDetailTransFarmasi(dm.getValueAt(i, 2).toString());
+                datl.CloseCon();
+                dm.removeRow(i);
+                
+                gr=0.0;
+                this.sumobat();
+                
+//                caridata();
+//                this.Hapussemua();
+               
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Hapus!");
+                Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+      }
+    }
+    private void HapusRowHistory(int i){
+    
+      if(lbl_cara_beli.getText().equals("Ralan")||lbl_cara_beli.getText().equals("Ranap")){  
+
+       int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus Ranap/Ralan No. Nota :  "+ tb_ralan_ranap.getModel().getValueAt(irowhistory, 10),"Warning ",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if(dialogResult == JOptionPane.YES_OPTION){
+                  DefaultTableModel dm = (DefaultTableModel) tb_ralan_ranap.getModel();
+        int rowCount = dm.getRowCount();
+        if (rowCount != 0) {
+            try {
+                
+                datl=new Crud_local();
+                datl.DelRecHistoryFarmasi(dm.getValueAt(i, 10).toString());
+                datl.CloseCon();
+                dm.removeRow(i);
+                
+                caridata();
+                this.Hapussemua();
+               
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Hapus!");
+                Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+            }   
+      
+      
+      }
+      else if(lbl_cara_beli.getText().equals("Karyawan")){
+          
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus Karyawan Jual Bebas No. Nota :  "+ tb_karyawan_jual_bebas.getModel().getValueAt(irowhistory, 0),"Warning ",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if(dialogResult == JOptionPane.YES_OPTION){   
+          
+        DefaultTableModel dm = (DefaultTableModel) tb_karyawan_jual_bebas.getModel();
+        int rowCount = dm.getRowCount();
+        if (rowCount != 0) {
+            try {
+                
+                datl=new Crud_local();
+                datl.DelRecHistoryFarmasi(dm.getValueAt(i, 0).toString());
+                datl.CloseCon();
+                dm.removeRow(i);
+                
+                caridata();
+                this.Hapussemua();
+               
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Hapus!");
+                Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+            }
+      }
+      else if(lbl_cara_beli.getText().equals("Jual Bebas")){
+          
+          int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus Jual Bebas No. Nota :  "+ tb_jual_bebas.getModel().getValueAt(irowhistory, 0),"Warning ",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if(dialogResult == JOptionPane.YES_OPTION){    
+          
+          DefaultTableModel dm = (DefaultTableModel) tb_jual_bebas.getModel();
+        int rowCount = dm.getRowCount();
+        if (rowCount != 0) {
+            try {
+                
+                datl=new Crud_local();
+                datl.DelRecHistoryFarmasi(dm.getValueAt(i, 0).toString());
+                datl.CloseCon();
+                dm.removeRow(i);
+                
+                caridata();
+                this.Hapussemua();
+               
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Gagal Hapus!");
+                Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+          
+      }
+      }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -3739,10 +4301,13 @@ private void savePrint(){
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu Popup_detail_trans;
+    private javax.swing.JPopupMenu Popup_history;
     private javax.swing.JToolBar ToolBar;
     private javax.swing.JButton bt_cari_history;
     private javax.swing.JButton bt_cari_rm;
     private javax.swing.JButton bt_det_proses;
+    private javax.swing.JButton bt_det_proses1;
     private javax.swing.JButton bt_hapus;
     private javax.swing.JButton bt_print_ulang;
     private javax.swing.JButton bt_proses_cari_registrasi;
@@ -3750,7 +4315,12 @@ private void savePrint(){
     private javax.swing.JCheckBox ck_jual_bebas;
     private javax.swing.JCheckBox ck_jual_karyawan;
     private javax.swing.JCheckBox ck_jual_karyawan_bebas;
+    private javax.swing.JCheckBox ck_kasbon;
     private javax.swing.JDialog dlg_dpjp;
+    private javax.swing.JDialog dlg_edit_trans;
+    private javax.swing.JMenuItem item_edit_detail_trans;
+    private javax.swing.JMenuItem item_hapus;
+    private javax.swing.JMenuItem item_hapus_detail_trans;
     private javax.swing.JDialog jDlg_itung;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -3764,6 +4334,8 @@ private void savePrint(){
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3782,7 +4354,9 @@ private void savePrint(){
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -3801,9 +4375,11 @@ private void savePrint(){
     private javax.swing.JTable jtb_history;
     private javax.swing.JTable jtb_registrasi;
     private javax.swing.JTable jtb_transaksi;
+    private javax.swing.JTable jtb_transaksi1;
     private uz.ncipro.calendar.JDateTimePicker jtgl;
     private uz.ncipro.calendar.JDateTimePicker jtgl_history;
     private javax.swing.JLabel lbl_barang;
+    private javax.swing.JLabel lbl_barang1;
     private javax.swing.JLabel lbl_cara_beli;
     private javax.swing.JLabel lbl_cari1;
     private javax.swing.JLabel lbl_cari2;
@@ -3811,6 +4387,7 @@ private void savePrint(){
     private javax.swing.JLabel lbl_cari4;
     private javax.swing.JLabel lbl_grand_tot;
     private javax.swing.JLabel lbl_hit_total;
+    private javax.swing.JLabel lbl_hit_total1;
     private javax.swing.JLabel lbl_jam;
     private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kamar_inap;
@@ -3822,6 +4399,7 @@ private void savePrint(){
     private javax.swing.JLabel lbl_poli3;
     private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JLabel lbl_total;
+    private javax.swing.JTabbedPane tab_trans;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_jual_bebas;
     private javax.swing.JTable tb_karyawan_jual_bebas;
@@ -3838,7 +4416,9 @@ private void savePrint(){
     private javax.swing.JTextField txt_harga_satuan;
     private javax.swing.JTextField txt_history;
     private javax.swing.JTextField txt_hit_harga;
+    private javax.swing.JTextField txt_hit_harga1;
     private javax.swing.JTextField txt_hit_jml;
+    private javax.swing.JTextField txt_hit_jml1;
     private javax.swing.JTextField txt_jml;
     private javax.swing.JTextField txt_nama_jual_bebas;
     private javax.swing.JTextField txt_nama_pasien;

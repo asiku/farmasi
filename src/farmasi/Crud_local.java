@@ -2405,7 +2405,58 @@ public class Crud_local extends DBKoneksi_local {
 
         }
     }
-     
+    
+    
+    public void DelRecDetailTransFarmasi(String nmbrg) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_detail.TB_NAME + " where " 
+                    + helper_detail.KEY_NAMA_BRG + "=?"
+                    );
+            preparedStatement.setString(1, nmbrg);
+           
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+    }
+    
+    public void DelRecHistoryDetailFarmasi(String nota) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_trans.TB_NAME + " where " 
+                    + helper_trans.KEY_NO_NOTA + "=?"
+                    );
+            preparedStatement.setString(1, nota);
+           
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+    }
+    
+     public void DelRecHistoryFarmasi(String nota) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_trans.TB_NAME + " where " 
+                    + helper_trans.KEY_NO_NOTA + "=?"
+                    );
+            preparedStatement.setString(1, nota);
+           
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+    }
     
     public void DelRecHistory(String kode,String tgl) throws SQLException  {
   
@@ -2422,9 +2473,6 @@ public class Crud_local extends DBKoneksi_local {
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
         }
     
-      
-        
-       
         
     }
     
