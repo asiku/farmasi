@@ -2662,6 +2662,47 @@ public void CetakTarif() throws JRException {
        
     }    
       
+
+public void updatehistordetailfarmasi(int jml ,double hargasatuan,double total,String nmbrg,String nota){
+       try { 
+           
+           
+           
+            preparedStatement = connect.prepareStatement("update " + helper_detail.TB_NAME + " set " 
+                    + helper_detail.KEY_JML+"=?,"
+                    + helper_detail.KEY_HARGA_SATUAN+"=?,"
+                    + helper_detail.KEY_TOTAL+"=?,"
+                    + helper_detail.KEY_NAMA_BRG+"=?"
+                    +" where "+ helper_detail.KEY_NO_NOTA + "=? AND "
+                    + helper_detail.KEY_NAMA_BRG+"=?"
+                    );
+            
+           
+            preparedStatement.setInt(1, jml);
+            preparedStatement.setDouble(2, hargasatuan);
+            preparedStatement.setDouble(3, total);
+            preparedStatement.setString(4, nmbrg);
+            preparedStatement.setString(5, nota);
+            preparedStatement.setString(6, nmbrg);
+          
+             
+             
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+            JOptionPane.showMessageDialog(null, "Gagal Update ");
+//            }
+//            else{
+//            JOptionPane.showMessageDialog(null, "Gagal Update");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+   }
+   
+
    public void CloseCon(){
     
         try {

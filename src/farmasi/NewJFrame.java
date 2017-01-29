@@ -272,6 +272,29 @@ public class NewJFrame extends javax.swing.JFrame {
         
     }
 
+    
+    public Double hitung_history() {
+        
+      Double tot=0.0;
+
+        if ((txt_hit_jml1.getText().isEmpty() || txt_hit_harga1.getText().isEmpty())) {
+            //Double tot=Double.valueOf(this.txt_jml.getText())*Double.valueOf(this.txt_harga_satuan.getText());
+            //this.lbl_total.setText(Double.valueOf(tot).toString());
+            this.lbl_hit_total1.setText("0");
+        } else {
+            //this.lbl_total.setText("isi");
+             tot = Double.valueOf(this.txt_hit_jml1.getText()) * Double.valueOf(this.txt_hit_harga1.getText());
+
+            String fr = formatuang(tot);
+            this.lbl_hit_total1.setText(fr);
+            
+        }
+        
+//        lbl_grand_tot.setText(formatuang(tot));
+        return tot;
+    }
+
+    
     public Double hitung() {
         
       Double tot=0.0;
@@ -414,6 +437,43 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
        
+         txt_hit_harga1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               hitung_history();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               hitung_history();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               hitung_history();
+            }
+        });
+       
+        
+          txt_hit_jml1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               hitung_history();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               hitung_history();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               hitung_history();
+            }
+        });
+     
+        
+        
        txt_hit_jml.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -528,6 +588,28 @@ public class NewJFrame extends javax.swing.JFrame {
 
         });
 
+        
+        this.txt_jml.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+
+                hitung();
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                hitung();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                hitung();
+            }
+
+        });
+
+        
         this.txt_jml.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -3258,6 +3340,7 @@ private void savePrint(){
     }
     private void bt_det_prosesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_det_prosesActionPerformed
         // TODO add your handling code here:
+      if(!txt_hit_jml.getText().equals("0")){   
         set_trans();
            
           gr=0.0;
@@ -3267,6 +3350,10 @@ private void savePrint(){
 //           this.txt_hit_harga.setText("0");
 //           this.txt_hit_jml.setText("0");
 //           this.lbl_hit_total.setText("0");
+      }
+      else{
+        JOptionPane.showMessageDialog(null, "Jumlah tidak bisa 0");
+      }
     }//GEN-LAST:event_bt_det_prosesActionPerformed
 
     private void jtb_barangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_barangKeyTyped
@@ -3978,8 +4065,23 @@ private void savePrint(){
 
     private void item_edit_detail_transActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_edit_detail_transActionPerformed
         // TODO add your handling code here:
+         int row = jtb_transaksi1.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+      
+  this.txt_hit_jml1.setText(jtb_transaksi1.getModel().getValueAt(row, 1).toString()); 
+  lbl_barang1.setText(jtb_transaksi1.getModel().getValueAt(row, 2).toString()); 
+  this.txt_hit_harga1.setText(jtb_transaksi1.getModel().getValueAt(row, 3).toString()); 
+  
         dlg_edit_trans.setLocationRelativeTo(this);
                 this.dlg_edit_trans.setVisible(true);
+                
+                
+            }
+      
+       
     }//GEN-LAST:event_item_edit_detail_transActionPerformed
 
     private void txt_hit_harga1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_hit_harga1ActionPerformed
@@ -3991,7 +4093,24 @@ private void savePrint(){
     }//GEN-LAST:event_txt_hit_harga1KeyPressed
 
     private void bt_det_proses1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_det_proses1ActionPerformed
-        // TODO add your handling code here:
+      if(!txt_hit_jml1.getText().equals("0")){  
+        try {
+            // TODO add your handling code here:
+            datl=new Crud_local();
+            datl.updatehistordetailfarmasi(Integer.valueOf(txt_hit_jml1.getText()), Double.valueOf(txt_hit_harga1.getText()), 
+                    this.hitung_history()
+                    , lbl_barang1.getText(), this.txt_nota.getText());
+            datl.CloseCon();
+            set_Historydetail();
+            gr=0.0;
+            this.sumobat_detail();
+                    } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      }
+      else{
+      JOptionPane.showMessageDialog(null, "Jumlah tidak bisa 0");
+      }
     }//GEN-LAST:event_bt_det_proses1ActionPerformed
 
     private void bt_det_proses1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bt_det_proses1KeyPressed
@@ -4004,6 +4123,10 @@ private void savePrint(){
 
     private void txt_hit_jml1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_jml1KeyTyped
         // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
     }//GEN-LAST:event_txt_hit_jml1KeyTyped
 
     private void txt_hit_jml1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_hit_jml1KeyPressed
