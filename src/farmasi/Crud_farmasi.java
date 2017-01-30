@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class Crud_farmasi extends DBkoneksi {
   
     String[] reg_titleralankasir = new String[]{"No.", "No. RM", "Nama Pasien", "Tanggal","Kode Dokter","Nama Dokter","Kode Poli","Poli","Kode PJ","Status Bayar","No Rawat","Status Lanjut","No. SEP"};
 
-    String[] brg_title = new String[]{"Kode obat", "Nama Obat", "Satuan"};
+    String[] brg_title = new String[]{"Kode Barang", "Nama", "Harga Jual", "Harga Jual Karyawan","Harga Beli", "Kategori"}; 
 
     String[] petugas_title = new String[]{"Nip", "Nama Petugas"};
     
@@ -247,6 +248,7 @@ public class Crud_farmasi extends DBkoneksi {
      public void readRec_kamarinapFisioFarmasi(String[] bangsal,String txtcari,String tgl,String tglserver) {
 
         try {
+            
             preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEVF + " WHERE "
                     + helper_kamar_inap.KEY_NO_RM + " like ? OR "
                     + helper_kamar_inap.KEY_NM_PASIEN + " like ?");
@@ -666,6 +668,14 @@ public class Crud_farmasi extends DBkoneksi {
 
     public void readRec_brgF(String namabrg) throws SQLException {
 
+        double hrgjmlralan=0.0;
+        double hrgjmlkry=0.0;
+        double hrgbeli=0.0;
+        double hrgralan=0.0;
+        double hrgkary=0.0;
+        double hrgralanalk=0.0;
+        double hrgkaryalk=0.0;
+        
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_NAME + " WHERE "
                 + helper_brg.KEY_NAMA_BRG + " like ?");
 
@@ -673,18 +683,33 @@ public class Crud_farmasi extends DBkoneksi {
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        int i = 0;
+//        int i = 0;
 
         while (resultSet.next()) {
 
-            i++;
+//            i++;
 
-            String no = String.valueOf(i);
+//            String no = String.valueOf(i);
             String kodeobat = resultSet.getString(helper_brg.KEY_KODE_BRG);
-            String nm_pasien = resultSet.getString(helper_brg.KEY_NAMA_BRG);
-            String satuan = resultSet.getString(helper_brg.KEY_SATUAN);
-
-            modelbrg.addRow(new Object[]{kodeobat, nm_pasien, satuan});
+            String nmbrg = resultSet.getString(helper_brg.KEY_NAMA_BRG);
+            hrgbeli = resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+            String kat = resultSet.getString(helper_brg.KEY_KATEGORI);
+             
+       if(resultSet.getString(helper_brg.KEY_KATEGORI).equals("OBR")){
+            hrgralan = hrgbeli*1.1*1.5;
+            hrgkary = hrgralan/1.2;
+           
+       }
+       else if(resultSet.getString(helper_brg.KEY_KATEGORI).equals("ALK")){
+            hrgralan = hrgbeli*1.8;
+            hrgkary = hrgralan/1.2;
+       
+       }
+       else if(resultSet.getString(helper_brg.KEY_KATEGORI).equals("resep")){
+       hrgralan = resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+       hrgkary=resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+       }
+            modelbrg.addRow(new Object[]{kodeobat, nmbrg, hrgralan,hrgkary,hrgbeli,kat});
         }
     }
 
@@ -777,24 +802,49 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
-    public void readRec_brg(String namabrg) throws SQLException {
+    public void readRec_brg() throws SQLException {
 
+        double hrgjmlralan=0.0;
+        double hrgjmlkry=0.0;
+        double hrgbeli=0.0;
+        double hrgralan=0.0;
+        double hrgkary=0.0;
+        double hrgralanalk=0.0;
+        double hrgkaryalk=0.0;
+        
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_NAME);
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        int i = 0;
-
+      
+             
+      
         while (resultSet.next()) {
-
-            i++;
-
-            String no = String.valueOf(i);
+ 
             String kodeobat = resultSet.getString(helper_brg.KEY_KODE_BRG);
-            String nm_pasien = resultSet.getString(helper_brg.KEY_NAMA_BRG);
-            String satuan = resultSet.getString(helper_brg.KEY_SATUAN);
-
-            modelbrg.addRow(new Object[]{kodeobat, nm_pasien, satuan});
+            String nmbrg = resultSet.getString(helper_brg.KEY_NAMA_BRG);
+            hrgbeli = resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+            String kat = resultSet.getString(helper_brg.KEY_KATEGORI);
+            
+       if(resultSet.getString(helper_brg.KEY_KATEGORI).equals("OBR")){
+            hrgralan = hrgbeli*1.1*1.5;
+            hrgkary = hrgralan/1.2;
+           
+       }
+       else if(resultSet.getString(helper_brg.KEY_KATEGORI).equals("ALK")){
+            hrgralan = hrgbeli*1.8;
+            hrgkary = hrgralan/1.2;
+       
+       }
+       else if(resultSet.getString(helper_brg.KEY_KATEGORI).equals("resep")){
+         hrgralan = resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+         hrgkary=resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
+       }
+           
+            DecimalFormat df2 = new DecimalFormat(".##");
+       
+            modelbrg.addRow(new Object[]{kodeobat, nmbrg, df2.format(hrgralan),df2.format(hrgkary),df2.format(hrgbeli),kat});
+            
         }
     }
 
@@ -939,7 +989,7 @@ public class Crud_farmasi extends DBkoneksi {
 
         preparedStatement.setString(1, tgl);
      }
-     if(s==2){   
+     else if(s==2){   
         
         
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
@@ -949,6 +999,19 @@ public class Crud_farmasi extends DBkoneksi {
         preparedStatement.setString(1, tgl);
         preparedStatement.setString(2, "%" + name + "%");
      }
+     else if(s==3){   
+        
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                + helper_registrasi.KEY_TGL_REGISTRASI + " =? AND "
+                + helper_registrasi.KEY_NO_RM + " like ?" 
+                );
+
+        preparedStatement.setString(1, tgl);
+        preparedStatement.setString(2, "%" + name + "%");
+        
+     }
+     
      
      else{
        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "

@@ -57,7 +57,7 @@ public class Crud_local extends DBKoneksi_local {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
-     String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Petugas","Tgl","Nama Barang","Jml", "Harga Satuan", "Total"};
+     String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Karyawan","Jual Bebas","Nama Barang","Jml", "Harga Satuan", "Total","Kategori","Tgl","Petugas"};
     
      String[] tarif_title= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
          "% Sarana","Nama Poli","Status","Keterangan","id poli","id status","Status Pengesah","Status Verif","Kelas","Tarif Tindakan BPJS","% RS. BPJS","% Dr. BPJS",
@@ -1353,11 +1353,25 @@ public class Crud_local extends DBKoneksi_local {
     
     public void readRec_transfarmasiKaryawanJualbebas(String nm) throws SQLException {
       
-          
-    preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_NAME + " WHERE "
-                + helper_trans.KEY_NM_PASIEN + " like ? ");
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_NAME + " WHERE "
+                + helper_trans.KEY_NM_PASIEN + " like ? or "
+                + helper_trans.KEY_NO_RM + " like ? or "
+                + helper_trans.KEY_NO_NOTA + " like ? or "
+                + helper_trans.KEY_NAMA_KARYAWAN + " like ? or "
+                + helper_trans.KEY_NAMA_JUAL_BEBAS + " like ?"
+                );
 
-        preparedStatement.setString(1, "%" + nm + "%");    
+         preparedStatement.setString(1, "%" + nm + "%");    
+         preparedStatement.setString(2, "%" + nm + "%");  
+         preparedStatement.setString(3, "%" + nm + "%");  
+         preparedStatement.setString(4, "%" + nm + "%");  
+         preparedStatement.setString(5, "%" + nm + "%");  
+       
+          
+//    preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_NAME + " WHERE "
+//                + helper_trans.KEY_NM_PASIEN + " like ? ");
+//
+//        preparedStatement.setString(1, "%" + nm + "%");    
           
        
     
@@ -1394,10 +1408,18 @@ public class Crud_local extends DBKoneksi_local {
       
           
     preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_trans.TB_VNAME + " WHERE "
-                + helper_trans.KEY_NM_PASIEN + " like ? ");
+                + helper_trans.KEY_NM_PASIEN + " like ? or "
+                + helper_trans.KEY_NO_RM + " like ? or "
+                + helper_trans.KEY_NO_NOTA + " like ? or "
+                + helper_trans.KEY_NAMA_KARYAWAN + " like ? or "
+                + helper_trans.KEY_NAMA_JUAL_BEBAS + " like ?"
+                );
 
-        preparedStatement.setString(1, "%" + nm + "%");    
-          
+         preparedStatement.setString(1, "%" + nm + "%");    
+         preparedStatement.setString(2, "%" + nm + "%");  
+         preparedStatement.setString(3, "%" + nm + "%");  
+         preparedStatement.setString(4, "%" + nm + "%");  
+         preparedStatement.setString(5, "%" + nm + "%");  
        
     
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -1559,14 +1581,19 @@ public class Crud_local extends DBKoneksi_local {
             String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
             String rm = resultSet.getString(helper_v_trans.KEY_NO_RM);
             String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+            String kar= resultSet.getString(helper_v_trans.KEY_NAMA_KARYAWAN);
+            String jb= resultSet.getString(helper_v_trans.KEY_NAMA_JUAL_BEBAS);
             String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
             String tglc = resultSet.getString(helper_v_trans.KEY_TGL);
             String brg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            String kat=resultSet.getString(helper_v_trans.KEY_KATEGORI);
             int jml = resultSet.getInt(helper_v_trans.KEY_JML);
             Double hargasat = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
             Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
 
-            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,petugas,tglc,brg,jml,hargasat,totalc});
+                 
+            
+            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,kar,jb,brg,jml,hargasat,totalc,kat,tglc,petugas});
         }
     }
     
@@ -1627,10 +1654,64 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
-       public void readRec_Allhistory() throws SQLException {
+       public void readRec_Allhistory(String tgl1,String tgl2,String nm,int pil) throws SQLException {
 
-        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME);
-
+       if(pil==1){     
+         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME 
+                                                     + " WHERE " +helper_v_trans.KEY_TGL + " BETWEEN ? AND ?"
+                                                               );
+         preparedStatement.setString(1, tgl1);
+         preparedStatement.setString(2, tgl2);
+         
+         
+       }
+       else if(pil==2){
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME 
+                                                     + " WHERE "  
+//                                                     + helper_v_trans.KEY_TGL + " =? AND "
+                                                     + helper_v_trans.KEY_NM_PASIEN + " like ? OR "
+                                                     + helper_v_trans.KEY_NO_RM + " like ? OR "
+                                                     + helper_v_trans.KEY_NO_NOTA + " like ? OR " 
+                                                     + helper_v_trans.KEY_NAMA_JUAL_BEBAS + " like ? OR " 
+                                                     + helper_v_trans.KEY_NAMA_KARYAWAN + " like ? OR " 
+                                                     + helper_v_trans.KEY_KATEGORI + " like ? OR "
+                                                     + helper_v_trans.KEY_NAMA_BRG + " like ?"   
+                                                        );  
+                                                               
+//         preparedStatement.setString(1, tgl1);
+         preparedStatement.setString(1, "%" + nm + "%");
+         preparedStatement.setString(2, "%" + nm + "%");
+         preparedStatement.setString(3, "%" + nm + "%");
+         preparedStatement.setString(4, "%" + nm + "%");
+         preparedStatement.setString(5, "%" + nm + "%");
+         preparedStatement.setString(6, "%" + nm + "%");
+         preparedStatement.setString(7, "%" + nm + "%");
+         
+      }
+      else if(pil==3){
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME 
+                                                     + " WHERE "  
+                                                     + helper_v_trans.KEY_TGL + "=? AND "
+                                                     + helper_v_trans.KEY_NM_PASIEN + " like ? OR "
+                                                     + helper_v_trans.KEY_NO_RM + " like ? OR "
+                                                     + helper_v_trans.KEY_NO_NOTA + " like ? OR " 
+                                                     + helper_v_trans.KEY_NAMA_JUAL_BEBAS + " like ? OR " 
+                                                     + helper_v_trans.KEY_NAMA_KARYAWAN + " like ? OR " 
+                                                    + helper_v_trans.KEY_KATEGORI + " like ? OR "
+                                                     + helper_v_trans.KEY_NAMA_BRG + " like ?"   
+                                                        );    
+                                                               
+         preparedStatement.setString(1, tgl1);
+         preparedStatement.setString(2, "%" + nm + "%");
+         preparedStatement.setString(3, "%" + nm + "%");
+         preparedStatement.setString(4, "%" + nm + "%");
+         preparedStatement.setString(5, "%" + nm + "%");
+         preparedStatement.setString(6, "%" + nm + "%");
+         preparedStatement.setString(7, "%" + nm + "%");
+         preparedStatement.setString(8, "%" + nm + "%");
+         
+      }
+     
      
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -1644,14 +1725,18 @@ public class Crud_local extends DBKoneksi_local {
             String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
             String rm = resultSet.getString(helper_v_trans.KEY_NO_RM);
             String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+            String kar= resultSet.getString(helper_v_trans.KEY_NAMA_KARYAWAN);
+            String jb= resultSet.getString(helper_v_trans.KEY_NAMA_JUAL_BEBAS);
             String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
             String tglc = resultSet.getString(helper_v_trans.KEY_TGL);
             String brg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            String kat=resultSet.getString(helper_v_trans.KEY_KATEGORI);
             int jml = resultSet.getInt(helper_v_trans.KEY_JML);
             Double hargasat = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
             Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
 
-            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,petugas,tglc,brg,jml,hargasat,totalc});
+            
+            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,kar,jb,brg,jml,hargasat,totalc,kat,tglc,petugas});
             
 
         }

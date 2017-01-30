@@ -21,4 +21,8 @@ public class helper_v_trans {
     public static String KEY_NAMA_BRG = "nama_barang";
     public static String KEY_TOTAL = "total";
     public static String KEY_TGL = "tgl";
+    public static String KEY_NAMA_JUAL_BEBAS= "nama_jual_bebas";
+    public static String KEY_NO_RAWAT="no_rawat"; 
+    public static String KEY_NAMA_KARYAWAN="nama_karyawan";
+    public static String KEY_KATEGORI="kategori"; 
 }

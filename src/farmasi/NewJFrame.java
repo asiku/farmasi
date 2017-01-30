@@ -29,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -340,9 +341,13 @@ public class NewJFrame extends javax.swing.JFrame {
         else if(lbl_cara_beli.getText().equals("Karyawan")){
                 this.txt_nota.setText("KRY"+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
          }
-        else{
-            this.txt_nota.setText(this.txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+        else if(lbl_cara_beli.getText().equals("Ranap")){
+            this.txt_nota.setText("RNP/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
         }
+        else if(lbl_cara_beli.getText().equals("Ralan")){
+            this.txt_nota.setText("RLN/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+        }
+        
         
     }
     
@@ -355,6 +360,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
       //  this.setUndecorated(true);
+      
+      jPanel10.setVisible(false);
+   
       
       jLabel10.setVisible(false);
       
@@ -386,20 +394,96 @@ public class NewJFrame extends javax.swing.JFrame {
        //set No nota
       
        
-       txt_cari_karyawan_jual_bebas.getDocument().addDocumentListener(new DocumentListener() {
+//       txt_cari_ralan_ranap.getDocument().addDocumentListener(new DocumentListener() {
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//               caridataralanranap(txt_cari_ralan_ranap.getText());
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//                caridataralanranap(txt_cari_ralan_ranap.getText());
+//             
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//             caridataralanranap(txt_cari_ralan_ranap.getText());
+//            }
+//        });
+       
+       
+       txt_history.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-              carihistorykaryawanjualbebas();
+              filterhistorydll();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-               carihistorykaryawanjualbebas();
+              filterhistorydll();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-              carihistorykaryawanjualbebas();
+             filterhistorydll();
+            }
+        });
+               
+       txt_cari_nm.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+             filtertxt(2);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+             filtertxt(2);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+             filtertxt(2);
+            }
+        });
+       
+       txt_cari_jual_bebas.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                caridata(txt_cari_jual_bebas.getText());
+//              carihistorykaryawanjualbebas();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+//               carihistorykaryawanjualbebas();
+caridata(txt_cari_jual_bebas.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+//              carihistorykaryawanjualbebas();
+caridata(txt_cari_jual_bebas.getText());
+            }
+        });
+       
+       txt_cari_karyawan_jual_bebas.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                caridata(txt_cari_karyawan_jual_bebas.getText());
+//              carihistorykaryawanjualbebas();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+//               carihistorykaryawanjualbebas();
+caridata(txt_cari_karyawan_jual_bebas.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+//              carihistorykaryawanjualbebas();
+caridata(txt_cari_karyawan_jual_bebas.getText());
             }
         });
        
@@ -496,18 +580,18 @@ public class NewJFrame extends javax.swing.JFrame {
        txt_history.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                filterhistory();
+//                filterhistory();
 
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                filterhistory();
+//                filterhistory();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                filterhistory();
+//                filterhistory();
             }
 
         });
@@ -516,18 +600,18 @@ public class NewJFrame extends javax.swing.JFrame {
         txt_cari_rm.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                filtertxt();
+                filtertxt(3);
 
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-               filtertxt();
+               filtertxt(3);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                filtertxt();
+                filtertxt(3);
             }
 
         });
@@ -554,17 +638,20 @@ public class NewJFrame extends javax.swing.JFrame {
         txt_cari_ralan_ranap.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                carihistoryralanranap();
+                caridata(txt_cari_ralan_ranap.getText());
+//                carihistoryralanranap();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                carihistoryralanranap();
+//                carihistoryralanranap();
+caridata(txt_cari_ralan_ranap.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                carihistoryralanranap();
+//                carihistoryralanranap();
+caridata(txt_cari_ralan_ranap.getText());
             }
 
         });
@@ -649,7 +736,7 @@ public class NewJFrame extends javax.swing.JFrame {
         
         refreshdatatb();
 
-        caridata();
+        caridata("");
         
         this.jtb_transaksi.setModel(modeltrans);
 
@@ -716,6 +803,10 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
          
+        
+           
+         
+         
          
          
       txt_tgl.setText(lbl_tgl_server.getText().toString());
@@ -736,10 +827,17 @@ public class NewJFrame extends javax.swing.JFrame {
         
         try {
             
-            datl = new Crud_local();
-            datl.readRec_brg();
-            datl.CloseCon();
-            this.jtb_barang.setModel(datl.modelbrg);
+//            datl = new Crud_local();
+//            datl.readRec_brg();
+//            datl.CloseCon();
+//            this.jtb_barang.setModel(datl.modelbrg);
+//            
+            dat = new Crud_farmasi();
+            dat.readRec_brg();
+            dat.CloseCon();
+            this.jtb_barang.setModel(dat.modelbrg);
+
+            
              setukurantbbarang();
             
             
@@ -889,11 +987,17 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void filterbrg() {
         try {
-            datl = new Crud_local();
+//            datl = new Crud_local();
+            dat = new Crud_farmasi();
             try {
-                datl.readRec_brgF(this.txt_barang.getText().trim());
-                datl.CloseCon();
-                this.jtb_barang.setModel(datl.modelbrg);
+//                datl.readRec_brgF(this.txt_barang.getText().trim());
+//                datl.CloseCon();
+//                this.jtb_barang.setModel(datl.modelbrg);
+                
+                dat.readRec_brgF(this.txt_barang.getText().trim());
+                dat.CloseCon();
+                this.jtb_barang.setModel(dat.modelbrg);
+                
                 setukurantbbarang();
                 
             } catch (SQLException ex) {
@@ -1001,8 +1105,22 @@ public class NewJFrame extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jtb_history = new javax.swing.JTable();
         jtgl_history = new uz.ncipro.calendar.JDateTimePicker();
+        jLabel27 = new javax.swing.JLabel();
+        jtgl_history1 = new uz.ncipro.calendar.JDateTimePicker();
+        jLabel29 = new javax.swing.JLabel();
+        bt_cari_history1 = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jtb_history1 = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
         txt_history = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        txt_history1 = new javax.swing.JTextField();
+        bt_cari_history2 = new javax.swing.JButton();
         bt_cari_history = new javax.swing.JButton();
+        jtgl_history2 = new uz.ncipro.calendar.JDateTimePicker();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel32 = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jLayeredPane4 = new javax.swing.JLayeredPane();
@@ -1011,12 +1129,16 @@ public class NewJFrame extends javax.swing.JFrame {
         jtgl = new uz.ncipro.calendar.JDateTimePicker();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtb_registrasi = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        txt_cari_nm = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         txt_cari_reg_inap = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         tb_reg_inap = new javax.swing.JTable();
         lbl_cari1 = new javax.swing.JLabel();
         lbl_kamar_inap = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
@@ -1024,16 +1146,19 @@ public class NewJFrame extends javax.swing.JFrame {
         lbl_cari2 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tb_ralan_ranap = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         tb_karyawan_jual_bebas = new javax.swing.JTable();
         txt_cari_karyawan_jual_bebas = new javax.swing.JTextField();
         lbl_cari3 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
         tb_jual_bebas = new javax.swing.JTable();
-        txt_cari_reg_inap3 = new javax.swing.JTextField();
+        txt_cari_jual_bebas = new javax.swing.JTextField();
         lbl_cari4 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         lbl_kode = new javax.swing.JLabel();
         ToolBar = new javax.swing.JToolBar();
         jPanel6 = new javax.swing.JPanel();
@@ -1224,7 +1349,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         Popup_detail_trans.add(item_hapus_detail_trans);
 
-        dlg_edit_trans.setPreferredSize(new java.awt.Dimension(418, 222));
         dlg_edit_trans.setSize(new java.awt.Dimension(400, 250));
 
         jLabel20.setText("Jml");
@@ -1737,7 +1861,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jTabbedPane1.addTab("Penjualan", jPanel3);
 
         jLayeredPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLayeredPane2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jtb_history.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jtb_history.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1751,52 +1877,119 @@ public class NewJFrame extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(jtb_history);
 
-        jtgl_history.setDisplayFormat("yyyy/MM/dd");
+        jLayeredPane2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 890, 220));
 
-        bt_cari_history.setText("Cari RM");
+        jtgl_history.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jtgl_history.setDisplayFormat("yyyy/MM/dd");
+        jLayeredPane2.add(jtgl_history, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 117, 30));
+
+        jLabel27.setText("Rp.");
+        jLayeredPane2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 300, -1));
+
+        jtgl_history1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jtgl_history1.setDisplayFormat("yyyy/MM/dd");
+        jLayeredPane2.add(jtgl_history1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 117, 30));
+
+        jLabel29.setText("S/d");
+        jLayeredPane2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+
+        bt_cari_history1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        bt_cari_history1.setText("Cari Periode");
+        bt_cari_history1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_history1ActionPerformed(evt);
+            }
+        });
+        jLayeredPane2.add(bt_cari_history1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 290, 30));
+
+        jLabel31.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel31.setText("Kategori ");
+        jLayeredPane2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 90, 20));
+
+        jtb_history1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jtb_history1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane12.setViewportView(jtb_history1);
+
+        jLayeredPane2.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 870, 180));
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel30.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel30.setText("Cari: No. RM/No. Nota / Nama Jual Bebas/Nama Karyawan/Nama Barang");
+
+        bt_cari_history2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        bt_cari_history2.setText("Cari");
+        bt_cari_history2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_history2ActionPerformed(evt);
+            }
+        });
+
+        bt_cari_history.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        bt_cari_history.setText("Cari");
         bt_cari_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_cari_historyActionPerformed(evt);
             }
         });
 
-        jLayeredPane2.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jtgl_history, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(txt_history, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(bt_cari_history, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jtgl_history2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jtgl_history2.setDisplayFormat("yyyy/MM/dd");
 
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5)
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addComponent(jtgl_history, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_history, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bt_cari_history, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 357, Short.MAX_VALUE)))
-                .addContainerGap())
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel30)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(txt_history, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(bt_cari_history, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addComponent(jtgl_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(txt_history1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(bt_cari_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24))
         );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtgl_history, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bt_cari_history))
-                    .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txt_history)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_history, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_cari_history, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtgl_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_history1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_cari_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        jLayeredPane2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 500, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OBR", "ALK", "RESEP", "ALL" }));
+        jLayeredPane2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 190, -1));
+
+        jLabel32.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel32.setText("Cari Berdasarkan Periode :");
+        jLayeredPane2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 290, 20));
 
         jLayeredPane1.setLayer(jLayeredPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -1813,8 +2006,8 @@ public class NewJFrame extends javax.swing.JFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cari History Penjualan Obat", jLayeredPane1);
@@ -1828,7 +2021,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 txt_cari_rmKeyPressed(evt);
             }
         });
-        jLayeredPane4.add(txt_cari_rm, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 7, 220, 30));
+        jLayeredPane4.add(txt_cari_rm, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 7, 140, 30));
 
         bt_proses_cari_registrasi.setText("cari");
         bt_proses_cari_registrasi.addActionListener(new java.awt.event.ActionListener() {
@@ -1836,7 +2029,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 bt_proses_cari_registrasiActionPerformed(evt);
             }
         });
-        jLayeredPane4.add(bt_proses_cari_registrasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 360, 30));
+        jLayeredPane4.add(bt_proses_cari_registrasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 360, 30));
 
         jtgl.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtgl.setDisplayFormat("yyyy/MM/dd");
@@ -1861,15 +2054,25 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jtb_registrasi);
 
-        jLayeredPane4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 360, 500));
+        jLayeredPane4.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 360, 440));
+
+        jLabel3.setText("Nama");
+        jLayeredPane4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jLabel22.setText("No. RM");
+        jLayeredPane4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jLayeredPane4.add(txt_cari_nm, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 270, 30));
 
         jTabbedPane2.addTab("Ralan", jLayeredPane4);
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_cari_reg_inap.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_cari_reg_inapKeyPressed(evt);
             }
         });
+        jPanel4.add(txt_cari_reg_inap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 310, 32));
 
         tb_reg_inap.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_reg_inap.setModel(new javax.swing.table.DefaultTableModel(
@@ -1898,51 +2101,30 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(tb_reg_inap);
 
+        jPanel4.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 107, 372, 480));
+
         lbl_cari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
         lbl_cari1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_cari1MouseClicked(evt);
             }
         });
+        jPanel4.add(lbl_cari1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 40, -1));
+        jPanel4.add(lbl_kamar_inap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 359, 19));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_kamar_inap, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(txt_cari_reg_inap, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(lbl_cari1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_cari_reg_inap, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_cari1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_kamar_inap, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
+        jLabel24.setText("Cari Nama/RM");
+        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jTabbedPane2.addTab("Ranap", jPanel4);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane3.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jTabbedPane3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane3StateChanged(evt);
+            }
+        });
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1951,7 +2133,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 txt_cari_ralan_ranapKeyPressed(evt);
             }
         });
-        jPanel5.add(txt_cari_ralan_ranap, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 310, 32));
+        jPanel5.add(txt_cari_ralan_ranap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 290, 32));
 
         lbl_cari2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
         lbl_cari2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1959,7 +2141,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 lbl_cari2MouseClicked(evt);
             }
         });
-        jPanel5.add(lbl_cari2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 40, -1));
+        jPanel5.add(lbl_cari2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 40, -1));
 
         tb_ralan_ranap.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_ralan_ranap.setModel(new javax.swing.table.DefaultTableModel(
@@ -1991,7 +2173,10 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(tb_ralan_ranap);
 
-        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 350, 500));
+        jPanel5.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 350, 460));
+
+        jLabel23.setText("Nama/RM/Nota");
+        jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jTabbedPane3.addTab("Ralan/Ranap", jPanel5);
 
@@ -2038,6 +2223,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel25.setText("Nama Karyawan/No. Nota");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -2046,24 +2233,24 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txt_cari_karyawan_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addComponent(txt_cari_karyawan_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_cari3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txt_cari_karyawan_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lbl_cari3))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_cari_karyawan_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_cari3))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2099,9 +2286,9 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         jScrollPane10.setViewportView(tb_jual_bebas);
 
-        txt_cari_reg_inap3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txt_cari_jual_bebas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_cari_reg_inap3KeyPressed(evt);
+                txt_cari_jual_bebasKeyPressed(evt);
             }
         });
 
@@ -2112,31 +2299,37 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel26.setText("Nama Jual Bebas/No. Nota");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 5, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txt_cari_reg_inap3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(lbl_cari4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(txt_cari_reg_inap3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_cari_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_cari4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel26))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_cari_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_cari4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -2706,13 +2899,25 @@ public class NewJFrame extends javax.swing.JFrame {
         
     }
     
-    private void caridata(){
+    private void caridataralanranap(String cari){
+        try {
+            datl = new Crud_local();
+            datl.readRec_transfarmasi(cari);
+            datl.CloseCon();
+            tb_ralan_ranap.setModel(datl.modeltransfarmasi);
+           setukurantbralanranap();
+        } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void caridata(String cari){
         
         try {
                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                
              datl = new Crud_local();
-             datl.readRec_transfarmasi("");
+             datl.readRec_transfarmasi(cari);
              
              datl.CloseCon();
              
@@ -2726,7 +2931,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //"No. Nota", "Nama Jual Bebas", "Tgl","Catatan","Petugas"};
     
     datl = new Crud_local();
-    datl.readRec_transfarmasiKaryawanJualbebas("");
+    datl.readRec_transfarmasiKaryawanJualbebas(cari);
     datl.CloseCon();
     
  tb_karyawan_jual_bebas.setModel(datl.modeltransfarmasikaryawanjualbebas);
@@ -3053,7 +3258,7 @@ private void savePrint(){
             
              this.Hapussemua();
              
-             caridata();
+             caridata("");
 //             this.txt_no_rm.requestFocus();
              
              
@@ -3208,45 +3413,79 @@ private void savePrint(){
 //        }   
     }//GEN-LAST:event_jtb_barangKeyPressed
 
-    private void bt_cari_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_historyActionPerformed
-        // TODO add your handling code here:
-        
-     if(this.txt_history.getText().isEmpty()){
+    private void setUkuranhistoryAll(){
      
-                try {
+        
+        
+        this.jtb_history.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        jtb_history.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tri = this.jtb_history.getColumnModel();
+
+        tri.getColumn(0).setPreferredWidth(50);
+        tri.getColumn(1).setPreferredWidth(60);
+        tri.getColumn(2).setPreferredWidth(60);
+        tri.getColumn(3).setPreferredWidth(220);
+        tri.getColumn(4).setPreferredWidth(100);
+        tri.getColumn(5).setPreferredWidth(100);
+        tri.getColumn(6).setPreferredWidth(150);
+        tri.getColumn(7).setPreferredWidth(150);
+        tri.getColumn(8).setPreferredWidth(150);
+        tri.getColumn(9).setPreferredWidth(150);
+        tri.getColumn(10).setPreferredWidth(150);
+        tri.getColumn(11).setPreferredWidth(150);
+        
+    
+    }
+    private void filterhistorydll(){
+     try {
                     
                     datl = new Crud_local();
                     
                     try {
-                        datl.readRec_Allhistory();
+                         String datePattern = "yyyy-MM-dd";
+                         SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        
+                        datl.readRec_Allhistory(dateFormatter.format(jtgl_history.getDate()),dateFormatter.format(jtgl_history.getDate())
+                        ,txt_history.getText(),2);
+                        
+                        datl.CloseCon();
+                      
                     } catch (SQLException ex) {
                         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
                     jtb_history.setModel(datl.modelctrans);
+                     setUkuranhistoryAll();
                 } catch (Exception ex) {
                     Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-     }   
-     else{   
-        String datePattern = "yyyy-MM-dd";
-        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+    }
+    private void bt_cari_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_historyActionPerformed
+        // TODO add your handling code here:
         
-         try {
-                datl = new Crud_local();
-
-                try {
-                    datl.readRec_cariTransRM(txt_history.getText(),dateFormatter.format(this.jtgl_history.getDate()));
-                } catch (SQLException ex) {
-                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                jtb_history.setModel(datl.modelctrans);
-
-            } catch (Exception ex) {
-                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-     }
+//     if(this.txt_history.getText().isEmpty()){
+     
+               filterhistorydll();
+//     }   
+//     else{   
+//        String datePattern = "yyyy-MM-dd";
+//        SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+//        
+//         try {
+//                datl = new Crud_local();
+//
+//                try {
+//                    datl.readRec_cariTransRM(txt_history.getText(),dateFormatter.format(this.jtgl_history.getDate()));
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//                jtb_history.setModel(datl.modelctrans);
+//
+//            } catch (Exception ex) {
+//                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//     }
     }//GEN-LAST:event_bt_cari_historyActionPerformed
 
     private void jcmb_catatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmb_catatanActionPerformed
@@ -3471,8 +3710,11 @@ private void savePrint(){
     }//GEN-LAST:event_txt_cari_reg_inapKeyPressed
 
     private void filtertxtInap(){
-       Utilitas.filtertb(txt_cari_reg_inap.getText(), tb_reg_inap, 1, 1);
+        filterRegInap();
+//       Utilitas.filtertb(txt_cari_reg_inap.getText(), tb_reg_inap, i, a);
     }
+    
+    
     private void filterRegInap() {
 
         this.lbl_tgl_server.setText(Utilitas.getDateServer());
@@ -3666,7 +3908,7 @@ private void savePrint(){
     private void lbl_cari1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari1MouseClicked
         // TODO add your handling code here:
         filterReg();
-        this.filtertxt();
+        this.filterRegInap();
     }//GEN-LAST:event_lbl_cari1MouseClicked
 
     private void lbl_nm_statusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbl_nm_statusKeyPressed
@@ -3820,7 +4062,7 @@ private void savePrint(){
 
     private void lbl_cari2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari2MouseClicked
         // TODO add your handling code here:
-        caridata();
+        caridata("");
     }//GEN-LAST:event_lbl_cari2MouseClicked
 
     
@@ -3972,7 +4214,7 @@ private void savePrint(){
 
     private void lbl_cari3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari3MouseClicked
         // TODO add your handling code here:
-        caridata();
+        caridata("");
     }//GEN-LAST:event_lbl_cari3MouseClicked
 
     private void tb_jual_bebasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_jual_bebasMouseReleased
@@ -4009,13 +4251,13 @@ private void savePrint(){
         // TODO add your handling code here:
     }//GEN-LAST:event_tb_jual_bebasKeyPressed
 
-    private void txt_cari_reg_inap3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_reg_inap3KeyPressed
+    private void txt_cari_jual_bebasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_jual_bebasKeyPressed
         // TODO add your haulndling code here:
-    }//GEN-LAST:event_txt_cari_reg_inap3KeyPressed
+    }//GEN-LAST:event_txt_cari_jual_bebasKeyPressed
 
     private void lbl_cari4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cari4MouseClicked
         // TODO add your handling code here:
-        caridata();
+        caridata("");
     }//GEN-LAST:event_lbl_cari4MouseClicked
 
     private void item_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_item_hapusActionPerformed
@@ -4205,6 +4447,74 @@ private void savePrint(){
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_hit_jml1KeyPressed
 
+    private void jTabbedPane3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane3StateChanged
+        // TODO add your handling code here:
+//       if(jTabbedPane3.getT)
+//        this.caridata("");
+
+        JTabbedPane pane = (JTabbedPane) evt.getSource();
+        int selectedIndex = pane.getSelectedIndex();
+        
+        if(selectedIndex!=-1){
+          this.caridata("");
+        }
+
+    }//GEN-LAST:event_jTabbedPane3StateChanged
+
+    private void bt_cari_history1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_history1ActionPerformed
+        // TODO add your handling code here:
+        
+                try {
+                    
+                    datl = new Crud_local();
+                    
+                    try {
+                         String datePattern = "yyyy-MM-dd";
+                         SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        
+                        datl.readRec_Allhistory(dateFormatter.format(jtgl_history.getDate()),dateFormatter.format(jtgl_history1.getDate())
+                        ,txt_history.getText(),1);
+                        
+                        datl.CloseCon();
+                      
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    jtb_history.setModel(datl.modelctrans);
+                      setUkuranhistoryAll();
+                } catch (Exception ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_bt_cari_history1ActionPerformed
+
+    private void bt_cari_history2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_history2ActionPerformed
+        // TODO add your handling code here:
+        
+          try {
+                    
+                    datl = new Crud_local();
+                    
+                    try {
+                         String datePattern = "yyyy-MM-dd";
+                         SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        
+                        datl.readRec_Allhistory(dateFormatter.format(jtgl_history2.getDate()),dateFormatter.format(jtgl_history2.getDate())
+                        ,txt_history1.getText(),3);
+                        
+                        datl.CloseCon();
+                       
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    jtb_history.setModel(datl.modelctrans);
+                     setUkuranhistoryAll();
+                } catch (Exception ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_bt_cari_history2ActionPerformed
+
     private void HapusRowHistoryDetail(int i){
       int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus No. Nota :  "+ jtb_transaksi1.getModel().getValueAt(irowhistoryDetail, 2),"Warning ",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -4252,7 +4562,7 @@ private void savePrint(){
                 datl.CloseCon();
                 dm.removeRow(i);
                 
-                caridata();
+                caridata("");
                 this.Hapussemua();
                
             } catch (Exception ex) {
@@ -4282,7 +4592,7 @@ private void savePrint(){
                 datl.CloseCon();
                 dm.removeRow(i);
                 
-                caridata();
+                caridata("");
                 this.Hapussemua();
                
             } catch (Exception ex) {
@@ -4310,7 +4620,7 @@ private void savePrint(){
                 datl.CloseCon();
                 dm.removeRow(i);
                 
-                caridata();
+                caridata("");
                 this.Hapussemua();
                
             } catch (Exception ex) {
@@ -4394,13 +4704,13 @@ private void savePrint(){
        return cek;
     }
     
-    private void filtertxt() {
+    private void filtertxt(int i) {
 
         try {
             //                   Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
 
             dat = new Crud_farmasi();
-            dat.readRec_registrasiRalanFisioFarmasi(this.lbl_tgl_server.getText(),txt_cari_rm.getText(),2);
+            dat.readRec_registrasiRalanFisioFarmasi(this.lbl_tgl_server.getText(),txt_cari_rm.getText(),i);
             
             dat.CloseCon();
             
@@ -4500,6 +4810,8 @@ private void savePrint(){
     private javax.swing.JPopupMenu Popup_history;
     private javax.swing.JToolBar ToolBar;
     private javax.swing.JButton bt_cari_history;
+    private javax.swing.JButton bt_cari_history1;
+    private javax.swing.JButton bt_cari_history2;
     private javax.swing.JButton bt_cari_rm;
     private javax.swing.JButton bt_det_proses;
     private javax.swing.JButton bt_det_proses1;
@@ -4516,6 +4828,7 @@ private void savePrint(){
     private javax.swing.JMenuItem item_edit_detail_trans;
     private javax.swing.JMenuItem item_hapus;
     private javax.swing.JMenuItem item_hapus_detail_trans;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDlg_itung;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -4531,6 +4844,17 @@ private void savePrint(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -4542,6 +4866,7 @@ private void savePrint(){
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -4552,6 +4877,7 @@ private void savePrint(){
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -4568,11 +4894,14 @@ private void savePrint(){
     private javax.swing.JPanel jp_barang;
     private javax.swing.JTable jtb_barang;
     private javax.swing.JTable jtb_history;
+    private javax.swing.JTable jtb_history1;
     private javax.swing.JTable jtb_registrasi;
     private javax.swing.JTable jtb_transaksi;
     private javax.swing.JTable jtb_transaksi1;
     private uz.ncipro.calendar.JDateTimePicker jtgl;
     private uz.ncipro.calendar.JDateTimePicker jtgl_history;
+    private uz.ncipro.calendar.JDateTimePicker jtgl_history1;
+    private uz.ncipro.calendar.JDateTimePicker jtgl_history2;
     private javax.swing.JLabel lbl_barang;
     private javax.swing.JLabel lbl_barang1;
     private javax.swing.JLabel lbl_cara_beli;
@@ -4601,15 +4930,17 @@ private void savePrint(){
     private javax.swing.JTable tb_ralan_ranap;
     private javax.swing.JTable tb_reg_inap;
     private javax.swing.JTextField txt_barang;
+    private javax.swing.JTextField txt_cari_jual_bebas;
     private javax.swing.JTextField txt_cari_karyawan_jual_bebas;
+    private javax.swing.JTextField txt_cari_nm;
     private javax.swing.JTextField txt_cari_petugas;
     private javax.swing.JTextField txt_cari_ralan_ranap;
     private javax.swing.JTextField txt_cari_reg_inap;
-    private javax.swing.JTextField txt_cari_reg_inap3;
     private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextField txt_catatan;
     private javax.swing.JTextField txt_harga_satuan;
     private javax.swing.JTextField txt_history;
+    private javax.swing.JTextField txt_history1;
     private javax.swing.JTextField txt_hit_harga;
     private javax.swing.JTextField txt_hit_harga1;
     private javax.swing.JTextField txt_hit_jml;
