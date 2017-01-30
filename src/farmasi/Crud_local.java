@@ -1888,7 +1888,27 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
 
-   
+     public int readRec_nmbrg(String namabrg,String nota) throws SQLException{
+      int hitkd=0;
+         
+        preparedStatement = connect.prepareStatement("SELECT count(*) as hitkd FROM " + helper_detail.TB_NAME + " WHERE "
+                + helper_detail.KEY_NAMA_BRG + "=? AND "
+                + helper_detail.KEY_NO_NOTA + "=?" );
+
+        
+         preparedStatement.setString(1, namabrg );
+          preparedStatement.setString(2, nota );
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+      
+        while (resultSet.next()) {
+           hitkd=resultSet.getInt("hitkd");
+        }
+         
+         return hitkd;
+     
+     }
+    
      public void readRec_brg() throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_TBNAME);

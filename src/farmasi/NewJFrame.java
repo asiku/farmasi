@@ -53,6 +53,7 @@ import unit_poli.frm_poli;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
+    boolean editmode;
     private int irowhistory = 0;
     private int irowhistoryDetail = 0;
      
@@ -198,6 +199,7 @@ public class NewJFrame extends javax.swing.JFrame {
                lbl_cara_beli.setText("Ralan");
             }
             
+            editmode=false;
              Set_Nonota();
               this.Hapussemua();
               tab_trans.setSelectedIndex(0);
@@ -1815,7 +1817,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap(379, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("History Penjualan Obat", jLayeredPane1);
+        jTabbedPane1.addTab("Cari History Penjualan Obat", jLayeredPane1);
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -2142,7 +2144,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jPanel2.add(jTabbedPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 370, 590));
 
-        jTabbedPane2.addTab("History Penjualan", jPanel2);
+        jTabbedPane2.addTab("Edit History Penjualan", jPanel2);
 
         jLayeredPane3.setLayer(jTabbedPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(lbl_kode, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -2474,6 +2476,11 @@ public class NewJFrame extends javax.swing.JFrame {
        if(tb_jual_bebas.getValueAt(srow, 2)!=null){
           txt_tgl.setText(tb_jual_bebas.getValueAt(srow, 2).toString());
         }
+       
+              editmode=true;
+              
+              
+              
              set_Historydetail();
              
              ck_jual_karyawan_bebas.setSelected(false);
@@ -2512,7 +2519,7 @@ public class NewJFrame extends javax.swing.JFrame {
         if (row == -1) {
             // No row selected
         } else {
-            
+            this.Hapussemua();
 //{nmrm,nama_pasien,carabeli,noraw,jb,nik,nmp
 //                                                   ,statcetak,petugas,catatan,nota,kdpj,nmpj,nosep,tgl});
              int srow =row; //tb_ralan_ranap.convertRowIndexToModel(row);
@@ -2574,7 +2581,7 @@ public class NewJFrame extends javax.swing.JFrame {
           txt_tgl.setText(tb_ralan_ranap.getValueAt(srow, 14).toString());
         }
             
-       
+        editmode=true;
         set_Historydetail();
         ck_jual_karyawan_bebas.setSelected(false);
              ck_jual_bebas.setSelected(false);
@@ -2631,6 +2638,7 @@ public class NewJFrame extends javax.swing.JFrame {
           txt_tgl.setText(tb_karyawan_jual_bebas.getValueAt(srow, 7).toString());
         }
           
+        editmode=true;
         set_Historydetail();
         
         ck_jual_karyawan_bebas.setSelected(false);
@@ -3248,7 +3256,7 @@ private void savePrint(){
 
     private void jtb_registrasiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtb_registrasiMouseReleased
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             set_pasien();
              
             
@@ -3338,10 +3346,16 @@ private void savePrint(){
       this.lbl_grand_tot.setText(this.formatuang(nol));
       }
     }
+    
+    
+    
     private void bt_det_prosesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_det_prosesActionPerformed
         // TODO add your handling code here:
+   if( !editmode){     
       if(!txt_hit_jml.getText().equals("0")){   
-        set_trans();
+      if (!txt_hit_jml.getText().isEmpty())
+      {
+          set_trans();
            
           gr=0.0;
         
@@ -3350,10 +3364,57 @@ private void savePrint(){
 //           this.txt_hit_harga.setText("0");
 //           this.txt_hit_jml.setText("0");
 //           this.lbl_hit_total.setText("0");
+       }
+      else{
+      JOptionPane.showMessageDialog(null, "Jumlah tidak bisa Kosong");
+        }
+      
       }
       else{
         JOptionPane.showMessageDialog(null, "Jumlah tidak bisa 0");
       }
+   }
+   else{
+       if(!txt_hit_jml.getText().equals("0")){   
+      if (!txt_hit_jml.getText().isEmpty())
+      { 
+       try {
+           
+           //cri brg
+           datl = new Crud_local();
+           int cek=datl.readRec_nmbrg(lbl_barang.getText(),txt_nota.getText());
+           datl.CloseCon();
+           
+          if(cek==0)
+          {
+           datl = new Crud_local();
+           datl.Save_detail_trans(this.txt_nota.getText(), Integer.valueOf(txt_hit_jml.getText()), "-",
+                   Double.valueOf(txt_hit_harga.getText()),lbl_barang.getText(),this.hitung());
+           datl.CloseCon();
+           
+           
+           set_Historydetail();
+            gr=0.0;
+            this.sumobat();
+           this.jDlg_itung.setVisible(false);
+          }
+          else{
+           JOptionPane.showMessageDialog(null, "Barang Sudah Pernah di Input!");
+          }
+       } catch (Exception ex) {
+           Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       }
+      else{
+      JOptionPane.showMessageDialog(null, "Jumlah tidak bisa Kosong");
+        }
+      
+      }
+      else{
+        JOptionPane.showMessageDialog(null, "Jumlah tidak bisa 0");
+      }
+   }
     }//GEN-LAST:event_bt_det_prosesActionPerformed
 
     private void jtb_barangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtb_barangKeyTyped
@@ -3505,7 +3566,7 @@ private void savePrint(){
     
     private void tb_reg_inapMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_reg_inapMouseReleased
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             int row = this.tb_reg_inap.getSelectedRow();
 
             if (row == -1) {
@@ -3514,7 +3575,7 @@ private void savePrint(){
                 
                 int srow = tb_reg_inap.convertRowIndexToModel(row);
                
-               
+              
                 setMasukdatInputInap(srow);
                Set_Nonota();
                
@@ -3574,7 +3635,7 @@ private void savePrint(){
 //            this.lbl_kelas.setText(this.tb_reg_inap.getModel().getValueAt(row, 5).toString());
             this.txt_status_pasien.setText(this.tb_reg_inap.getModel().getValueAt(row, 6).toString());
             this.lbl_nm_status.setText(this.tb_reg_inap.getModel().getValueAt(row, 7).toString());
-            
+             editmode=false;
              this.Hapussemua();
              
         } catch (Exception ex) {
@@ -3778,7 +3839,9 @@ private void savePrint(){
     private void tb_ralan_ranapMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_ralan_ranapMouseReleased
        
         if (evt.getClickCount() == 1) {
+
             this.clstxt();
+            
            set_Historyralanranap();
            lbl_grand_tot.setText("");
            gr=0.0;
@@ -4094,7 +4157,10 @@ private void savePrint(){
 
     private void bt_det_proses1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_det_proses1ActionPerformed
       if(!txt_hit_jml1.getText().equals("0")){  
+      if (!txt_hit_jml1.getText().isEmpty())
+      {    
         try {
+            
             // TODO add your handling code here:
             datl=new Crud_local();
             datl.updatehistordetailfarmasi(Integer.valueOf(txt_hit_jml1.getText()), Double.valueOf(txt_hit_harga1.getText()), 
@@ -4104,9 +4170,15 @@ private void savePrint(){
             set_Historydetail();
             gr=0.0;
             this.sumobat_detail();
+            
                     } catch (Exception ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }//end
         }
+      else{
+      JOptionPane.showMessageDialog(null, "Jumlah tidak bisa Kosong");
+        }
+        
       }
       else{
       JOptionPane.showMessageDialog(null, "Jumlah tidak bisa 0");
