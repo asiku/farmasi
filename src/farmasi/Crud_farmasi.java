@@ -709,7 +709,9 @@ public class Crud_farmasi extends DBkoneksi {
        hrgralan = resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
        hrgkary=resultSet.getDouble(helper_brg.KEY_HARGA_BELI);
        }
-            modelbrg.addRow(new Object[]{kodeobat, nmbrg, hrgralan,hrgkary,hrgbeli,kat});
+             DecimalFormat df2 = new DecimalFormat(".##");
+       
+            modelbrg.addRow(new Object[]{kodeobat, nmbrg, df2.format(hrgralan),df2.format(hrgkary),df2.format(hrgbeli),kat});
         }
     }
 

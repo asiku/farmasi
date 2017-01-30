@@ -1108,10 +1108,7 @@ caridata(txt_cari_ralan_ranap.getText());
         jLabel27 = new javax.swing.JLabel();
         jtgl_history1 = new uz.ncipro.calendar.JDateTimePicker();
         jLabel29 = new javax.swing.JLabel();
-        bt_cari_history1 = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        jtb_history1 = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
         txt_history = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
@@ -1121,6 +1118,7 @@ caridata(txt_cari_ralan_ranap.getText());
         jtgl_history2 = new uz.ncipro.calendar.JDateTimePicker();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel32 = new javax.swing.JLabel();
+        bt_cari_history1 = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jLayeredPane4 = new javax.swing.JLayeredPane();
@@ -1614,7 +1612,7 @@ caridata(txt_cari_ralan_ranap.getText());
 
         lbl_petugas_input.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         lbl_petugas_input.setText("Petugas Input:");
-        jp_barang.add(lbl_petugas_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 200, 19));
+        jp_barang.add(lbl_petugas_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 250, 19));
 
         jLabel19.setText("tgl");
         jp_barang.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, 19));
@@ -1877,14 +1875,14 @@ caridata(txt_cari_ralan_ranap.getText());
         ));
         jScrollPane5.setViewportView(jtb_history);
 
-        jLayeredPane2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 890, 220));
+        jLayeredPane2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 890, 410));
 
         jtgl_history.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jtgl_history.setDisplayFormat("yyyy/MM/dd");
         jLayeredPane2.add(jtgl_history, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 117, 30));
 
         jLabel27.setText("Rp.");
-        jLayeredPane2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, 300, -1));
+        jLayeredPane2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 300, -1));
 
         jtgl_history1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jtgl_history1.setDisplayFormat("yyyy/MM/dd");
@@ -1893,39 +1891,18 @@ caridata(txt_cari_ralan_ranap.getText());
         jLabel29.setText("S/d");
         jLayeredPane2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
-        bt_cari_history1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
-        bt_cari_history1.setText("Cari Periode");
-        bt_cari_history1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_cari_history1ActionPerformed(evt);
-            }
-        });
-        jLayeredPane2.add(bt_cari_history1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 290, 30));
-
         jLabel31.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel31.setText("Kategori ");
-        jLayeredPane2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 90, 20));
-
-        jtb_history1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jtb_history1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane12.setViewportView(jtb_history1);
-
-        jLayeredPane2.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 870, 180));
+        jLayeredPane2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 60, 20));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel10.add(txt_history, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 32, 400, 30));
 
         jLabel30.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel30.setText("Cari: No. RM/No. Nota / Nama Jual Bebas/Nama Karyawan/Nama Barang");
+        jPanel10.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 2, -1, 20));
+        jPanel10.add(txt_history1, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 82, 260, 30));
 
         bt_cari_history2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
         bt_cari_history2.setText("Cari");
@@ -1934,6 +1911,7 @@ caridata(txt_cari_ralan_ranap.getText());
                 bt_cari_history2ActionPerformed(evt);
             }
         });
+        jPanel10.add(bt_cari_history2, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 82, 120, 30));
 
         bt_cari_history.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
         bt_cari_history.setText("Cari");
@@ -1942,54 +1920,29 @@ caridata(txt_cari_ralan_ranap.getText());
                 bt_cari_historyActionPerformed(evt);
             }
         });
+        jPanel10.add(bt_cari_history, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 32, 120, 30));
 
         jtgl_history2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jtgl_history2.setDisplayFormat("yyyy/MM/dd");
+        jPanel10.add(jtgl_history2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 82, 117, 30));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel30)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(txt_history, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_cari_history, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jtgl_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(txt_history1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(bt_cari_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_history, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_cari_history, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtgl_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_history1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_cari_history2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jLayeredPane2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 240, -1));
 
-        jLayeredPane2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 500, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "OBR", "ALK", "RESEP", "ALL" }));
-        jLayeredPane2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 190, -1));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "OBR", "ALK", "RESEP" }));
+        jLayeredPane2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 120, -1));
 
         jLabel32.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel32.setText("Cari Berdasarkan Periode :");
         jLayeredPane2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 290, 20));
+
+        bt_cari_history1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/carik_ico.png"))); // NOI18N
+        bt_cari_history1.setText("Cari Periode");
+        bt_cari_history1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_history1ActionPerformed(evt);
+            }
+        });
+        jLayeredPane2.add(bt_cari_history1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 170, 60));
 
         jLayeredPane1.setLayer(jLayeredPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -3422,9 +3375,9 @@ private void savePrint(){
         TableColumnModel tri = this.jtb_history.getColumnModel();
 
         tri.getColumn(0).setPreferredWidth(50);
-        tri.getColumn(1).setPreferredWidth(60);
-        tri.getColumn(2).setPreferredWidth(60);
-        tri.getColumn(3).setPreferredWidth(220);
+        tri.getColumn(1).setPreferredWidth(150);
+        tri.getColumn(2).setPreferredWidth(280);
+        tri.getColumn(3).setPreferredWidth(50);
         tri.getColumn(4).setPreferredWidth(100);
         tri.getColumn(5).setPreferredWidth(100);
         tri.getColumn(6).setPreferredWidth(150);
@@ -3498,7 +3451,7 @@ private void savePrint(){
         if (evt.getClickCount() == 1) {
             set_pasien();
              
-            
+            this.txt_catatan.setText("");
             txt_nama_pegawai.setText("");
             bt_simpan.setEnabled(true);
         }
@@ -3824,6 +3777,7 @@ private void savePrint(){
                 tab_trans.setSelectedIndex(0);
                 //txt_tarif.requestFocus();
                 txt_nama_pegawai.setText("");
+                this.txt_catatan.setText("");
           bt_simpan.setEnabled(true);
             }
         }
@@ -4877,7 +4831,6 @@ private void savePrint(){
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -4894,7 +4847,6 @@ private void savePrint(){
     private javax.swing.JPanel jp_barang;
     private javax.swing.JTable jtb_barang;
     private javax.swing.JTable jtb_history;
-    private javax.swing.JTable jtb_history1;
     private javax.swing.JTable jtb_registrasi;
     private javax.swing.JTable jtb_transaksi;
     private javax.swing.JTable jtb_transaksi1;

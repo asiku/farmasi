@@ -57,7 +57,7 @@ public class Crud_local extends DBKoneksi_local {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
-     String[] caritrans_title = new String[]{"No.","No. Nota","No. RM","Nama Pasien","Karyawan","Jual Bebas","Nama Barang","Jml", "Harga Satuan", "Total","Kategori","Tgl","Petugas"};
+     String[] caritrans_title = new String[]{"No.","No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Kategori","No. RM","Nama Pasien","Karyawan","Jual Bebas","Tgl","Petugas"};
     
      String[] tarif_title= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
          "% Sarana","Nama Poli","Status","Keterangan","id poli","id status","Status Pengesah","Status Verif","Kelas","Tarif Tindakan BPJS","% RS. BPJS","% Dr. BPJS",
@@ -1735,8 +1735,7 @@ public class Crud_local extends DBKoneksi_local {
             Double hargasat = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
             Double totalc = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
 
-            
-            modelctrans.addRow(new Object[]{no, nonota, rm, nmp,kar,jb,brg,jml,hargasat,totalc,kat,tglc,petugas});
+            modelctrans.addRow(new Object[]{no, nonota,brg,jml,hargasat,totalc,kat, rm, nmp,kar,jb,tglc,petugas});
             
 
         }
@@ -1973,6 +1972,31 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
 
+    public void readRec_DetailFarmasi(String namabrg,String nota) throws SQLException{
+      
+         
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_detail.TB_NAME + " WHERE "
+                + helper_detail.KEY_NAMA_BRG + "=? AND "
+                + helper_detail.KEY_NO_NOTA + "=?" );
+
+        
+         preparedStatement.setString(1, namabrg );
+          preparedStatement.setString(2, nota );
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+      
+        while (resultSet.next()) {
+           
+            
+            
+        }
+         
+       
+     
+     }
+
+    
+    
      public int readRec_nmbrg(String namabrg,String nota) throws SQLException{
       int hitkd=0;
          
