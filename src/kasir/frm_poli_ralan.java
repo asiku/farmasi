@@ -1067,7 +1067,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(bt_save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 150, 40));
 
         jLabel7.setText("Plafon BPJS");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, 130, 20));
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 130, 20));
 
         lbl_stat_pasien.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_stat_pasien, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 170, 19));
@@ -1092,14 +1092,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jLabel21.setText("Tgl Registrasi");
         jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 108, -1));
-        jPanel4.add(txt_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 260, 30));
+        jPanel4.add(txt_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 260, 30));
 
         jLabel23.setText("Status Pasien");
-        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 130, -1));
-        jPanel4.add(txt_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, 260, 30));
+        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 130, -1));
+        jPanel4.add(txt_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 260, 30));
 
         jLabel27.setText("Deposit");
-        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 130, -1));
+        jPanel4.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 130, -1));
 
         bt_save_deposit_plafon_bpjs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/kasir_kecil_ico.png"))); // NOI18N
         bt_save_deposit_plafon_bpjs.setText("Save Plafon BPJS dan Deposit");
@@ -1108,7 +1108,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_save_deposit_plafon_bpjsActionPerformed(evt);
             }
         });
-        jPanel4.add(bt_save_deposit_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 70, 320, 40));
+        jPanel4.add(bt_save_deposit_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, 280, 40));
 
         jTabbedPane3.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1365,10 +1365,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

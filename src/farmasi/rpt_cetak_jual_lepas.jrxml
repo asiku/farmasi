@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="510" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5972857-afd0-4072-b040-360bbe7459e9">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="60"/>
+	<property name="ireport.x" value="165"/>
+	<property name="ireport.y" value="133"/>
 	<parameter name="TOTSEMUA" class="java.lang.Double">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -108,9 +108,6 @@
 	</pageHeader>
 	<columnHeader>
 		<band height="86" splitType="Stretch">
-			<rectangle>
-				<reportElement mode="Transparent" x="0" y="63" width="555" height="20" uuid="34c20238-e08f-4378-9cfe-13e0d01b6c78"/>
-			</rectangle>
 			<textField>
 				<reportElement x="95" y="4" width="145" height="20" uuid="5620ceac-3be1-49b5-b244-932368a8463c"/>
 				<textFieldExpression><![CDATA[$F{nama_jual_bebas}]]></textFieldExpression>
@@ -120,7 +117,7 @@
 				<textFieldExpression><![CDATA[$F{cara_beli}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="366" y="3" width="100" height="20" uuid="3d7ac387-83a9-48e7-bb17-8edceef813a7"/>
+				<reportElement x="366" y="3" width="176" height="20" uuid="3d7ac387-83a9-48e7-bb17-8edceef813a7"/>
 				<textFieldExpression><![CDATA[$F{no_nota}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -172,7 +169,7 @@
 				<text><![CDATA[Harga Satuan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="443" y="67" width="117" height="19" uuid="7017c6cf-061b-40e7-9872-9e460e633551"/>
+				<reportElement x="443" y="67" width="70" height="19" uuid="7017c6cf-061b-40e7-9872-9e460e633551"/>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
@@ -183,7 +180,7 @@
 				<reportElement x="348" y="44" width="19" height="23" uuid="e3ff4d6a-6253-4293-ac59-1aeb587faea6"/>
 				<text><![CDATA[:]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy HH:mm:ss">
+			<textField pattern="yyyy/MM/dd">
 				<reportElement x="367" y="44" width="99" height="20" uuid="40298222-cf88-4327-b101-97e29519b82c"/>
 				<textFieldExpression><![CDATA[$F{tgl}]]></textFieldExpression>
 			</textField>
@@ -191,6 +188,12 @@
 				<reportElement x="8" y="67" width="23" height="19" uuid="59230ce9-788d-4e22-8898-901b894198e5"/>
 				<text><![CDATA[No]]></text>
 			</staticText>
+			<line>
+				<reportElement x="1" y="64" width="555" height="1" uuid="d874502c-5e72-4999-9b59-575e80a2366c"/>
+			</line>
+			<line>
+				<reportElement x="3" y="84" width="553" height="1" uuid="cefec64e-82db-43d5-af01-f766a9e9a030"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -215,7 +218,7 @@
 				<reportElement x="84" y="-23" width="1" height="47" uuid="e0d39b8e-aef8-46ed-a409-5e0aded7c5f7"/>
 			</line>
 			<line>
-				<reportElement x="0" y="-21" width="1" height="45" uuid="6eedf11b-dd0f-4df4-bfc3-661824b1db29"/>
+				<reportElement x="1" y="-22" width="1" height="45" uuid="6eedf11b-dd0f-4df4-bfc3-661824b1db29"/>
 			</line>
 			<line>
 				<reportElement x="332" y="-22" width="1" height="45" uuid="80e88a69-c3fb-46fa-b638-7e0ed4056daf"/>
@@ -230,7 +233,7 @@
 				<reportElement x="1" y="22" width="554" height="2" uuid="0f77fe29-29ac-4f0e-a8f8-4ab18607601b"/>
 			</line>
 			<textField pattern="#,##0">
-				<reportElement x="443" y="2" width="100" height="20" uuid="9075d1c6-efca-4f21-9118-69ad102bfef8"/>
+				<reportElement x="443" y="2" width="109" height="20" uuid="9075d1c6-efca-4f21-9118-69ad102bfef8"/>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -254,6 +257,20 @@
 				<reportElement x="366" y="3" width="65" height="20" uuid="7c69bda0-374f-4723-93ce-e68419f79373"/>
 				<text><![CDATA[Tagihan Rp.]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="7" width="59" height="20" uuid="63a2c3d5-e5c2-4e19-ab6c-b236d4674f58"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Catatan:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="22" width="263" height="20" uuid="0addcc3b-6707-40aa-acc0-b25fd3c93542"/>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{catatan}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

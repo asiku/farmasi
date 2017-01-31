@@ -361,6 +361,10 @@ public class NewJFrame extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
       //  this.setUndecorated(true);
       
+      ck_kasbon.setVisible(false);
+
+//      cmb_kategori.setVisible(true);
+      
       jPanel10.setVisible(false);
    
       
@@ -945,7 +949,7 @@ caridata(txt_cari_ralan_ranap.getText());
     }
     
     private void setlebartbldetail() {
-        TableColumnModel colm = this.jtb_transaksi.getColumnModel();
+        TableColumnModel colm = this.jtb_transaksi1.getColumnModel();
         colm.getColumn(0).setPreferredWidth(1);
         colm.getColumn(1).setPreferredWidth(1);
         colm.getColumn(2).setPreferredWidth(150);
@@ -1105,10 +1109,8 @@ caridata(txt_cari_ralan_ranap.getText());
         jScrollPane5 = new javax.swing.JScrollPane();
         jtb_history = new javax.swing.JTable();
         jtgl_history = new uz.ncipro.calendar.JDateTimePicker();
-        jLabel27 = new javax.swing.JLabel();
         jtgl_history1 = new uz.ncipro.calendar.JDateTimePicker();
         jLabel29 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         txt_history = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
@@ -1116,9 +1118,10 @@ caridata(txt_cari_ralan_ranap.getText());
         bt_cari_history2 = new javax.swing.JButton();
         bt_cari_history = new javax.swing.JButton();
         jtgl_history2 = new uz.ncipro.calendar.JDateTimePicker();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmb_kategori = new javax.swing.JComboBox<>();
         jLabel32 = new javax.swing.JLabel();
         bt_cari_history1 = new javax.swing.JButton();
+        bt_cetak_periode = new javax.swing.JButton();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jLayeredPane4 = new javax.swing.JLayeredPane();
@@ -1875,14 +1878,11 @@ caridata(txt_cari_ralan_ranap.getText());
         ));
         jScrollPane5.setViewportView(jtb_history);
 
-        jLayeredPane2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 890, 410));
+        jLayeredPane2.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 890, 460));
 
         jtgl_history.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jtgl_history.setDisplayFormat("yyyy/MM/dd");
         jLayeredPane2.add(jtgl_history, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 117, 30));
-
-        jLabel27.setText("Rp.");
-        jLayeredPane2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 300, -1));
 
         jtgl_history1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jtgl_history1.setDisplayFormat("yyyy/MM/dd");
@@ -1890,10 +1890,6 @@ caridata(txt_cari_ralan_ranap.getText());
 
         jLabel29.setText("S/d");
         jLayeredPane2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
-
-        jLabel31.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel31.setText("Kategori ");
-        jLayeredPane2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 60, 20));
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1926,10 +1922,10 @@ caridata(txt_cari_ralan_ranap.getText());
         jtgl_history2.setDisplayFormat("yyyy/MM/dd");
         jPanel10.add(jtgl_history2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 82, 117, 30));
 
-        jLayeredPane2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 240, -1));
+        jLayeredPane2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 240, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "OBR", "ALK", "RESEP" }));
-        jLayeredPane2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 120, -1));
+        cmb_kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL", "OBR", "ALK", "resep" }));
+        jLayeredPane2.add(cmb_kategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 120, -1));
 
         jLabel32.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jLabel32.setText("Cari Berdasarkan Periode :");
@@ -1942,7 +1938,16 @@ caridata(txt_cari_ralan_ranap.getText());
                 bt_cari_history1ActionPerformed(evt);
             }
         });
-        jLayeredPane2.add(bt_cari_history1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 170, 60));
+        jLayeredPane2.add(bt_cari_history1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 170, 40));
+
+        bt_cetak_periode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/printer_ico.png"))); // NOI18N
+        bt_cetak_periode.setText("Cetak Periode");
+        bt_cetak_periode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cetak_periodeActionPerformed(evt);
+            }
+        });
+        jLayeredPane2.add(bt_cetak_periode, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 200, 40));
 
         jLayeredPane1.setLayer(jLayeredPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -1963,7 +1968,7 @@ caridata(txt_cari_ralan_ranap.getText());
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cari History Penjualan Obat", jLayeredPane1);
+        jTabbedPane1.addTab("Cari Periode History Penjualan Obat", jLayeredPane1);
 
         jLayeredPane3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -2645,8 +2650,10 @@ caridata(txt_cari_ralan_ranap.getText());
             datl.readRec_transfarmasidetail(txt_nota.getText());
             datl.CloseCon();
             this.jtb_transaksi1.setModel(datl.modeltrans);
+            
             tab_trans.setSelectedIndex(1);
             setlebartbldetail();
+//            setukuranjtb_transaksi1();
             
         } catch (SQLException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -4365,7 +4372,9 @@ private void savePrint(){
             datl.CloseCon();
             set_Historydetail();
             gr=0.0;
-            this.sumobat_detail();
+            this.sumobat();
+            
+            this.dlg_edit_trans.setVisible(false);
             
                     } catch (Exception ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -4426,8 +4435,15 @@ private void savePrint(){
                          String datePattern = "yyyy-MM-dd";
                          SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
         
+                       if(cmb_kategori.getSelectedItem().equals("ALL")) { 
                         datl.readRec_Allhistory(dateFormatter.format(jtgl_history.getDate()),dateFormatter.format(jtgl_history1.getDate())
                         ,txt_history.getText(),1);
+                       }
+                       else{
+                         datl.readRec_Allhistory(dateFormatter.format(jtgl_history.getDate()),dateFormatter.format(jtgl_history1.getDate())
+                        ,cmb_kategori.getSelectedItem().toString(),4);
+                       
+                       }
                         
                         datl.CloseCon();
                       
@@ -4468,6 +4484,45 @@ private void savePrint(){
                     Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
     }//GEN-LAST:event_bt_cari_history2ActionPerformed
+
+    
+    private void setukuranjtb_transaksi1(){
+    this.jtb_transaksi1.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        jtb_transaksi1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        TableColumnModel tr = jtb_transaksi1.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(100);
+        tr.getColumn(1).setPreferredWidth(325);
+        tr.getColumn(2).setPreferredWidth(150);
+        tr.getColumn(3).setPreferredWidth(150);
+        tr.getColumn(4).setPreferredWidth(0);
+    }
+    
+    private void bt_cetak_periodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cetak_periodeActionPerformed
+          this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            // TODO add your handling code here:
+          
+            String datePattern = "yyyy-MM-dd";
+            SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+        
+            datl=new Crud_local();
+            if(cmb_kategori.getSelectedItem().equals("ALL")) { 
+            datl.cetakpendapatanfarmasi(dateFormatter.format(jtgl_history.getDate()),
+                    dateFormatter.format(jtgl_history1.getDate()),1,cmb_kategori.getSelectedItem().toString());
+            }
+            else{
+            datl.cetakpendapatanfarmasi(dateFormatter.format(jtgl_history.getDate()),
+                    dateFormatter.format(jtgl_history1.getDate()),2,cmb_kategori.getSelectedItem().toString());
+            }
+            datl.CloseCon();
+            
+            this.setCursor(Cursor.getDefaultCursor()); 
+        } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bt_cetak_periodeActionPerformed
 
     private void HapusRowHistoryDetail(int i){
       int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus No. Nota :  "+ jtb_transaksi1.getModel().getValueAt(irowhistoryDetail, 2),"Warning ",
@@ -4740,7 +4795,9 @@ private void savePrint(){
                 }
 
                 jtb_history.setModel(datl.modelctrans);
-
+                
+                this.setUkuranhistoryAll();
+                
             } catch (Exception ex) {
                 Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -4767,6 +4824,7 @@ private void savePrint(){
     private javax.swing.JButton bt_cari_history1;
     private javax.swing.JButton bt_cari_history2;
     private javax.swing.JButton bt_cari_rm;
+    private javax.swing.JButton bt_cetak_periode;
     private javax.swing.JButton bt_det_proses;
     private javax.swing.JButton bt_det_proses1;
     private javax.swing.JButton bt_hapus;
@@ -4777,12 +4835,12 @@ private void savePrint(){
     private javax.swing.JCheckBox ck_jual_karyawan;
     private javax.swing.JCheckBox ck_jual_karyawan_bebas;
     private javax.swing.JCheckBox ck_kasbon;
+    private javax.swing.JComboBox<String> cmb_kategori;
     private javax.swing.JDialog dlg_dpjp;
     private javax.swing.JDialog dlg_edit_trans;
     private javax.swing.JMenuItem item_edit_detail_trans;
     private javax.swing.JMenuItem item_hapus;
     private javax.swing.JMenuItem item_hapus_detail_trans;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDlg_itung;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -4803,11 +4861,9 @@ private void savePrint(){
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

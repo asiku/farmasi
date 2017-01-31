@@ -1711,7 +1711,19 @@ public class Crud_local extends DBKoneksi_local {
          preparedStatement.setString(8, "%" + nm + "%");
          
       }
-     
+     else if(pil==4){
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_NAME 
+                                                     + " WHERE " +helper_v_trans.KEY_TGL + " BETWEEN ? AND ? AND "
+                                                     + helper_v_trans.KEY_KATEGORI + "=?"
+                                                        );  
+                                                               
+//         preparedStatement.setString(1, tgl1);
+         preparedStatement.setString(1, tgl1);
+         preparedStatement.setString(2, tgl2);
+         preparedStatement.setString(3, nm);
+         
+         
+      }
      
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -2791,6 +2803,35 @@ public void CetakTarif() throws JRException {
        
     }    
       
+
+public void cetakpendapatanfarmasi(String tgl1,String tgl2,int i,String kategori) throws JRException{
+     InputStream is = null;
+        
+     Map map = new HashMap();
+    if(i==1) 
+    {
+       is = getClass().getResourceAsStream("rpt_farmasi_pend.jrxml");
+           //set parameters
+      
+        map.put("tgl1", tgl1);
+        map.put("tgl2", tgl2);
+    }
+    else{
+       is = getClass().getResourceAsStream("rpt_farmasi_pend_kategori.jrxml");
+           //set parameters
+      
+        map.put("tgl1", tgl1);
+        map.put("tgl2", tgl2);
+        map.put("kategori", kategori);
+        
+    }
+        
+         JasperReport jr = JasperCompileManager.compileReport(is);
+
+        JasperPrint jp = JasperFillManager.fillReport(jr, map, connect);
+         JasperViewer.viewReport(jp, false);
+}
+
 
 public void updatehistordetailfarmasi(int jml ,double hargasatuan,double total,String nmbrg,String nota){
        try { 
