@@ -498,7 +498,8 @@ public class Crud_farmasi extends DBkoneksi {
 //            i++;
 //            String no = String.valueOf(i);
              if((resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[0])||
-                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[1])
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[1])||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[2])
                              ))
                  
               {

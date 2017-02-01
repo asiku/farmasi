@@ -1485,6 +1485,14 @@ public class frm_poli extends javax.swing.JFrame {
             datl.readRec_cariUnitDetailInapanak(txt, i);
         
             tb_unit_detail_history.setModel(datl.modelunitdetail);
+            
+//            if(tb_unit_detail_history.getModel().getRowCount()==0){
+//                  txt_nip_dpjp.setText("");
+//                  txt_dpjp.setText("");
+//                  txt_nip_ppjp.setText("");
+//                  txt_ppjp.setText("");
+//                }
+            
             setukurantbulunitHistory();
         } catch (Exception ex) {
             Logger.getLogger(frm_poli.class.getName()).log(Level.SEVERE, null, ex);
@@ -1512,7 +1520,7 @@ public class frm_poli extends javax.swing.JFrame {
             datl=new Crud_local();
             datl.readRec_cariUnitMaster(txt_no_rawat.getText(), 2);
       
-       
+       ///FIX IT
              if(!datl.modelunitanakmaster.getValueAt(0, 8).toString().isEmpty()){  
                 r_pulang.setSelected(Boolean.parseBoolean(datl.modelunitanakmaster.getValueAt(0, 8).toString()));
              }

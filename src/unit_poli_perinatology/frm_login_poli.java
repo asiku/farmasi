@@ -49,7 +49,7 @@ public class frm_login_poli extends javax.swing.JFrame {
         bt_cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Poli Perinatology");
+        setTitle("Perinatology");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -227,6 +227,10 @@ public class frm_login_poli extends javax.swing.JFrame {
                 datl.CloseCon();
                 
               if(Crud_local.namapoli.equals("PERINATOLOGI")){  
+                  
+                Crud_local.usm="";
+                Crud_local.psm="";
+                 
                   
                 frm_poli pol=new frm_poli(namapetugaslogin,Crud_local.namapoli);
                 

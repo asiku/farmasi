@@ -230,7 +230,7 @@ public class frm_poli extends javax.swing.JFrame {
 
                 dat = new Crud_farmasi();
 
-                String[] b = {"PERINATOLOGI", "PERINATOLOGI BPJS"};
+                String[] b = {"PERINATOLOGI", "PERINATOLOGI BPJS","NICU"};
 
                 String t = lbl_tgl_server.getText().toString().substring(5, lbl_tgl_server.getText().length() - 3);
 

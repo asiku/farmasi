@@ -15,5 +15,5 @@ public class helper_kasir {
     public static String KEY_NO_RAWAT = "no_rawat";
     public static String KEY_USERNAME = "username";
     public static String KEY_TGL = "tgl";
-    public static String KEY_SET_STATUS = "set_status";
+    public static String KEY_SET_STATUS = "set_status_bayar";
 }

@@ -335,17 +335,17 @@ public class NewJFrame extends javax.swing.JFrame {
         //} catch (SQLException ex) {
           
         if(lbl_cara_beli.getText().equals("Jual Bebas")){
-           this.txt_nota.setText("JB"+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+           this.txt_nota.setText("JB/"+Utilitas.tglsekarang()+"/" +this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
         }
         
         else if(lbl_cara_beli.getText().equals("Karyawan")){
-                this.txt_nota.setText("KRY"+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+                this.txt_nota.setText("KRY/"+Utilitas.tglsekarang()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
          }
         else if(lbl_cara_beli.getText().equals("Ranap")){
-            this.txt_nota.setText("RNP/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+            this.txt_nota.setText(txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
         }
         else if(lbl_cara_beli.getText().equals("Ralan")){
-            this.txt_nota.setText("RLN/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+            this.txt_nota.setText(txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
         }
         
         
@@ -437,17 +437,18 @@ public class NewJFrame extends javax.swing.JFrame {
        txt_cari_nm.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-             filtertxt(2);
+             filtertxtnama(2);
+             
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-             filtertxt(2);
+             filtertxtnama(2);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-             filtertxt(2);
+             filtertxtnama(2);
             }
         });
        
@@ -1160,6 +1161,7 @@ caridata(txt_cari_ralan_ranap.getText());
         txt_cari_jual_bebas = new javax.swing.JTextField();
         lbl_cari4 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
         lbl_kode = new javax.swing.JLabel();
         ToolBar = new javax.swing.JToolBar();
         jPanel6 = new javax.swing.JPanel();
@@ -2297,6 +2299,19 @@ caridata(txt_cari_ralan_ranap.getText());
 
         jTabbedPane2.addTab("Edit History Penjualan", jPanel2);
 
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 385, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 648, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Retur", jPanel11);
+
         jLayeredPane3.setLayer(jTabbedPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(lbl_kode, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -3244,7 +3259,7 @@ private void savePrint(){
        
         
         if(lbl_cara_beli.getText().equals("Ralan")||lbl_cara_beli.getText().equals("Ranap")){
-              if(!(txt_no_rawat.getText().isEmpty()||this.txt_nota.getText().isEmpty()||this.txt_no_rm.getText().isEmpty()||this.txt_nama_pasien.getText().isEmpty())){       
+              if(!(txt_no_rawat.getText().isEmpty()||this.txt_nota.getText().trim().isEmpty()||this.txt_no_rm.getText().isEmpty()||this.txt_nama_pasien.getText().isEmpty())){       
                
                   savePrint();
         
@@ -3256,7 +3271,7 @@ private void savePrint(){
                } //end
        }
        else  if(lbl_cara_beli.getText().equals("Jual Bebas")){
-           if(!txt_nama_jual_bebas.getText().isEmpty()){
+           if(!(txt_nama_jual_bebas.getText().isEmpty()||this.txt_nota.getText().trim().isEmpty())){
               savePrint();
               }//end
     
@@ -3266,7 +3281,7 @@ private void savePrint(){
                } //end
        }
        else  if(lbl_cara_beli.getText().equals("Karyawan")){
-           if(!txt_nama_pegawai.getText().isEmpty()){
+           if(!(txt_nama_pegawai.getText().isEmpty()||this.txt_nota.getText().trim().isEmpty())){
               savePrint();
               }//end
     
@@ -3586,6 +3601,7 @@ private void savePrint(){
            
           if(cek==0)
           {
+              
            datl = new Crud_local();
            datl.Save_detail_trans(this.txt_nota.getText(), Integer.valueOf(txt_hit_jml.getText()), "-",
                    Double.valueOf(txt_hit_harga.getText()),lbl_barang.getText(),this.hitung());
@@ -3936,10 +3952,13 @@ private void savePrint(){
         // TODO add your handling code here:
          if(ck_jual_karyawan_bebas.isSelected()){
                this.Hapussemua();
+               
+               tab_trans.setSelectedIndex(0);
+               
             lbl_cara_beli.setText("Karyawan");
             Utilitas.HapusText(jPanel3);
             filterPegawai(); 
-             
+             editmode=false;
              Set_Nonota();
              bt_simpan.setEnabled(true);
             ck_jual_karyawan_bebas.setSelected(true);
@@ -3963,9 +3982,9 @@ private void savePrint(){
               this.Hapussemua();
             Utilitas.HapusText(jPanel3);
             bt_simpan.setEnabled(true);
-            
+             tab_trans.setSelectedIndex(0);
             lbl_cara_beli.setText("Jual Bebas");
-            
+            editmode=false;
             Set_Nonota();
             ck_jual_bebas.setSelected(true);
             ck_jual_karyawan_bebas.setSelected(false);
@@ -4140,6 +4159,7 @@ private void savePrint(){
           if (evt.getClickCount() == 1) {
              this.clstxt();
            this.set_HistoryKaryawanjualBebas();
+           ck_jual_karyawan_bebas.setSelected(true);
            lbl_grand_tot.setText("");
            gr=0.0;
           this.sumobat();
@@ -4259,7 +4279,9 @@ private void savePrint(){
             } else {
                 this.Popup_history.show(tb_karyawan_jual_bebas, evt.getX(), evt.getY());
                 irowhistory = row;
-
+                
+               
+                
             }
 
         }
@@ -4713,6 +4735,29 @@ private void savePrint(){
        return cek;
     }
     
+    
+    private void filtertxtnama(int i) {
+
+        try {
+            //                   Utilitas.filtertb(txt_cari_reg.getText(), tb_reg, 2,2);
+
+            dat = new Crud_farmasi();
+            dat.readRec_registrasiRalanFisioFarmasi(this.lbl_tgl_server.getText(),txt_cari_nm.getText(),i);
+            
+            dat.CloseCon();
+            
+            this.jtb_registrasi.setModel(dat.modelregralanfarmasi);
+
+            setukurantbReg();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                    
+                    
+    }
+
+    
     private void filtertxt(int i) {
 
         try {
@@ -4877,6 +4922,7 @@ private void savePrint(){
     private javax.swing.JLayeredPane jLayeredPane4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

@@ -1795,7 +1795,7 @@ public class Crud_local extends DBKoneksi_local {
 
            
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+             JOptionPane.showMessageDialog(null, "Gagal Tersimpan "+ex);
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -2087,7 +2087,7 @@ public class Crud_local extends DBKoneksi_local {
 
             JOptionPane.showMessageDialog(null, "Data Tersimpan");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan "+ ex);
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
         }
 
