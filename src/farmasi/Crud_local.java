@@ -2685,7 +2685,7 @@ public class Crud_local extends DBKoneksi_local {
     }
    
    
-  public void CetakTagihanFisio(String nonota,String username,String tampil,int i) throws JRException {
+  public void CetakTagihanFisio(String nonota,String username,String tampil,int i,String tgl) throws JRException {
 
         InputStream is = null;
         
@@ -2700,7 +2700,7 @@ public class Crud_local extends DBKoneksi_local {
         Map map = new HashMap();
         map.put("noraw", nonota);
         map.put("username", username);
-        
+        map.put("tgl", tgl);
      
 
        JasperReport jr = JasperCompileManager.compileReport(is);

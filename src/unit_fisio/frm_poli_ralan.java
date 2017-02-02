@@ -499,6 +499,7 @@ filterTindakanFisio();
         jPanel7 = new javax.swing.JPanel();
         bt_save = new javax.swing.JButton();
         bt_save1 = new javax.swing.JButton();
+        dt_tgl_reg1 = new uz.ncipro.calendar.JDateTimePicker();
 
         dlg_dpjp.setModal(true);
         dlg_dpjp.setResizable(false);
@@ -1016,22 +1017,28 @@ filterTindakanFisio();
             }
         });
 
+        dt_tgl_reg1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        dt_tgl_reg1.setDisplayFormat("yyyy/MM/dd");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bt_save, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bt_save1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bt_save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_save1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dt_tgl_reg1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(bt_save)
-                .addComponent(bt_save1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(bt_save1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dt_tgl_reg1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1236,10 +1243,13 @@ filterTindakanFisio();
         if (rowCount != 0) {
 
             try {
-                datl = new Crud_local();
+              
            
                 if(tb_unit_detail_history.getModel().getRowCount()==0){
+                   
+                   datl = new Crud_local();
                    datl.Save_tindakanralan(txt_no_rawat.getText());
+                   datl.CloseCon();
 //                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "");
                   
                 }
@@ -1258,10 +1268,12 @@ filterTindakanFisio();
             //cek apa sudah di billing
               
             try {
-                datl = new Crud_local();
+               
                 for (int i = rowCount - 1; i >= 0; i--) {
+                datl = new Crud_local();    
                 datl.Save_inapanakDetail(dm.getValueAt(i, 0).toString(), dm.getValueAt(i, 1).toString()
                         , this.lbl_nip_petugas_pilih.getText(), lbl_petugas.getText());
+                 datl.CloseCon();
                  }
                 
                 hapusmodelunitdetail();
@@ -2049,16 +2061,25 @@ if(!this.txt_no_rawat.getText().isEmpty()){
     
     private void bt_save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save1ActionPerformed
         // TODO add your handling code here:
+        
+        String datePattern = "yyyy-MM-dd";
+                SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+                
           try {
                 datl = new Crud_local();
            
                 if(!txt_no_rawat.getText().isEmpty()){
                   
                   if(lbl_status.getText().equals("2"))  {
-                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "",2);
+                      
+                       
+               
+              
+                      
+                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "",2,dateFormatter.format(dt_tgl_reg1.getDate()));
                   }
                   else{
-                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "",1);
+                   datl.CetakTagihanFisio(txt_no_rawat.getText(),this.lbl_petugas.getText(), "",1,dateFormatter.format(dt_tgl_reg1.getDate()));
                   }
                 }
                 else{
@@ -2155,6 +2176,7 @@ if(!this.txt_no_rawat.getText().isEmpty()){
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JDialog dlg_dpjp;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
+    private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
     private javax.swing.JMenuItem item_hapus;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

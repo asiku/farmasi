@@ -773,8 +773,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
 
-        lbl_news.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/news_ico.png"))); // NOI18N
-        lbl_news.setText("Info");
+        lbl_news.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/money_ico.png"))); // NOI18N
+        lbl_news.setText("Tutup Kasir");
 
         lbl_jamnow.setText("sssss");
 
@@ -834,7 +834,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addComponent(bt_save, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_save2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(918, Short.MAX_VALUE))
+                .addContainerGap(864, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

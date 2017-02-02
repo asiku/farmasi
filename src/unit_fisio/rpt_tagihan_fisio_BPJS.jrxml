@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="509" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3a6bd0e-f868-40dc-b4c4-710b2f9a490f">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="99"/>
-	<property name="ireport.y" value="167"/>
+	<property name="ireport.y" value="16"/>
 	<parameter name="noraw" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -16,7 +16,7 @@
 		<![CDATA[SELECT
    *
 FROM
-     V_tagihan_fisio WHERE no_rawat=$P{noraw} AND username=$P{username}]]>
+     V_tagihan_fisio WHERE no_rawat=$P{noraw} AND username=$P{username} AND Date(tgl)=$P{tgl}]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -46,8 +46,7 @@ FROM
 	<field name="username" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-        
-        <variable name="v_total" class="java.lang.Double" calculation="Sum">
+	<variable name="v_total" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{tarif_tindakan_bpjs}]]></variableExpression>
 	</variable>
 	<group name="no_rawat">
