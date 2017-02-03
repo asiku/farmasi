@@ -196,6 +196,8 @@ public class NewJFrame extends javax.swing.JFrame {
             this.lbl_nm_status.setText(this.jtb_registrasi.getModel().getValueAt(row, 9).toString());
             this.txt_no_sep.setText(this.jtb_registrasi.getModel().getValueAt(row, 11).toString());
             
+            txt_tgl.setText(this.jtb_registrasi.getModel().getValueAt(row, 3).toString());
+            
             if(!this.txt_no_rawat.getText().isEmpty()){
                lbl_cara_beli.setText("Ralan");
             }

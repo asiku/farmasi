@@ -2065,10 +2065,10 @@ public class Crud_local extends DBKoneksi_local {
                     + helper_trans.KEY_CARA_BELI + ","
                     + helper_trans.KEY_NO_RAWAT + ","
                     + helper_trans.KEY_NAMA_JUAL_BEBAS + "," 
-                    + helper_trans.KEY_TGL + "," 
+//                    + helper_trans.KEY_TGL + "," 
                     + helper_trans.KEY_NIK + "," 
                     + helper_trans.KEY_NAMA_KARYAWAN + ") "
-                    + " values (?,?,?,?,?,?,?,?,?,?,?)");
+                    + " values (?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setString(1, no_nota);
             preparedStatement.setString(2, no_rm);
@@ -2078,9 +2078,9 @@ public class Crud_local extends DBKoneksi_local {
             preparedStatement.setString(6, carabeli);
             preparedStatement.setString(7, noraw);
             preparedStatement.setString(8, nmjualbebas);
-            preparedStatement.setString(9, tgl);
-            preparedStatement.setString(10, nik);
-            preparedStatement.setString(11, namakary);
+//            preparedStatement.setString(9, tgl);
+            preparedStatement.setString(9, nik);
+            preparedStatement.setString(10, namakary);
             
             preparedStatement.execute();
 

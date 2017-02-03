@@ -41,7 +41,7 @@ import tools.Utilitas;
  *
  * @author jengcool
  */
-public class frm_poli_ralan extends javax.swing.JFrame {
+public class frm_poli_ranap extends javax.swing.JFrame {
 
     private  int nilai_jam = 0;
     private  int nilai_menit = 0;
@@ -124,12 +124,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     /**
      * Creates new form frm_poli
      */
-    public frm_poli_ralan() {
+    public frm_poli_ranap() {
         initComponents();
 
     }
 
-    public frm_poli_ralan(String nmp, String poli) {
+    public frm_poli_ranap(String nmp, String poli) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -323,9 +323,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
     
             } catch (SQLException ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             }
        
     }
@@ -412,9 +412,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 dat.CloseCon();
     
             } catch (SQLException ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(null, "SerVer tidak Terkoneksi");
@@ -620,7 +620,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        tab_tagihan = new javax.swing.JTabbedPane();
+        jTabbedPane4 = new javax.swing.JTabbedPane();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         tb_biaya_tindakan = new javax.swing.JTable();
@@ -1161,7 +1161,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tab_tagihan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTabbedPane4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         tb_biaya_tindakan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_biaya_tindakan.setModel(new javax.swing.table.DefaultTableModel(
@@ -1206,7 +1206,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        tab_tagihan.addTab("Tagihan Tindakan", jPanel14);
+        jTabbedPane4.addTab("Tagihan Tindakan", jPanel14);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1276,7 +1276,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jPanel10.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 690, 90));
 
-        tab_tagihan.addTab("Tagihan Inap", jPanel10);
+        jTabbedPane4.addTab("Tagihan Inap", jPanel10);
 
         tb_lab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1319,7 +1319,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tab_tagihan.addTab("Tagihan Lab", jPanel11);
+        jTabbedPane4.addTab("Tagihan Lab", jPanel11);
 
         jLabel26.setText("Total          Rp.");
 
@@ -1362,9 +1362,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tab_tagihan.addTab("Tagihan Obat", jPanel16);
+        jTabbedPane4.addTab("Tagihan Obat", jPanel16);
 
-        jPanel7.add(tab_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 700, 300));
+        jPanel7.add(jTabbedPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 700, 300));
         jPanel7.add(txt_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 200, 30));
 
         jLabel27.setText("Deposit");
@@ -1735,7 +1735,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
                  
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             }
               
 
@@ -1750,7 +1750,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
                 hapusmodelunitdetail();
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             }
                 
              
@@ -1866,7 +1866,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             datl.CloseCon();
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
         }
     
        
@@ -1909,7 +1909,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 //            }
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
         }
       
         
@@ -2047,7 +2047,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             
             this.tb_lab.setModel(modelbiayalab);
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
         }
        
       
@@ -2120,7 +2120,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           hpsbiaya();
         
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
         }
         
        
@@ -2160,7 +2160,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         } 
         
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
         }
         
        
@@ -2213,7 +2213,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             a=datl.readRec_Hitkasir(this.txt_no_rawat.getText());
             System.out.println(a);
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
         }
         
      return a;
@@ -2236,7 +2236,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Hapus!");
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -2371,9 +2371,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 dat.CloseCon();
     
             } catch (SQLException ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_bt_cari_tglActionPerformed
 
@@ -2590,7 +2590,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 //Utilitas.Hitungtgl(ateFormatter.format(dt_tgl_reg2.getDate()),jam,tb_biaya_inap.getModel().getValueAt(i, 4), tb_biaya_inap.getModel().getValueAt(i, 5))
             } catch (ParseException ex) {
                 
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
       }
@@ -2707,7 +2707,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         
         
        } catch (Exception ex) {
-           Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
        }
   }  
     
@@ -2728,7 +2728,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ranap.class.getName()).log(Level.SEVERE, null, ex);
         }
      
   
@@ -2752,14 +2752,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ranap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ranap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ranap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ranap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -2772,7 +2780,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_poli_ralan().setVisible(true);
+                new frm_poli_ranap().setVisible(true);
             }
         });
 
@@ -2863,6 +2871,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JLabel lbl;
     private javax.swing.JLabel lbl_biaya_reg;
     private javax.swing.JLabel lbl_biaya_reg1;
@@ -2898,7 +2907,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_total_tagihan3;
     private javax.swing.JLabel lbl_total_tagihan4;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
-    private javax.swing.JTabbedPane tab_tagihan;
     private javax.swing.JTable tb_biaya_inap;
     private javax.swing.JTable tb_biaya_tindakan;
     private javax.swing.JTable tb_cari_petugas;

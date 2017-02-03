@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from v_trans where tgl BETWEEN  $P{tgl1} AND $P{tgl2}]]>
+		<![CDATA[select * from v_trans where date(tgl) BETWEEN  $P{tgl1} AND $P{tgl2}]]>
 	</queryString>
 	<field name="no_nota" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -30,7 +30,7 @@
 	<field name="petugas" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="tgl" class="java.sql.Date">
+	<field name="tgl" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nama_barang" class="java.lang.String">
@@ -164,6 +164,9 @@
 		<band height="42" splitType="Stretch">
 			<line>
 				<reportElement x="4" y="5" width="545" height="1" uuid="9ee90c5f-b615-4fa9-a46f-4e8431ffa42d"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
 			</line>
 			<staticText>
 				<reportElement x="352" y="14" width="65" height="20" uuid="a1761fc1-d305-4e5c-9d48-ce81b15173b2"/>

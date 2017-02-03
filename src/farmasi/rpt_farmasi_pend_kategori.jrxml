@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select * from v_trans where tgl BETWEEN  $P{tgl1} AND $P{tgl2} AND kategori=$P{kategori}]]>
+		<![CDATA[select * from v_trans where date(tgl) BETWEEN  $P{tgl1} AND $P{tgl2} AND kategori=$P{kategori}]]>
 	</queryString>
 	<field name="no_nota" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -33,7 +33,7 @@
 	<field name="petugas" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="tgl" class="java.sql.Date">
+	<field name="tgl" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nama_barang" class="java.lang.String">
