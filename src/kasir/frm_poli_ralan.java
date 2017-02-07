@@ -2203,6 +2203,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           
             lbl_tot_tindakan.setText(Utilitas.formatuang(sumtindakan()));
             setukurantbulunitdetail();
+            
+            hpsbiayalab();
+            setBiayaLab();
+            
 //            hpsbiaya();
             
             //close b

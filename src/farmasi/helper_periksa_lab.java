@@ -23,5 +23,11 @@ public class helper_periksa_lab {
     public static String KEY_STATV = "status_verif";
     public static String KEY_STATP_BPJS = "status_pengesah_bpjs";
     public static String KEY_STATV_BPJS = "status_verif_bpjs";
-    
+    public static String KEY_TARIF_NIP = "nip_petugas";
+    public static String KEY_TARIF_DR = "presentase_dr";
+    public static String KEY_TARIF_RS = "presentase_rs";
+    public static String KEY_TARIF_SARANA = "presentase_sarana";
+    public static String KEY_TARIF_DRBPJS= "presentase_dr_bpjs";
+    public static String KEY_TARIF_RSBPJS = "presentase_rs_bpjs";
+    public static String KEY_TARIF_SARANABPJS = "presentase_sarana_bpjs";
 }

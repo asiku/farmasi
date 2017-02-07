@@ -81,8 +81,10 @@ public class Crud_local extends DBKoneksi_local {
     String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","Biaya Reg"};
 
     String[] periksa_lab_title = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif","Tarif BPJS"
-                                            ,"status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs"};
+                                            ,"status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip"};
    
+    x String[] periksa_lab_titlebpjs = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif BPJS",
+                                            "status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs","rsbpjs","drbpjs","saranabpjs","nip"};
     
    String[] brg_title = new String[]{"Kode Barang", "Nama", "Harga Jual", "Harga Jual Karyawan","Harga Beli", "Kategori"}; 
   
@@ -432,6 +434,56 @@ public class Crud_local extends DBKoneksi_local {
             String status_verif = resultSet.getString(helper_periksa_lab.KEY_STATV);
             String status_pengesah_bpjs = resultSet.getString(helper_periksa_lab.KEY_STATP_BPJS);
             String status_verif_bpjs = resultSet.getString(helper_periksa_lab.KEY_STATV_BPJS);
+            
+             if(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_RS)!=0.0)
+            {    
+              rs =(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN)) * (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_RS)/100);
+            }
+            else{
+              rs=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_DR)!=0.0)
+            {    
+              dr = (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN)) * ((resultSet.getDouble(helper_periksa_lab.KEY_TARIF_DR)/100));
+            }
+            else{
+              dr=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_SARANA)!=0.0)
+            {    
+              sarana = (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN)) * (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_SARANA)/100);             
+            }
+            else{
+              sarana=0.0;
+            } 
+             
+             
+            if(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_RSBPJS)!=0.0)
+            {    
+              rsbpjs =(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN_BPJS)) * (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_RSBPJS)/100);
+            }
+            else{
+              rsbpjs=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_DRBPJS)!=0.0)
+            {    
+              drbpjs = (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN_BPJS)) * (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_DRBPJS)/100);
+            }
+             else{
+              drbpjs=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_SARANABPJS)!=0.0)
+            {    
+              saranabpjs = (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN_BPJS)) * (resultSet.getDouble(helper_periksa_lab.KEY_TARIF_SARANABPJS)/100);             
+            }
+             else{
+              saranabpjs=0.0;
+            }
+            
             
              modelperiksalab.addRow(new Object[]{norawat,kodeobat,namatindakan,tarif,tarifbpjs,status_pengesah,status_verif,status_pengesah_bpjs,status_verif_bpjs});
         }
