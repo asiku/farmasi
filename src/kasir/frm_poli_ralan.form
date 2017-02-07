@@ -1171,7 +1171,7 @@
                         <Property name="useNullLayout" type="boolean" value="false"/>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JTabbedPane" name="tab_tagihan">
+                        <Container class="javax.swing.JTabbedPane" name="jTabbedPane4">
                           <Properties>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -1200,10 +1200,10 @@
                                 <DimensionLayout dim="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="354" max="32767" attributes="0"/>
-                                          <Component id="jLabel25" min="-2" pref="113" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="lbl_tot_tindakan" min="-2" pref="194" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="406" max="32767" attributes="0"/>
+                                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                          <Component id="lbl_tot_tindakan" min="-2" pref="172" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -1256,7 +1256,7 @@
                                 </Container>
                                 <Component class="javax.swing.JLabel" name="jLabel25">
                                   <Properties>
-                                    <Property name="text" type="java.lang.String" value="Total          Rp."/>
+                                    <Property name="text" type="java.lang.String" value="Total         "/>
                                   </Properties>
                                 </Component>
                                 <Component class="javax.swing.JLabel" name="lbl_tot_tindakan">
@@ -1731,7 +1731,7 @@
                         <Component class="javax.swing.JTextField" name="txt_plafon_bpjs1">
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="720" y="90" width="200" height="30"/>
+                              <AbsoluteConstraints x="720" y="90" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1748,7 +1748,7 @@
                         <Component class="javax.swing.JTextField" name="txt_plafon_bpjs">
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="720" y="150" width="200" height="30"/>
+                              <AbsoluteConstraints x="720" y="140" width="200" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1758,7 +1758,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="720" y="130" width="130" height="20"/>
+                              <AbsoluteConstraints x="720" y="110" width="130" height="20"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1767,14 +1767,14 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Dialog" size="9" style="1"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Save Plafon BPJS &amp; Deposit"/>
+                            <Property name="text" type="java.lang.String" value="Deposit"/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_save_deposit_plafon_bpjsActionPerformed"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="720" y="190" width="200" height="40"/>
+                              <AbsoluteConstraints x="820" y="170" width="100" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1790,7 +1790,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="720" y="240" width="200" height="40"/>
+                              <AbsoluteConstraints x="720" y="260" width="200" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1811,6 +1811,48 @@
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                               <AbsoluteConstraints x="720" y="10" width="130" height="-1"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="10" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Piutang"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="830" y="230" width="-1" height="-1"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="10" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Lunas"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="720" y="230" width="-1" height="-1"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="bt_save_deposit_plafon_bpjs1">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Dialog" size="9" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Plafon BPJS"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_save_deposit_plafon_bpjs1ActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="720" y="170" width="90" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>

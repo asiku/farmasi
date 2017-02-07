@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class Crud_local extends DBKoneksi_local {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
+    
      String[] caritrans_title = new String[]{"No.","No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Kategori","No. RM","Nama Pasien","Karyawan","Jual Bebas","Tgl","Petugas"};
     
      String[] tarif_title= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
@@ -69,10 +71,14 @@ public class Crud_local extends DBKoneksi_local {
       String[] tarif_title_logBPJS= new String[]{"Id", "Nama Tindakan","Tarif Tindakan","% RS.","% Dr.",
          "% Sarana","Nama Poli","Status","Pengesah","Verif","pilih"};
       
+    
       
     String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Username"};
-      
-    String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","Biaya Reg"};
+    
+            
+    String[] biaya_tindakan_titlebpjs = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan BPJS","rsbpjs","drbpjs","saranabpjs","nip"}; 
+    
+    String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","Biaya Reg"};
 
     String[] periksa_lab_title = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif","Tarif BPJS"
                                             ,"status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs"};
@@ -91,6 +97,15 @@ public class Crud_local extends DBKoneksi_local {
    
      String[] trans_title = new String[]{"No.", "Jml", "Nama Barang", "Harga Satuan", "Total"};
     
+//     String[] breg_title = new String[]{"No Rawat", "Biaya Reg"};
+//     
+//     public DefaultTableModel  modelbiayareg= new DefaultTableModel(breg_title, 0) {
+//         public boolean isCellEditable(int row, int column) {
+//            return false;
+//
+//        }
+//     };
+     
      public DefaultTableModel modeltrans = new DefaultTableModel(trans_title, 0) {
          public boolean isCellEditable(int row, int column) {
             return false;
@@ -127,7 +142,16 @@ public class Crud_local extends DBKoneksi_local {
 
         }
     };         
-    
+   
+   
+    public DefaultTableModel modelbiayatindakanbpjs = new DefaultTableModel(biaya_tindakan_titlebpjs, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };  
+   
+   
     public DefaultTableModel modelbiayatindakan = new DefaultTableModel(biaya_tindakan_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -1628,9 +1652,15 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
      
+      
     
      public void readRec_Biayatindakankasir(String noraw) throws SQLException {
 
+         Double rs=0.0,dr=0.0,sarana=0.0;
+         Double rsbpjs=0.0,drbpjs=0.0,saranabpjs=0.0;
+         
+         DecimalFormat df2 = new DecimalFormat(".##");
+         
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_biaya_tindakan.TB_VNAME + " WHERE "
                                                      + helper_v_biaya_tindakan.KEY_NO_RAWAT + " =?");
 
@@ -1648,8 +1678,63 @@ public class Crud_local extends DBKoneksi_local {
             Double tarif = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN);
             Double tarifbpjs = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN_BPJS);
             Double breg = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_BIAYA_REG);
-
-            modelbiayatindakan.addRow(new Object[]{norawat, kdtarif, nmt, tarif,tarifbpjs,breg});
+            
+            if(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_RS)!=0.0)
+            {    
+              rs =(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN)) * (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_RS)/100);
+            }
+            else{
+              rs=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_DR)!=0.0)
+            {    
+              dr = (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN)) * ((resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_DR)/100));
+            }
+            else{
+              dr=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_SARANA)!=0.0)
+            {    
+              sarana = (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN)) * (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_SARANA)/100);             
+            }
+            else{
+              sarana=0.0;
+            } 
+             
+             
+            if(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_RSBPJS)!=0.0)
+            {    
+              rsbpjs =(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN_BPJS)) * (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_RSBPJS)/100);
+            }
+            else{
+              rsbpjs=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_DRBPJS)!=0.0)
+            {    
+              drbpjs = (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN_BPJS)) * (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_DRBPJS)/100);
+            }
+             else{
+              drbpjs=0.0;
+            }
+            
+            if(resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_SARANABPJS)!=0.0)
+            {    
+              saranabpjs = (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN_BPJS)) * (resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_SARANABPJS)/100);             
+            }
+             else{
+              saranabpjs=0.0;
+            }
+            
+            String nip = resultSet.getString(helper_v_biaya_tindakan.KEY_TARIF_NIP);
+//            {"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","Biaya Reg","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs"};
+//"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","Biaya Reg"
+            modelbiayatindakan.addRow(new Object[]{norawat, kdtarif, nmt, tarif,tarifbpjs,df2.format(rs),df2.format(dr),df2.format(sarana),df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),nip,breg});
+            
+            modelbiayatindakanbpjs.addRow(new Object[]{norawat, kdtarif, nmt,tarifbpjs,df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),nip});
+            
             
         }
     }

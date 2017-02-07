@@ -140,11 +140,25 @@ public class Crud_farmasi extends DBkoneksi {
         }
     };
 
-    
-    
-    
-     
-    
+    public Double readRec_BiayaRegkasir(String noraw) throws SQLException {
+      
+          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_biaya_reg.TB_TBNAME + " WHERE "
+                                                     + helper_v_biaya_reg.KEY_NO_RAWAT + " =?");
+
+        preparedStatement.setString(1, noraw);
+       
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        Double breg=0.0;
+        
+        while (resultSet.next()) {
+            String norawat = resultSet.getString(helper_v_biaya_reg.KEY_NO_RAWAT);
+            breg = resultSet.getDouble(helper_v_biaya_reg.KEY_BIAYA_REG);
+           
+        }
+          return breg;
+      }
     
     
     public double readRec_JasaPelayanan(String kodekamar){

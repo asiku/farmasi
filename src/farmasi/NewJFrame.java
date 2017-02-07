@@ -202,6 +202,8 @@ public class NewJFrame extends javax.swing.JFrame {
                lbl_cara_beli.setText("Ralan");
             }
             
+            ck_jual_karyawan_bebas.setSelected(false);
+            
             editmode=false;
              Set_Nonota();
               this.Hapussemua();
@@ -1077,6 +1079,8 @@ caridata(txt_cari_ralan_ranap.getText());
         txt_tgl = new javax.swing.JLabel();
         lbl_petugas_input = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        ck_resep_racik = new javax.swing.JCheckBox();
+        ck_resep_tunggal = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         bt_hapus = new javax.swing.JButton();
         bt_simpan = new javax.swing.JButton();
@@ -1549,7 +1553,7 @@ caridata(txt_cari_ralan_ranap.getText());
                 txt_barangKeyPressed(evt);
             }
         });
-        jp_barang.add(txt_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 32, 839, 30));
+        jp_barang.add(txt_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 32, 550, 30));
 
         jLabel8.setText("x");
         jLabel8.setVisible(false);
@@ -1623,6 +1627,34 @@ caridata(txt_cari_ralan_ranap.getText());
 
         jLabel19.setText("tgl");
         jp_barang.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, 19));
+
+        ck_resep_racik.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_resep_racik.setText("Resep Racik");
+        ck_resep_racik.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ck_resep_racikStateChanged(evt);
+            }
+        });
+        ck_resep_racik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ck_resep_racikActionPerformed(evt);
+            }
+        });
+        jp_barang.add(ck_resep_racik, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, -1, -1));
+
+        ck_resep_tunggal.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_resep_tunggal.setText("Resep Tunggal");
+        ck_resep_tunggal.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ck_resep_tunggalStateChanged(evt);
+            }
+        });
+        ck_resep_tunggal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ck_resep_tunggalActionPerformed(evt);
+            }
+        });
+        jp_barang.add(ck_resep_tunggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
 
         jPanel3.add(jp_barang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 860, 190));
 
@@ -1847,7 +1879,7 @@ caridata(txt_cari_ralan_ranap.getText());
         jPanel3.add(txt_nama_jual_bebas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 239, -1));
 
         ck_jual_karyawan.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        ck_jual_karyawan.setText("Penjualan Karyawan");
+        ck_jual_karyawan.setText("Karyawan");
         ck_jual_karyawan.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 ck_jual_karyawanStateChanged(evt);
@@ -3856,6 +3888,9 @@ private void savePrint(){
 //            this.lbl_kelas.setText(this.tb_reg_inap.getModel().getValueAt(row, 5).toString());
             this.txt_status_pasien.setText(this.tb_reg_inap.getModel().getValueAt(row, 6).toString());
             this.lbl_nm_status.setText(this.tb_reg_inap.getModel().getValueAt(row, 7).toString());
+            
+            ck_jual_karyawan_bebas.setSelected(false);
+            
              editmode=false;
              this.Hapussemua();
              
@@ -4548,6 +4583,22 @@ private void savePrint(){
         }
     }//GEN-LAST:event_bt_cetak_periodeActionPerformed
 
+    private void ck_resep_racikStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ck_resep_racikStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ck_resep_racikStateChanged
+
+    private void ck_resep_racikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_resep_racikActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ck_resep_racikActionPerformed
+
+    private void ck_resep_tunggalStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ck_resep_tunggalStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ck_resep_tunggalStateChanged
+
+    private void ck_resep_tunggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_resep_tunggalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ck_resep_tunggalActionPerformed
+
     private void HapusRowHistoryDetail(int i){
       int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan di Hapus No. Nota :  "+ jtb_transaksi1.getModel().getValueAt(irowhistoryDetail, 2),"Warning ",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -4882,6 +4933,8 @@ private void savePrint(){
     private javax.swing.JCheckBox ck_jual_karyawan;
     private javax.swing.JCheckBox ck_jual_karyawan_bebas;
     private javax.swing.JCheckBox ck_kasbon;
+    private javax.swing.JCheckBox ck_resep_racik;
+    private javax.swing.JCheckBox ck_resep_tunggal;
     private javax.swing.JComboBox<String> cmb_kategori;
     private javax.swing.JDialog dlg_dpjp;
     private javax.swing.JDialog dlg_edit_trans;
