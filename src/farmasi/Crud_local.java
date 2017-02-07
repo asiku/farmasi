@@ -81,10 +81,18 @@ public class Crud_local extends DBKoneksi_local {
     String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","Biaya Reg"};
 
     String[] periksa_lab_title = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif","Tarif BPJS"
-                                            ,"status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip"};
+                                            ,"rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs"};
    
-    x String[] periksa_lab_titlebpjs = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif BPJS",
-                                            "status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs","rsbpjs","drbpjs","saranabpjs","nip"};
+     String[] periksa_lab_titlebpjs = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif BPJS",
+                                                   "rsbpjs","drbpjs","saranabpjs","Status verif bpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs"};
+    
+     
+     public DefaultTableModel modelperiksalabbpjs = new DefaultTableModel(periksa_lab_titlebpjs, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };         
     
    String[] brg_title = new String[]{"Kode Barang", "Nama", "Harga Jual", "Harga Jual Karyawan","Harga Beli", "Kategori"}; 
   
@@ -414,6 +422,11 @@ public class Crud_local extends DBKoneksi_local {
     
     public void readRec_periksa_lab(String noraw) throws SQLException {
 
+         Double rs=0.0,dr=0.0,sarana=0.0;
+         Double rsbpjs=0.0,drbpjs=0.0,saranabpjs=0.0;
+         
+         DecimalFormat df2 = new DecimalFormat(".##");
+
          
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_periksa_lab.TB_VNAME + " WHERE "
                                                       + helper_periksa_lab.KEY_NO_RAWAT + " =?");
@@ -426,7 +439,7 @@ public class Crud_local extends DBKoneksi_local {
         while (resultSet.next()) {
 //helper_periksa_lab
             String norawat = resultSet.getString(helper_periksa_lab.KEY_NO_RAWAT);
-            String kodeobat = resultSet.getString(helper_periksa_lab.KEY_KODE_TARIF);
+            String kodetarif = resultSet.getString(helper_periksa_lab.KEY_KODE_TARIF);
             String namatindakan = resultSet.getString(helper_periksa_lab.KEY_NAMA_TINDAKAN);
             double tarif = resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN);
             double tarifbpjs = resultSet.getDouble(helper_periksa_lab.KEY_TARIF_TINDAKAN_BPJS);
@@ -434,6 +447,7 @@ public class Crud_local extends DBKoneksi_local {
             String status_verif = resultSet.getString(helper_periksa_lab.KEY_STATV);
             String status_pengesah_bpjs = resultSet.getString(helper_periksa_lab.KEY_STATP_BPJS);
             String status_verif_bpjs = resultSet.getString(helper_periksa_lab.KEY_STATV_BPJS);
+            String nip = resultSet.getString(helper_periksa_lab.KEY_TARIF_NIP);
             
              if(resultSet.getDouble(helper_periksa_lab.KEY_TARIF_RS)!=0.0)
             {    
@@ -483,9 +497,18 @@ public class Crud_local extends DBKoneksi_local {
              else{
               saranabpjs=0.0;
             }
-            
-            
-             modelperiksalab.addRow(new Object[]{norawat,kodeobat,namatindakan,tarif,tarifbpjs,status_pengesah,status_verif,status_pengesah_bpjs,status_verif_bpjs});
+
+
+                        //                                              "No Rawat","kode tarif","Nama Tindakan","Tarif","Tarif BPJS"
+                        //                                            ,"rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs"};
+                        //   
+                        //                                          "No Rawat","kode tarif","Nama Tindakan","Tarif BPJS",
+                        //                                                   "rsbpjs","drbpjs","saranabpjs","Status verif bpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs"};
+                
+
+             modelperiksalabbpjs.addRow(new Object[]{norawat,kodetarif,namatindakan,tarifbpjs,df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),status_verif_bpjs,nip,status_pengesah,status_verif,status_pengesah_bpjs});
+             modelperiksalab.addRow(new Object[]{norawat,kodetarif,namatindakan,tarif,tarifbpjs,df2.format(rs),df2.format(dr),df2.format(sarana),df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),nip,status_pengesah,status_verif,status_pengesah_bpjs,status_verif_bpjs});
+             
         }
     }
 

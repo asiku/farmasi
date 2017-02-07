@@ -466,6 +466,20 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     }
     
+    private void setukurantblab() {
+
+        this.tb_lab.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_lab.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr = this.tb_lab.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(120);
+        tr.getColumn(1).setPreferredWidth(100);
+        tr.getColumn(2).setPreferredWidth(310);
+        tr.getColumn(3).setPreferredWidth(220);
+        tr.getColumn(4).setPreferredWidth(150);
+
+    }
+    
     private void setukurantbulunitdetail() {
 
         this.tb_biaya_tindakan.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
@@ -2060,12 +2074,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             datl.readRec_periksa_lab(txt_no_rawat.getText());
             datl.CloseCon();
             
-            for(int i=0;i<datl.modelperiksalab.getRowCount();i++){
-                this.modelbiayalab.addRow(new Object[]{datl.modelperiksalab.getValueAt(i, 1),datl.modelperiksalab.getValueAt(i, 2),
-                                                         datl.modelperiksalab.getValueAt(i, 3)});
-            }
-            
-            this.tb_lab.setModel(modelbiayalab);
+//            for(int i=0;i<datl.modelperiksalab.getRowCount();i++){
+//                this.modelbiayalab.addRow(new Object[]{datl.modelperiksalab.getValueAt(i, 1),datl.modelperiksalab.getValueAt(i, 2),
+//                                                         datl.modelperiksalab.getValueAt(i, 3)});
+//            }
+             if(lbl_nm_status.getText().equals("BPJS")){
+              this.tb_lab.setModel(datl.modelperiksalabbpjs);
+             }
+             else{
+             this.tb_lab.setModel(datl.modelperiksalab);
+             
+             }
+            setukurantblab();
         } catch (Exception ex) {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2204,7 +2224,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             lbl_tot_tindakan.setText(Utilitas.formatuang(sumtindakan()));
             setukurantbulunitdetail();
             
-            hpsbiayalab();
+//            hpsbiayalab();
             setBiayaLab();
             
 //            hpsbiaya();
