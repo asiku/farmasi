@@ -1295,6 +1295,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Tagihan Inap", jPanel10);
 
+        tb_lab.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_lab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1308,7 +1309,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         ));
         jScrollPane8.setViewportView(tb_lab);
 
-        jLabel24.setText("Total          Rp.");
+        jLabel24.setText("Total ");
 
         lbl_tot_lab.setText("0");
 
@@ -1319,7 +1320,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel24)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_tot_lab, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1328,9 +1329,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(lbl_tot_lab))
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_tot_lab)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1382,14 +1383,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jTabbedPane4.addTab("Tagihan Obat", jPanel16);
 
         jPanel7.add(jTabbedPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 700, 300));
-        jPanel7.add(txt_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 200, 20));
+        jPanel7.add(txt_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 200, 30));
 
         jLabel27.setText("Deposit");
         jPanel7.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 90, -1));
-        jPanel7.add(txt_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, 200, 20));
+        jPanel7.add(txt_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 200, 30));
 
         jLabel7.setText("Plafon BPJS");
-        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 110, 130, 20));
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, 130, 20));
 
         bt_save_deposit_plafon_bpjs.setFont(new java.awt.Font("Dialog", 1, 9)); // NOI18N
         bt_save_deposit_plafon_bpjs.setText("Deposit");
@@ -1398,7 +1399,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_save_deposit_plafon_bpjsActionPerformed(evt);
             }
         });
-        jPanel7.add(bt_save_deposit_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 170, 100, 40));
+        jPanel7.add(bt_save_deposit_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 100, 40));
 
         bt_save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
         bt_save1.setText("Proses Pembayaran");
@@ -1430,7 +1431,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_save_deposit_plafon_bpjs1ActionPerformed(evt);
             }
         });
-        jPanel7.add(bt_save_deposit_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, 90, 40));
+        jPanel7.add(bt_save_deposit_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 90, 40));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -2085,7 +2086,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
              this.tb_lab.setModel(datl.modelperiksalab);
              
              }
+             
+            lbl_tot_lab.setText(Utilitas.formatuang(sumlab()));
+             
             setukurantblab();
+            
         } catch (Exception ex) {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2167,6 +2172,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
      
     }
     
+   
+    private Double sumlab(){
+     double tot=0.0;
+       if(tb_lab.getModel().getRowCount()>0){
+          
+           for(int i=0;i<tb_lab.getModel().getRowCount();i++){
+            tot=tot+Double.parseDouble(tb_lab.getModel().getValueAt(i, 3).toString());
+          }
+       }
+     
+       return tot;
+   }
    
    private Double sumtindakan(){
      double tot=0.0;
