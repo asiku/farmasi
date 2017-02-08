@@ -87,7 +87,16 @@ public class Crud_local extends DBKoneksi_local {
                                                    "rsbpjs","drbpjs","saranabpjs","Status verif bpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs"};
     
      
-     public DefaultTableModel modelperiksalabbpjs = new DefaultTableModel(periksa_lab_titlebpjs, 0) {
+      String[] obat_kasir_title = new String[]{"No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Harga Beli","No. Rawat","No. RM","Nama Pasien","Karyawan","Jual Bebas","Kategori","Tgl","Petugas","HPP","Profit"};
+     
+    public DefaultTableModel modelobatkasir = new DefaultTableModel(obat_kasir_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+            
+    public DefaultTableModel modelperiksalabbpjs = new DefaultTableModel(periksa_lab_titlebpjs, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
 
@@ -2210,7 +2219,91 @@ public class Crud_local extends DBKoneksi_local {
          return hitkd;
      
      }
+     
+     
+     public void readRec_ObatKasir(String norawat,String nota) throws SQLException {
+
+        DecimalFormat df2 = new DecimalFormat(".##");        
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_KNAME + " WHERE "
+                                                                    + helper_v_trans.KEY_NO_RAWAT + "=? AND "
+                                                                    + helper_v_trans.KEY_NO_NOTA + " LIKE ?"
+                                                                    );
+
+        preparedStatement.setString(1, norawat);
+        preparedStatement.setString(2, "%" + nota + "%");
+         
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+      
+        while (resultSet.next()) {
+            
+            String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
+            String nmbrg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            int jml = resultSet.getInt(helper_v_trans.KEY_JML);
+            double hrgsatuan = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
+            double total = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
+            double hbeli = resultSet.getDouble(helper_v_trans.KEY_HARGA_BELI);
+            String noraw = resultSet.getString(helper_v_trans.KEY_NO_RAWAT);
+            String norm = resultSet.getString(helper_v_trans.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+            String kry = resultSet.getString(helper_v_trans.KEY_NAMA_KARYAWAN);
+            String jb = resultSet.getString(helper_v_trans.KEY_NAMA_JUAL_BEBAS);
+            String kat = resultSet.getString(helper_v_trans.KEY_KATEGORI);
+            String tgl = resultSet.getString(helper_v_trans.KEY_TGL);
+            String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
+            Double hpp = hbeli * jml;
+            Double profit = total - hpp;
+           
+//            "No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Harga Beli","No. Rawat","No. RM"
+//            ,"Nama Pasien","Karyawan","Jual Bebas","Kategori","Tgl","Petugas","HPP","Profit"
+//            
+            modelobatkasir.addRow(new Object[]{nonota, nmbrg, jml,hrgsatuan,total
+                    ,hbeli,noraw,norm,nmp,kry,jb,kat,tgl,petugas,df2.format(hpp),df2.format(profit)});
+        }
+    }
+     
     
+     public void readRec_ObatKasir(String norawat) throws SQLException {
+
+        DecimalFormat df2 = new DecimalFormat(".##");        
+        
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_trans.TB_KNAME + " WHERE "
+                                                                    + helper_v_trans.KEY_NO_RAWAT + "=?" );
+
+        preparedStatement.setString(1, norawat);
+         
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+      
+        while (resultSet.next()) {
+            
+            String nonota = resultSet.getString(helper_v_trans.KEY_NO_NOTA);
+            String nmbrg = resultSet.getString(helper_v_trans.KEY_NAMA_BRG);
+            int jml = resultSet.getInt(helper_v_trans.KEY_JML);
+            double hrgsatuan = resultSet.getDouble(helper_v_trans.KEY_HARGA_SATUAN);
+            double total = resultSet.getDouble(helper_v_trans.KEY_TOTAL);
+            double hbeli = resultSet.getDouble(helper_v_trans.KEY_HARGA_BELI);
+            String noraw = resultSet.getString(helper_v_trans.KEY_NO_RAWAT);
+            String norm = resultSet.getString(helper_v_trans.KEY_NO_RM);
+            String nmp = resultSet.getString(helper_v_trans.KEY_NM_PASIEN);
+            String kry = resultSet.getString(helper_v_trans.KEY_NAMA_KARYAWAN);
+            String jb = resultSet.getString(helper_v_trans.KEY_NAMA_JUAL_BEBAS);
+            String kat = resultSet.getString(helper_v_trans.KEY_KATEGORI);
+            String tgl = resultSet.getString(helper_v_trans.KEY_TGL);
+            String petugas = resultSet.getString(helper_v_trans.KEY_PETUGAS);
+            Double hpp = hbeli * jml;
+            Double profit = total - hpp;
+           
+//            "No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Harga Beli","No. Rawat","No. RM"
+//            ,"Nama Pasien","Karyawan","Jual Bebas","Kategori","Tgl","Petugas","HPP","Profit"
+//            
+            modelobatkasir.addRow(new Object[]{nonota, nmbrg, jml,hrgsatuan,total
+                    ,hbeli,noraw,norm,nmp,kry,jb,kat,tgl,petugas,df2.format(hpp),df2.format(profit)});
+        }
+    }
+     
+     
      public void readRec_brg() throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_TBNAME);

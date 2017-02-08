@@ -11,6 +11,7 @@ package farmasi;
  */
 public class helper_v_trans {
     public static String TB_NAME = "v_trans";
+    public static String TB_KNAME = "v_obat_kasir";
     public static String KEY_NO_NOTA = "no_nota";
     public static String KEY_NO_RM = "no_rm";
     public static String KEY_NM_PASIEN = "nama_pasien";
@@ -18,6 +19,7 @@ public class helper_v_trans {
     public static String KEY_JML = "jml";
     public static String KEY_SATUAN = "satuan";
     public static String KEY_HARGA_SATUAN = "harga_satuan";
+    public static String KEY_HARGA_BELI = "h_beli";
     public static String KEY_NAMA_BRG = "nama_barang";
     public static String KEY_TOTAL = "total";
     public static String KEY_TGL = "tgl";
