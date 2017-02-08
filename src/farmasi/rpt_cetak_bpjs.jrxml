@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="510" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5972857-afd0-4072-b040-360bbe7459e9">
 	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="1023"/>
 	<property name="ireport.y" value="171"/>
 	<parameter name="TOTSEMUA" class="java.lang.Double">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -110,6 +110,13 @@
 					<pen lineWidth="0.75"/>
 				</graphicElement>
 			</line>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="435" y="49" width="109" height="20" uuid="40298222-cf88-4327-b101-97e29519b82c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tgl}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -118,7 +125,7 @@
 	<columnHeader>
 		<band height="86" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="63" width="555" height="20" uuid="34c20238-e08f-4378-9cfe-13e0d01b6c78"/>
+				<reportElement mode="Transparent" x="0" y="63" width="555" height="20" uuid="34c20238-e08f-4378-9cfe-13e0d01b6c78"/>
 			</rectangle>
 			<textField>
 				<reportElement x="74" y="0" width="82" height="20" uuid="9f94bdde-0638-473f-9b3c-87407006e117"/>
@@ -133,11 +140,14 @@
 				<textFieldExpression><![CDATA[$F{cara_beli}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="246" y="3" width="130" height="20" uuid="3d7ac387-83a9-48e7-bb17-8edceef813a7"/>
+				<reportElement x="255" y="3" width="176" height="20" uuid="3d7ac387-83a9-48e7-bb17-8edceef813a7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{no_nota}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="246" y="24" width="100" height="20" uuid="22288f67-26dd-4fa7-83dc-be3625cd80d0"/>
+				<reportElement x="255" y="23" width="111" height="20" uuid="22288f67-26dd-4fa7-83dc-be3625cd80d0"/>
 				<textFieldExpression><![CDATA[$F{petugas}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -173,7 +183,7 @@
 				<text><![CDATA[No. Nota]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="239" y="3" width="19" height="23" uuid="4aec70c0-85c2-4be0-abd8-4498fcb90e65"/>
+				<reportElement x="247" y="3" width="19" height="23" uuid="4aec70c0-85c2-4be0-abd8-4498fcb90e65"/>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
@@ -181,7 +191,7 @@
 				<text><![CDATA[Petugas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="239" y="23" width="19" height="23" uuid="fad336ea-8531-4642-bf70-b1e439882b65"/>
+				<reportElement x="247" y="23" width="19" height="23" uuid="fad336ea-8531-4642-bf70-b1e439882b65"/>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
@@ -201,51 +211,35 @@
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="189" y="44" width="73" height="20" uuid="006a85e8-1972-47e3-9feb-3a0e9bbbfb05"/>
-				<text><![CDATA[Tgl]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="239" y="44" width="19" height="23" uuid="e3ff4d6a-6253-4293-ac59-1aeb587faea6"/>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField pattern="dd/MM/yyyy HH:mm:ss">
-				<reportElement x="247" y="44" width="109" height="20" uuid="40298222-cf88-4327-b101-97e29519b82c"/>
-				<textFieldExpression><![CDATA[$F{tgl}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="435" y="4" width="19" height="23" uuid="a7c97298-d332-49b2-bb92-c802e7630861"/>
+				<reportElement x="247" y="42" width="19" height="23" uuid="a7c97298-d332-49b2-bb92-c802e7630861"/>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="377" y="4" width="55" height="20" uuid="3b35fa5d-1ff1-4db8-b49e-7b86bc6cc9c0"/>
+				<reportElement x="189" y="42" width="55" height="20" uuid="3b35fa5d-1ff1-4db8-b49e-7b86bc6cc9c0"/>
 				<text><![CDATA[No. Rawat]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="443" y="4" width="109" height="20" uuid="ab797ef7-2093-437b-84b1-e1c177e577ed"/>
+				<reportElement x="255" y="42" width="109" height="20" uuid="ab797ef7-2093-437b-84b1-e1c177e577ed"/>
 				<textFieldExpression><![CDATA[$F{no_rawat}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="442" y="25" width="100" height="20" uuid="58e6c1bb-2830-4429-a0cb-c7c2dc66c02a"/>
+				<reportElement x="481" y="3" width="74" height="20" uuid="58e6c1bb-2830-4429-a0cb-c7c2dc66c02a"/>
 				<textFieldExpression><![CDATA[$P{statuspasien}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="434" y="25" width="19" height="23" uuid="74551a68-3ab3-4bdb-bbe3-0d9fbfe71641"/>
+				<reportElement x="477" y="3" width="19" height="23" uuid="74551a68-3ab3-4bdb-bbe3-0d9fbfe71641"/>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="376" y="25" width="55" height="20" uuid="db05d8fd-5ee4-4ab1-8ff8-b73e2747468a"/>
+				<reportElement x="434" y="3" width="36" height="20" uuid="db05d8fd-5ee4-4ab1-8ff8-b73e2747468a"/>
 				<text><![CDATA[Status]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="376" y="45" width="55" height="20" uuid="092db73d-202c-4cbd-b0ba-b068c4fbacea"/>
+				<reportElement x="433" y="26" width="55" height="20" uuid="092db73d-202c-4cbd-b0ba-b068c4fbacea"/>
 				<text><![CDATA[No. SEP]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="434" y="45" width="19" height="23" uuid="3a7ebf7a-8402-4699-ad6f-19889861e738"/>
-				<text><![CDATA[:]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="442" y="45" width="110" height="20" uuid="b6fdf228-ce80-4a8a-b45e-c7febbb1a37f"/>
+				<reportElement x="433" y="40" width="122" height="20" uuid="b6fdf228-ce80-4a8a-b45e-c7febbb1a37f"/>
 				<textFieldExpression><![CDATA[$P{nosep}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -282,7 +276,7 @@
 				<reportElement x="332" y="-22" width="1" height="45" uuid="80e88a69-c3fb-46fa-b638-7e0ed4056daf"/>
 			</line>
 			<line>
-				<reportElement x="440" y="-21" width="1" height="45" uuid="cd27005d-d456-431d-848e-870ca81b6e47"/>
+				<reportElement x="441" y="-23" width="1" height="47" uuid="cd27005d-d456-431d-848e-870ca81b6e47"/>
 			</line>
 			<line>
 				<reportElement x="555" y="-22" width="1" height="45" uuid="86d12828-ca6c-4acc-8962-8f0035a63eed"/>

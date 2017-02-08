@@ -1616,6 +1616,27 @@ public class Crud_local extends DBKoneksi_local {
     } 
      
      
+      public int readRec_HitFarmasi(String norw) throws SQLException {
+
+       int hit=0;  
+       preparedStatement = connect.prepareStatement("SELECT count(*) as hit FROM " + helper_trans.TB_NAME +" WHERE "
+       +helper_trans.KEY_NO_NOTA+" like ?");
+    
+        preparedStatement.setString(1, "%" + norw + "%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+//            String norawat = resultSet.getString(helper_kasir.KEY_NO_RAWAT);
+//            String tgl= resultSet.getString(helper_kasir.KEY_TGL);
+//            String username = resultSet.getString(helper_kasir.KEY_USERNAME);
+//            String stat = resultSet.getString(helper_kasir.KEY_SET_STATUS);
+            hit=resultSet.getInt("hit");
+            
+        }
+        
+        return hit;
+    }
      
      public int readRec_Hitkasir(String norw) throws SQLException {
 

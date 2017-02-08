@@ -232,7 +232,7 @@ public class frm_login_poli extends javax.swing.JFrame {
                 
                 datl.CloseCon();
                 
-                NewJFrame pol=new NewJFrame(namapetugaslogin,"Farmasi Unit 2","c2");
+                NewJFrame pol=new NewJFrame(namapetugaslogin,"Farmasi Unit 1","c1");
                 
                 pol.setVisible(true);
                 

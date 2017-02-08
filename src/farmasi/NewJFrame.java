@@ -328,8 +328,21 @@ public class NewJFrame extends javax.swing.JFrame {
         LocalDate localDate = LocalDate.now();
 
         return DateTimeFormatter.ofPattern("yyy/MM/dd").format(localDate);
-    }
+    } 
  
+    private int countkode(String str){
+         int hit=0;
+        try {
+            datl = new Crud_local();
+            hit=datl.readRec_HitFarmasi(str)+1;
+            datl.CloseCon();
+           
+        } catch (Exception ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return hit;
+    }
+    
     private void Set_Nonota() {
          //datl = new Crud_local();
 
@@ -339,17 +352,21 @@ public class NewJFrame extends javax.swing.JFrame {
         //} catch (SQLException ex) {
           
         if(lbl_cara_beli.getText().equals("Jual Bebas")){
-           this.txt_nota.setText("JB/"+Utilitas.tglsekarang()+"/" +this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+//           this.txt_nota.setText("JB/"+Utilitas.tglsekarang()+"/" +this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+             this.txt_nota.setText("JB/"+Utilitas.tglsekarang()+"/" +this.lbl_kode.getText()+"-"+countkode("JB/"+Utilitas.tglsekarang()));
         }
         
         else if(lbl_cara_beli.getText().equals("Karyawan")){
-                this.txt_nota.setText("KRY/"+Utilitas.tglsekarang()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+//           this.txt_nota.setText("KRY/"+Utilitas.tglsekarang()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+             this.txt_nota.setText("KRY/"+Utilitas.tglsekarang()+"/"+this.lbl_kode.getText()+"-"+countkode("KRY/"+Utilitas.tglsekarang()));
          }
         else if(lbl_cara_beli.getText().equals("Ranap")){
-            this.txt_nota.setText(txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+//            this.txt_nota.setText("RN/"+txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+              this.txt_nota.setText("RN/"+txt_no_rawat.getText()+"/"+this.lbl_kode.getText()+"-"+countkode("RN/"+txt_no_rawat.getText()));
         }
         else if(lbl_cara_beli.getText().equals("Ralan")){
-            this.txt_nota.setText(txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+//            this.txt_nota.setText("RJ/"+txt_no_rawat.getText()+"/"+ this.lbl_kode.getText()+String.valueOf(LocalDateTime.now().getSecond()+1));
+            this.txt_nota.setText("RJ/"+txt_no_rawat.getText()+"/"+this.lbl_kode.getText()+"-"+countkode("RJ/"+txt_no_rawat.getText()));
         }
         
         
@@ -1053,6 +1070,7 @@ caridata(txt_cari_ralan_ranap.getText());
         bt_det_proses1 = new javax.swing.JButton();
         lbl_hit_total1 = new javax.swing.JLabel();
         txt_hit_jml1 = new javax.swing.JTextField();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         bt_cari_rm = new javax.swing.JButton();
@@ -1628,8 +1646,10 @@ caridata(txt_cari_ralan_ranap.getText());
         jLabel19.setText("tgl");
         jp_barang.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 30, 19));
 
+        buttonGroup1.add(ck_resep_racik);
         ck_resep_racik.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         ck_resep_racik.setText("Resep Racik");
+        ck_resep_racik.setEnabled(false);
         ck_resep_racik.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 ck_resep_racikStateChanged(evt);
@@ -1642,8 +1662,10 @@ caridata(txt_cari_ralan_ranap.getText());
         });
         jp_barang.add(ck_resep_racik, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, -1, -1));
 
+        buttonGroup1.add(ck_resep_tunggal);
         ck_resep_tunggal.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         ck_resep_tunggal.setText("Resep Tunggal");
+        ck_resep_tunggal.setEnabled(false);
         ck_resep_tunggal.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 ck_resep_tunggalStateChanged(evt);
@@ -3289,8 +3311,6 @@ private void savePrint(){
     }
     
     private void bt_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_simpanActionPerformed
-      
-       
         
         if(lbl_cara_beli.getText().equals("Ralan")||lbl_cara_beli.getText().equals("Ranap")){
               if(!(txt_no_rawat.getText().isEmpty()||this.txt_nota.getText().trim().isEmpty()||this.txt_no_rm.getText().isEmpty()||this.txt_nama_pasien.getText().isEmpty())){       
@@ -4929,6 +4949,7 @@ private void savePrint(){
     private javax.swing.JButton bt_print_ulang;
     private javax.swing.JButton bt_proses_cari_registrasi;
     private javax.swing.JButton bt_simpan;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox ck_jual_bebas;
     private javax.swing.JCheckBox ck_jual_karyawan;
     private javax.swing.JCheckBox ck_jual_karyawan_bebas;
