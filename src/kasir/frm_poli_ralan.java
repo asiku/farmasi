@@ -43,6 +43,8 @@ import tools.Utilitas;
  */
 public class frm_poli_ralan extends javax.swing.JFrame {
 
+    private Double alltot=0.0;
+    
     private  int nilai_jam = 0;
     private  int nilai_menit = 0;
     private  int nilai_detik = 0;
@@ -659,11 +661,15 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         txt_bayar3 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        lbl_total_tagihan3 = new javax.swing.JLabel();
+        lbl_total_tagihan = new javax.swing.JLabel();
         txt_bayar4 = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         lbl_total_tagihan4 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        lbl_tot_kamar = new javax.swing.JLabel();
+        lbl_tot_jaspel = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -685,10 +691,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         bt_proses = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tb_jasa_pelayanan = new javax.swing.JTable();
-        jLabel36 = new javax.swing.JLabel();
-        lbl_tot_jaspel = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        lbl_tot_kamar = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tb_lab = new javax.swing.JTable();
@@ -1128,46 +1130,46 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 111, -1, -1));
 
         lbl_tgl_masuk.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_tgl_masuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 132, 19));
+        jPanel4.add(lbl_tgl_masuk, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 132, 19));
 
         jLabel5.setText("Status");
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 60, -1));
 
         lbl_nm_status.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_nm_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 170, 19));
+        jPanel4.add(lbl_nm_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 170, 19));
 
         lbl_status.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel4.add(lbl_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 60, 19));
 
         jLabel6.setText("Poli");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 60, -1));
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 60, -1));
 
         lbl_kode_poli.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_kode_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 60, 19));
+        jPanel4.add(lbl_kode_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 60, 19));
 
         lbl_nm_poli.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_nm_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 210, 19));
+        jPanel4.add(lbl_nm_poli, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 150, 20));
 
         lbl_no_sep.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_no_sep, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 170, 19));
+        jPanel4.add(lbl_no_sep, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, 170, 19));
 
         lbl.setText("No. SEP");
-        jPanel4.add(lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 130, -1));
+        jPanel4.add(lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 60, -1));
 
         jLabel14.setText("Kelas");
-        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 60, -1));
+        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, 60, -1));
 
         lbl_kelas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_kelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 150, 19));
+        jPanel4.add(lbl_kelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 150, 19));
 
         jLabel17.setText("Kamar");
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 60, -1));
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 60, -1));
 
         lbl_kamar_inap.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.add(lbl_kamar_inap, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 210, 180, 19));
+        jPanel4.add(lbl_kamar_inap, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 180, 19));
 
         jLabel21.setText("Tgl Registrasi");
-        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 108, -1));
+        jPanel4.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 108, -1));
 
         jLabel18.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel18.setText("Biaya Regist.");
@@ -1202,8 +1204,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel20.setText("Total Tagihan");
         jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 180, 130, -1));
 
-        lbl_total_tagihan3.setText("0");
-        jPanel4.add(lbl_total_tagihan3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 180, 30));
+        lbl_total_tagihan.setText("0");
+        jPanel4.add(lbl_total_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 180, 30));
         jPanel4.add(txt_bayar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 180, 30));
 
         jLabel33.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
@@ -1216,6 +1218,20 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel32.setText("Sisa Tagihan");
         jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, 130, -1));
+
+        jLabel38.setText("Biaya Kamar ");
+        jPanel4.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, -1, -1));
+
+        lbl_tot_kamar.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        lbl_tot_kamar.setText("0");
+        jPanel4.add(lbl_tot_kamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 100, -1));
+
+        lbl_tot_jaspel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        lbl_tot_jaspel.setText("0");
+        jPanel4.add(lbl_tot_jaspel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, 100, -1));
+
+        jLabel36.setText("Jasa Pelayanan");
+        jPanel4.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, -1, -1));
 
         jTabbedPane3.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1319,13 +1335,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel11.setText("Tgl Pulang dan Jam Pulang Ranap");
         jPanel10.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, -1));
 
+        bt_proses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/tick_ico.png"))); // NOI18N
         bt_proses.setText("Proses");
         bt_proses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_prosesActionPerformed(evt);
             }
         });
-        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 100, 50));
+        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 310, 30));
 
         tb_jasa_pelayanan.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         tb_jasa_pelayanan.setModel(new javax.swing.table.DefaultTableModel(
@@ -1339,20 +1356,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jScrollPane7.setViewportView(tb_jasa_pelayanan);
 
         jPanel10.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 690, 90));
-
-        jLabel36.setText("Jasa Pelayanan");
-        jPanel10.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, -1, -1));
-
-        lbl_tot_jaspel.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        lbl_tot_jaspel.setText("0");
-        jPanel10.add(lbl_tot_jaspel, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 100, -1));
-
-        jLabel38.setText("Kamar ");
-        jPanel10.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
-
-        lbl_tot_kamar.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        lbl_tot_kamar.setText("0");
-        jPanel10.add(lbl_tot_kamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 100, -1));
 
         jTabbedPane4.addTab("Tagihan Inap", jPanel10);
 
@@ -2337,14 +2340,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
    }
    
    private Double sumkamarinap(){
-     double tot=0.0;
+    double tot=0.0;
+    
+      
+     
        if(tb_biaya_inap.getModel().getRowCount()>0){
           
            for(int i=0;i<tb_biaya_inap.getModel().getRowCount();i++){
             tot=tot+Double.parseDouble(tb_biaya_inap.getModel().getValueAt(i, 7).toString());
           }
        }
-     
+    
+    
        return tot;
    }
    
@@ -2466,6 +2473,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                  setMasukdatInput(srow);
                  setBiayaTindakan();
                  
+                 setAllTot();
                 
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
@@ -2704,6 +2712,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 //                   setBiayaTindakanRanap();
                  //edit 13 jan 2017
                  setBiayaKamarinap();
+                 
+                 setAllTot();
+                 
                 //txt_tarif.requestFocus();
                 this.txt_cari_reg.requestFocus();
 
@@ -2893,6 +2904,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
       hapusjaspel();
       setBiayaJaspel();
       
+      setAllTot();
     }//GEN-LAST:event_bt_prosesActionPerformed
 
     private void bt_save_deposit_plafon_bpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save_deposit_plafon_bpjsActionPerformed
@@ -2998,17 +3010,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
          modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString()),
             tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
          dat.CloseCon();
-           lbl_tot_jaspel.setText(Utilitas.formatuang(sumjaspel()));
+          
          } 
         
         tb_jasa_pelayanan.setModel(modelpelayanan);
-        
+         lbl_tot_jaspel.setText(Utilitas.formatuang(sumjaspel()));
         
        } catch (Exception ex) {
            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
        }
   }  
-    
+  
+  private void setAllTot(){
+     alltot=Double.parseDouble(lbl_biaya_reg.getText())+this.sumjaspel()+this.sumkamarinap()+this.sumlab()+this.sumobat()+this.sumtindakan();
+     lbl_total_tagihan.setText(Utilitas.formatuang(alltot));
+  }
+  
   private void setBiayaKamarinap(){
         try {
             
@@ -3231,7 +3248,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_tot_lab;
     private javax.swing.JLabel lbl_tot_obat;
     private javax.swing.JLabel lbl_tot_tindakan;
-    private javax.swing.JLabel lbl_total_tagihan3;
+    private javax.swing.JLabel lbl_total_tagihan;
     private javax.swing.JLabel lbl_total_tagihan4;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
     private javax.swing.JTable tb_biaya_inap;
