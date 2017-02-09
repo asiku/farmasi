@@ -992,7 +992,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lbl_biaya_reg2">
+                <Component class="javax.swing.JLabel" name="lbl_biaya_adm_ranap">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
                   </Properties>

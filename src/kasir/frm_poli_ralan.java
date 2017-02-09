@@ -653,7 +653,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         lbl_biaya_reg = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        lbl_biaya_reg2 = new javax.swing.JLabel();
+        lbl_biaya_adm_ranap = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         txt_bayar1 = new javax.swing.JTextField();
         txt_bayar2 = new javax.swing.JTextField();
@@ -1182,8 +1182,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel28.setText("Biaya Adm. Ranap");
         jPanel4.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
 
-        lbl_biaya_reg2.setText("0");
-        jPanel4.add(lbl_biaya_reg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 170, 30));
+        lbl_biaya_adm_ranap.setText("0");
+        jPanel4.add(lbl_biaya_adm_ranap, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 30, 170, 30));
 
         jLabel29.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel29.setText("Cash");
@@ -3022,8 +3022,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
   }  
   
   private void setAllTot(){
-     alltot=Double.parseDouble(lbl_biaya_reg.getText())+this.sumjaspel()+this.sumkamarinap()+this.sumlab()+this.sumobat()+this.sumtindakan();
+     Double tot=Double.parseDouble(lbl_biaya_reg.getText())+this.sumjaspel()+this.sumkamarinap()+this.sumlab()+this.sumobat()+this.sumtindakan();
      lbl_total_tagihan.setText(Utilitas.formatuang(alltot));
+     
+     // 5 %
+     Double prosentase=alltot*0.05;
+     lbl_biaya_adm_ranap.setText(String.valueOf(prosentase));
+     alltot=tot+prosentase;
   }
   
   private void setBiayaKamarinap(){
@@ -3217,8 +3222,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JLabel lbl;
+    private javax.swing.JLabel lbl_biaya_adm_ranap;
     private javax.swing.JLabel lbl_biaya_reg;
-    private javax.swing.JLabel lbl_biaya_reg2;
     private javax.swing.JLabel lbl_cari;
     private javax.swing.JLabel lbl_cari1;
     private javax.swing.JLabel lbl_cari2;
