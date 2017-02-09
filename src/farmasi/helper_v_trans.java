@@ -27,4 +27,5 @@ public class helper_v_trans {
     public static String KEY_NO_RAWAT="no_rawat"; 
     public static String KEY_NAMA_KARYAWAN="nama_karyawan";
     public static String KEY_KATEGORI="kategori"; 
+    public static String KEY_CARA_BELI="cara_beli"; 
 }

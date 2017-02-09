@@ -159,6 +159,93 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         filterRegInap();
 
+        txt_bayar_debet.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              setHitung();
+            }
+        });
+        
+        txt_bayar_kredit.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              setHitung();
+            }
+        });
+        
+        txt_bayar_asuransi.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              setHitung();
+            }
+        });
+        
+        
+        txt_bayar_cash.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               setHitung();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              setHitung();
+            }
+        });
+        
+        txt_cari_jual_bebas.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               carijualbebas();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                carijualbebas();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              carijualbebas();
+            }
+        });
+        
+        
         txt_cari_nota.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -489,6 +576,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     }
     
+     private void setukurantbjual_bebas() {
+
+        this.tb_jual_bebas.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_jual_bebas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr = this.tb_jual_bebas.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(120);
+        tr.getColumn(1).setPreferredWidth(150);
+        tr.getColumn(2).setPreferredWidth(200);
+        tr.getColumn(3).setPreferredWidth(40);
+        tr.getColumn(4).setPreferredWidth(90);
+        tr.getColumn(5).setPreferredWidth(105);
+    }
+    
+    
+    
     private void setukurantbobat() {
 
         this.tb_obat.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
@@ -595,6 +698,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         mnu_item_hapus_tindakan = new javax.swing.JMenuItem();
         Popup_history = new javax.swing.JPopupMenu();
         item_hapus = new javax.swing.JMenuItem();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         ToolBar = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         lbl_jam = new javax.swing.JLabel();
@@ -655,16 +759,16 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         lbl_biaya_adm_ranap = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        txt_bayar1 = new javax.swing.JTextField();
-        txt_bayar2 = new javax.swing.JTextField();
+        txt_bayar_cash = new javax.swing.JTextField();
+        txt_bayar_kredit = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        txt_bayar3 = new javax.swing.JTextField();
+        txt_bayar_debet = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         lbl_total_tagihan = new javax.swing.JLabel();
-        txt_bayar4 = new javax.swing.JTextField();
+        txt_bayar_asuransi = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        lbl_total_tagihan4 = new javax.swing.JLabel();
+        lbl_sisa_tagihan = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         lbl_tot_kamar = new javax.swing.JLabel();
@@ -703,15 +807,19 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tb_obat = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         txt_cari_nota = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        lbl_tot_alkes = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        tb_obat1 = new javax.swing.JTable();
-        txt_cari_nota1 = new javax.swing.JTextField();
+        tb_jual_bebas = new javax.swing.JTable();
+        txt_cari_jual_bebas = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
+        ck_umum = new javax.swing.JCheckBox();
+        ck_kary = new javax.swing.JCheckBox();
         jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
+        lbl_tot_jual_bebas = new javax.swing.JLabel();
+        lbl_tot_jual_bebas_alkes = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
         txt_plafon_bpjs1 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         txt_plafon_bpjs = new javax.swing.JTextField();
@@ -894,12 +1002,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(lbl_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bt_nota, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_save, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_save2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(864, Short.MAX_VALUE))
+                .addContainerGap(901, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1188,8 +1296,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel29.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel29.setText("Cash");
         jPanel4.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, -1, -1));
-        jPanel4.add(txt_bayar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 170, 30));
-        jPanel4.add(txt_bayar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 170, 30));
+        jPanel4.add(txt_bayar_cash, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 170, 30));
+        jPanel4.add(txt_bayar_kredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 170, 30));
 
         jLabel30.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel30.setText("Kartu Kredit");
@@ -1198,7 +1306,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel31.setText("Kartu Debet");
         jPanel4.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, -1, -1));
-        jPanel4.add(txt_bayar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 180, 30));
+        jPanel4.add(txt_bayar_debet, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 180, 30));
 
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel20.setText("Total Tagihan");
@@ -1206,14 +1314,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_total_tagihan.setText("0");
         jPanel4.add(lbl_total_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 180, 30));
-        jPanel4.add(txt_bayar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 180, 30));
+        jPanel4.add(txt_bayar_asuransi, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 180, 30));
 
         jLabel33.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel33.setText("Asuransi");
         jPanel4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 120, 90, -1));
 
-        lbl_total_tagihan4.setText("0");
-        jPanel4.add(lbl_total_tagihan4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 150, 30));
+        lbl_sisa_tagihan.setText("0");
+        jPanel4.add(lbl_sisa_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 150, 30));
 
         jLabel32.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel32.setText("Sisa Tagihan");
@@ -1405,11 +1513,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel26.setText("Total  ");
-        jPanel16.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(409, 23, -1, -1));
+        jLabel26.setText("Total Obat  ");
+        jPanel16.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
         lbl_tot_obat.setText("0");
-        jPanel16.add(lbl_tot_obat, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 23, 214, -1));
+        jPanel16.add(lbl_tot_obat, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 130, -1));
 
         tb_obat.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_obat.setModel(new javax.swing.table.DefaultTableModel(
@@ -1428,13 +1536,19 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel16.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 691, 220));
 
         jLabel8.setText("No. Nota");
-        jPanel16.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 23, -1, -1));
-        jPanel16.add(txt_cari_nota, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 21, 311, -1));
+        jPanel16.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
+        jPanel16.add(txt_cari_nota, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 50, -1));
+
+        jLabel35.setText("Total  Alkes ");
+        jPanel16.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, -1));
+
+        lbl_tot_alkes.setText("0");
+        jPanel16.add(lbl_tot_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 20, 150, -1));
 
         jTabbedPane4.addTab("Tagihan Obat", jPanel16);
 
-        tb_obat1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        tb_obat1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_jual_bebas.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        tb_jual_bebas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1445,17 +1559,38 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane11.setViewportView(tb_obat1);
+        tb_jual_bebas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_jual_bebasMouseReleased(evt);
+            }
+        });
+        jScrollPane11.setViewportView(tb_jual_bebas);
 
         jLabel22.setText("No. Nota");
 
-        jCheckBox3.setText("Umum");
+        buttonGroup3.add(ck_umum);
+        ck_umum.setText("Umum");
+        ck_umum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ck_umumActionPerformed(evt);
+            }
+        });
 
-        jCheckBox4.setText("Karyawan");
+        buttonGroup3.add(ck_kary);
+        ck_kary.setText("Karyawan");
+        ck_kary.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ck_karyActionPerformed(evt);
+            }
+        });
 
-        jLabel34.setText("Total  ");
+        jLabel34.setText("Total  Obat");
 
-        jLabel35.setText("0");
+        lbl_tot_jual_bebas.setText("0");
+
+        lbl_tot_jual_bebas_alkes.setText("0");
+
+        jLabel37.setText("Total  Alkes");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1463,18 +1598,26 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_cari_nota1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBox4)
-                .addGap(8, 8, 8)
-                .addComponent(jCheckBox3)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel34)
+                        .addGap(0, 4, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel34)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_cari_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_tot_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(ck_kary)
+                        .addGap(50, 50, 50)
+                        .addComponent(ck_umum))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(jLabel37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_tot_jual_bebas_alkes, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(126, 126, 126))
             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel15Layout.createSequentialGroup()
                     .addContainerGap()
@@ -1487,16 +1630,20 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(txt_cari_nota1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
+                    .addComponent(txt_cari_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ck_umum)
+                    .addComponent(ck_kary))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_tot_jual_bebas)
                     .addComponent(jLabel34)
-                    .addComponent(jLabel35))
-                .addContainerGap(239, Short.MAX_VALUE))
+                    .addComponent(jLabel37)
+                    .addComponent(lbl_tot_jual_bebas_alkes))
+                .addContainerGap(220, Short.MAX_VALUE))
             .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel15Layout.createSequentialGroup()
-                    .addGap(41, 41, 41)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(67, 67, 67)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -2367,6 +2514,17 @@ public class frm_poli_ralan extends javax.swing.JFrame {
        return tot;
    }
    
+   private Double sumobatjualbebas(){
+     double tot=0.0;
+       if(tb_jual_bebas.getModel().getRowCount()>0){
+          
+           for(int i=0;i<tb_jual_bebas.getModel().getRowCount();i++){
+            tot=tot+Double.parseDouble(tb_jual_bebas.getModel().getValueAt(i, 5).toString());
+          }
+       }
+     
+       return tot;
+   }
    
     private Double sumlab(){
      double tot=0.0;
@@ -2440,6 +2598,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             setBiayaLab();
             setBiayaObat();
             
+            lbl_tot_kamar.setText("0");
+            
+            lbl_tot_jaspel.setText("0");
+            
 //            hpsbiaya();
             
             //close b
@@ -2459,7 +2621,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     
     private void tb_regMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_regMouseReleased
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             int row = this.tb_reg.getSelectedRow();
 
             if (row == -1) {
@@ -2694,7 +2856,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void tb_reg_inapMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_reg_inapMouseReleased
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 1) {
             int row = this.tb_reg_inap.getSelectedRow();
 
             if (row == -1) {
@@ -2891,7 +3053,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
               }
                   
               lbl_tot_kamar.setText(Utilitas.formatuang(sumkamarinap()));
-          
+              setAllTot();
                 //Utilitas.Hitungtgl(ateFormatter.format(dt_tgl_reg2.getDate()),jam,tb_biaya_inap.getModel().getValueAt(i, 4), tb_biaya_inap.getModel().getValueAt(i, 5))
             } catch (ParseException ex) {
                 
@@ -2923,6 +3085,106 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private void bt_save_deposit_plafon_bpjs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save_deposit_plafon_bpjs1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_save_deposit_plafon_bpjs1ActionPerformed
+
+    private void carijualbebas(){
+    
+    try {
+            
+            datl=new Crud_local();
+            datl.readRec_ObatKasirJualBebas(txt_cari_jual_bebas.getText());
+            datl.CloseCon();
+            
+          if(ck_kary.isSelected())  
+          { 
+            tb_jual_bebas.setModel(datl.modelobatkasirjualbebaskary);
+          }
+          else{
+            tb_jual_bebas.setModel(datl.modelobatkasirjualbebas);  
+          }
+            setukurantbjual_bebas();
+            lbl_tot_jual_bebas.setText(Utilitas.formatuang(sumobatjualbebas()));
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void setHitung(){
+        
+        if(txt_bayar_cash.getText().isEmpty()){
+           txt_bayar_cash.setText("0");
+        }
+        
+        if(txt_bayar_debet.getText().isEmpty()){
+           txt_bayar_debet.setText("0");
+        }
+        
+        if(txt_bayar_kredit.getText().isEmpty()){
+           txt_bayar_kredit.setText("0");
+        }
+        
+        if(txt_bayar_asuransi.getText().isEmpty()){
+           txt_bayar_asuransi.setText("0");
+        }
+        
+        
+//        Double tot= (Double.parseDouble(txt_bayar_cash.getText())
+//                     +Double.parseDouble(txt_bayar_debet.getText())
+//                     +Double.parseDouble(txt_bayar_kredit.getText())
+//                     +Double.parseDouble(txt_bayar_asuransi.getText()))-alltot;
+////                     
+////             lbl_total_tagihan.setText(String.valueOf(Double.parseDouble(txt_bayar_cash.getText())
+////                     +Double.parseDouble(txt_bayar_debet.getText())
+////                     +Double.parseDouble(txt_bayar_kredit.getText())
+////                     +Double.parseDouble(txt_bayar_asuransi.getText())));
+////             
+//             lbl_sisa_tagihan.setText(Utilitas.formatuang(tot));
+    }
+    
+    private void ck_karyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_karyActionPerformed
+        try {
+            // TODO add your handling code here:
+            datl=new Crud_local();
+            datl.readRec_ObatKasirJualBebas("");
+            datl.CloseCon();
+            tb_jual_bebas.setModel(datl.modelobatkasirjualbebaskary);
+            setukurantbjual_bebas();
+            lbl_tot_jual_bebas.setText("0");
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_ck_karyActionPerformed
+
+    private void ck_umumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ck_umumActionPerformed
+        // TODO add your handling code here:
+         try {
+            // TODO add your handling code here:
+            datl=new Crud_local();
+            datl.readRec_ObatKasirJualBebas("");
+            datl.CloseCon();
+            tb_jual_bebas.setModel(datl.modelobatkasirjualbebas);
+            setukurantbjual_bebas();
+            
+            lbl_tot_jual_bebas.setText("0");
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_ck_umumActionPerformed
+
+    private void tb_jual_bebasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_jual_bebasMouseReleased
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2) {
+            int row = this.tb_jual_bebas.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                txt_cari_jual_bebas.setText(tb_jual_bebas.getModel().getValueAt(row, 0).toString());
+            }
+         }
+    }//GEN-LAST:event_tb_jual_bebasMouseReleased
 
     private void hapusjaspel(){
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
@@ -3022,13 +3284,29 @@ public class frm_poli_ralan extends javax.swing.JFrame {
   }  
   
   private void setAllTot(){
-     Double tot=Double.parseDouble(lbl_biaya_reg.getText())+this.sumjaspel()+this.sumkamarinap()+this.sumlab()+this.sumobat()+this.sumtindakan();
-     lbl_total_tagihan.setText(Utilitas.formatuang(alltot));
+      
+     Double totinap = 0.0;
+     
+     if(sumkamarinap()!=null){
+        totinap=sumkamarinap();
+     } 
+     
+     Double tot=Double.parseDouble(lbl_biaya_reg.getText())+this.sumjaspel()+totinap+this.sumlab()+this.sumobat()+this.sumtindakan();
+     
+     
+     
+     
      
      // 5 %
-     Double prosentase=alltot*0.05;
-     lbl_biaya_adm_ranap.setText(String.valueOf(prosentase));
+     Double prosentase=tot*0.05;
+     
+     lbl_biaya_adm_ranap.setText(Utilitas.formatdigit(prosentase));
+     
      alltot=tot+prosentase;
+     
+     lbl_total_tagihan.setText(Utilitas.formatuang(alltot));
+     
+//     this.setHitung();
   }
   
   private void setBiayaKamarinap(){
@@ -3147,6 +3425,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JButton bt_save_deposit_plafon_bpjs1;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JCheckBox ck_kary;
+    private javax.swing.JCheckBox ck_umum;
     private javax.swing.JDialog dlg_dpjp;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
@@ -3154,8 +3435,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JMenuItem item_hapus;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3185,6 +3464,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3243,36 +3523,39 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_petugas_input_history;
     private javax.swing.JLabel lbl_poli;
     private javax.swing.JLabel lbl_poli1;
+    private javax.swing.JLabel lbl_sisa_tagihan;
     private javax.swing.JLabel lbl_stat_pasien;
     private javax.swing.JLabel lbl_stat_tgl;
     private javax.swing.JLabel lbl_status;
     private javax.swing.JLabel lbl_tgl_masuk;
     private javax.swing.JLabel lbl_tgl_server;
+    private javax.swing.JLabel lbl_tot_alkes;
     private javax.swing.JLabel lbl_tot_jaspel;
+    private javax.swing.JLabel lbl_tot_jual_bebas;
+    private javax.swing.JLabel lbl_tot_jual_bebas_alkes;
     private javax.swing.JLabel lbl_tot_kamar;
     private javax.swing.JLabel lbl_tot_lab;
     private javax.swing.JLabel lbl_tot_obat;
     private javax.swing.JLabel lbl_tot_tindakan;
     private javax.swing.JLabel lbl_total_tagihan;
-    private javax.swing.JLabel lbl_total_tagihan4;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
     private javax.swing.JTable tb_biaya_inap;
     private javax.swing.JTable tb_biaya_tindakan;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_jasa_pelayanan;
+    private javax.swing.JTable tb_jual_bebas;
     private javax.swing.JTable tb_lab;
     private javax.swing.JTable tb_obat;
-    private javax.swing.JTable tb_obat1;
     private javax.swing.JTable tb_reg;
     private javax.swing.JTable tb_reg_inap;
     private javax.swing.JTable tb_unit_detail_history;
-    private javax.swing.JTextField txt_bayar1;
-    private javax.swing.JTextField txt_bayar2;
-    private javax.swing.JTextField txt_bayar3;
-    private javax.swing.JTextField txt_bayar4;
+    private javax.swing.JTextField txt_bayar_asuransi;
+    private javax.swing.JTextField txt_bayar_cash;
+    private javax.swing.JTextField txt_bayar_debet;
+    private javax.swing.JTextField txt_bayar_kredit;
+    private javax.swing.JTextField txt_cari_jual_bebas;
     private javax.swing.JTextField txt_cari_nama_tindakan;
     private javax.swing.JTextField txt_cari_nota;
-    private javax.swing.JTextField txt_cari_nota1;
     private javax.swing.JTextField txt_cari_petugas;
     private javax.swing.JTextField txt_cari_reg;
     private javax.swing.JTextField txt_cari_reg_ranap;

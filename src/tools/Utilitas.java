@@ -112,6 +112,14 @@ public class Utilitas {
 
     }
 
+    
+    public static String formatdigit(Double hrg){
+    
+    DecimalFormat df2 = new DecimalFormat(".##"); 
+    return df2.format(hrg);
+    
+    }
+    
     public static String formatuang(Double hrg) {
 
         DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
