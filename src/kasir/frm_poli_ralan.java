@@ -598,7 +598,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tb_obat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel tr = this.tb_obat.getColumnModel();
 
-        tr.getColumn(0).setPreferredWidth(160);
+        tr.getColumn(0).setPreferredWidth(180);
         tr.getColumn(1).setPreferredWidth(280);
         tr.getColumn(2).setPreferredWidth(40);
         tr.getColumn(3).setPreferredWidth(100);
@@ -644,7 +644,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         tr.getColumn(0).setPreferredWidth(50);
         tr.getColumn(1).setPreferredWidth(71);
-        tr.getColumn(2).setPreferredWidth(328);
+        tr.getColumn(2).setPreferredWidth(210);
         tr.getColumn(3).setPreferredWidth(100);
         tr.getColumn(4).setPreferredWidth(100);
     }
@@ -809,6 +809,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         txt_cari_nota = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
         lbl_tot_alkes = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        lbl_tot_obat_grand = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         tb_jual_bebas = new javax.swing.JTable();
@@ -820,6 +822,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_tot_jual_bebas = new javax.swing.JLabel();
         lbl_tot_jual_bebas_alkes = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        lbl_tot_jual_bebas_grand = new javax.swing.JLabel();
         txt_plafon_bpjs1 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         txt_plafon_bpjs = new javax.swing.JTextField();
@@ -1513,11 +1517,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel26.setText("Total Obat  ");
-        jPanel16.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+        jLabel26.setText("Grand Total");
+        jPanel16.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, -1, -1));
 
         lbl_tot_obat.setText("0");
-        jPanel16.add(lbl_tot_obat, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 130, -1));
+        jPanel16.add(lbl_tot_obat, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 120, -1));
 
         tb_obat.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_obat.setModel(new javax.swing.table.DefaultTableModel(
@@ -1536,16 +1540,24 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel16.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 691, 220));
 
         jLabel8.setText("No. Nota");
-        jPanel16.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, -1, -1));
-        jPanel16.add(txt_cari_nota, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, 50, -1));
+        jPanel16.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
+        jPanel16.add(txt_cari_nota, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 50, -1));
 
         jLabel35.setText("Total  Alkes ");
         jPanel16.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 100, -1));
 
         lbl_tot_alkes.setText("0");
-        jPanel16.add(lbl_tot_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 20, 150, -1));
+        jPanel16.add(lbl_tot_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 20, 130, -1));
+
+        jLabel39.setText("Total Obat  ");
+        jPanel16.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+
+        lbl_tot_obat_grand.setText("0");
+        jPanel16.add(lbl_tot_obat_grand, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 140, -1));
 
         jTabbedPane4.addTab("Tagihan Obat", jPanel16);
+
+        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tb_jual_bebas.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         tb_jual_bebas.setModel(new javax.swing.table.DefaultTableModel(
@@ -1566,7 +1578,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         });
         jScrollPane11.setViewportView(tb_jual_bebas);
 
+        jPanel15.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 80, 667, 180));
+        jPanel15.add(txt_cari_jual_bebas, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 12, 178, -1));
+
         jLabel22.setText("No. Nota");
+        jPanel15.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 14, 83, -1));
 
         buttonGroup3.add(ck_umum);
         ck_umum.setText("Umum");
@@ -1575,6 +1591,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 ck_umumActionPerformed(evt);
             }
         });
+        jPanel15.add(ck_umum, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, -1));
 
         buttonGroup3.add(ck_kary);
         ck_kary.setText("Karyawan");
@@ -1583,69 +1600,25 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 ck_karyActionPerformed(evt);
             }
         });
+        jPanel15.add(ck_kary, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 10, -1, -1));
 
         jLabel34.setText("Total  Obat");
+        jPanel15.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         lbl_tot_jual_bebas.setText("0");
+        jPanel15.add(lbl_tot_jual_bebas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 119, -1));
 
         lbl_tot_jual_bebas_alkes.setText("0");
+        jPanel15.add(lbl_tot_jual_bebas_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 117, -1));
 
-        jLabel37.setText("Total  Alkes");
+        jLabel37.setText("Grand Total");
+        jPanel15.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel34)
-                        .addGap(0, 4, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_cari_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_tot_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(ck_kary)
-                        .addGap(50, 50, 50)
-                        .addComponent(ck_umum))
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel37)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbl_tot_jual_bebas_alkes, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(126, 126, 126))
-            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel15Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(txt_cari_jual_bebas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ck_umum)
-                    .addComponent(ck_kary))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_tot_jual_bebas)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel37)
-                    .addComponent(lbl_tot_jual_bebas_alkes))
-                .addContainerGap(220, Short.MAX_VALUE))
-            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel15Layout.createSequentialGroup()
-                    .addGap(67, 67, 67)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
+        jLabel40.setText("Total  Alkes");
+        jPanel15.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
+
+        lbl_tot_jual_bebas_grand.setText("0");
+        jPanel15.add(lbl_tot_jual_bebas_grand, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 150, 20));
 
         jTabbedPane4.addTab("Tagihan Obat Jual Bebas", jPanel15);
 
@@ -2362,6 +2335,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             
             lbl_tot_obat.setText(Utilitas.formatuang(sumobat()));
             
+            lbl_tot_alkes.setText(Utilitas.formatuang(sumobatAlkes()));
+            
         } catch (Exception ex) {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2501,16 +2476,39 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     
        return tot;
    }
-   
-   private Double sumobat(){
+
+   private Double sumobatAlkes(){
      double tot=0.0;
+     
        if(tb_obat.getModel().getRowCount()>0){
           
            for(int i=0;i<tb_obat.getModel().getRowCount();i++){
-            tot=tot+Double.parseDouble(tb_obat.getModel().getValueAt(i, 4).toString());
+            if(tb_obat.getModel().getValueAt(i, 11).toString().equals("ALK")){    
+             tot=tot+Double.parseDouble(tb_obat.getModel().getValueAt(i, 4).toString());
+            }
+            
           }
        }
      
+       return tot;
+   }
+
+   
+   private Double sumobat(){
+     double tot=0.0;
+     double grandtot=0.0;
+     
+       if(tb_obat.getModel().getRowCount()>0){
+          
+           for(int i=0;i<tb_obat.getModel().getRowCount();i++){
+            if(tb_obat.getModel().getValueAt(i, 11).toString().equals("OBR")||
+                    tb_obat.getModel().getValueAt(i, 11).toString().equals("resep")){    
+             tot=tot+Double.parseDouble(tb_obat.getModel().getValueAt(i, 4).toString());
+            }
+            grandtot=grandtot+Double.parseDouble(tb_obat.getModel().getValueAt(i, 4).toString());
+          }
+       }
+        lbl_tot_obat_grand.setText(Utilitas.formatuang(grandtot));
        return tot;
    }
    
@@ -3466,7 +3464,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3533,9 +3533,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_tot_jaspel;
     private javax.swing.JLabel lbl_tot_jual_bebas;
     private javax.swing.JLabel lbl_tot_jual_bebas_alkes;
+    private javax.swing.JLabel lbl_tot_jual_bebas_grand;
     private javax.swing.JLabel lbl_tot_kamar;
     private javax.swing.JLabel lbl_tot_lab;
     private javax.swing.JLabel lbl_tot_obat;
+    private javax.swing.JLabel lbl_tot_obat_grand;
     private javax.swing.JLabel lbl_tot_tindakan;
     private javax.swing.JLabel lbl_total_tagihan;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;

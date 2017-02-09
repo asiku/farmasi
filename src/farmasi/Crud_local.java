@@ -87,7 +87,8 @@ public class Crud_local extends DBKoneksi_local {
                                                    "rsbpjs","drbpjs","saranabpjs","Status verif bpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs"};
     
      
-    String[] obat_kasir_title = new String[]{"No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Harga Beli","No. Rawat","No. RM","Nama Pasien","Karyawan","Jual Bebas","Kategori","Tgl","Petugas","HPP","Profit"};
+    String[] obat_kasir_title = new String[]{"No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Harga Beli","No. Rawat","No. RM","Nama Pasien","Karyawan","Jual Bebas","Kategori","Tgl"
+                                             ,"Petugas","HPP","Profit"};
      
     public DefaultTableModel modelobatkasir = new DefaultTableModel(obat_kasir_title, 0) {
         public boolean isCellEditable(int row, int column) {

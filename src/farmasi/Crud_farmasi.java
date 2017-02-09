@@ -829,7 +829,7 @@ public class Crud_farmasi extends DBkoneksi {
         double hrgralanalk=0.0;
         double hrgkaryalk=0.0;
         
-        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_NAME);
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_brg.TB_NAME );
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
