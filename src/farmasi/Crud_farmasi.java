@@ -865,6 +865,28 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    
+    public String cari_sep(String norawat){
+        String nosep="";
+     try {  
+     preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_registrasi.TB_VNAME + " WHERE "
+                     + helper_registrasi.KEY_NO_RAWAT + " =?" );
+             
+             preparedStatement.setString(1, norawat);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+      
+
+      while (resultSet.next()) {
+        nosep = resultSet.getString(helper_registrasi.KEY_NO_SEP);
+      }
+      } catch (SQLException ex) {
+             Logger.getLogger(Crud_farmasi.class.getName()).log(Level.SEVERE, null, ex);
+         }
+     
+     return nosep;
+    }
+    
     public void readRec_registrasiKasir(String tgl,String nm,int s)  {
 
     try {    
