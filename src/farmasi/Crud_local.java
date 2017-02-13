@@ -36,6 +36,10 @@ import tarif.frm_tarif;
  */
 public class Crud_local extends DBKoneksi_local {
     
+    
+    public static String kelasupdate = "";
+    public static String tarifupdate="";
+    
     public static String tgl1="";
     public static String tgl2="";
     
@@ -1079,6 +1083,34 @@ public class Crud_local extends DBKoneksi_local {
      
     }
      
+    public void CariKelastindakan(String nm,String kelas,String stat) throws SQLException{
+      preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE " 
+        + helper_tarif.KEY_STATUS_PENGESAH + " =? AND "
+        + helper_tarif.KEY_STATUS_VERIF + " =? AND "        
+        + helper_tarif.KEY_NAMA_TINDAKAN + " like ? ");
+        
+        preparedStatement.setString(1, "ok");
+        preparedStatement.setString(2, "ok");
+        preparedStatement.setString(3, "%" + nm + "%");
+    
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+       
+        
+        while (resultSet.next()) {
+         if(resultSet.getString(helper_tarif.KEY_KELAS).equalsIgnoreCase(kelas)||resultSet.getString(helper_tarif.KEY_KELAS).equalsIgnoreCase("-")){
+           if(stat.equals("BPJS"))  {
+             kelasupdate = resultSet.getString(helper_tarif.KEY_KELAS);
+             tarifupdate = resultSet.getString(helper_tarif.KEY_TARIF_TINDAKAN_BPJS);
+           }
+           else{
+            tarifupdate = resultSet.getString(helper_tarif.KEY_TARIF_TINDAKAN);
+           }
+            
+         }
+        }
+    }  
+     
     public void readRec_cariTarifTemplate(String nm,boolean i,int idpoli,String kelas) throws SQLException {
     
      if(i){    
@@ -1090,6 +1122,8 @@ public class Crud_local extends DBKoneksi_local {
         preparedStatement.setString(1, "ok");
         preparedStatement.setString(2, "ok");
         preparedStatement.setString(3, "%" + nm + "%");
+        
+       
      }
      else{
          preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_tarif.V_NAME + " WHERE "
@@ -2579,6 +2613,36 @@ public class Crud_local extends DBKoneksi_local {
         }
         
    }
+   
+   
+   public void updateNaikKelas(String ckode_tarif,String ukode_tarif,String noraw) {
+    
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_unit_detail.TB_NAME + " set " 
+                    + helper_unit_detail.KEY_KODE_TARIF+"=?"
+                    +" where "+ helper_unit_detail.KEY_KODE_TARIF + "=? AND "
+                    + helper_unit_detail.KEY_NO_RAWAT+"=?");
+            
+           
+            preparedStatement.setString(1, ukode_tarif);
+            preparedStatement.setString(2, ckode_tarif);
+            preparedStatement.setString(3, noraw);
+             
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Update");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//           JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+            JOptionPane.showMessageDialog(null, "Gagal Update "+ex.getMessage());
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+   
    
    public void updateTarifStatus(String kode_tarif,String status_pengesah,String status_verif) {
     

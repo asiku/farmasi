@@ -44,7 +44,7 @@ import unit_poli.frm_poli;
  *
  * @author jengcool
  */
-public class frm_poli_ralan extends javax.swing.JFrame {
+public class frm_poli_ralan_BAK extends javax.swing.JFrame {
 
     private Double alltot=0.0;
     
@@ -129,12 +129,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     /**
      * Creates new form frm_poli
      */
-    public frm_poli_ralan() {
+    public frm_poli_ralan_BAK() {
         initComponents();
 
     }
 
-    public frm_poli_ralan(String nmp, String poli) {
+    public frm_poli_ralan_BAK(String nmp, String poli) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -162,25 +162,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         filterRegInap();
 
-        
-        txt_cari_tindakan.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-               settbpilih(txt_cari_tindakan.getText(),true);
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                settbpilih(txt_cari_tindakan.getText(),true);
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-              settbpilih(txt_cari_tindakan.getText(),true);
-            }
-        });
-        
-        
         txt_bayar_debet.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -455,9 +436,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
     
             } catch (SQLException ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             }
        
     }
@@ -544,9 +525,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 dat.CloseCon();
     
             } catch (SQLException ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             JOptionPane.showMessageDialog(null, "SerVer tidak Terkoneksi");
@@ -831,6 +812,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tb_biaya_tindakan = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
         lbl_tot_tindakan = new javax.swing.JLabel();
+        ck_cost_bpjs_tindakan = new javax.swing.JCheckBox();
         lbl_status_naik_kelas = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -844,11 +826,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         bt_proses = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tb_jasa_pelayanan = new javax.swing.JTable();
+        ck_cost_bpjs_jp = new javax.swing.JCheckBox();
+        ck_cost_bpjs_kamar = new javax.swing.JCheckBox();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tb_lab = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         lbl_tot_lab = new javax.swing.JLabel();
+        ck_cost_bpjs_lab = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         lbl_tot_obat = new javax.swing.JLabel();
@@ -860,6 +845,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_tot_alkes = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         lbl_tot_obat_grand = new javax.swing.JLabel();
+        ck_cost_bpjs_alkes = new javax.swing.JCheckBox();
+        ck_cost_bpjs_obat_alkes = new javax.swing.JCheckBox();
+        ck_cost_bpjs_obat = new javax.swing.JCheckBox();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         tb_jual_bebas = new javax.swing.JTable();
@@ -976,7 +964,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         Popup_history.add(item_hapus);
 
         dlg_update_naik_kelas.setModal(true);
-        dlg_update_naik_kelas.setPreferredSize(new java.awt.Dimension(614, 496));
         dlg_update_naik_kelas.setSize(new java.awt.Dimension(614, 496));
 
         jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1106,11 +1093,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         bt_update_tindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/edit_ic.png"))); // NOI18N
         bt_update_tindakan.setText("Update");
-        bt_update_tindakan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_update_tindakanActionPerformed(evt);
-            }
-        });
 
         bt_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/delete_ic.png"))); // NOI18N
         bt_batal.setText("Batal");
@@ -1640,6 +1622,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_tot_tindakan.setText("0");
 
+        ck_cost_bpjs_tindakan.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_tindakan.setText("Semua Tindakan di Masukan BPJS Cost Sharing");
+
         lbl_status_naik_kelas.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -1648,7 +1633,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(lbl_status_naik_kelas, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(ck_cost_bpjs_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 97, Short.MAX_VALUE))
+                    .addComponent(lbl_status_naik_kelas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel25)
                 .addGap(29, 29, 29)
@@ -1661,15 +1650,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_status_naik_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(ck_cost_bpjs_tindakan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_status_naik_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel25)
                         .addComponent(lbl_tot_tindakan)))
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                    .addContainerGap(34, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(58, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -1727,7 +1719,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_prosesActionPerformed(evt);
             }
         });
-        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 18, 330, -1));
+        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 18, 110, -1));
 
         tb_jasa_pelayanan.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         tb_jasa_pelayanan.setModel(new javax.swing.table.DefaultTableModel(
@@ -1741,6 +1733,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jScrollPane7.setViewportView(tb_jasa_pelayanan);
 
         jPanel10.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 690, 90));
+
+        ck_cost_bpjs_jp.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_jp.setText("BPJS Cost Sharing Jasa Pelayanan");
+        jPanel10.add(ck_cost_bpjs_jp, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 40, -1, -1));
+
+        ck_cost_bpjs_kamar.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_kamar.setText("BPJS Cost Sharing Kamar Inap");
+        jPanel10.add(ck_cost_bpjs_kamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 200, -1));
 
         jTabbedPane4.addTab("Tagihan Inap", jPanel10);
 
@@ -1762,13 +1762,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_tot_lab.setText("0");
 
+        ck_cost_bpjs_lab.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_lab.setText("Semua Tindakan LAB di Masukan BPJS Cost Sharing");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(ck_cost_bpjs_lab, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_tot_lab, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1780,8 +1785,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_tot_lab)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ck_cost_bpjs_lab)))
+                .addGap(8, 8, 8)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1810,7 +1817,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         ));
         jScrollPane10.setViewportView(tb_obat);
 
-        jPanel16.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 691, 220));
+        jPanel16.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 72, 691, 200));
 
         jLabel8.setText("No. Nota");
         jPanel16.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
@@ -1827,6 +1834,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_tot_obat_grand.setText("0");
         jPanel16.add(lbl_tot_obat_grand, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 140, -1));
+
+        ck_cost_bpjs_alkes.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_alkes.setText("Alkes BPJS Cost Sharing");
+        jPanel16.add(ck_cost_bpjs_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 160, -1));
+
+        ck_cost_bpjs_obat_alkes.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_obat_alkes.setText("Semua Obat/Alkes di Masukan BPJS Cost Sharing");
+        jPanel16.add(ck_cost_bpjs_obat_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        ck_cost_bpjs_obat.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_obat.setText("Obat BPJS Cost Sharing");
+        jPanel16.add(ck_cost_bpjs_obat, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 160, -1));
 
         jTabbedPane4.addTab("Tagihan Obat", jPanel16);
 
@@ -1932,7 +1951,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         });
         jPanel7.add(bt_save_deposit_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 90, 40));
 
-        cmb_cara_bayar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "===CARA BAYAR===", "LUNAS", "PIUTANG" }));
+        cmb_cara_bayar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "===CARA BAYAR===", "LUNAS", "PIUTANG", "COST SHARING BPJS" }));
         jPanel7.add(cmb_cara_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 200, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -2272,7 +2291,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
                  
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             }
               
 
@@ -2287,7 +2306,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
                 hapusmodelunitdetail();
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             }
                 
              
@@ -2403,7 +2422,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             datl.CloseCon();
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
     
        
@@ -2446,7 +2465,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 //            }
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
       
         
@@ -2583,7 +2602,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             lbl_tot_obat.setText(Utilitas.formatuang(sumobat()));
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
        
       
@@ -2606,7 +2625,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             lbl_tot_alkes.setText(Utilitas.formatuang(sumobatAlkes()));
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
        
       
@@ -2637,7 +2656,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             setukurantblab();
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
        
       
@@ -2710,7 +2729,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           hpsbiaya();
         
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
         
        
@@ -2899,7 +2918,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 //        } 
         
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
         
        
@@ -2956,7 +2975,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             a=datl.readRec_Hitkasir(this.txt_no_rawat.getText());
             System.out.println(a);
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
         
      return a;
@@ -2979,7 +2998,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 }
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Gagal Hapus!");
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -3114,9 +3133,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 dat.CloseCon();
     
             } catch (SQLException ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_bt_cari_tglActionPerformed
 
@@ -3133,23 +3152,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "Pembayaran Melebihi Tagihan");
       }
       else{
-          if(this.lbl_status.getText().equals("A17")||this.lbl_status.getText().equals("2")){
-             if(!(txt_bayar_asuransi.getText().equals("")||txt_bayar_asuransi.getText().equals(0)||
-                     txt_plafon_bpjs.getText().equals(0)||txt_plafon_bpjs.getText().equals(""))){
+          if(this.cmb_cara_bayar.getSelectedItem().equals("COST SHARING BPJS")){
+             if(!(txt_bayar_asuransi.getText().equals("")||txt_bayar_asuransi.getText().equals(0))){
                 //save
              }
              else{
-               JOptionPane.showMessageDialog(null, "Pembayaran Asuransi/Pembayaran BPJS/Coding BPJS masih 0 atau belum diisi!");
-             }
-          }
-          else if(this.lbl_status.getText().equals("A18")||this.lbl_status.getText().equals("7")
-                  ||this.lbl_status.getText().equals("8")||this.lbl_status.getText().equals("9")
-                  ||this.lbl_status.getText().equals("11")||this.lbl_status.getText().equals("10")){
-              if(!(txt_bayar_asuransi.getText().equals("")||txt_bayar_asuransi.getText().equals(0))){
-                //save
-             }
-             else{
-               JOptionPane.showMessageDialog(null, "Pembayaran Asuransi/Pembayaran");
+               JOptionPane.showMessageDialog(null, "Pembayaran Asuransi/Pembayaran BPJS masih 0 atau belum diisi!");
              }
           }
           else{
@@ -3396,7 +3404,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 //Utilitas.Hitungtgl(ateFormatter.format(dt_tgl_reg2.getDate()),jam,tb_biaya_inap.getModel().getValueAt(i, 4), tb_biaya_inap.getModel().getValueAt(i, 5))
             } catch (ParseException ex) {
                 
-                Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
       }
@@ -3444,7 +3452,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             lbl_tot_jual_bebas.setText(Utilitas.formatuang(sumobatjualbebas()));
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -3505,7 +3513,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             setukurantbjual_bebas();
             lbl_tot_jual_bebas.setText("0");
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_ck_karyActionPerformed
@@ -3523,7 +3531,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             lbl_tot_jual_bebas.setText("0");
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ck_umumActionPerformed
 
@@ -3542,7 +3550,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void tb_biaya_tindakanMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_biaya_tindakanMouseReleased
         // TODO add your handling code here:
-     
+      
+        
         
         if (evt.getClickCount() == 2) {
             int row = this.tb_biaya_tindakan.getSelectedRow();
@@ -3555,7 +3564,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 
               if(!lbl_status_naik_kelas.getText().isEmpty())  {
               
-                  settbpilih("",false);
+                  settbpilih();
                   
               if(lbl_nm_status.getText().equals("BPJS")){ 
               
@@ -3600,34 +3609,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void tb_tindakan_pilihMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tindakan_pilihMouseReleased
         // TODO add your handling code here:
-        
-        
-               int row = this.tb_tindakan_pilih.getSelectedRow();
-
-            if (row == -1) {
-                // No row selected
-            } else {
-                   try {
-                       lbl_kode_tindakan_update.setText(tb_tindakan_pilih.getModel().getValueAt(row, 0).toString());
-                       lbl_nama_tindakan_update.setText(tb_tindakan_pilih.getModel().getValueAt(row, 1).toString());
-                       
-                       datl=new Crud_local();
-                       
-                       datl.CariKelastindakan(lbl_nama_tindakan_update.getText(), lbl_kelas.getText()
-                               , lbl_nm_status.getText());
-                       
-                       lbl_tarif_update.setText(datl.tarifupdate);
-                       lbl_kelas_update.setText(datl.kelasupdate);
-                               
-                       datl.CloseCon();
-                       
-                   } catch (Exception ex) {
-                       Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-              
-                      
-            }
-        
     }//GEN-LAST:event_tb_tindakan_pilihMouseReleased
 
     private void bt_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_batalActionPerformed
@@ -3645,7 +3626,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 // No row selected
             } else {
                 //maatiin heula dieumah teu penting
-//                this.Popup_CostSharing.show(tb_biaya_tindakan, evt.getX(), evt.getY());
+                this.Popup_CostSharing.show(tb_biaya_tindakan, evt.getX(), evt.getY());
 //                irowhistory = row;
 
             }
@@ -3658,21 +3639,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_mnu_costsharingActionPerformed
-
-    private void bt_update_tindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_update_tindakanActionPerformed
-        try {
-            // TODO add your handling code here:
-            datl=new Crud_local();
-            datl.updateNaikKelas(lbl_kode_tindakan.getText(), lbl_kode_tindakan_update.getText(), txt_no_rawat.getText());
-            setBiayaTindakan();
-            dlg_update_naik_kelas.setVisible(false);
-            
-        } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                       
-       
-    }//GEN-LAST:event_bt_update_tindakanActionPerformed
 
     private void hapusjaspel(){
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
@@ -3767,7 +3733,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
          lbl_tot_jaspel.setText(Utilitas.formatuang(sumjaspel()));
         
        } catch (Exception ex) {
-           Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
        }
   }  
   
@@ -3841,7 +3807,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           
             
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
      
   
@@ -3858,11 +3824,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     }  
   
-  private void settbpilih(String cari,boolean b) {
+  private void settbpilih() {
         try {
             datl = new Crud_local();
 
-            datl.readRec_cariTarifTemplate(cari, b, 2, lbl_kelas.getText());
+            datl.readRec_cariTarifTemplate("", false, 2, lbl_kelas.getText());
 
             datl.CloseCon();
             
@@ -3875,7 +3841,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
   TableColumn col = tb_tindakan_pilih.getColumnModel().getColumn(2);
             tb_tindakan_pilih.removeColumn(col);
         } catch (Exception ex) {
-            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -3897,14 +3863,46 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frm_poli_ralan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frm_poli_ralan_BAK.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -3941,7 +3939,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frm_poli_ralan().setVisible(true);
+                new frm_poli_ralan_BAK().setVisible(true);
             }
         });
 
@@ -3975,6 +3973,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JCheckBox ck_cost_bpjs_alkes;
+    private javax.swing.JCheckBox ck_cost_bpjs_jp;
+    private javax.swing.JCheckBox ck_cost_bpjs_kamar;
+    private javax.swing.JCheckBox ck_cost_bpjs_lab;
+    private javax.swing.JCheckBox ck_cost_bpjs_obat;
+    private javax.swing.JCheckBox ck_cost_bpjs_obat_alkes;
+    private javax.swing.JCheckBox ck_cost_bpjs_tindakan;
     private javax.swing.JCheckBox ck_kary;
     private javax.swing.JCheckBox ck_umum;
     private javax.swing.JComboBox<String> cmb_cara_bayar;

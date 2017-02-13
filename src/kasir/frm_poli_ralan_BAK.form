@@ -116,9 +116,6 @@
     <Container class="javax.swing.JDialog" name="dlg_update_naik_kelas">
       <Properties>
         <Property name="modal" type="boolean" value="true"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[614, 496]"/>
-        </Property>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[614, 496]"/>
         </Property>
@@ -459,9 +456,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Update"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bt_update_tindakanActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="bt_batal">
               <Properties>
@@ -1642,7 +1636,13 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                          <Component id="lbl_status_naik_kelas" pref="396" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="ck_cost_bpjs_tindakan" min="-2" pref="299" max="-2" attributes="0"/>
+                                                  <EmptySpace min="0" pref="97" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Component id="lbl_status_naik_kelas" max="32767" attributes="0"/>
+                                          </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -1658,18 +1658,22 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lbl_status_naik_kelas" min="-2" pref="16" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="ck_cost_bpjs_tindakan" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="lbl_status_naik_kelas" min="-2" pref="16" max="-2" attributes="0"/>
+                                              </Group>
                                               <Group type="103" groupAlignment="3" attributes="0">
                                                   <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="lbl_tot_tindakan" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace pref="241" max="32767" attributes="0"/>
+                                          <EmptySpace pref="218" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace pref="34" max="32767" attributes="0"/>
-                                              <Component id="jScrollPane9" min="-2" pref="223" max="-2" attributes="0"/>
+                                              <EmptySpace pref="58" max="32767" attributes="0"/>
+                                              <Component id="jScrollPane9" min="-2" pref="199" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -1711,6 +1715,14 @@
                                 <Component class="javax.swing.JLabel" name="lbl_tot_tindakan">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="0"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JCheckBox" name="ck_cost_bpjs_tindakan">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Dialog" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Semua Tindakan di Masukan BPJS Cost Sharing"/>
                                   </Properties>
                                 </Component>
                                 <Component class="javax.swing.JLabel" name="lbl_status_naik_kelas">
@@ -2016,7 +2028,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="350" y="18" width="330" height="-1"/>
+                                      <AbsoluteConstraints x="350" y="18" width="110" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2044,6 +2056,32 @@
                                     </Component>
                                   </SubComponents>
                                 </Container>
+                                <Component class="javax.swing.JCheckBox" name="ck_cost_bpjs_jp">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Dialog" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="BPJS Cost Sharing Jasa Pelayanan"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="469" y="40" width="-1" height="-1"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="javax.swing.JCheckBox" name="ck_cost_bpjs_kamar">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Dialog" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="BPJS Cost Sharing Kamar Inap"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="470" y="10" width="200" height="-1"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
                               </SubComponents>
                             </Container>
                             <Container class="javax.swing.JPanel" name="jPanel11">
@@ -2060,6 +2098,8 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jScrollPane8" alignment="0" pref="691" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="ck_cost_bpjs_lab" min="-2" pref="330" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -2074,9 +2114,12 @@
                                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lbl_tot_lab" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel24" min="-2" pref="15" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="jLabel24" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
+                                                  <Component id="ck_cost_bpjs_lab" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                           <Component id="jScrollPane8" min="-2" pref="231" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
@@ -2116,6 +2159,14 @@
                                 <Component class="javax.swing.JLabel" name="lbl_tot_lab">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="0"/>
+                                  </Properties>
+                                </Component>
+                                <Component class="javax.swing.JCheckBox" name="ck_cost_bpjs_lab">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Dialog" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Semua Tindakan LAB di Masukan BPJS Cost Sharing"/>
                                   </Properties>
                                 </Component>
                               </SubComponents>
@@ -2159,7 +2210,7 @@
                                   </AuxValues>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="0" y="52" width="691" height="220"/>
+                                      <AbsoluteConstraints x="0" y="72" width="691" height="200"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -2236,6 +2287,45 @@
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                       <AbsoluteConstraints x="550" y="20" width="140" height="-1"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="javax.swing.JCheckBox" name="ck_cost_bpjs_alkes">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Dialog" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Alkes BPJS Cost Sharing"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="490" y="40" width="160" height="-1"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="javax.swing.JCheckBox" name="ck_cost_bpjs_obat_alkes">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Dialog" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Semua Obat/Alkes di Masukan BPJS Cost Sharing"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="10" y="40" width="-1" height="-1"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="javax.swing.JCheckBox" name="ck_cost_bpjs_obat">
+                                  <Properties>
+                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                      <Font name="Dialog" size="10" style="1"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="Obat BPJS Cost Sharing"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="320" y="40" width="160" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2484,10 +2574,11 @@
                         <Component class="javax.swing.JComboBox" name="cmb_cara_bayar">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="3">
+                              <StringArray count="4">
                                 <StringItem index="0" value="===CARA BAYAR==="/>
                                 <StringItem index="1" value="LUNAS"/>
                                 <StringItem index="2" value="PIUTANG"/>
+                                <StringItem index="3" value="COST SHARING BPJS"/>
                               </StringArray>
                             </Property>
                           </Properties>
