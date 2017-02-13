@@ -747,6 +747,21 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         bt_batal = new javax.swing.JButton();
         Popup_CostSharing = new javax.swing.JPopupMenu();
         mnu_costsharing = new javax.swing.JMenuItem();
+        dlg_deposit = new javax.swing.JDialog();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        txt_kode_deposit = new javax.swing.JTextField();
+        jLabel47 = new javax.swing.JLabel();
+        txt_kode_deposit1 = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        txt_kode_deposit2 = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        txt_kode_deposit3 = new javax.swing.JTextField();
+        jPanel20 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         ToolBar = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         lbl_jam = new javax.swing.JLabel();
@@ -976,7 +991,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         Popup_history.add(item_hapus);
 
         dlg_update_naik_kelas.setModal(true);
-        dlg_update_naik_kelas.setPreferredSize(new java.awt.Dimension(614, 496));
         dlg_update_naik_kelas.setSize(new java.awt.Dimension(614, 496));
 
         jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1185,6 +1199,126 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
         Popup_CostSharing.add(mnu_costsharing);
+
+        jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel44.setText("Kode Deposit");
+
+        jLabel47.setText("Nama Pendeposit");
+
+        jLabel48.setText("telp");
+
+        jLabel49.setText("No Rawat");
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel47)
+                    .addComponent(jLabel48)
+                    .addComponent(jLabel49)
+                    .addComponent(jLabel44))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_kode_deposit1)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_kode_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_kode_deposit2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_kode_deposit3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel44)
+                    .addComponent(txt_kode_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel47)
+                    .addComponent(txt_kode_deposit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel48)
+                    .addComponent(txt_kode_deposit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel49)
+                    .addComponent(txt_kode_deposit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jButton1.setText("jButton1");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jButton2.setText("jButton1");
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout dlg_depositLayout = new javax.swing.GroupLayout(dlg_deposit.getContentPane());
+        dlg_deposit.getContentPane().setLayout(dlg_depositLayout);
+        dlg_depositLayout.setHorizontalGroup(
+            dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlg_depositLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        dlg_depositLayout.setVerticalGroup(
+            dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlg_depositLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -3978,12 +4112,15 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JCheckBox ck_kary;
     private javax.swing.JCheckBox ck_umum;
     private javax.swing.JComboBox<String> cmb_cara_bayar;
+    private javax.swing.JDialog dlg_deposit;
     private javax.swing.JDialog dlg_dpjp;
     private javax.swing.JDialog dlg_update_naik_kelas;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg2;
     private javax.swing.JMenuItem item_hapus;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -4022,8 +4159,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -4039,7 +4180,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -4052,6 +4195,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
@@ -4061,6 +4205,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl;
     private javax.swing.JLabel lbl_biaya_adm_ranap;
     private javax.swing.JLabel lbl_biaya_reg;
@@ -4135,6 +4280,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cari_reg_ranap;
     private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextField txt_cari_tindakan;
+    private javax.swing.JTextField txt_kode_deposit;
+    private javax.swing.JTextField txt_kode_deposit1;
+    private javax.swing.JTextField txt_kode_deposit2;
+    private javax.swing.JTextField txt_kode_deposit3;
     private javax.swing.JTextField txt_nm_pasien;
     private javax.swing.JTextField txt_no_rawat;
     private javax.swing.JTextField txt_no_rm;
