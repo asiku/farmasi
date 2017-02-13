@@ -57,7 +57,7 @@ public class Crud_farmasi extends DBkoneksi {
     
     String[] kamarinap_title_biaya = new String[]{"No. RM", "Nama Pasien", "No. Rawat","Tgl Masuk","Kamar Inap","Kelas","Kode Status","Status","Tarif"};
     
-    String[] kamarinap_title_biayakasir = new String[]{"Kamar","Tarif","Tgl Masuk","Jam Masuk","Tgl Keluar","Jam Keluar","Lama","Total","No. Rawat","Kode"};
+    String[] kamarinap_title_biayakasir = new String[]{"Kamar","Tarif","Tgl Masuk","Jam Masuk","Tgl Keluar","Jam Keluar","Lama","Total","No. Rawat","Kode","Kelas"};
     
 
     
@@ -218,7 +218,7 @@ public class Crud_farmasi extends DBkoneksi {
                 String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
                  String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
                 String jammasuk= resultSet.getString(helper_kamar_inap.KEY_JAM_MASUK);
-                 
+                  String kelas= resultSet.getString(helper_kamar_inap.KEY_KELAS);
                 
                 
                if(resultSet.getString(helper_kamar_inap.KEY_TGL_KELUAR)!=null){
@@ -246,7 +246,7 @@ public class Crud_farmasi extends DBkoneksi {
             
 //                    int lama=resultSet.getInt(helper_kamar_inap.KEY_LAMA);
                 
-               modelkamarinapbiayakasir.addRow(new Object[]{nmbangsal,tarif,tglmasuk,jammasuk,tglkeluar,jamkeluar,lama,tot,norawat,kode});
+               modelkamarinapbiayakasir.addRow(new Object[]{nmbangsal,tarif,tglmasuk,jammasuk,tglkeluar,jamkeluar,lama,tot,norawat,kode,kelas});
                tot=0;
                lama=0;
             }

@@ -700,6 +700,28 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         Popup_history = new javax.swing.JPopupMenu();
         item_hapus = new javax.swing.JMenuItem();
         buttonGroup3 = new javax.swing.ButtonGroup();
+        dlg_update_naik_kelas = new javax.swing.JDialog();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        lbl_kode_tindakan = new javax.swing.JLabel();
+        lbl_nama_tindakan = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        lbl_kode_tindakan_update = new javax.swing.JLabel();
+        lbl_nama_tindakan_update = new javax.swing.JLabel();
+        lbl_ket = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        lbl_tarif = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        lbl_tarif_update = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        tb_biaya_tindakan1 = new javax.swing.JTable();
+        txt_cari_tindakan = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        bt_update_tindakan = new javax.swing.JButton();
+        bt_batal = new javax.swing.JButton();
         ToolBar = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         lbl_jam = new javax.swing.JLabel();
@@ -785,7 +807,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         lbl_tot_tindakan = new javax.swing.JLabel();
         ck_cost_bpjs_tindakan = new javax.swing.JCheckBox();
-        bt_naik_kelas = new javax.swing.JButton();
+        lbl_status_naik_kelas = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_biaya_inap = new javax.swing.JTable();
@@ -934,6 +956,185 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
         Popup_history.add(item_hapus);
+
+        dlg_update_naik_kelas.setModal(true);
+        dlg_update_naik_kelas.setPreferredSize(new java.awt.Dimension(614, 496));
+        dlg_update_naik_kelas.setSize(new java.awt.Dimension(614, 496));
+
+        jPanel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel19.setText("Kode ");
+
+        lbl_kode_tindakan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lbl_nama_tindakan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel41.setText("Tindakan");
+
+        jLabel42.setText("Tindakan");
+
+        jLabel43.setText("Kode ");
+
+        lbl_kode_tindakan_update.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lbl_nama_tindakan_update.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lbl_ket.setForeground(new java.awt.Color(255, 0, 0));
+        lbl_ket.setText("Udate Tindakan ============================================");
+
+        jLabel45.setText("Tarif");
+
+        lbl_tarif.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel46.setText("Tarif");
+
+        lbl_tarif_update.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_ket)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_kode_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_kode_tindakan_update, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_nama_tindakan_update, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_nama_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_tarif_update, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_kode_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_nama_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_ket, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_kode_tindakan_update, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_nama_tindakan_update, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_tarif_update, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        tb_biaya_tindakan1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_biaya_tindakan1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        tb_biaya_tindakan1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_biaya_tindakan1MouseReleased(evt);
+            }
+        });
+        jScrollPane12.setViewportView(tb_biaya_tindakan1);
+
+        jLabel9.setText("Cari Tindakan");
+
+        bt_update_tindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/edit_ic.png"))); // NOI18N
+        bt_update_tindakan.setText("Update");
+
+        bt_batal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/delete_ic.png"))); // NOI18N
+        bt_batal.setText("Batal");
+        bt_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_batalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_cari_tindakan))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bt_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bt_update_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel18Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_cari_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_update_tindakan)
+                    .addComponent(bt_batal))
+                .addContainerGap())
+            .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel18Layout.createSequentialGroup()
+                    .addGap(52, 52, 52)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(51, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout dlg_update_naik_kelasLayout = new javax.swing.GroupLayout(dlg_update_naik_kelas.getContentPane());
+        dlg_update_naik_kelas.getContentPane().setLayout(dlg_update_naik_kelasLayout);
+        dlg_update_naik_kelasLayout.setHorizontalGroup(
+            dlg_update_naik_kelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dlg_update_naik_kelasLayout.setVerticalGroup(
+            dlg_update_naik_kelasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlg_update_naik_kelasLayout.createSequentialGroup()
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1375,6 +1576,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 "Title 1", "Title 2"
             }
         ));
+        tb_biaya_tindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_biaya_tindakanMouseReleased(evt);
+            }
+        });
         jScrollPane9.setViewportView(tb_biaya_tindakan);
 
         jLabel25.setText("Total         ");
@@ -1384,50 +1590,43 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         ck_cost_bpjs_tindakan.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         ck_cost_bpjs_tindakan.setText("Semua Tindakan di Masukan BPJS Cost Sharing");
 
-        bt_naik_kelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/tick_ico.png"))); // NOI18N
-        bt_naik_kelas.setText("Proses Naik Kelas");
-        bt_naik_kelas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_naik_kelasActionPerformed(evt);
-            }
-        });
+        lbl_status_naik_kelas.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ck_cost_bpjs_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel25)
-                        .addGap(29, 29, 29)
-                        .addComponent(lbl_tot_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(bt_naik_kelas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(ck_cost_bpjs_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 97, Short.MAX_VALUE))
+                    .addComponent(lbl_status_naik_kelas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel25)
+                .addGap(29, 29, 29)
+                .addComponent(lbl_tot_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(lbl_tot_tindakan))
+                        .addComponent(ck_cost_bpjs_tindakan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_naik_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(ck_cost_bpjs_tindakan)))
-                .addContainerGap(208, Short.MAX_VALUE))
+                        .addComponent(lbl_status_naik_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel25)
+                        .addComponent(lbl_tot_tindakan)))
+                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                    .addContainerGap(67, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(58, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -2599,8 +2798,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
        }
      
        return tot;
-   }
+   } 
     
+   
+//   private void cekNaikKelas(){
+//      
+//     for(int i=0;i<tb_biaya_tindakan.getModel().getRowCount();i++){  
+//      if(!lbl_kelas.getText().equals(tb_biaya_tindakan.getModel().getValueAt(i, 8))){
+//         lbl_status_naik_kelas.setText("Pasien Naik Kelas dari"+ tb_biaya_tindakan.getModel().getValueAt(i, 8)  + " Ke Kelas " + lbl_kelas.getText());
+//       break;
+//      }
+//      else{
+//        lbl_status_naik_kelas.setText("");
+//      }
+//     }  
+//   }
+   
     private void setBiayaTindakan(){
       
         try {
@@ -2653,6 +2866,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 //            hpsbiayalab();
             setBiayaLab();
             setBiayaObat();
+            
+            
             
             lbl_tot_kamar.setText("0");
             
@@ -3298,10 +3513,39 @@ public class frm_poli_ralan extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_tb_jual_bebasMouseReleased
 
-    private void bt_naik_kelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_naik_kelasActionPerformed
+    private void tb_biaya_tindakanMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_biaya_tindakanMouseReleased
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_bt_naik_kelasActionPerformed
+        if (evt.getClickCount() == 1) {
+            int row = this.tb_biaya_tindakan.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                
+              if(!lbl_status_naik_kelas.getText().isEmpty())  {
+                 this.lbl_ket.setText(lbl_status_naik_kelas.getText());
+                this.lbl_kode_tindakan.setText(tb_biaya_tindakan.getModel().getValueAt(row, 1).toString());
+                this.lbl_nama_tindakan.setText(tb_biaya_tindakan.getModel().getValueAt(row, 2).toString());
+                this.lbl_tarif.setText(tb_biaya_tindakan.getModel().getValueAt(row, 3).toString()); 
+                dlg_update_naik_kelas.setLocationRelativeTo(this);
+                this.dlg_update_naik_kelas.setVisible(true);
+                
+                
+              }
+                 
+            }
+        }   
+    }//GEN-LAST:event_tb_biaya_tindakanMouseReleased
+
+    private void tb_biaya_tindakan1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_biaya_tindakan1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_biaya_tindakan1MouseReleased
+
+    private void bt_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_batalActionPerformed
+        // TODO add your handling code here:
+        dlg_update_naik_kelas.setVisible(false);
+    }//GEN-LAST:event_bt_batalActionPerformed
 
     private void hapusjaspel(){
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
@@ -3460,8 +3704,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             
             setukurantb_biaya_inap();
             
-            
-            
+          
+       if(!lbl_kelas.getText().equals(tb_biaya_inap.getModel().getValueAt(0, 10))){
+         lbl_status_naik_kelas.setText("Pasien Naik Kelas dari "+ tb_biaya_inap.getModel().getValueAt(0, 10)  + " Ke " + lbl_kelas.getText());
+       }
+       else{
+         lbl_status_naik_kelas.setText("");
+       }
           
             
         } catch (Exception ex) {
@@ -3551,10 +3800,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JPopupMenu Popup_history;
     private javax.swing.JTabbedPane Tab_reg;
     private javax.swing.JToolBar ToolBar;
+    private javax.swing.JButton bt_batal;
     private javax.swing.JButton bt_cari_tgl;
     private javax.swing.JButton bt_cari_tgl_tindakan;
     private javax.swing.JButton bt_cari_tindakan;
-    private javax.swing.JButton bt_naik_kelas;
     private javax.swing.JButton bt_nota;
     private javax.swing.JButton bt_pembayaran;
     private javax.swing.JButton bt_proses;
@@ -3562,6 +3811,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JButton bt_save2;
     private javax.swing.JButton bt_save_deposit_plafon_bpjs;
     private javax.swing.JButton bt_save_deposit_plafon_bpjs1;
+    private javax.swing.JButton bt_update_tindakan;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -3576,6 +3826,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JCheckBox ck_umum;
     private javax.swing.JComboBox<String> cmb_cara_bayar;
     private javax.swing.JDialog dlg_dpjp;
+    private javax.swing.JDialog dlg_update_naik_kelas;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg2;
@@ -3590,6 +3841,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -3614,10 +3866,16 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -3626,6 +3884,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3637,6 +3897,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -3657,7 +3918,12 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kamar_inap;
     private javax.swing.JLabel lbl_kelas;
+    private javax.swing.JLabel lbl_ket;
     private javax.swing.JLabel lbl_kode_poli;
+    private javax.swing.JLabel lbl_kode_tindakan;
+    private javax.swing.JLabel lbl_kode_tindakan_update;
+    private javax.swing.JLabel lbl_nama_tindakan;
+    private javax.swing.JLabel lbl_nama_tindakan_update;
     private javax.swing.JLabel lbl_news;
     private javax.swing.JLabel lbl_nip_petugas_pilih;
     private javax.swing.JLabel lbl_nm_poli;
@@ -3673,6 +3939,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_stat_pasien;
     private javax.swing.JLabel lbl_stat_tgl;
     private javax.swing.JLabel lbl_status;
+    private javax.swing.JLabel lbl_status_naik_kelas;
+    private javax.swing.JLabel lbl_tarif;
+    private javax.swing.JLabel lbl_tarif_update;
     private javax.swing.JLabel lbl_tgl_masuk;
     private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JLabel lbl_tot_alkes;
@@ -3689,6 +3958,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
     private javax.swing.JTable tb_biaya_inap;
     private javax.swing.JTable tb_biaya_tindakan;
+    private javax.swing.JTable tb_biaya_tindakan1;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_jasa_pelayanan;
     private javax.swing.JTable tb_jual_bebas;
@@ -3708,6 +3978,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cari_reg;
     private javax.swing.JTextField txt_cari_reg_ranap;
     private javax.swing.JTextField txt_cari_rm;
+    private javax.swing.JTextField txt_cari_tindakan;
     private javax.swing.JTextField txt_nm_pasien;
     private javax.swing.JTextField txt_no_rawat;
     private javax.swing.JTextField txt_no_rm;
