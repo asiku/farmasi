@@ -784,6 +784,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tb_biaya_tindakan = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
         lbl_tot_tindakan = new javax.swing.JLabel();
+        ck_cost_bpjs_tindakan = new javax.swing.JCheckBox();
+        bt_naik_kelas = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_biaya_inap = new javax.swing.JTable();
@@ -796,11 +798,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         bt_proses = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tb_jasa_pelayanan = new javax.swing.JTable();
+        ck_cost_bpjs_jp = new javax.swing.JCheckBox();
+        ck_cost_bpjs_kamar = new javax.swing.JCheckBox();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tb_lab = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         lbl_tot_lab = new javax.swing.JLabel();
+        ck_cost_bpjs_lab = new javax.swing.JCheckBox();
         jPanel16 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         lbl_tot_obat = new javax.swing.JLabel();
@@ -812,6 +817,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         lbl_tot_alkes = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         lbl_tot_obat_grand = new javax.swing.JLabel();
+        ck_cost_bpjs_alkes = new javax.swing.JCheckBox();
+        ck_cost_bpjs_obat_alkes = new javax.swing.JCheckBox();
+        ck_cost_bpjs_obat = new javax.swing.JCheckBox();
         jPanel15 = new javax.swing.JPanel();
         jScrollPane11 = new javax.swing.JScrollPane();
         tb_jual_bebas = new javax.swing.JTable();
@@ -832,7 +840,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         bt_save_deposit_plafon_bpjs = new javax.swing.JButton();
         bt_pembayaran = new javax.swing.JButton();
         bt_save_deposit_plafon_bpjs1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmb_cara_bayar = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_unit_detail_history = new javax.swing.JTable();
@@ -1323,8 +1331,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel4.add(txt_bayar_asuransi, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 180, 30));
 
         jLabel33.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jLabel33.setText("Asuransi");
-        jPanel4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 120, 90, -1));
+        jLabel33.setText("Asuransi/Pembayaran BPJS");
+        jPanel4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 120, 180, -1));
 
         lbl_sisa_tagihan.setText("0");
         jPanel4.add(lbl_sisa_tagihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 150, 30));
@@ -1373,30 +1381,53 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_tot_tindakan.setText("0");
 
+        ck_cost_bpjs_tindakan.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_tindakan.setText("Semua Tindakan di Masukan BPJS Cost Sharing");
+
+        bt_naik_kelas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/tick_ico.png"))); // NOI18N
+        bt_naik_kelas.setText("Proses Naik Kelas");
+        bt_naik_kelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_naik_kelasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addGap(0, 418, Short.MAX_VALUE)
-                .addComponent(jLabel25)
-                .addGap(29, 29, 29)
-                .addComponent(lbl_tot_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(ck_cost_bpjs_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addGap(29, 29, 29)
+                        .addComponent(lbl_tot_tindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bt_naik_kelas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(lbl_tot_tindakan))
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(lbl_tot_tindakan))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_naik_kelas, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(ck_cost_bpjs_tindakan)))
+                .addContainerGap(208, Short.MAX_VALUE))
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                    .addContainerGap(32, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(67, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -1446,6 +1477,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel11.setText("Tgl Pulang dan Jam Pulang Ranap");
         jPanel10.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 290, -1));
 
+        bt_proses.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         bt_proses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/tick_ico.png"))); // NOI18N
         bt_proses.setText("Proses");
         bt_proses.addActionListener(new java.awt.event.ActionListener() {
@@ -1453,7 +1485,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_prosesActionPerformed(evt);
             }
         });
-        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 310, 30));
+        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 18, 110, -1));
 
         tb_jasa_pelayanan.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         tb_jasa_pelayanan.setModel(new javax.swing.table.DefaultTableModel(
@@ -1467,6 +1499,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jScrollPane7.setViewportView(tb_jasa_pelayanan);
 
         jPanel10.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 690, 90));
+
+        ck_cost_bpjs_jp.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_jp.setText("BPJS Cost Sharing Jasa Pelayanan");
+        jPanel10.add(ck_cost_bpjs_jp, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 40, -1, -1));
+
+        ck_cost_bpjs_kamar.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_kamar.setText("BPJS Cost Sharing Kamar Inap");
+        jPanel10.add(ck_cost_bpjs_kamar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 200, -1));
 
         jTabbedPane4.addTab("Tagihan Inap", jPanel10);
 
@@ -1488,13 +1528,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_tot_lab.setText("0");
 
+        ck_cost_bpjs_lab.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_lab.setText("Semua Tindakan LAB di Masukan BPJS Cost Sharing");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(ck_cost_bpjs_lab, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_tot_lab, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1503,11 +1548,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_tot_lab)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ck_cost_bpjs_lab)))
+                .addGap(8, 8, 8)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1536,7 +1583,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         ));
         jScrollPane10.setViewportView(tb_obat);
 
-        jPanel16.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 52, 691, 220));
+        jPanel16.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 72, 691, 200));
 
         jLabel8.setText("No. Nota");
         jPanel16.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, -1, -1));
@@ -1553,6 +1600,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         lbl_tot_obat_grand.setText("0");
         jPanel16.add(lbl_tot_obat_grand, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 140, -1));
+
+        ck_cost_bpjs_alkes.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_alkes.setText("Alkes BPJS Cost Sharing");
+        jPanel16.add(ck_cost_bpjs_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, 160, -1));
+
+        ck_cost_bpjs_obat_alkes.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_obat_alkes.setText("Semua Obat/Alkes di Masukan BPJS Cost Sharing");
+        jPanel16.add(ck_cost_bpjs_obat_alkes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        ck_cost_bpjs_obat.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        ck_cost_bpjs_obat.setText("Obat BPJS Cost Sharing");
+        jPanel16.add(ck_cost_bpjs_obat, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 160, -1));
 
         jTabbedPane4.addTab("Tagihan Obat", jPanel16);
 
@@ -1658,8 +1717,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         });
         jPanel7.add(bt_save_deposit_plafon_bpjs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 90, 40));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "===CARA BAYAR===", "LUNAS", "PIUTANG", "COST SHARING BPJS" }));
-        jPanel7.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 200, -1));
+        cmb_cara_bayar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "===CARA BAYAR===", "LUNAS", "PIUTANG", "COST SHARING BPJS" }));
+        jPanel7.add(cmb_cara_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 200, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -2568,12 +2627,17 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             dat=new Crud_farmasi();
             Double breg=dat.readRec_BiayaRegkasir(txt_no_rawat.getText());
             dat.CloseCon();
-            
+          if(this.Tab_reg.getSelectedIndex()==0){   
             if(breg!=null)
             {
                lbl_biaya_reg.setText(String.valueOf(breg));
+               lbl_biaya_adm_ranap.setText("0");
             }
-            
+          }
+          else{
+          lbl_biaya_reg.setText("0");
+          
+          }
             
 //            tb_biaya_tindakan.setModel(modelbiaya);
           if(lbl_nm_status.getText().equals("BPJS")){
@@ -2827,6 +2891,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void bt_pembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pembayaranActionPerformed
         // TODO add your handling code here:
+     
+     if(!this.cmb_cara_bayar.getSelectedItem().equals("===CARA BAYAR===")){
+         
        if(lbl_sisa_tagihan.getText().equals("0")){ 
            JOptionPane.showMessageDialog(null, "Sisa Pembayaran Masih Nol");
          
@@ -2835,8 +2902,26 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "Pembayaran Melebihi Tagihan");
       }
       else{
-      
+          if(this.cmb_cara_bayar.getSelectedItem().equals("COST SHARING BPJS")){
+             if(!(txt_bayar_asuransi.getText().equals("")||txt_bayar_asuransi.getText().equals(0))){
+                //save
+             }
+             else{
+               JOptionPane.showMessageDialog(null, "Pembayaran Asuransi/Pembayaran BPJS masih 0 atau belum diisi!");
+             }
+          }
+          else{
+          //save
+          }
+         
       }
+     
+     }        
+     else
+     {
+        JOptionPane.showMessageDialog(null, "Anda Belum memilih Cara Pembayaran!");
+     }
+       
        
     }//GEN-LAST:event_bt_pembayaranActionPerformed
 
@@ -3213,6 +3298,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_tb_jual_bebasMouseReleased
 
+    private void bt_naik_kelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_naik_kelasActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_bt_naik_kelasActionPerformed
+
     private void hapusjaspel(){
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
          HapusRowJaspel();
@@ -3335,7 +3425,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
      }
       
      
-     Double tot=Double.parseDouble(lbl_biaya_reg.getText())+totjaspel+totinap+totlab+totobat+tottindakan;
+     Double tot=totjaspel+totinap+totlab+totobat+tottindakan;
     
     if(this.Tab_reg.getSelectedIndex()!=0){ 
      // 5 %
@@ -3346,7 +3436,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
      alltot=tot+prosentase;
     }
     else{
-       alltot=tot;
+       alltot=tot+Double.parseDouble(lbl_biaya_reg.getText());
     }
      
      lbl_total_tagihan.setText(Utilitas.formatuang(alltot));
@@ -3464,6 +3554,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JButton bt_cari_tgl;
     private javax.swing.JButton bt_cari_tgl_tindakan;
     private javax.swing.JButton bt_cari_tindakan;
+    private javax.swing.JButton bt_naik_kelas;
     private javax.swing.JButton bt_nota;
     private javax.swing.JButton bt_pembayaran;
     private javax.swing.JButton bt_proses;
@@ -3474,14 +3565,21 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JCheckBox ck_cost_bpjs_alkes;
+    private javax.swing.JCheckBox ck_cost_bpjs_jp;
+    private javax.swing.JCheckBox ck_cost_bpjs_kamar;
+    private javax.swing.JCheckBox ck_cost_bpjs_lab;
+    private javax.swing.JCheckBox ck_cost_bpjs_obat;
+    private javax.swing.JCheckBox ck_cost_bpjs_obat_alkes;
+    private javax.swing.JCheckBox ck_cost_bpjs_tindakan;
     private javax.swing.JCheckBox ck_kary;
     private javax.swing.JCheckBox ck_umum;
+    private javax.swing.JComboBox<String> cmb_cara_bayar;
     private javax.swing.JDialog dlg_dpjp;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg2;
     private javax.swing.JMenuItem item_hapus;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

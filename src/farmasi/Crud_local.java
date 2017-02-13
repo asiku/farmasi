@@ -76,9 +76,9 @@ public class Crud_local extends DBKoneksi_local {
     String[] unit_detail = new String[]{"No Rawat", "Kode Tindakan", "Tindakan", "Petugas", "Tgl Tindakan", "Username"};
     
             
-    String[] biaya_tindakan_titlebpjs = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan BPJS","rsbpjs","drbpjs","saranabpjs","nip"}; 
+    String[] biaya_tindakan_titlebpjs = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan BPJS","rsbpjs","drbpjs","saranabpjs","nip","kelas"}; 
     
-    String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","Biaya Reg"};
+    String[] biaya_tindakan_title = new String[]{"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","Biaya Reg","kelas"};
 
     String[] periksa_lab_title = new String[]{"No Rawat","kode tarif","Nama Tindakan","Tarif","Tarif BPJS"
                                             ,"rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs","Status verif bpjs"};
@@ -1801,6 +1801,7 @@ public class Crud_local extends DBKoneksi_local {
             String norawat = resultSet.getString(helper_v_biaya_tindakan.KEY_NO_RAWAT);
             String kdtarif = resultSet.getString(helper_v_biaya_tindakan.KEY_KODE_TARIF);
             String nmt = resultSet.getString(helper_v_biaya_tindakan.KEY_NAMA_TINDAKAN);
+            String kelas = resultSet.getString(helper_v_biaya_tindakan.KEY_KELAS);
             Double tarif = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN);
             Double tarifbpjs = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN_BPJS);
             Double breg = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_BIAYA_REG);
@@ -1857,9 +1858,9 @@ public class Crud_local extends DBKoneksi_local {
             String nip = resultSet.getString(helper_v_biaya_tindakan.KEY_TARIF_NIP);
 //            {"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","Biaya Reg","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs"};
 //"No Rawat", "Kode Tarif", "Nama Tindakan", "Tarif Tindakan", "Tarif Tindakan BPJS","rs","dr","sarana","rsbpjs","drbpjs","saranabpjs","nip","Biaya Reg"
-            modelbiayatindakan.addRow(new Object[]{norawat, kdtarif, nmt, tarif,tarifbpjs,df2.format(rs),df2.format(dr),df2.format(sarana),df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),nip,breg});
+            modelbiayatindakan.addRow(new Object[]{norawat, kdtarif, nmt, tarif,tarifbpjs,df2.format(rs),df2.format(dr),df2.format(sarana),df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),nip,breg,kelas});
             
-            modelbiayatindakanbpjs.addRow(new Object[]{norawat, kdtarif, nmt,tarifbpjs,df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),nip});
+            modelbiayatindakanbpjs.addRow(new Object[]{norawat, kdtarif, nmt,tarifbpjs,df2.format(rsbpjs),df2.format(drbpjs),df2.format(saranabpjs),nip,kelas});
             
             
         }

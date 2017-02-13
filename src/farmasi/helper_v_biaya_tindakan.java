@@ -18,6 +18,7 @@ public class helper_v_biaya_tindakan {
     public static String KEY_TARIF_TINDAKAN_BPJS = "tarif_tindakan_bpjs";
     public static String KEY_TARIF_BIAYA_REG = "biaya_reg";
     public static String KEY_TARIF_NIP = "nip_petugas";
+    public static String KEY_KELAS = "kelas";
     public static String KEY_TARIF_DR = "presentase_dr";
     public static String KEY_TARIF_RS = "presentase_rs";
     public static String KEY_TARIF_SARANA = "presentase_sarana";
