@@ -26,8 +26,8 @@ public class DBKoneksi_local {
             // Setup the connection with the DB
 
             
-//            String urlcon = "jdbc:mysql://192.168.1.31:3306/rs_juliana";
-		String urlcon = "jdbc:mysql://localhost:3306/rs_juliana";
+            String urlcon = "jdbc:mysql://192.168.1.31:3306/rs_juliana";
+//		String urlcon = "jdbc:mysql://localhost:3306/rs_juliana";
             String user = "root";
             String pwd = "";
 

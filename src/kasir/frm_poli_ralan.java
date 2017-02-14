@@ -163,6 +163,23 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         filterRegInap();
 
         
+        txt_jml_deposit.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               lbl_format_jml_deposit.setText(Utilitas.formatuang(Double.parseDouble(txt_jml_deposit.getText())));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              lbl_format_jml_deposit.setText(Utilitas.formatuang(Double.parseDouble(txt_jml_deposit.getText())));
+            }
+        });
+        
         txt_cari_tindakan.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -752,16 +769,19 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         txt_kode_deposit = new javax.swing.JTextField();
         jLabel47 = new javax.swing.JLabel();
-        txt_kode_deposit1 = new javax.swing.JTextField();
+        txt_nama_pendeposit = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
-        txt_kode_deposit2 = new javax.swing.JTextField();
+        txt_tlp_deposit = new javax.swing.JTextField();
         jLabel49 = new javax.swing.JLabel();
-        txt_kode_deposit3 = new javax.swing.JTextField();
+        txt_jml_deposit = new javax.swing.JTextField();
+        lbl_format_jml_deposit = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        bt_save_deposit = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        bt_delete_deposit = new javax.swing.JButton();
+        bt_keluar = new javax.swing.JButton();
+        lbl_tot_deposit = new javax.swing.JLabel();
         ToolBar = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         lbl_jam = new javax.swing.JLabel();
@@ -1200,15 +1220,21 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         });
         Popup_CostSharing.add(mnu_costsharing);
 
+        dlg_deposit.setModal(true);
+        dlg_deposit.setResizable(false);
+        dlg_deposit.setSize(new java.awt.Dimension(506, 451));
+
         jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel44.setText("Kode Deposit");
+
+        txt_kode_deposit.setEditable(false);
 
         jLabel47.setText("Nama Pendeposit");
 
         jLabel48.setText("telp");
 
-        jLabel49.setText("No Rawat");
+        jLabel49.setText("Jumlah Deposit");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -1219,16 +1245,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel47)
                     .addComponent(jLabel48)
-                    .addComponent(jLabel49)
-                    .addComponent(jLabel44))
+                    .addComponent(jLabel44)
+                    .addComponent(jLabel49))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_kode_deposit1)
+                    .addComponent(txt_nama_pendeposit)
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_kode_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_kode_deposit2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_kode_deposit3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txt_kode_deposit)
+                                .addComponent(txt_tlp_deposit)
+                                .addComponent(txt_jml_deposit, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                            .addComponent(lbl_format_jml_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1242,21 +1270,29 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
-                    .addComponent(txt_kode_deposit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_nama_pendeposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel48)
-                    .addComponent(txt_kode_deposit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_tlp_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel49)
-                    .addComponent(txt_kode_deposit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(txt_jml_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_format_jml_deposit)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton1.setText("jButton1");
+        bt_save_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
+        bt_save_deposit.setText("Save");
+        bt_save_deposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_save_depositActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1271,53 +1307,65 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable1);
 
-        jButton2.setText("jButton1");
+        bt_delete_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/delete_ic.png"))); // NOI18N
+        bt_delete_deposit.setText("Delete");
+
+        bt_keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/log_out.png"))); // NOI18N
+        bt_keluar.setText("Keluar");
+        bt_keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_keluarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                                .addComponent(bt_keluar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bt_delete_deposit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bt_save_deposit))
+                            .addComponent(lbl_tot_deposit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(lbl_tot_deposit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(bt_save_deposit)
+                    .addComponent(bt_delete_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout dlg_depositLayout = new javax.swing.GroupLayout(dlg_deposit.getContentPane());
         dlg_deposit.getContentPane().setLayout(dlg_depositLayout);
         dlg_depositLayout.setHorizontalGroup(
             dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlg_depositLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         dlg_depositLayout.setVerticalGroup(
             dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlg_depositLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -3544,6 +3592,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void bt_save_deposit_plafon_bpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save_deposit_plafon_bpjsActionPerformed
         // TODO add your handling code here:
+        
+       if(!txt_no_rawat.getText().equals("")) 
+       {
+         this.txt_kode_deposit.setText("DP/"+this.txt_no_rawat.getText());
+        
+        dlg_deposit.setLocationRelativeTo(this);
+        dlg_deposit.setVisible(true);
+       }
+       else{
+          JOptionPane.showMessageDialog(null,"Anda Belum Memilih Pasien");
+       }
+        
     }//GEN-LAST:event_bt_save_deposit_plafon_bpjsActionPerformed
 
     private void bt_save2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save2ActionPerformed
@@ -3807,6 +3867,40 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                        
        
     }//GEN-LAST:event_bt_update_tindakanActionPerformed
+
+    private void refreshDeposit(){
+        
+    }
+    
+    private void bt_save_depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save_depositActionPerformed
+        // TODO add your handling code here:
+      if(!(this.txt_no_rawat.getText().trim().equals("")||txt_kode_deposit.getText().trim().equals("")||txt_nama_pendeposit.getText().trim().equals("")
+              ||txt_tlp_deposit.getText().trim().equals("") ||txt_jml_deposit.getText().trim().equals("")||txt_jml_deposit.getText().trim().equals("0") )){  
+            
+          try {
+              
+              datl=new Crud_local();
+              datl.Save_Deposit(txt_kode_deposit.getText(), txt_nama_pendeposit.getText(), txt_tlp_deposit.getText(),this.txt_no_rawat.getText());
+              datl.CloseCon();
+             
+              datl=new Crud_local();
+              datl.Save_DepositDetail(txt_kode_deposit.getText(), Double.parseDouble(txt_jml_deposit.getText()), txt_tlp_deposit.getText(), "bln");
+              datl.CloseCon();
+          
+          } catch (Exception ex) {
+              Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        }
+      else{
+         JOptionPane.showMessageDialog(null, "Data Ada Yg Belum Diisi!");
+      }
+    }//GEN-LAST:event_bt_save_depositActionPerformed
+
+    private void bt_keluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_keluarActionPerformed
+        // TODO add your handling code here:
+        this.dlg_deposit.setVisible(false);
+        
+    }//GEN-LAST:event_bt_keluarActionPerformed
 
     private void hapusjaspel(){
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
@@ -4098,11 +4192,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JButton bt_cari_tgl;
     private javax.swing.JButton bt_cari_tgl_tindakan;
     private javax.swing.JButton bt_cari_tindakan;
+    private javax.swing.JButton bt_delete_deposit;
+    private javax.swing.JButton bt_keluar;
     private javax.swing.JButton bt_nota;
     private javax.swing.JButton bt_pembayaran;
     private javax.swing.JButton bt_proses;
     private javax.swing.JButton bt_save;
     private javax.swing.JButton bt_save2;
+    private javax.swing.JButton bt_save_deposit;
     private javax.swing.JButton bt_save_deposit_plafon_bpjs;
     private javax.swing.JButton bt_save_deposit_plafon_bpjs1;
     private javax.swing.JButton bt_update_tindakan;
@@ -4119,8 +4216,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg1;
     private uz.ncipro.calendar.JDateTimePicker dt_tgl_reg2;
     private javax.swing.JMenuItem item_hapus;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -4212,6 +4307,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_cari;
     private javax.swing.JLabel lbl_cari1;
     private javax.swing.JLabel lbl_cari2;
+    private javax.swing.JLabel lbl_format_jml_deposit;
     private javax.swing.JLabel lbl_jam;
     private javax.swing.JLabel lbl_jamnow;
     private javax.swing.JLabel lbl_kamar_inap;
@@ -4245,6 +4341,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_tgl_masuk;
     private javax.swing.JLabel lbl_tgl_server;
     private javax.swing.JLabel lbl_tot_alkes;
+    private javax.swing.JLabel lbl_tot_deposit;
     private javax.swing.JLabel lbl_tot_jaspel;
     private javax.swing.JLabel lbl_tot_jual_bebas;
     private javax.swing.JLabel lbl_tot_jual_bebas_alkes;
@@ -4280,15 +4377,15 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTextField txt_cari_reg_ranap;
     private javax.swing.JTextField txt_cari_rm;
     private javax.swing.JTextField txt_cari_tindakan;
+    private javax.swing.JTextField txt_jml_deposit;
     private javax.swing.JTextField txt_kode_deposit;
-    private javax.swing.JTextField txt_kode_deposit1;
-    private javax.swing.JTextField txt_kode_deposit2;
-    private javax.swing.JTextField txt_kode_deposit3;
+    private javax.swing.JTextField txt_nama_pendeposit;
     private javax.swing.JTextField txt_nm_pasien;
     private javax.swing.JTextField txt_no_rawat;
     private javax.swing.JTextField txt_no_rm;
     private javax.swing.JLabel txt_petugas_pilih;
     private javax.swing.JTextField txt_plafon_bpjs;
     private javax.swing.JTextField txt_plafon_bpjs1;
+    private javax.swing.JTextField txt_tlp_deposit;
     // End of variables declaration//GEN-END:variables
 }

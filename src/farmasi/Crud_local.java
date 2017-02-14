@@ -546,6 +546,57 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
 
+     public void Save_DepositDetail(String kddepo,Double tot ,String usr, String stat)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_deposit.TB_D_NAME + " (" 
+                    + helper_deposit.KEY_KODE_DEPOSIT + "," 
+                    + helper_deposit.KEY_TOTAL_DEPOSIT + ","
+                    + helper_deposit.KEY_USERNAME  + ","
+                    + helper_deposit.KEY_STATUS + ") "
+                    + " values (?,?,?,?)");
+         
+            preparedStatement.setString(1, kddepo);
+            preparedStatement.setDouble(2, tot);
+            preparedStatement.setString(3, usr);
+            preparedStatement.setString(4, stat);
+           
+            preparedStatement.execute();
+//            JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+     public void Save_Deposit(String kddepo,String nm ,String tlp,String noraw)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_deposit.TB_NAME + " (" 
+                    + helper_deposit.KEY_KODE_DEPOSIT + "," 
+                    + helper_deposit.KEY_NAMA_DEPOSIT + ","
+                     + helper_deposit.KEY_TELP  + ","
+                    + helper_deposit.KEY_NO_RAWAT + ") "
+                    + " values (?,?,?,?)");
+         
+            preparedStatement.setString(1, kddepo);
+            preparedStatement.setString(2, nm);
+            preparedStatement.setString(3, tlp);
+            preparedStatement.setString(4, noraw);
+           
+           
+            preparedStatement.execute();
+            JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     
     
     public void Save_unitAnak(String nmtmp,String nip ,String ptug, String stat)  {
@@ -1467,7 +1518,10 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
+    public void readRec_Deposit(String no){
+       x
     
+    }
     
     public void readRec_cariPoli() throws SQLException {
 
