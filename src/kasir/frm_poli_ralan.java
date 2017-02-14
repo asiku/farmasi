@@ -778,7 +778,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel20 = new javax.swing.JPanel();
         bt_save_deposit = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_deposit = new javax.swing.JTable();
         bt_delete_deposit = new javax.swing.JButton();
         bt_keluar = new javax.swing.JButton();
         lbl_tot_deposit = new javax.swing.JLabel();
@@ -1294,7 +1294,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_deposit.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1305,7 +1305,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tb_deposit);
 
         bt_delete_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/delete_ic.png"))); // NOI18N
         bt_delete_deposit.setText("Delete");
@@ -3869,6 +3869,16 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_update_tindakanActionPerformed
 
     private void refreshDeposit(){
+        try {
+            datl=new Crud_local();
+            datl.readRec_Depositdetail(txt_kode_deposit.getText());
+            datl.CloseCon();
+            
+            this.tb_deposit.setModel(datl.modeldetaildeposit);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
@@ -3887,6 +3897,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
               datl.Save_DepositDetail(txt_kode_deposit.getText(), Double.parseDouble(txt_jml_deposit.getText()), txt_tlp_deposit.getText(), "bln");
               datl.CloseCon();
           
+              refreshDeposit();
           } catch (Exception ex) {
               Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -4300,7 +4311,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl;
     private javax.swing.JLabel lbl_biaya_adm_ranap;
     private javax.swing.JLabel lbl_biaya_reg;
@@ -4357,6 +4367,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTable tb_biaya_inap;
     private javax.swing.JTable tb_biaya_tindakan;
     private javax.swing.JTable tb_cari_petugas;
+    private javax.swing.JTable tb_deposit;
     private javax.swing.JTable tb_jasa_pelayanan;
     private javax.swing.JTable tb_jual_bebas;
     private javax.swing.JTable tb_lab;

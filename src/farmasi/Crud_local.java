@@ -91,9 +91,24 @@ public class Crud_local extends DBKoneksi_local {
                                                    "rsbpjs","drbpjs","saranabpjs","Status verif bpjs","nip","status_pengesah","Status verif","Status_pengesah bpjs"};
     
      
+     
+     
     String[] obat_kasir_title = new String[]{"No. Nota","Nama Barang","Jml", "Harga Satuan", "Total","Harga Beli","No. Rawat","No. RM","Nama Pasien","Karyawan","Jual Bebas","Kategori","Tgl"
                                              ,"Petugas","HPP","Profit"};
      
+ 
+       String[] deposit_detail_title = new String[]{"Kode Deposit","Jml Deposit","tgl","User Name"};
+ 
+    
+      
+    public DefaultTableModel modeldetaildeposit = new DefaultTableModel(deposit_detail_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+   
+      
     public DefaultTableModel modelobatkasir = new DefaultTableModel(obat_kasir_title, 0) {
         public boolean isCellEditable(int row, int column) {
             return false;
@@ -1518,9 +1533,56 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
-    public void readRec_Deposit(String no){
-       x
+    public void readRec_Deposit(String noraw){
+       
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_NAME + " WHERE "
+                    + helper_deposit.KEY_KODE_DEPOSIT + " =?"
+            );
+            
+            preparedStatement.setString(1, noraw);
+            
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                String koded = resultSet.getString(helper_deposit.KEY_KODE_DEPOSIT);
+                Double tot = resultSet.getDouble(helper_deposit.KEY_TOTAL_DEPOSIT);
+                String tgl = resultSet.getString(helper_deposit.KEY_TGL);
+                String usr = resultSet.getString(helper_deposit.KEY_USERNAME);
+                modeldeposit.addRow(new Object[]{koded, tot,tgl,usr});
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
+    public void readRec_Deposit_detail(String noraw){
+       
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_D_NAME + " WHERE "
+                    + helper_deposit.KEY_KODE_DEPOSIT + " =?"
+            );
+            
+            preparedStatement.setString(1, noraw);
+            
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                String koded = resultSet.getString(helper_deposit.KEY_KODE_DEPOSIT);
+                Double tot = resultSet.getDouble(helper_deposit.KEY_TOTAL_DEPOSIT);
+                String tgl = resultSet.getString(helper_deposit.KEY_TGL);
+                String usr = resultSet.getString(helper_deposit.KEY_USERNAME);
+                modeldetaildeposit.addRow(new Object[]{koded, tot,tgl,usr});
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public void readRec_cariPoli() throws SQLException {
