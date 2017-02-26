@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="509" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8664362d-0ffa-43e6-abb2-9767194caca9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="kddeposit" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     *
+FROM
+     `tb_deposit` tb_deposit INNER JOIN `tb_deposit_detail` tb_deposit_detail ON tb_deposit.`kode_deposit` = $P{kddeposit}]]>
+	</queryString>
+	<field name="kode_deposit" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_pendeposit" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_rawat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_deposit" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="username" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="kode_deposit">
+		<groupExpression><![CDATA[$F{kode_deposit}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="116" y="25" width="324" height="18" uuid="e790f694-78ba-45d9-a19b-1368abc21984"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[JL. Raya Tajur No. 75, Bogor, Jawa Barat]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="61" width="552" height="1" uuid="8dd0ff7a-ef79-44ac-9892-e9e7cd0d4fe6"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="116" y="7" width="324" height="18" uuid="2682fcc8-6d79-478e-80f4-454fb2f33244"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RS JULIANA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="43" width="324" height="18" uuid="c2ab4de9-fea5-406a-afb7-c80af01b82cb"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telp: 0251 - 83395993, E-mail : rsiajuliana@gmail.com]]></text>
+			</staticText>
+			<elementGroup>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="0" width="553" height="62" uuid="24ab7a95-397c-4581-8d52-fea09b4c4e98"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</rectangle>
+			</elementGroup>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="148" splitType="Stretch">
+			<textField>
+				<reportElement x="50" y="12" width="142" height="20" uuid="761ee419-a41b-4a51-a162-320ddf5df8d0"/>
+				<textElement>
+					<font size="8" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kode_deposit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="41" width="100" height="20" uuid="46db8b5a-9b7b-4071-853e-82f79ffa76b1"/>
+				<textFieldExpression><![CDATA[$F{nama_pendeposit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="74" width="157" height="20" uuid="c9a7f2df-c86b-495a-8773-402e68a8e790"/>
+				<textFieldExpression><![CDATA[$F{total_deposit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="12" width="43" height="20" uuid="ef68b396-990d-4085-9604-ed8d2d332f26"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="8" width="179" height="20" uuid="e379586c-3dc4-4dfc-b08b-ff4a371270e8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KWITANSI DEPOSIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="41" width="89" height="20" uuid="7074b8ea-716c-432e-a81d-e1b8a3d51411"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telah terima dari]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="74" width="89" height="20" uuid="8e3a779c-e759-4e0a-8246-5f290ff5aac1"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deposit Sejumlah]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="1" y="0" width="554" height="148" uuid="6ea54e0a-8985-4d56-b60a-d38aa8d4e987"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="317" y="120" width="214" height="17" uuid="c0b34119-070c-4a3e-96ba-f58dbb4f3ad6"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[(........................................................)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="377" y="115" width="100" height="20" uuid="269c6e21-d489-4d6d-b5a9-100b765db31d"/>
+				<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="377" y="54" width="89" height="20" uuid="bb4ca3a3-0024-46c9-bcd6-fe67040e79ad"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kasir]]></text>
+			</staticText>
+			<line>
+				<reportElement x="116" y="94" width="157" height="1" uuid="e45d6a5b-8fe5-46ce-aa37-92946530fa0c"/>
+				<graphicElement>
+					<pen lineWidth="1.25" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="8" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="47" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -13,6 +13,7 @@ public class helper_deposit {
     
     public static String TB_NAME = "tb_deposit";
     public static String TB_D_NAME = "tb_deposit_detail";
+    public static String TB_V_NAME = "v_deposit";
     public static String KEY_KODE_DEPOSIT = "kode_deposit";
     public static String KEY_NAMA_DEPOSIT = "nama_pendeposit";
     public static String KEY_TELP = "telp";

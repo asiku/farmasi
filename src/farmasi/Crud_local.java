@@ -100,6 +100,15 @@ public class Crud_local extends DBKoneksi_local {
        String[] deposit_detail_title = new String[]{"Kode Deposit","Jml Deposit","tgl","User Name"};
  
     
+       
+     String[] deposit_title = new String[]{"Kode Deposit","Nama Deposit","telp","No. Rawat"};
+         
+     public DefaultTableModel modeldeposit = new DefaultTableModel(deposit_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };           
       
     public DefaultTableModel modeldetaildeposit = new DefaultTableModel(deposit_detail_title, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -1533,11 +1542,124 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
     
+    public void  Update_deposit_total(String kd,Double tot )
+            {
+    
+         
+         
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_deposit.TB_D_NAME + " set " 
+                    + helper_deposit.KEY_TOTAL_DEPOSIT+"=?"
+                     +" where "+ helper_deposit.KEY_KODE_DEPOSIT + "=?");
+            
+           
+         
+            preparedStatement.setDouble(1, tot);
+            preparedStatement.setString(2, kd);
+             
+            preparedStatement.executeUpdate();
+//            JOptionPane.showMessageDialog(null, "Data Berhasil Di Disimpan");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+//            JOptionPane.showMessageDialog(null, "Gagal Update");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    public String CekStatus_deposit(String kd){
+        
+      String stat="";
+      
+        try {
+          
+            
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_D_NAME +" WHERE "
+                    + helper_deposit.KEY_KODE_DEPOSIT +"=?");
+            
+            preparedStatement.setString(1,  kd );
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                
+                stat=resultSet.getString(helper_deposit.KEY_STATUS);;
+                
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return stat;
+    }
+    
+    
+    public void  Update_deposit(String kd,String nm ,String tlp)
+            {
+    
+         
+         
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_deposit.TB_NAME + " set " 
+                    + helper_deposit.KEY_NAMA_DEPOSIT+"=?," 
+                    + helper_deposit.KEY_TELP+"=?"
+                     +" where "+ helper_deposit.KEY_KODE_DEPOSIT + "=?");
+            
+           
+         
+            preparedStatement.setString(1, nm);
+            preparedStatement.setString(2, tlp);
+            preparedStatement.setString(3, kd);
+             
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Disimpan");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+//            JOptionPane.showMessageDialog(null, "Gagal Update");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+  
+    
+    
+    
+      public int readRec_HitDeposit(String norw) throws SQLException {
+
+       int hit=0;  
+       preparedStatement = connect.prepareStatement("SELECT count(*) as hit FROM " + helper_deposit.TB_NAME +" WHERE "
+       + helper_deposit.KEY_NO_RAWAT +"=?");
+    
+        preparedStatement.setString(1,  norw );
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+  
+            hit=resultSet.getInt("hit");
+            
+        }
+        
+        return hit;
+    }
+     
+    
     public void readRec_Deposit(String noraw){
        
         try {
             preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_NAME + " WHERE "
-                    + helper_deposit.KEY_KODE_DEPOSIT + " =?"
+                    + helper_deposit.KEY_NO_RAWAT + " =?"
             );
             
             preparedStatement.setString(1, noraw);
@@ -1547,10 +1669,11 @@ public class Crud_local extends DBKoneksi_local {
             
             while (resultSet.next()) {
                 String koded = resultSet.getString(helper_deposit.KEY_KODE_DEPOSIT);
-                Double tot = resultSet.getDouble(helper_deposit.KEY_TOTAL_DEPOSIT);
-                String tgl = resultSet.getString(helper_deposit.KEY_TGL);
-                String usr = resultSet.getString(helper_deposit.KEY_USERNAME);
-                modeldeposit.addRow(new Object[]{koded, tot,tgl,usr});
+                String nm = resultSet.getString(helper_deposit.KEY_NAMA_DEPOSIT);
+                String tlp = resultSet.getString(helper_deposit.KEY_TELP);
+                String norawat = resultSet.getString(helper_deposit.KEY_NO_RAWAT);
+             
+                modeldeposit.addRow(new Object[]{koded, nm,tlp,norawat});
                 
             }
         } catch (SQLException ex) {
@@ -1559,14 +1682,69 @@ public class Crud_local extends DBKoneksi_local {
         
     }
     
-    public void readRec_Deposit_detail(String noraw){
+     public void readRec_Deposit_detailC(String kddep){
        
         try {
-            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_D_NAME + " WHERE "
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_V_NAME + " WHERE "
                     + helper_deposit.KEY_KODE_DEPOSIT + " =?"
             );
             
-            preparedStatement.setString(1, noraw);
+            preparedStatement.setString(1, kddep);
+            
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                String koded = resultSet.getString(helper_deposit.KEY_KODE_DEPOSIT);
+                Double tot = resultSet.getDouble(helper_deposit.KEY_TOTAL_DEPOSIT);
+                String tgl = resultSet.getString(helper_deposit.KEY_TGL);
+                String usr = resultSet.getString(helper_deposit.KEY_USERNAME);
+                modeldetaildeposit.addRow(new Object[]{koded, tot,tgl,usr});
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+  
+     
+    public Double readRec_Deposit_total(String norawat){
+       
+         Double tot=0.0;
+         
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_V_NAME + " WHERE "
+                    + helper_deposit.KEY_KODE_DEPOSIT + " =?"
+            );
+            
+            preparedStatement.setString(1, norawat);
+            
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+               
+                 tot = resultSet.getDouble(helper_deposit.KEY_TOTAL_DEPOSIT);
+               
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return tot;
+    }
+     
+    public void readRec_Deposit_detail(String norawat){
+       
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_deposit.TB_V_NAME + " WHERE "
+                    + helper_deposit.KEY_NO_RAWAT + " =?"
+            );
+            
+            preparedStatement.setString(1, norawat);
             
             
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -3179,11 +3357,38 @@ public class Crud_local extends DBKoneksi_local {
         }
     
       
-      
-       
         
     }
         
+     
+     public void DelRecDeposit(String kode) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_deposit.TB_NAME + " where " + helper_deposit.KEY_KODE_DEPOSIT + "=?");
+            preparedStatement.setString(1, kode);
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+    }
+    
+   public void DelRecDepositdetail(String kode) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_deposit.TB_D_NAME + " where " + helper_deposit.KEY_KODE_DEPOSIT + "=?");
+            preparedStatement.setString(1, kode);
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+    }  
+     
      public void DelRecPetugas(String kode) throws SQLException  {
   
         
@@ -3234,6 +3439,34 @@ public class Crud_local extends DBKoneksi_local {
 
     }
    
+ 
+  public void CetakDeposit(String kddep) throws JRException {
+        InputStream is = null;
+        
+     
+        is = getClass().getResourceAsStream("/kasir/report_deposit.jrxml");
+     
+
+        //set parameters
+        Map map = new HashMap();
+        map.put("kddeposit", kddep);
+       
+     
+
+       JasperReport jr = JasperCompileManager.compileReport(is);
+//
+        JasperPrint jp = JasperFillManager.fillReport(jr, map, connect);
+      
+
+      
+        JasperPrintManager.printReport(jp,false);
+//        JasperViewer.viewReport(jp, false);
+//        if(tampil.equals("ok")){
+            JasperViewer.viewReport(jp, false);
+//        }
+       
+    }    
+    
    
   public void CetakTagihanFisio(String nonota,String username,String tampil,int i,String tgl) throws JRException {
 

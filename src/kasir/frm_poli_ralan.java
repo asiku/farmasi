@@ -570,7 +570,32 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         }
     }
+    
+    
 
+    private void setukurantb_deposit() {
+        
+        this.tb_deposit.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_deposit.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr = this.tb_deposit.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(150);
+        tr.getColumn(1).setPreferredWidth(100);
+        tr.getColumn(2).setPreferredWidth(100);
+        tr.getColumn(3).setPreferredWidth(100);
+        
+         this.tb_deposit_master.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+         tb_deposit_master.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr1 = this.tb_deposit_master.getColumnModel();
+
+        tr1.getColumn(0).setPreferredWidth(150);
+        tr1.getColumn(1).setPreferredWidth(150);
+        tr1.getColumn(2).setPreferredWidth(100);
+        tr1.getColumn(3).setPreferredWidth(100);
+
+
+    }        
+            
     private void setukurantbcaripetugas() {
         tb_cari_petugas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel tr = this.tb_cari_petugas.getColumnModel();
@@ -765,6 +790,15 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         Popup_CostSharing = new javax.swing.JPopupMenu();
         mnu_costsharing = new javax.swing.JMenuItem();
         dlg_deposit = new javax.swing.JDialog();
+        jPanel20 = new javax.swing.JPanel();
+        bt_save_deposit = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tb_deposit = new javax.swing.JTable();
+        bt_keluar = new javax.swing.JButton();
+        lbl_tot_deposit = new javax.swing.JLabel();
+        bt_edit_deposit = new javax.swing.JButton();
+        bt_cetak = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel19 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         txt_kode_deposit = new javax.swing.JTextField();
@@ -775,13 +809,14 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel49 = new javax.swing.JLabel();
         txt_jml_deposit = new javax.swing.JTextField();
         lbl_format_jml_deposit = new javax.swing.JLabel();
-        jPanel20 = new javax.swing.JPanel();
-        bt_save_deposit = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tb_deposit = new javax.swing.JTable();
-        bt_delete_deposit = new javax.swing.JButton();
-        bt_keluar = new javax.swing.JButton();
-        lbl_tot_deposit = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        tb_deposit_master = new javax.swing.JTable();
+        Popup_hapus_deposit = new javax.swing.JPopupMenu();
+        mnu_hapus_deposit = new javax.swing.JMenuItem();
+        mnu_edit_deposit = new javax.swing.JMenuItem();
+        Popup_hapus_deposit_detail = new javax.swing.JPopupMenu();
+        mnu_item_hapus_detail = new javax.swing.JMenuItem();
         ToolBar = new javax.swing.JToolBar();
         jPanel2 = new javax.swing.JPanel();
         lbl_jam = new javax.swing.JLabel();
@@ -1222,7 +1257,110 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         dlg_deposit.setModal(true);
         dlg_deposit.setResizable(false);
-        dlg_deposit.setSize(new java.awt.Dimension(506, 451));
+        dlg_deposit.setSize(new java.awt.Dimension(506, 500));
+        dlg_deposit.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        bt_save_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
+        bt_save_deposit.setText("Save");
+        bt_save_deposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_save_depositActionPerformed(evt);
+            }
+        });
+
+        tb_deposit.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        tb_deposit.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_deposit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_depositMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_depositMouseReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tb_deposit);
+
+        bt_keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/log_out.png"))); // NOI18N
+        bt_keluar.setText("Keluar");
+        bt_keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_keluarActionPerformed(evt);
+            }
+        });
+
+        bt_edit_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/edit_ic.png"))); // NOI18N
+        bt_edit_deposit.setText("Edit");
+        bt_edit_deposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_edit_depositActionPerformed(evt);
+            }
+        });
+
+        bt_cetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/farmasi/printer_ico.png"))); // NOI18N
+        bt_cetak.setText("Cetak");
+        bt_cetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cetakActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_tot_deposit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                                .addComponent(bt_cetak)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bt_keluar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bt_edit_deposit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bt_save_deposit)))))
+                .addContainerGap())
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(lbl_tot_deposit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_save_deposit)
+                    .addComponent(bt_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_edit_deposit)
+                    .addComponent(bt_cetak, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+        );
+
+        dlg_deposit.getContentPane().add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 490, 260));
+
+        jTabbedPane2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane2StateChanged(evt);
+            }
+        });
 
         jPanel19.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1232,9 +1370,27 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
         jLabel47.setText("Nama Pendeposit");
 
+        txt_nama_pendeposit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nama_pendepositKeyPressed(evt);
+            }
+        });
+
         jLabel48.setText("telp");
 
+        txt_tlp_deposit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_tlp_depositKeyPressed(evt);
+            }
+        });
+
         jLabel49.setText("Jumlah Deposit");
+
+        txt_jml_deposit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_jml_depositKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -1280,21 +1436,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                     .addComponent(jLabel49)
                     .addComponent(txt_jml_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_format_jml_deposit)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(lbl_format_jml_deposit, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
         );
 
-        jPanel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTabbedPane2.addTab("Input Data Deposit", jPanel19);
 
-        bt_save_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
-        bt_save_deposit.setText("Save");
-        bt_save_deposit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_save_depositActionPerformed(evt);
-            }
-        });
-
-        tb_deposit.setModel(new javax.swing.table.DefaultTableModel(
+        tb_deposit_master.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        tb_deposit_master.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1305,68 +1453,59 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tb_deposit);
-
-        bt_delete_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/delete_ic.png"))); // NOI18N
-        bt_delete_deposit.setText("Delete");
-
-        bt_keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/log_out.png"))); // NOI18N
-        bt_keluar.setText("Keluar");
-        bt_keluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_keluarActionPerformed(evt);
+        tb_deposit_master.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tb_deposit_masterMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_deposit_masterMouseReleased(evt);
             }
         });
+        jScrollPane13.setViewportView(tb_deposit_master);
 
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                                .addComponent(bt_keluar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bt_delete_deposit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bt_save_deposit))
-                            .addComponent(lbl_tot_deposit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(lbl_tot_deposit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_save_deposit)
-                    .addComponent(bt_delete_deposit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout dlg_depositLayout = new javax.swing.GroupLayout(dlg_deposit.getContentPane());
-        dlg_deposit.getContentPane().setLayout(dlg_depositLayout);
-        dlg_depositLayout.setHorizontalGroup(
-            dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        dlg_depositLayout.setVerticalGroup(
-            dlg_depositLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlg_depositLayout.createSequentialGroup()
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jTabbedPane2.addTab("History Deposit", jPanel21);
+
+        dlg_deposit.getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 490, 190));
+
+        mnu_hapus_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/delete_ic.png"))); // NOI18N
+        mnu_hapus_deposit.setText("Hapus Data Deposit");
+        mnu_hapus_deposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_hapus_depositActionPerformed(evt);
+            }
+        });
+        Popup_hapus_deposit.add(mnu_hapus_deposit);
+
+        mnu_edit_deposit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/edit_ic.png"))); // NOI18N
+        mnu_edit_deposit.setText("Edit");
+        mnu_edit_deposit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_edit_depositActionPerformed(evt);
+            }
+        });
+        Popup_hapus_deposit.add(mnu_edit_deposit);
+
+        mnu_item_hapus_detail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/edit_ic.png"))); // NOI18N
+        mnu_item_hapus_detail.setText("Edit Total");
+        mnu_item_hapus_detail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_item_hapus_detailActionPerformed(evt);
+            }
+        });
+        Popup_hapus_deposit_detail.add(mnu_item_hapus_detail);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -3590,15 +3729,63 @@ public class frm_poli_ralan extends javax.swing.JFrame {
       setAllTot();
     }//GEN-LAST:event_bt_prosesActionPerformed
 
+   
+    private int setkode(){
+        int i=0;
+        try {
+            datl=new Crud_local();
+             i=datl.readRec_HitDeposit(txt_no_rawat.getText())+1;
+            datl.CloseCon();
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return i;
+    }
+    
+    private Double sumdeposit(){
+       
+        Double tot=0.0;
+        
+       for(int i=0;i<this.tb_deposit.getModel().getRowCount();i++){
+       
+         tot=tot+Double.parseDouble(this.tb_deposit.getModel().getValueAt(i, 1).toString());
+       }
+        
+       this.lbl_tot_deposit.setText(Utilitas.formatuang(tot));
+       
+       return tot;
+    }
+    
     private void bt_save_deposit_plafon_bpjsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_save_deposit_plafon_bpjsActionPerformed
         // TODO add your handling code here:
         
        if(!txt_no_rawat.getText().equals("")) 
        {
-         this.txt_kode_deposit.setText("DP/"+this.txt_no_rawat.getText());
+           try {
+               this.txt_kode_deposit.setText("DP-"+setkode()+"/"+this.txt_no_rawat.getText());
+               
+               datl=new Crud_local();
+               datl.readRec_Deposit(txt_no_rawat.getText());
+               
+               this.tb_deposit_master.setModel(datl.modeldeposit);
+               
+               datl.CloseCon();
+             
+               
+               this.refreshDeposit();
+                
+               dlg_deposit.setLocationRelativeTo(this);
+               dlg_deposit.setVisible(true);
+               
+                setukurantb_deposit();
+               
+           } catch (Exception ex) {
+               Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+           }
         
-        dlg_deposit.setLocationRelativeTo(this);
-        dlg_deposit.setVisible(true);
        }
        else{
           JOptionPane.showMessageDialog(null,"Anda Belum Memilih Pasien");
@@ -3870,11 +4057,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private void refreshDeposit(){
         try {
+            
+               datl=new Crud_local();
+               datl.readRec_Deposit(txt_no_rawat.getText());
+               
+               this.tb_deposit_master.setModel(datl.modeldeposit);
+            
+            
             datl=new Crud_local();
-            datl.readRec_Depositdetail(txt_kode_deposit.getText());
+            datl.readRec_Deposit_detail(txt_no_rawat.getText());
             datl.CloseCon();
             
             this.tb_deposit.setModel(datl.modeldetaildeposit);
+            
+            setukurantb_deposit();
+            
+            sumdeposit();
             
         } catch (Exception ex) {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
@@ -3894,7 +4092,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
               datl.CloseCon();
              
               datl=new Crud_local();
-              datl.Save_DepositDetail(txt_kode_deposit.getText(), Double.parseDouble(txt_jml_deposit.getText()), txt_tlp_deposit.getText(), "bln");
+              datl.Save_DepositDetail(txt_kode_deposit.getText(), Double.parseDouble(txt_jml_deposit.getText()),  this.lbl_petugas.getText(), "bln");
               datl.CloseCon();
           
               refreshDeposit();
@@ -3912,6 +4110,270 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         this.dlg_deposit.setVisible(false);
         
     }//GEN-LAST:event_bt_keluarActionPerformed
+
+    private void tb_deposit_masterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_deposit_masterMouseReleased
+        // TODO add your handling code here:
+        
+         if (evt.isPopupTrigger()) {
+
+            int row = tb_deposit_master.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                
+                this.Popup_hapus_deposit.show(tb_deposit_master, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+        
+        
+        
+               int row = this.tb_deposit_master.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+               try {
+            
+            datl=new Crud_local();
+            datl.readRec_Deposit_detailC(tb_deposit_master.getModel().getValueAt(row, 0).toString());
+//            datl.readRec_Deposit_detail(this.txt_no_rawat.getText());
+            datl.CloseCon();
+            
+            this.tb_deposit.setModel(datl.modeldetaildeposit);
+            
+            setukurantb_deposit();
+            
+            this.sumdeposit();
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+            }
+    }//GEN-LAST:event_tb_deposit_masterMouseReleased
+
+    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
+        // TODO add your handling code here:
+        if(jTabbedPane2.getSelectedIndex()==1){
+        
+            this.refreshDeposit();
+        
+        }
+    }//GEN-LAST:event_jTabbedPane2StateChanged
+
+    private void mnu_hapus_depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_hapus_depositActionPerformed
+        try {
+            // TODO add your handling code here:
+            datl=new Crud_local();
+            
+           if (!datl.CekStatus_deposit(txt_kode_deposit.getText()).equals("dpt")){
+               
+                datl.CloseCon();
+               
+               int dialogResult = JOptionPane.showConfirmDialog (null, "Apakah Ingin Menghapus Deposit: "+tb_deposit_master.getModel().getValueAt(irowhistory, 1).toString(),"Hapus Data",JOptionPane.YES_NO_OPTION);
+            
+            if(dialogResult == JOptionPane.YES_OPTION){  
+            
+             datl=new Crud_local();
+             datl.DelRecDeposit(tb_deposit_master.getModel().getValueAt(irowhistory, 0).toString());
+            
+             datl.CloseCon();
+             
+             this.refreshDeposit();
+             
+            }
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Total Sudah Terdeposit tidak bisa di Edit!");
+           }            
+          
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_mnu_hapus_depositActionPerformed
+
+    private void tb_deposit_masterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_deposit_masterMousePressed
+        // TODO add your handling code here:
+         if (evt.isPopupTrigger()) {
+
+            int row = tb_deposit_master.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                
+                this.Popup_hapus_deposit.show(tb_deposit_master, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_tb_deposit_masterMousePressed
+
+    private void tb_depositMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_depositMousePressed
+        // TODO add your handling code here:
+         if (evt.isPopupTrigger()) {
+
+            int row = tb_deposit.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                
+                this.Popup_hapus_deposit_detail.show(tb_deposit, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_tb_depositMousePressed
+
+    private void tb_depositMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_depositMouseReleased
+        // TODO add your handling code here:
+          if (evt.isPopupTrigger()) {
+
+            int row = tb_deposit.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                
+                this.Popup_hapus_deposit_detail.show(tb_deposit, evt.getX(), evt.getY());
+                irowhistory = row;
+
+            }
+
+        }
+    }//GEN-LAST:event_tb_depositMouseReleased
+
+    private void mnu_item_hapus_detailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_item_hapus_detailActionPerformed
+        // TODO add your handling code here:
+         try {
+            // TODO add your handling code here:
+//            int dialogResult = JOptionPane.showConfirmDialog (null, "Apakah Ingin Menghapus Total Deposit?","Hapus Data",JOptionPane.YES_NO_OPTION);
+//            
+//            if(dialogResult == JOptionPane.YES_OPTION){
+            
+            txt_jml_deposit.setText(tb_deposit.getModel().getValueAt(irowhistory, 1).toString());
+            txt_kode_deposit.setText(tb_deposit.getModel().getValueAt(irowhistory, 0).toString());
+            
+//            datl=new Crud_local();
+//            datl.DelRecDepositdetail(tb_deposit.getModel().getValueAt(irowhistory, 0).toString());
+//            
+//            datl.CloseCon();
+//            
+//            this.refreshDeposit();
+//            }
+    
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_mnu_item_hapus_detailActionPerformed
+
+    private void txt_nama_pendepositKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nama_pendepositKeyPressed
+        // TODO add your handling code here:
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_tlp_deposit.requestFocus();
+        }
+    }//GEN-LAST:event_txt_nama_pendepositKeyPressed
+
+    private void txt_tlp_depositKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_tlp_depositKeyPressed
+        // TODO add your handling code here:
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_jml_deposit.requestFocus();
+        }
+    }//GEN-LAST:event_txt_tlp_depositKeyPressed
+
+    private void txt_jml_depositKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jml_depositKeyTyped
+        // TODO add your handling code here:
+         char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_jml_depositKeyTyped
+
+    private void bt_edit_depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_edit_depositActionPerformed
+        try {
+            // TODO add your handling code here:
+            datl=new Crud_local();
+            
+            datl.Update_deposit(txt_kode_deposit.getText(), txt_nama_pendeposit.getText(), txt_tlp_deposit.getText());
+            
+            datl.CloseCon();
+            
+             datl=new Crud_local();
+           
+           if (!datl.CekStatus_deposit(txt_kode_deposit.getText()).equals("dpt")){
+               
+               datl.CloseCon();
+               
+               datl=new Crud_local();
+            
+               datl.Update_deposit_total(txt_kode_deposit.getText(),  Double.parseDouble(txt_jml_deposit.getText()));
+            
+               datl.CloseCon();
+           }
+           else{
+               JOptionPane.showMessageDialog(null, "Total Sudah Terdeposit tidak bisa di Edit!");
+           }         
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_bt_edit_depositActionPerformed
+
+    private void mnu_edit_depositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_edit_depositActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            txt_kode_deposit.setText(tb_deposit_master.getModel().getValueAt(irowhistory, 0).toString());
+            txt_nama_pendeposit.setText(tb_deposit_master.getModel().getValueAt(irowhistory, 1).toString());
+            txt_tlp_deposit.setText(tb_deposit_master.getModel().getValueAt(irowhistory, 2).toString());
+            
+            datl=new Crud_local();
+            
+            txt_jml_deposit.setText(String.valueOf(datl.readRec_Deposit_total(tb_deposit_master.getModel().getValueAt(irowhistory, 0).toString())));
+            datl.CloseCon();
+            
+            
+             datl=new Crud_local();
+            datl.readRec_Deposit_detailC(txt_kode_deposit.getText());
+//            datl.readRec_Deposit_detail(this.txt_no_rawat.getText());
+            datl.CloseCon();
+            
+            this.tb_deposit.setModel(datl.modeldetaildeposit);
+            
+            setukurantb_deposit();
+            
+            this.sumdeposit();
+            
+            jTabbedPane2.setSelectedIndex(0);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+    }//GEN-LAST:event_mnu_edit_depositActionPerformed
+
+    private void bt_cetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cetakActionPerformed
+        try {
+            // TODO add your handling code here:
+            datl=new Crud_local();
+            datl.CetakDeposit(txt_kode_deposit.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bt_cetakActionPerformed
 
     private void hapusjaspel(){
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
@@ -4196,6 +4658,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private uz.ncipro.calendar.JDateTimePicker Dttgl2;
     private javax.swing.JPopupMenu Popup_CostSharing;
     private javax.swing.JPopupMenu Popup_hapus;
+    private javax.swing.JPopupMenu Popup_hapus_deposit;
+    private javax.swing.JPopupMenu Popup_hapus_deposit_detail;
     private javax.swing.JPopupMenu Popup_history;
     private javax.swing.JTabbedPane Tab_reg;
     private javax.swing.JToolBar ToolBar;
@@ -4203,7 +4667,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JButton bt_cari_tgl;
     private javax.swing.JButton bt_cari_tgl_tindakan;
     private javax.swing.JButton bt_cari_tindakan;
-    private javax.swing.JButton bt_delete_deposit;
+    private javax.swing.JButton bt_cetak;
+    private javax.swing.JButton bt_edit_deposit;
     private javax.swing.JButton bt_keluar;
     private javax.swing.JButton bt_nota;
     private javax.swing.JButton bt_pembayaran;
@@ -4289,6 +4754,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -4300,6 +4766,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -4309,6 +4776,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JLabel lbl;
@@ -4363,11 +4831,15 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_tot_tindakan;
     private javax.swing.JLabel lbl_total_tagihan;
     private javax.swing.JMenuItem mnu_costsharing;
+    private javax.swing.JMenuItem mnu_edit_deposit;
+    private javax.swing.JMenuItem mnu_hapus_deposit;
+    private javax.swing.JMenuItem mnu_item_hapus_detail;
     private javax.swing.JMenuItem mnu_item_hapus_tindakan;
     private javax.swing.JTable tb_biaya_inap;
     private javax.swing.JTable tb_biaya_tindakan;
     private javax.swing.JTable tb_cari_petugas;
     private javax.swing.JTable tb_deposit;
+    private javax.swing.JTable tb_deposit_master;
     private javax.swing.JTable tb_jasa_pelayanan;
     private javax.swing.JTable tb_jual_bebas;
     private javax.swing.JTable tb_lab;
