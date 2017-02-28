@@ -674,7 +674,44 @@ public class Crud_local extends DBKoneksi_local {
 
     }
     
-   
+   public void  Update_inapanakmasterPerina(String norawat,String nipdpjp ,String nipppjp
+            , boolean statusinap,String perkembangan,String normibu) {
+    
+         
+         
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_unit.TB_NAME + " set " 
+                    + helper_unit.KEY_NIP_DPJP+"=?," 
+                    + helper_unit.KEY_NIP_PPJP+"=?,"
+                    + helper_unit.KEY_STATUSINAP  + "=?,"
+                    + helper_unit.KEY_PERKEMBANGAN  + "=?,"
+                    + helper_unit.KEY_NO_RM_IBU  + "=?"
+                    +" where "+ helper_unit.KEY_NO_RAWAT + "=?");
+            
+           
+           preparedStatement.setString(6, norawat);
+            preparedStatement.setString(1, nipdpjp);
+            preparedStatement.setString(2, nipppjp);
+            preparedStatement.setBoolean(3, statusinap);
+            preparedStatement.setString(4, perkembangan);
+            preparedStatement.setString(5, normibu);
+            
+            
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Disimpan");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+          JOptionPane.showMessageDialog(null, "Gagal Update");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+  
 
      public void  Update_inapanakmaster(String norawat,String nipdpjp ,String nipppjp
             , boolean statusinap,String perkembangan) {
@@ -776,6 +813,40 @@ public class Crud_local extends DBKoneksi_local {
 
     }
  
+    public void Save_inapanakmasterPerina(String norawat,String nipdpjp ,String nipppjp
+            , boolean statusinap,String perkembangan,String statkamar,String normibu)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_unit.TB_NAME + " (" 
+                    + helper_unit.KEY_NO_RAWAT + "," 
+                    + helper_unit.KEY_NIP_DPJP + ","
+                    + helper_unit.KEY_NIP_PPJP  + ","
+                    + helper_unit.KEY_STATUSINAP  + ","
+                    + helper_unit.KEY_PERKEMBANGAN + ","
+                    + helper_unit.KEY_STATUS_KAMAR + ","
+                    + helper_unit.KEY_NO_RM_IBU +") "
+                    + " values (?,?,?,?,?,?,?)");
+         
+            preparedStatement.setString(1, norawat);
+            preparedStatement.setString(2, nipdpjp);
+            preparedStatement.setString(3, nipppjp);
+            preparedStatement.setBoolean(4, statusinap);
+            preparedStatement.setString(5, perkembangan);
+            preparedStatement.setString(6, statkamar);
+            preparedStatement.setString(7, normibu);
+            
+           
+            preparedStatement.execute();
+          JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     
     public void Save_inapanakmaster(String norawat,String nipdpjp ,String nipppjp
             , boolean statusinap,String perkembangan,String statkamar)  {
@@ -1925,6 +1996,30 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
      
+    public String readRec_cariUnitIbu(String noraw){
+        
+        String norm="";
+        
+        try {
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit.TB_NAME+ " WHERE "
+                    + helper_unit.KEY_NO_RAWAT + " =?");
+            
+            preparedStatement.setString(1,noraw);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                norm=resultSet.getString(helper_unit.KEY_NO_RM_IBU);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    
+    return norm;
+    
+    }    
+        
      //edit 26   
      public void readRec_cariUnitMaster(String txtcari,int i) throws SQLException {
 

@@ -61,6 +61,15 @@ public class Crud_farmasi extends DBkoneksi {
     
 
     
+     String[] pasienibu_title = new String[]{"No. RM", "Nama Ibu"};
+     
+     public DefaultTableModel modelpasienibu = new DefaultTableModel(pasienibu_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
+     
             
     public DefaultTableModel modelkamarinapbiayakasir = new DefaultTableModel(kamarinap_title_biayakasir, 0) {
         public boolean isCellEditable(int row, int column) {
@@ -657,6 +666,51 @@ public class Crud_farmasi extends DBkoneksi {
         }
     }
 
+    
+    public void readRec_pasienIbu(String norm) throws SQLException {
+        
+        String nmp = "";
+        String rm="";
+        
+//       if(i==0){ 
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_pasien.TB_NAME + " WHERE "
+                + helper_pasien.KEY_NO_RM + 
+                " like ? OR "  
+                + helper_pasien.KEY_NM_PASIEN + " like ? AND "
+                + helper_pasien.KEY_JK + " =?");
+
+        preparedStatement.setString(1, "%" + norm + "%");
+        preparedStatement.setString(2, "%" + norm + "%");
+        preparedStatement.setString(3, "P");
+//
+//       }
+//       else{
+//       
+//           preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_pasien.TB_NAME + " WHERE "
+//                + helper_pasien.KEY_NO_RM + " =? AND "  + helper_pasien.KEY_JK + " =?");
+//
+//        preparedStatement.setString(1, norm);
+//        preparedStatement.setString(2, "P");
+//       
+//       }
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        
+
+        while (resultSet.next()) {
+
+            rm = resultSet.getString(helper_pasien.KEY_NO_RM);
+            nmp = resultSet.getString(helper_pasien.KEY_NM_PASIEN);
+            
+            modelpasienibu.addRow(new Object[]{rm, nmp});
+
+        }
+
+//        return rm;
+
+    }
+    
+    
     public String readRec_pasien(String norm) throws SQLException {
 
         String nmp = "";
