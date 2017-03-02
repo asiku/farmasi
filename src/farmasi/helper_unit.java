@@ -14,7 +14,7 @@ public class helper_unit {
     public static String TB_VNAME =  "v_unit_anak";
     public static String KEY_NO_RAWAT = "no_rawat";
     public static String KEY_NO_RM = "no_rkm_medis";
-    public static String KEY_NO_RM_IBU = "no_rm_ibu";
+    public static String KEY_NO_RM_IBU = "no_rawat_ibu";
     public static String KEY_NAMA = "nm_pasien";
     public static String KEY_KODE_PJ = "kd_pj";
     public static String KEY_NAMA_PJ = "png_jawab";

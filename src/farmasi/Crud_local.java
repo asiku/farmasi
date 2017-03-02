@@ -1996,13 +1996,16 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
      
-    public String readRec_cariUnitIbu(String noraw){
+    public String readRec_cariNorawatIbu(String noraw){
         
         String norm="";
+        
         
         try {
             preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit.TB_NAME+ " WHERE "
                     + helper_unit.KEY_NO_RAWAT + " =?");
+//preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
+//                    + helper_kamar_inap.KEY_NO_RAWAT + "=?");
             
             preparedStatement.setString(1,noraw);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -2018,7 +2021,8 @@ public class Crud_local extends DBKoneksi_local {
     
     return norm;
     
-    }    
+    }       
+        
         
      //edit 26   
      public void readRec_cariUnitMaster(String txtcari,int i) throws SQLException {

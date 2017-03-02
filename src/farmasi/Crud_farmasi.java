@@ -523,6 +523,12 @@ public class Crud_farmasi extends DBkoneksi {
              if((resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[0])||
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[1])||
                      resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[2])
+                     ||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[3])
+                     ||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[4])
+                     ||
+                     resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL).equalsIgnoreCase(bangsal[5])
                              ))
                  
               {
@@ -536,6 +542,7 @@ public class Crud_farmasi extends DBkoneksi {
                 String norawat = resultSet.getString(helper_kamar_inap.KEY_NO_RAWAT);
                 String tglmasuk= resultSet.getString(helper_kamar_inap.KEY_TGL_MASUK);
                 String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_NM_BANGSAL);
+//                String nmbangsal= resultSet.getString(helper_kamar_inap.KEY_KODE_KAMAR);
                 String kelas= resultSet.getString(helper_kamar_inap.KEY_KELAS);
                 String kdpj= resultSet.getString(helper_kamar_inap.KEY_KODE_STATUS_BAYAR);
                 String pj= resultSet.getString(helper_kamar_inap.KEY_STATUS_BAYAR);
@@ -809,6 +816,36 @@ public class Crud_farmasi extends DBkoneksi {
         
       return nama;
     }
+    
+    
+    
+    public String readRec_cariUnitIbu(String noraw){
+        
+        String norm="";
+        
+        
+        try {
+//            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit.TB_NAME+ " WHERE "
+//                    + helper_unit.KEY_NO_RAWAT + " =?");
+preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEV + " WHERE "
+                    + helper_kamar_inap.KEY_NO_RAWAT + "=?");
+            
+            preparedStatement.setString(1,noraw);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                norm=resultSet.getString(helper_kamar_inap.KEY_NO_RM);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    
+    return norm;
+    
+    }
+    
     public void readRec_pegawaiF(String nm) throws SQLException {
 
         preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_pegawai.TB_NAME + " WHERE "
@@ -829,6 +866,7 @@ public class Crud_farmasi extends DBkoneksi {
 
         }
 
+        modelpegawai.addRow(new Object[]{"-", "-","-"});
     }
 
     
