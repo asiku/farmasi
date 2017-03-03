@@ -29,6 +29,7 @@ public class Crud_farmasi extends DBkoneksi {
         ConDb();
     }
 
+    public static String kelasibu="";
     
     public static String kddokterfisio="";
     public static String nmdokterfisio="";
@@ -835,7 +836,7 @@ preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_ina
             
             while (resultSet.next()) {
                 norm=resultSet.getString(helper_kamar_inap.KEY_NO_RM);
-                
+                kelasibu=resultSet.getString(helper_kamar_inap.KEY_KELAS);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);

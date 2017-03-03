@@ -841,9 +841,18 @@ public class Crud_local extends DBKoneksi_local {
           
           
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+              
+           if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+          JOptionPane.showMessageDialog(null, "Data Tersimpan");
+           }
+            else{
+               JOptionPane.showMessageDialog(null, "Gagal Tersimpan Save");
+            }
+            
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
     }
 

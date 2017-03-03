@@ -7,6 +7,7 @@ package unit_poli_perinatology;
 
 import unit_poli.*;
 import farmasi.Crud_farmasi;
+import static farmasi.Crud_farmasi.kelasibu;
 import farmasi.Crud_local;
 import static farmasi.Crud_local.cekvalpilih;
 import static farmasi.Crud_local.cekvalpilihtemplatepilih;
@@ -747,6 +748,12 @@ filterIbu();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTabbedPane2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane2StateChanged(evt);
+            }
+        });
+
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tb_reg.setModel(new javax.swing.table.DefaultTableModel(
@@ -1364,8 +1371,8 @@ filterIbu();
                    datl.Save_inapanakmasterPerina(txt_no_rawat.getText(), txt_nip_dpjp.getText(), txt_nip_ppjp.getText(), r_pulang.isSelected(), kondisipasien(),"perinatology",txt_no_rawat_ibu.getText());
                    datl.CloseCon();
                    
-                   txt_nm_ibu.setText("");
-                   txt_no_rm_ibu.setText("");
+//                   txt_nm_ibu.setText("");
+//                   txt_no_rm_ibu.setText("");
                 }
                 else{
                   
@@ -1468,8 +1475,11 @@ filterIbu();
 //            if ( r_pulang.isSelected()) {
                 if (r_belum.isSelected() || r_membaik.isSelected() || r_menurun.isSelected()
                         || r_kritis.isSelected() || r_sembuh.isSelected()) {
-                      JOptionPane.showMessageDialog(null, "save");
+//                      JOptionPane.showMessageDialog(null, "save");
                     saveTindakan();
+                    filterhistorytindakan(txt_no_rawat.getText(),2);
+           
+                 setukurantbulunitHistory();
                 }
 //            } 
                 else {
@@ -1484,7 +1494,20 @@ filterIbu();
         try {
             datl = new Crud_local();
 
-            datl.readRec_cariTarifTemplate("", false, 2, lbl_kelas.getText());
+           if (lbl_kamar_inap.getText().contains("BAYI SEHAT"))
+           {
+             datl.readRec_cariTarifTemplate("", false, 2, this.lbl_kelas_ibu.getText());
+           }
+           else if (lbl_kamar_inap.getText().contains("BAYI SAKIT"))
+           {
+           datl.readRec_cariTarifTemplate("", false, 2, "Kelas 3");
+           } 
+            else if (lbl_kamar_inap.getText().contains("NICU"))
+           {
+             datl.readRec_cariTarifTemplate("", false, 2, "VIP");
+           } 
+           
+//           datl.readRec_cariTarifTemplate("", false, 2, lbl_kelas.getText());
 
             this.tb_tindakan_pilih.setModel(datl.modeltariftemplate);
 
@@ -1691,6 +1714,8 @@ filterIbu();
                     
             dat=new Crud_farmasi();
             txt_no_rm_ibu.setText(dat.readRec_cariUnitIbu(txt_no_rawat_ibu.getText()));
+            this.lbl_kelas_ibu.setText(dat.kelasibu);
+            dat.kelasibu="";
             dat.CloseCon();
             
             
@@ -1712,6 +1737,12 @@ filterIbu();
   public void cariStatDPJPPPJP(){
              //edit 31 des
    try {
+       
+       txt_nip_dpjp.setText("");
+       txt_dpjp.setText("");
+       txt_nip_ppjp.setText("");
+       txt_ppjp.setText("");
+       
             datl=new Crud_local();
             datl.readRec_cariUnitMaster(txt_no_rawat.getText(), 2);
       
@@ -2029,6 +2060,8 @@ filterIbu();
          JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
    
         if(dialogResult == JOptionPane.YES_OPTION){  
+            //cek billing
+            
               this.HapusRowHistory(irowhistory);
               
         }
@@ -2099,6 +2132,20 @@ filterIbu();
     private void txt_cari_ibuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cari_ibuKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cari_ibuKeyPressed
+
+    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
+        // TODO add your handling code here:
+        if(jTabbedPane2.getSelectedIndex()==1){
+           
+            if(lbl_kelas_ibu.getText().isEmpty()){
+              JOptionPane.showMessageDialog(null, "Ibu bayi belum di input!");
+              jTabbedPane2.setSelectedIndex(0);
+            }
+            else{
+            settbpilih();
+            }
+        }
+    }//GEN-LAST:event_jTabbedPane2StateChanged
 
     private void filterPegawai() {
 
