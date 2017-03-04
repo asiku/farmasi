@@ -1480,6 +1480,9 @@ filterIbu();
                     filterhistorytindakan(txt_no_rawat.getText(),2);
            
                  setukurantbulunitHistory();
+                 
+                  lbl_nip_petugas_pilih.setText("");
+                   txt_petugas_pilih.setText("");
                 }
 //            } 
                 else {
@@ -2137,6 +2140,8 @@ filterIbu();
         // TODO add your handling code here:
         if(jTabbedPane2.getSelectedIndex()==1){
            
+           
+            
             if(lbl_kelas_ibu.getText().isEmpty()){
               JOptionPane.showMessageDialog(null, "Ibu bayi belum di input!");
               jTabbedPane2.setSelectedIndex(0);
