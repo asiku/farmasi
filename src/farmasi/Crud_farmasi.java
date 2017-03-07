@@ -171,6 +171,11 @@ public class Crud_farmasi extends DBkoneksi {
       }
     
     
+     
+    
+    
+    
+    
     public double readRec_JasaPelayanan(String kodekamar){
         
        double biaya =0;
@@ -818,6 +823,37 @@ public class Crud_farmasi extends DBkoneksi {
       return nama;
     }
     
+    
+     public String readRec_cariKodekamarIbu(String noraw){
+        
+      
+        String kdkmr="";
+     
+        
+        try {
+           
+          
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_kamar_inap.TB_NAMEVBIAYA + " WHERE "
+                    + helper_kamar_inap.KEY_NO_RAWAT + "=?");
+            
+             preparedStatement.setString(1,noraw);
+           ResultSet  resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                kdkmr=resultSet.getString(helper_kamar_inap.KEY_KODE_KAMAR);
+               
+            }
+       
+            
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    
+    return kdkmr;
+    
+    }
     
     
     public String readRec_cariUnitIbu(String noraw){

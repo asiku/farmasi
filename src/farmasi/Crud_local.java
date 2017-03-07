@@ -3515,6 +3515,33 @@ public class Crud_local extends DBKoneksi_local {
        
         
     }
+     
+     public String readRec_cariNoRawatIbu(String noraw){
+        
+      
+        String norawat="";
+        
+        try {
+           
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_unit.TB_NAME+ " WHERE "
+                    + helper_unit.KEY_NO_RAWAT + " =?");
+             preparedStatement.setString(1,noraw);
+          ResultSet   resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                
+                norawat=resultSet.getString(helper_unit.KEY_NO_RM_IBU);
+            }
+              } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    
+    return norawat;
+    
+    }
+     
+     
    public void CekPetugas(String pl) throws SQLException {
 
 

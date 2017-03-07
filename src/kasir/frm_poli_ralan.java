@@ -914,6 +914,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         bt_proses = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tb_jasa_pelayanan = new javax.swing.JTable();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         tb_lab = new javax.swing.JTable();
@@ -2048,7 +2052,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_prosesActionPerformed(evt);
             }
         });
-        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 18, 330, -1));
+        jPanel10.add(bt_proses, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 18, 130, -1));
 
         tb_jasa_pelayanan.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         tb_jasa_pelayanan.setModel(new javax.swing.table.DefaultTableModel(
@@ -2062,6 +2066,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jScrollPane7.setViewportView(tb_jasa_pelayanan);
 
         jPanel10.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 690, 90));
+
+        jLabel50.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel50.setText("JP mengikuti bayi sakit.");
+        jPanel10.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 190, -1));
+
+        jLabel51.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel51.setText("Catatan: Untuk perina jika bayi ");
+        jPanel10.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 190, -1));
+
+        jLabel52.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel52.setText("sehat maka JP mengikuti ibu, Jika");
+        jPanel10.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 22, 190, -1));
+
+        jLabel53.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel53.setText("Pindah kelas dari sehat ke sakit");
+        jPanel10.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 35, 190, -1));
 
         jTabbedPane4.addTab("Tagihan Inap", jPanel10);
 
@@ -3724,6 +3744,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
        
      
       hapusjaspel();
+      
       setBiayaJaspel();
       
       setAllTot();
@@ -4449,27 +4470,93 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         }
     }
 
+   private String Carikodekamaribu(){
+        
+     String kd="";
+       
+       try {
+           datl = new Crud_local();
+           String noraw=datl.readRec_cariNoRawatIbu(this.txt_no_rawat.getText());
+//           JOptionPane.showMessageDialog(null, "tes: "+noraw);
+           datl.CloseCon();
+           
+            dat = new Crud_farmasi();
+             kd=dat.readRec_cariKodekamarIbu(noraw);
+//             JOptionPane.showMessageDialog(null, "kmar: "+kd);
+            dat.CloseCon();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return kd;
+   } 
+    
   private void setBiayaJaspel(){
   
 //      readRec_JasaPelayanan
       
+
        try {
+
+           
+ if(tb_biaya_inap.getModel().getRowCount()==2&&tb_biaya_inap.getModel().getValueAt(1, 0).toString().contains("BAYI SAKIT")) {
+            JOptionPane.showMessageDialog(null, "skt");
+                for(int i=0;i<tb_biaya_inap.getModel().getRowCount();i++){
         
+         dat = new Crud_farmasi();   
+         
+        modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(1, 9).toString()),
+            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(1, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
+          dat.CloseCon();  
+        
+       } 
+        
+        
+        
+        
+        tb_jasa_pelayanan.setModel(modelpelayanan);
+         lbl_tot_jaspel.setText(Utilitas.formatuang(sumjaspel()));
+               
+           
+          
+        }            
+ else{        
+           
+
+           
         for(int i=0;i<tb_biaya_inap.getModel().getRowCount();i++){
         
          dat = new Crud_farmasi();   
-         modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString()),
-            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
-         dat.CloseCon();
+         
+         //perina jp ngikutin ibunya klo sehat
+        if(tb_biaya_inap.getModel().getValueAt(i, 0).toString().contains("BAYI SEHAT")) {
+            
+          modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(Carikodekamaribu()),
+            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(Carikodekamaribu())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
+          dat.CloseCon();
           
-         } 
+        }
+        
+        else{
+          modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString()),
+            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
+          dat.CloseCon();
+         }
+        
+       } 
+        
+        
+        
         
         tb_jasa_pelayanan.setModel(modelpelayanan);
          lbl_tot_jaspel.setText(Utilitas.formatuang(sumjaspel()));
         
+ }
        } catch (Exception ex) {
            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
        }
+       
+       
   }  
   
   private void setAllTot(){
@@ -4737,6 +4824,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
