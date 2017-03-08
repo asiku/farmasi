@@ -49,13 +49,13 @@ public class frm_login_poli_keu extends javax.swing.JFrame {
         bt_cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Poli Anak");
+        setTitle("Keuangan");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/anak_ico.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kasir/kasir_ico.png"))); // NOI18N
 
         jLabel2.setText("User Name");
 
@@ -141,11 +141,11 @@ public class frm_login_poli_keu extends javax.swing.JFrame {
                         .addComponent(txt_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_login, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(bt_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bt_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 22, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -221,27 +221,29 @@ public class frm_login_poli_keu extends javax.swing.JFrame {
                
             try {
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
-              if(Crud_local.namapoli.equals("RANAP ANAK")){  
+              if(Crud_local.namapoli.equals("KEUANGAN")){  
                   
-                frm_poli pol=new frm_poli(namapetugaslogin,Crud_local.namapoli);
+                 Crud_local.usm="";
+                Crud_local.psm="";  
+                frm_non_cover_bpjs pol=new frm_non_cover_bpjs(namapetugaslogin,Crud_local.namapoli);
                 
                 pol.setVisible(true);
                 
                 dispose();
               }
               else{
-              JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Terdaftar!");
+              JOptionPane.showMessageDialog(this, "Maaf Anda Tidak Terdaftar!");
               }
                  
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal Login Koneksi Data Bermasalah!");
+                JOptionPane.showMessageDialog(this, "Gagal Login Koneksi Data Bermasalah!");
                 Logger.getLogger(frm_login_poli_keu.class.getName()).log(Level.SEVERE, null, ex);
             }
                 
             
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Password Salah!");
+                JOptionPane.showMessageDialog(this, "Password Salah!");
                 txt_pwd.requestFocus();
                 txt_pwd.setText("");
                 
@@ -249,7 +251,7 @@ public class frm_login_poli_keu extends javax.swing.JFrame {
       }
      else
      {
-       JOptionPane.showMessageDialog(null, "Username atau Password Kosong!");
+       JOptionPane.showMessageDialog(this, "Username atau Password Kosong!");
      }
   
      }

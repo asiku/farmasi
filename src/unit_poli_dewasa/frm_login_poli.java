@@ -221,6 +221,10 @@ public class frm_login_poli extends javax.swing.JFrame {
             try {
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
             if(Crud_local.namapoli.equals("RANAP DEWASA")){   
+                
+                Crud_local.usm="";
+                Crud_local.psm="";
+                
                 frm_poli pol=new frm_poli(namapetugaslogin,Crud_local.namapoli);
                 
                 pol.setVisible(true);
@@ -228,18 +232,18 @@ public class frm_login_poli extends javax.swing.JFrame {
                 dispose();
               }
               else{
-                 JOptionPane.showMessageDialog(null, "Maaf Anda Tidak Terdaftar!");
+                 JOptionPane.showMessageDialog(this, "Maaf Anda Tidak Terdaftar!");
               }  
             
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Gagal Login Koneksi Data Bermasalah!");
+                JOptionPane.showMessageDialog(this, "Gagal Login Koneksi Data Bermasalah!");
                 Logger.getLogger(frm_login_poli.class.getName()).log(Level.SEVERE, null, ex);
             }
                 
             
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Password Salah!");
+                JOptionPane.showMessageDialog(this, "Password Salah!");
                 txt_pwd.requestFocus();
                 txt_pwd.setText("");
                 
@@ -247,7 +251,7 @@ public class frm_login_poli extends javax.swing.JFrame {
       }
      else
      {
-       JOptionPane.showMessageDialog(null, "Username atau Password Kosong!");
+       JOptionPane.showMessageDialog(this, "Username atau Password Kosong!");
      }
   
      }
