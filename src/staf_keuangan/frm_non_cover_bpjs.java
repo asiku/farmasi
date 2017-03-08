@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.TableColumnModel;
+import tools.Utilitas;
 
 /**
  *
@@ -56,6 +57,7 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
             }
         });
          
+         carinoncoverbpsj("");  
         
     }
     /**
@@ -88,7 +90,7 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
         bt_delete = new javax.swing.JButton();
         bt_edit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb_non_cover = new javax.swing.JTable();
         txt_cari = new javax.swing.JTextField();
 
         dlg_tarif.setModal(true);
@@ -184,6 +186,8 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
 
         jLabel2.setText("Kode Tarif");
 
+        txt_kode_tarif.setEditable(false);
+
         bt_cari_tarif.setText("...");
         bt_cari_tarif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,11 +197,24 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
 
         jLabel3.setText("Nama Tarif");
 
+        txt_nm_tarif.setEditable(false);
+
+        txt_jml.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_jmlKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Jumlah yg di cover");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         bt_save.setText("Save");
+        bt_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_saveActionPerformed(evt);
+            }
+        });
 
         bt_delete.setText("Delete");
 
@@ -208,8 +225,8 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(bt_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(bt_edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,7 +244,7 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb_non_cover.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -238,7 +255,7 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tb_non_cover);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -259,7 +276,7 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bt_cari_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txt_nm_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -415,6 +432,50 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                dlg_tarif.setVisible(true);
     }//GEN-LAST:event_bt_cari_tarifActionPerformed
 
+    private void txt_jmlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jmlKeyTyped
+        // TODO add your handling code here:
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txt_jmlKeyTyped
+
+    private void carinoncoverbpsj(String cr){
+        try {
+            datl=new Crud_local();
+            datl.readRec_cariNoncoverBPJS(cr);
+            datl.CloseCon();
+            
+            tb_non_cover.setModel(datl.modelnoncoverbpjs);
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    
+    }
+    
+    private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
+        try {
+            // TODO add your handling code here:
+          if(!(this.txt_kode_tarif.getText().isEmpty()||this.txt_jml.getText().isEmpty()))  {
+            datl=new Crud_local();
+            datl.Save_non_coverBPJS(this.txt_kode_tarif.getText(),Integer.parseInt(this.txt_jml.getText()), this.lbl_petugas.getText());
+            datl.CloseCon();
+            
+            Utilitas.HapusText(jPanel2);
+            carinoncoverbpsj("");
+            
+          }
+          else{
+          JOptionPane.showMessageDialog(null, "Inputan Ada yang Kosong!");
+          }
+        } catch (Exception ex) {
+            Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bt_saveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -464,10 +525,10 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_petugas;
     private javax.swing.JLabel lbl_poli;
     private javax.swing.JLabel lbl_poli1;
+    private javax.swing.JTable tb_non_cover;
     private javax.swing.JTable tb_tarif;
     private javax.swing.JTextField txt_cari;
     private javax.swing.JTextField txt_cari_tarif;

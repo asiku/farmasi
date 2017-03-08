@@ -99,8 +99,16 @@ public class Crud_local extends DBKoneksi_local {
  
        String[] deposit_detail_title = new String[]{"Kode Deposit","Jml Deposit","tgl","User Name"};
  
-    
+     String[] noncoverbpjs_title = new String[]{"Kode Tarif","Nama Tindakan","Jml"};
        
+      public DefaultTableModel modelnoncoverbpjs = new DefaultTableModel(noncoverbpjs_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };        
+               
+               
      String[] deposit_title = new String[]{"Kode Deposit","Nama Deposit","telp","No. Rawat"};
          
      public DefaultTableModel modeldeposit = new DefaultTableModel(deposit_title, 0) {
@@ -649,6 +657,29 @@ public class Crud_local extends DBKoneksi_local {
 
     }
 
+    public void Save_non_coverBPJS(String kd, int jml, String usr)  {
+
+        try {
+            preparedStatement = connect.prepareStatement("insert into " + helper_non_cover_bpjs.TB_NAME + " (" 
+                    + helper_non_cover_bpjs.KEY_KODE_TARIF + "," 
+                    + helper_non_cover_bpjs.KEY_JML
+                    + "," + helper_non_cover_bpjs.KEY_USERNAME + ") "
+                    + " values (?,?,?)");
+         
+            preparedStatement.setString(1, kd);
+            preparedStatement.setInt(2, jml);
+            preparedStatement.setString(3, usr);
+           
+            preparedStatement.execute();
+            JOptionPane.showMessageDialog(null, "Data Tersimpan");
+          
+          
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     public void Save_mastertemplatedetail(String nmtmp, String trf, String nmtf)  {
 
@@ -916,6 +947,32 @@ public class Crud_local extends DBKoneksi_local {
 
     }
 
+    
+   public void readRec_cariNoncoverBPJS(String nm) throws SQLException {
+
+       preparedStatement = connect.prepareStatement("SELECT * FROM " 
+               + helper_non_cover_bpjs.TB_VNAME + " WHERE " 
+      + helper_non_cover_bpjs.KEY_NAMA_TINDAKAN + " LIKE ? ");
+      
+        preparedStatement.setString(1, "%" + nm + "%");
+    
+        resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+         
+            String kd = resultSet.getString(helper_non_cover_bpjs.KEY_KODE_TARIF);
+            String nmt = resultSet.getString(helper_non_cover_bpjs.KEY_NAMA_TINDAKAN);
+            int jml = resultSet.getInt(helper_non_cover_bpjs.KEY_JML);
+          
+         
+            modelnoncoverbpjs.addRow(new Object[]{kd,nmt,jml});
+            
+        }
+        
+        
+    }
+ 
+    
     public void readRec_cariMasterTemplateDetail(String nm) throws SQLException {
   
        preparedStatement = connect.prepareStatement("SELECT * FROM " 
