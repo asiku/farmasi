@@ -657,6 +657,24 @@ public class Crud_local extends DBKoneksi_local {
 
     }
 
+    
+     public void DelRecNoncoverBPJS(String kd) throws SQLException  {
+  
+        
+        try {
+            preparedStatement = connect.prepareStatement("delete from " + helper_non_cover_bpjs.TB_NAME + " where " 
+                    + helper_non_cover_bpjs.KEY_KODE_TARIF + "=?"
+                    );
+            preparedStatement.setString(1, kd);
+           
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        
+    }
+    
     public void Save_non_coverBPJS(String kd, int jml, String usr)  {
 
         try {
@@ -676,6 +694,11 @@ public class Crud_local extends DBKoneksi_local {
           
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Gagal Tersimpan");
+            
+            if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+             JOptionPane.showMessageDialog(null, "Gagal Simpan : Kode " + kd + " sudah pernah di input");
+            }
             Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -947,6 +970,34 @@ public class Crud_local extends DBKoneksi_local {
 
     }
 
+    public void  Update_non_coverbpjs(String kd,int tot )
+            {
+    
+         
+         
+        try {
+            preparedStatement = connect.prepareStatement("update " + helper_non_cover_bpjs.TB_NAME + " set " 
+                    + helper_non_cover_bpjs.KEY_JML+"=?"
+                     +" where "+ helper_non_cover_bpjs.KEY_KODE_TARIF + "=?");
+            
+            preparedStatement.setInt(1, tot);
+            preparedStatement.setString(2, kd);
+             
+            preparedStatement.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Edit");
+        } catch (SQLException ex) {
+//             if(ex.getErrorCode() == 1062 ){
+//            //duplicate primary key 
+//             JOptionPane.showMessageDialog(null, "Gagal Update : Kode " + kode_tarif + " sudah pernah di input");
+//            }
+//            else{
+            JOptionPane.showMessageDialog(null, "Gagal Edit");
+//            }
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+     
     
    public void readRec_cariNoncoverBPJS(String nm) throws SQLException {
 

@@ -26,40 +26,56 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
     /**
      * Creates new form frm_non_cover_bpjs
      */
-    
     private Crud_local datl;
-    
+
     public frm_non_cover_bpjs() {
         initComponents();
     }
 
-     public frm_non_cover_bpjs(String nm,String poli) {
-         
-         initComponents();
-            this.setLocationRelativeTo(null);
-            this.lbl_petugas.setText(nm);
-            lbl_poli.setText(poli);
-            
-           txt_cari_tarif.getDocument().addDocumentListener(new DocumentListener() {
+    public frm_non_cover_bpjs(String nm, String poli) {
+
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.lbl_petugas.setText(nm);
+        lbl_poli.setText(poli);
+
+        txt_cari_tarif.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-               cari_tarif();
+                cari_tarif();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-               cari_tarif();
+                cari_tarif();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-              cari_tarif();
+                cari_tarif();
             }
         });
-         
-         carinoncoverbpsj("");  
-        
+        txt_cari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                carinoncoverbpsj(txt_cari.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                carinoncoverbpsj(txt_cari.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                carinoncoverbpsj(txt_cari.getText());
+            }
+        });
+
+        carinoncoverbpsj("");
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -217,8 +233,18 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
         });
 
         bt_delete.setText("Delete");
+        bt_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_deleteActionPerformed(evt);
+            }
+        });
 
         bt_edit.setText("Edit");
+        bt_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_editActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -244,6 +270,7 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tb_non_cover.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_non_cover.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -255,6 +282,16 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tb_non_cover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_non_coverMouseReleased(evt);
+            }
+        });
+        tb_non_cover.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tb_non_coverKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_non_cover);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -341,12 +378,11 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
     private void lbl_poli1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_poli1MouseClicked
         // TODO add your handling code here:
         int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan Keluar?", "Warning ",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (dialogResult == JOptionPane.YES_OPTION) {
 
 //            executor.shutdown();
-
             new frm_login_poli_keu().setVisible(true);
             dispose();
         }
@@ -361,8 +397,8 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 // No row selected
             } else {
                 this.txt_kode_tarif.setText(tb_tarif.getModel().getValueAt(row, 0).toString());
-                txt_nm_tarif.setText(tb_tarif.getModel().getValueAt(row, 1).toString()); 
-            
+                txt_nm_tarif.setText(tb_tarif.getModel().getValueAt(row, 1).toString());
+
             }
 
             this.dlg_tarif.setVisible(false);
@@ -379,15 +415,15 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 // No row selected
             } else {
                 this.txt_kode_tarif.setText(tb_tarif.getModel().getValueAt(row, 0).toString());
-                txt_nm_tarif.setText(tb_tarif.getModel().getValueAt(row, 1).toString());    
+                txt_nm_tarif.setText(tb_tarif.getModel().getValueAt(row, 1).toString());
             }
 
             this.dlg_tarif.setVisible(false);
         }
     }//GEN-LAST:event_tb_tarifKeyPressed
 
-   private void setukurantb_tarif() {
-        
+    private void setukurantb_tarif() {
+
         this.tb_tarif.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
         tb_tarif.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         TableColumnModel tr = this.tb_tarif.getColumnModel();
@@ -395,86 +431,165 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
         tr.getColumn(0).setPreferredWidth(80);
         tr.getColumn(1).setPreferredWidth(280);
         tr.getColumn(2).setPreferredWidth(100);
-        tr.getColumn(3).setPreferredWidth(100);   
-        tr.getColumn(4).setPreferredWidth(100); 
-}
+        tr.getColumn(3).setPreferredWidth(100);
+        tr.getColumn(4).setPreferredWidth(100);
+    }
     
-   private void cari_tarif(){
+    
+    private void setukurantb_non_cover() {
+
+        this.tb_non_cover.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_non_cover.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr = this.tb_non_cover.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(80);
+        tr.getColumn(1).setPreferredWidth(380);
+        tr.getColumn(2).setPreferredWidth(50);
+        
+    }
+
+    private void cari_tarif() {
         try {
-            datl=new Crud_local();
+            datl = new Crud_local();
             datl.readRec_cariTarif(this.txt_cari_tarif.getText());
             datl.CloseCon();
-            
+
             tb_tarif.setModel(datl.modeltarif);
-            
-             setukurantb_tarif();
-            
+
+            setukurantb_tarif();
+
         } catch (Exception ex) {
             Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
         }
-   }
-   
+    }
+
     private void bt_cari_tarifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_tarifActionPerformed
         // TODO add your handling code here:
         try {
-            
-            datl=new Crud_local();
+
+            datl = new Crud_local();
             datl.readRec_cariTarif();
             datl.CloseCon();
             tb_tarif.setModel(datl.modeltarif);
-            
+
             setukurantb_tarif();
-            
+
         } catch (Exception ex) {
             Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dlg_tarif.setLocationRelativeTo(this);
-               dlg_tarif.setVisible(true);
+        dlg_tarif.setVisible(true);
     }//GEN-LAST:event_bt_cari_tarifActionPerformed
 
     private void txt_jmlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jmlKeyTyped
         // TODO add your handling code here:
         char enter = evt.getKeyChar();
-        if(!(Character.isDigit(enter))){
+        if (!(Character.isDigit(enter))) {
             evt.consume();
         }
     }//GEN-LAST:event_txt_jmlKeyTyped
 
-    private void carinoncoverbpsj(String cr){
+    private void carinoncoverbpsj(String cr) {
         try {
-            datl=new Crud_local();
+            datl = new Crud_local();
             datl.readRec_cariNoncoverBPJS(cr);
             datl.CloseCon();
-            
+
             tb_non_cover.setModel(datl.modelnoncoverbpjs);
             
-            
+            setukurantb_non_cover();
+
         } catch (Exception ex) {
             Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-    
+
     }
-    
+
     private void bt_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_saveActionPerformed
         try {
             // TODO add your handling code here:
-          if(!(this.txt_kode_tarif.getText().isEmpty()||this.txt_jml.getText().isEmpty()))  {
-            datl=new Crud_local();
-            datl.Save_non_coverBPJS(this.txt_kode_tarif.getText(),Integer.parseInt(this.txt_jml.getText()), this.lbl_petugas.getText());
-            datl.CloseCon();
-            
-            Utilitas.HapusText(jPanel2);
-            carinoncoverbpsj("");
-            
-          }
-          else{
-          JOptionPane.showMessageDialog(null, "Inputan Ada yang Kosong!");
-          }
+            if (!(this.txt_kode_tarif.getText().isEmpty() || this.txt_jml.getText().isEmpty())) {
+                datl = new Crud_local();
+                datl.Save_non_coverBPJS(this.txt_kode_tarif.getText(), Integer.parseInt(this.txt_jml.getText()), this.lbl_petugas.getText());
+                datl.CloseCon();
+
+                Utilitas.HapusText(jPanel2);
+                carinoncoverbpsj("");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Inputan Ada yang Kosong!");
+            }
         } catch (Exception ex) {
             Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_bt_saveActionPerformed
+
+    private void bt_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_editActionPerformed
+        // TODO add your handling code here:
+        try {
+            datl = new Crud_local();
+            datl.Update_non_coverbpjs(this.txt_kode_tarif.getText(), Integer.parseInt(this.txt_jml.getText()));
+            datl.CloseCon();
+
+            carinoncoverbpsj("");
+
+        } catch (Exception ex) {
+            Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bt_editActionPerformed
+
+    private void tb_non_coverMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_non_coverMouseReleased
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int row = this.tb_non_cover.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.txt_kode_tarif.setText(tb_non_cover.getModel().getValueAt(row, 0).toString());
+                txt_nm_tarif.setText(tb_non_cover.getModel().getValueAt(row, 1).toString());
+                this.txt_jml.setText(tb_non_cover.getModel().getValueAt(row, 2).toString());
+            }
+
+        }
+    }//GEN-LAST:event_tb_non_coverMouseReleased
+
+    private void tb_non_coverKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_non_coverKeyPressed
+        // TODO add your handling code here:
+
+        int row = this.tb_non_cover.getSelectedRow();
+
+        if (row == -1) {
+            // No row selected
+        } else {
+            this.txt_kode_tarif.setText(tb_non_cover.getModel().getValueAt(row, 0).toString());
+            txt_nm_tarif.setText(tb_non_cover.getModel().getValueAt(row, 1).toString());
+            this.txt_jml.setText(tb_non_cover.getModel().getValueAt(row, 2).toString());
+        }
+
+
+    }//GEN-LAST:event_tb_non_coverKeyPressed
+
+    private void bt_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_deleteActionPerformed
+        // TODO add your handling code here:
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Apakah Akan Dihapus? "+this.txt_nm_tarif.getText(), "Warning ",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            try {
+                datl = new Crud_local();
+                datl.DelRecNoncoverBPJS(this.txt_kode_tarif.getText());
+                datl.CloseCon();
+
+                carinoncoverbpsj("");
+
+            } catch (Exception ex) {
+                Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_bt_deleteActionPerformed
 
     /**
      * @param args the command line arguments
