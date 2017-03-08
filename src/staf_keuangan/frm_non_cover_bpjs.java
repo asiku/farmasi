@@ -5,7 +5,16 @@
  */
 package staf_keuangan;
 
+import farmasi.Crud_local;
+import java.awt.Font;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -16,15 +25,37 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
     /**
      * Creates new form frm_non_cover_bpjs
      */
+    
+    private Crud_local datl;
+    
     public frm_non_cover_bpjs() {
         initComponents();
     }
 
      public frm_non_cover_bpjs(String nm,String poli) {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        this.lbl_petugas.setText(nm);
-        lbl_poli.setText(poli);
+         
+         initComponents();
+            this.setLocationRelativeTo(null);
+            this.lbl_petugas.setText(nm);
+            lbl_poli.setText(poli);
+            
+           txt_cari_tarif.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               cari_tarif();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+               cari_tarif();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+              cari_tarif();
+            }
+        });
+         
         
     }
     /**
@@ -36,6 +67,10 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlg_tarif = new javax.swing.JDialog();
+        txt_cari_tarif = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tb_tarif = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         lbl_petugas = new javax.swing.JLabel();
         lbl_poli1 = new javax.swing.JLabel();
@@ -43,17 +78,66 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_kode_tarif = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        bt_cari_tarif = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txt_kode_tarif1 = new javax.swing.JTextField();
-        txt_kode_tarif2 = new javax.swing.JTextField();
+        txt_nm_tarif = new javax.swing.JTextField();
+        txt_jml = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         bt_save = new javax.swing.JButton();
         bt_delete = new javax.swing.JButton();
+        bt_edit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         txt_cari = new javax.swing.JTextField();
+
+        dlg_tarif.setModal(true);
+        dlg_tarif.setSize(new java.awt.Dimension(477, 508));
+
+        tb_tarif.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_tarif.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_tarif.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tb_tarifMouseReleased(evt);
+            }
+        });
+        tb_tarif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tb_tarifKeyPressed(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tb_tarif);
+
+        javax.swing.GroupLayout dlg_tarifLayout = new javax.swing.GroupLayout(dlg_tarif.getContentPane());
+        dlg_tarif.getContentPane().setLayout(dlg_tarifLayout);
+        dlg_tarifLayout.setHorizontalGroup(
+            dlg_tarifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlg_tarifLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dlg_tarifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_cari_tarif)
+                    .addComponent(jScrollPane5))
+                .addContainerGap())
+        );
+        dlg_tarifLayout.setVerticalGroup(
+            dlg_tarifLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlg_tarifLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(txt_cari_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tarif Non Cover BPJS");
@@ -100,11 +184,16 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
 
         jLabel2.setText("Kode Tarif");
 
-        jButton1.setText("...");
+        bt_cari_tarif.setText("...");
+        bt_cari_tarif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_cari_tarifActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Nama Tarif");
 
-        jLabel4.setText("Jumlah");
+        jLabel4.setText("Jumlah yg di cover");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -112,12 +201,16 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
 
         bt_delete.setText("Delete");
 
+        bt_edit.setText("Edit");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(bt_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_save, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +222,8 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_save)
-                    .addComponent(bt_delete))
+                    .addComponent(bt_delete)
+                    .addComponent(bt_edit))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,10 +255,10 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_kode_tarif2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_jml, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_kode_tarif1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bt_cari_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_nm_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +266,7 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txt_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -185,15 +279,15 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_kode_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(bt_cari_tarif))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_kode_tarif1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_nm_tarif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txt_kode_tarif2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_jml, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -241,6 +335,86 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lbl_poli1MouseClicked
 
+    private void tb_tarifMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_tarifMouseReleased
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            int row = this.tb_tarif.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.txt_kode_tarif.setText(tb_tarif.getModel().getValueAt(row, 0).toString());
+                txt_nm_tarif.setText(tb_tarif.getModel().getValueAt(row, 1).toString()); 
+            
+            }
+
+            this.dlg_tarif.setVisible(false);
+        }
+    }//GEN-LAST:event_tb_tarifMouseReleased
+
+    private void tb_tarifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tb_tarifKeyPressed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            int row = this.tb_tarif.getSelectedRow();
+
+            if (row == -1) {
+                // No row selected
+            } else {
+                this.txt_kode_tarif.setText(tb_tarif.getModel().getValueAt(row, 0).toString());
+                txt_nm_tarif.setText(tb_tarif.getModel().getValueAt(row, 1).toString());    
+            }
+
+            this.dlg_tarif.setVisible(false);
+        }
+    }//GEN-LAST:event_tb_tarifKeyPressed
+
+   private void setukurantb_tarif() {
+        
+        this.tb_tarif.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_tarif.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr = this.tb_tarif.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(80);
+        tr.getColumn(1).setPreferredWidth(280);
+        tr.getColumn(2).setPreferredWidth(100);
+        tr.getColumn(3).setPreferredWidth(100);   
+        tr.getColumn(4).setPreferredWidth(100); 
+}
+    
+   private void cari_tarif(){
+        try {
+            datl=new Crud_local();
+            datl.readRec_cariTarif(this.txt_cari_tarif.getText());
+            datl.CloseCon();
+            
+            tb_tarif.setModel(datl.modeltarif);
+            
+             setukurantb_tarif();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
+   
+    private void bt_cari_tarifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cari_tarifActionPerformed
+        // TODO add your handling code here:
+        try {
+            
+            datl=new Crud_local();
+            datl.readRec_cariTarif();
+            datl.CloseCon();
+            tb_tarif.setModel(datl.modeltarif);
+            
+            setukurantb_tarif();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_non_cover_bpjs.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dlg_tarif.setLocationRelativeTo(this);
+               dlg_tarif.setVisible(true);
+    }//GEN-LAST:event_bt_cari_tarifActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,9 +451,11 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_cari_tarif;
     private javax.swing.JButton bt_delete;
+    private javax.swing.JButton bt_edit;
     private javax.swing.JButton bt_save;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JDialog dlg_tarif;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -287,13 +463,16 @@ public class frm_non_cover_bpjs extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_petugas;
     private javax.swing.JLabel lbl_poli;
     private javax.swing.JLabel lbl_poli1;
+    private javax.swing.JTable tb_tarif;
     private javax.swing.JTextField txt_cari;
+    private javax.swing.JTextField txt_cari_tarif;
+    private javax.swing.JTextField txt_jml;
     private javax.swing.JTextField txt_kode_tarif;
-    private javax.swing.JTextField txt_kode_tarif1;
-    private javax.swing.JTextField txt_kode_tarif2;
+    private javax.swing.JTextField txt_nm_tarif;
     // End of variables declaration//GEN-END:variables
 }

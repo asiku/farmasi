@@ -223,8 +223,9 @@ public class frm_login_poli_keu extends javax.swing.JFrame {
                 datl.readRec_cariPetugasBypoli(txt_username.getText());
               if(Crud_local.namapoli.equals("KEUANGAN")){  
                   
-                 Crud_local.usm="";
+                Crud_local.usm="";
                 Crud_local.psm="";  
+                
                 frm_non_cover_bpjs pol=new frm_non_cover_bpjs(namapetugaslogin,Crud_local.namapoli);
                 
                 pol.setVisible(true);
