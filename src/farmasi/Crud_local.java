@@ -2322,7 +2322,29 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
      
-      
+     public int GetJmlTindakan(String noraw,String kd){
+       
+         int jml=0;
+         
+        try {
+            preparedStatement = connect.prepareStatement("SELECT *,(SELECT COUNT(*) FROM  v_biaya_tindakan WHERE no_rawat=? AND kode_tarif=?) " +
+                    "AS jml_tindakan FROM " + helper_v_biaya_tindakan.TB_VNAME + " WHERE "
+                    + helper_v_biaya_tindakan.KEY_NO_RAWAT + " =? limit 1");
+            
+            preparedStatement.setString(1, noraw);
+            preparedStatement.setString(2, kd);
+            preparedStatement.setString(3, noraw);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            while (resultSet.next()) {
+                jml=resultSet.getInt("jml_tindakan");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Crud_local.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return jml;
+     } 
     
      public void readRec_Biayatindakankasir(String noraw) throws SQLException {
 
