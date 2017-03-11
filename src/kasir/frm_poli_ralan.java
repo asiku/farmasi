@@ -3430,17 +3430,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     
     }
     
-    private void HapusRowJaspel(){
-        
-        DefaultTableModel dm = (DefaultTableModel) tb_jasa_pelayanan.getModel();
-        int rowCount = dm.getRowCount();
-        
-        if (rowCount != 0) {
-          for(int i=0;i<rowCount;i++){
-            dm.removeRow(i);
-          }     
-        }
-    }
+   
     
     private void HapusRowTindakan(int i) {
         DefaultTableModel dm = (DefaultTableModel) tb_biaya_tindakan.getModel();
@@ -3669,8 +3659,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 cariStatDPJPPPJP();
                 setukurantbulunitHistory();
                 
-              
-                
+               
+                ChkJln.setSelected(true);
+                jam();
                  setBiayaInap();
                 jam();
                 
@@ -3765,9 +3756,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 setukurantbulunitHistory();
                 
               
-                
-                setBiayaInap();
+                ChkJln.setSelected(true);
                 jam();
+              
+                setBiayaInap();
+              
                 
                 setRinci();
             }
@@ -3807,9 +3800,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     
-    private void setBiayaInap(){
+  private void setBiayaInap(){
     
-      
+ 
         
          String datePattern = "yyyy-MM-dd";
                 SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
@@ -3860,17 +3853,19 @@ public class frm_poli_ralan extends javax.swing.JFrame {
       }
        
      
+      
       hapusjaspel();
       
       setBiayaJaspel();
-      
+       
       setAllTot();
     }
     
     private void bt_prosesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_prosesActionPerformed
         // TODO add your handling code here:
+        
         setBiayaInap();
-     
+      
     }//GEN-LAST:event_bt_prosesActionPerformed
 
    
@@ -4516,8 +4511,19 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_cetakActionPerformed
 
     private void hapusjaspel(){
+        
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
-         HapusRowJaspel();
+           DefaultTableModel dm = (DefaultTableModel) tb_jasa_pelayanan.getModel();
+        int rowCount = dm.getRowCount();
+       //x
+//        for(int i = rowCount - 1; i >= 0; i--){
+        if (rowCount != 0) {
+         for(int i = rowCount - 1; i >= 0; i--){
+               
+            dm.removeRow(i);
+          }     
+           
+        }
       }
     }
     
@@ -4613,13 +4619,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
   private void setBiayaJaspel(){
   
 //      readRec_JasaPelayanan
-      
+      this.hapusjaspel();
 
        try {
 
            
  if(tb_biaya_inap.getModel().getRowCount()==2&&tb_biaya_inap.getModel().getValueAt(1, 0).toString().contains("BAYI SAKIT")) {
-            JOptionPane.showMessageDialog(null, "skt");
+//            JOptionPane.showMessageDialog(null, "skt");
                 for(int i=0;i<tb_biaya_inap.getModel().getRowCount();i++){
         
          dat = new Crud_farmasi();   
