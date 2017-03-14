@@ -186,7 +186,7 @@ public class Crud_farmasi extends DBkoneksi {
             
             preparedStatement.setString(1,kodekamar);
         
-            ResultSet resultSet = preparedStatement.executeQuery();
+             resultSet = preparedStatement.executeQuery();
 
            
             while (resultSet.next()) {

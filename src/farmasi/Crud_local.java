@@ -107,7 +107,16 @@ public class Crud_local extends DBKoneksi_local {
 
         }
     };        
-               
+            
+     String[] kodetarifs_title = new String[]{"Kode Tarif","Tarif","Nama"}; 
+     
+     public DefaultTableModel modelkodetariftitle = new DefaultTableModel(kodetarifs_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };          
+      
                
      String[] deposit_title = new String[]{"Kode Deposit","Nama Deposit","telp","No. Rawat"};
          
@@ -2322,7 +2331,57 @@ public class Crud_local extends DBKoneksi_local {
         }
     }
      
-     public int GetJmlTindakan(String noraw,String kd){
+     public String GetKodeNoncoverBPJS(String kdtarif) throws SQLException{
+        
+        String kd="";
+        
+       
+            
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_non_cover_bpjs.TB_NAME + " WHERE "
+                    + helper_non_cover_bpjs.KEY_KODE_TARIF + " =?");
+            
+            preparedStatement.setString(1, kdtarif);
+            
+            
+             resultSet = preparedStatement.executeQuery();
+            
+            
+          while (resultSet.next()) {
+                kd= resultSet.getString(helper_non_cover_bpjs.KEY_KODE_TARIF);
+                
+            }
+        
+        
+        return kd;
+        
+     }
+     
+     public int GetJmlNoncoverBPJS(String kdtarif) throws SQLException{
+        
+        int i=0;
+        
+       
+            
+            preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_non_cover_bpjs.TB_NAME + " WHERE "
+                    + helper_non_cover_bpjs.KEY_KODE_TARIF + " =?");
+            
+            preparedStatement.setString(1, kdtarif);
+            
+            
+             resultSet = preparedStatement.executeQuery();
+            
+            
+          while (resultSet.next()) {
+                i= resultSet.getInt(helper_non_cover_bpjs.KEY_JML);
+                
+            }
+        
+        
+        return i;
+        
+     }
+             
+     public int GetJmlTindakan(String noraw,String kdtarif){
        
          int jml=0;
          
@@ -2332,10 +2391,10 @@ public class Crud_local extends DBKoneksi_local {
                     + helper_v_biaya_tindakan.KEY_NO_RAWAT + " =? limit 1");
             
             preparedStatement.setString(1, noraw);
-            preparedStatement.setString(2, kd);
+            preparedStatement.setString(2, kdtarif);
             preparedStatement.setString(3, noraw);
             
-            ResultSet resultSet = preparedStatement.executeQuery();
+              resultSet = preparedStatement.executeQuery();
             
             while (resultSet.next()) {
                 jml=resultSet.getInt("jml_tindakan");
@@ -2346,6 +2405,57 @@ public class Crud_local extends DBKoneksi_local {
         return jml;
      } 
     
+     
+      public Double readRec_TarifNoncover(String noraw,String kdtarif) throws SQLException {
+        Double tot=0.0;
+         
+        preparedStatement = connect.prepareStatement("SELECT * FROM " + helper_v_biaya_tindakan.TB_VNAME + " WHERE "
+                                                     + helper_v_biaya_tindakan.KEY_NO_RAWAT + " =? AND "
+                                                     + helper_v_biaya_tindakan.KEY_KODE_TARIF + " =?"
+                                                     );
+
+        preparedStatement.setString(1, noraw);
+        preparedStatement.setString(2, kdtarif);
+        
+          resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+              tot= resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN);
+            
+        }
+      
+     return tot;
+      
+      }
+     
+     
+      public void readRec_BiayaNoncover(String noraw) throws SQLException {
+         
+        preparedStatement = connect.prepareStatement("SELECT DISTINCT "+ helper_v_biaya_tindakan.KEY_KODE_TARIF
+                 + ","+ helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN 
+                + ","+ helper_v_biaya_tindakan.KEY_NAMA_TINDAKAN 
+                +" FROM " + helper_v_biaya_tindakan.TB_VNAME + " WHERE "
+                                                     + helper_v_biaya_tindakan.KEY_NO_RAWAT + " =?");
+
+        preparedStatement.setString(1, noraw);
+       
+        
+          resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+              String kd= resultSet.getString(helper_v_biaya_tindakan.KEY_KODE_TARIF);
+              Double tarif = resultSet.getDouble(helper_v_biaya_tindakan.KEY_TARIF_TINDAKAN);
+              String nmt = resultSet.getString(helper_v_biaya_tindakan.KEY_NAMA_TINDAKAN);
+              
+              modelkodetariftitle.addRow(new Object[]{kd,tarif,nmt});
+            
+        }
+      
+     
+      
+      }
+     
+     
      public void readRec_Biayatindakankasir(String noraw) throws SQLException {
 
          Double rs=0.0,dr=0.0,sarana=0.0;

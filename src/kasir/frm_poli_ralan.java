@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Timer;
@@ -64,6 +65,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     private Crud_local datl;
 
+    private Crud_local datl2;
+    private Crud_local datl3;
+    private Crud_local datl4;
     private int pilihcari;
 
     
@@ -79,6 +83,17 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     
     String[] template_pelayanan = new String[]{"Pelayanan Kamar", "Tarif","lama", "Total"};
+    
+    
+    
+    String[] noncoverbpjs_title = new String[]{"Nama Tagihan","Tarif" ,"Total"};
+    
+     DefaultTableModel modelnoncoverbpjs = new DefaultTableModel(noncoverbpjs_title, 0) {
+        public boolean isCellEditable(int row, int column) {
+            return false;
+
+        }
+    };
     
     
      String[] rinci_title = new String[]{"Nama Tagihan", "Total"};
@@ -639,6 +654,20 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     }
     
+    private void setukurantbnoncover() {
+
+        this.tb_non_cover.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
+        tb_non_cover.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnModel tr = this.tb_non_cover.getColumnModel();
+
+        tr.getColumn(0).setPreferredWidth(180);
+        tr.getColumn(1).setPreferredWidth(80);
+        tr.getColumn(2).setPreferredWidth(100);
+        
+
+    }
+    
+    
     private void setukurantbulunitHistory() {
 
         this.tb_unit_detail_history.getTableHeader().setFont(new Font("Dialog", Font.PLAIN, 11));
@@ -908,6 +937,15 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jTabbedPane4 = new javax.swing.JTabbedPane();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        tb_rinci_tagihan = new javax.swing.JTable();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        tb_non_cover = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         tb_biaya_tindakan = new javax.swing.JTable();
@@ -962,15 +1000,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         lbl_tot_jual_bebas_grand = new javax.swing.JLabel();
-        jPanel22 = new javax.swing.JPanel();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel24 = new javax.swing.JPanel();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        tb_rinci_tagihan = new javax.swing.JTable();
-        jScrollPane15 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
         txt_plafon_bpjs = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         bt_pembayaran = new javax.swing.JButton();
@@ -1958,6 +1987,97 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jTabbedPane4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane4.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
 
+        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
+        jPanel23.setLayout(jPanel23Layout);
+        jPanel23Layout.setHorizontalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel23Layout.setVerticalGroup(
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel24.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        tb_rinci_tagihan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_rinci_tagihan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane14.setViewportView(tb_rinci_tagihan);
+
+        tb_non_cover.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        tb_non_cover.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane15.setViewportView(tb_non_cover);
+
+        jLabel11.setText("Tagihan yang Tidak di Cover BPJS");
+
+        jLabel54.setText("List Tagihan");
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 73, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel54))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, 271, Short.MAX_VALUE)
+        );
+
+        jTabbedPane4.addTab("Rincian Tagihan", jPanel22);
+
         tb_biaya_tindakan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         tb_biaya_tindakan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2262,102 +2382,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jPanel15.add(lbl_tot_jual_bebas_grand, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 150, 20));
 
         jTabbedPane4.addTab("Tagihan Obat Jual Bebas", jPanel15);
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel24.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        tb_rinci_tagihan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        tb_rinci_tagihan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane14.setViewportView(tb_rinci_tagihan);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane15.setViewportView(jTable2);
-
-        jLabel11.setText("Tagihan yang Tidak di Cover BPJS");
-
-        jLabel54.setText("List Tagihan");
-
-        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
-        jPanel24.setLayout(jPanel24Layout);
-        jPanel24Layout.setHorizontalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 73, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel24Layout.setVerticalGroup(
-            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel54))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
-        jPanel22.setLayout(jPanel22Layout);
-        jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel22Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, 271, Short.MAX_VALUE)
-        );
-
-        jTabbedPane4.addTab("Rincian Tagihan", jPanel22);
 
         jPanel7.add(jTabbedPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 750, 300));
         jPanel7.add(txt_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 100, 150, 30));
@@ -3346,8 +3370,13 @@ public class frm_poli_ralan extends javax.swing.JFrame {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       
-     
+        
+         hapustnoncover();
+        
+    if(lbl_status.getText().equals("2")){   
+        
+        setBiayaNoncoverBPJS();
+       }
     }
     
     private void tb_regMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_regMouseReleased
@@ -4510,6 +4539,41 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_cetakActionPerformed
 
+        
+    private void hapustnoncover(){
+        
+     if(this.tb_non_cover.getModel().getRowCount()!=0){ 
+           DefaultTableModel dm = (DefaultTableModel) tb_non_cover.getModel();
+        int rowCount = dm.getRowCount();
+       //x
+//        for(int i = rowCount - 1; i >= 0; i--){
+        if (rowCount != 0) {
+         for(int i = rowCount - 1; i >= 0; i--){
+               
+            dm.removeRow(i);
+          }     
+           
+        }
+      }
+    }
+    
+    private void hapusBiayarinci(){
+        
+     if(this.tb_rinci_tagihan.getModel().getRowCount()!=0){ 
+           DefaultTableModel dm = (DefaultTableModel) tb_rinci_tagihan.getModel();
+        int rowCount = dm.getRowCount();
+       //x
+//        for(int i = rowCount - 1; i >= 0; i--){
+        if (rowCount != 0) {
+         for(int i = rowCount - 1; i >= 0; i--){
+               
+            dm.removeRow(i);
+          }     
+           
+        }
+      }
+    }
+    
     private void hapusjaspel(){
         
      if(tb_jasa_pelayanan.getModel().getRowCount()!=0){ 
@@ -4616,6 +4680,22 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         return kd;
    } 
     
+   
+  private Double GetJasa(String kd){
+      
+      Double totj=0.0;  
+      
+      try {
+            dat=new Crud_farmasi();
+            totj=dat.readRec_JasaPelayanan(kd);
+            dat.CloseCon();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return totj;
+  }
+   
   private void setBiayaJaspel(){
   
 //      readRec_JasaPelayanan
@@ -4628,11 +4708,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, "skt");
                 for(int i=0;i<tb_biaya_inap.getModel().getRowCount();i++){
         
-         dat = new Crud_farmasi();   
          
-        modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(1, 9).toString()),
-            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(1, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
-          dat.CloseCon();  
+         
+        modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),GetJasa(tb_biaya_inap.getModel().getValueAt(1, 9).toString()),
+            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),GetJasa(tb_biaya_inap.getModel().getValueAt(1, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
+        
         
        } 
         
@@ -4651,21 +4731,23 @@ public class frm_poli_ralan extends javax.swing.JFrame {
            
         for(int i=0;i<tb_biaya_inap.getModel().getRowCount();i++){
         
-         dat = new Crud_farmasi();   
+          
          
          //perina jp ngikutin ibunya klo sehat
         if(tb_biaya_inap.getModel().getValueAt(i, 0).toString().contains("BAYI SEHAT")) {
             
-          modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(Carikodekamaribu()),
-            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(Carikodekamaribu())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
-          dat.CloseCon();
+          modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),GetJasa(Carikodekamaribu()),
+            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),GetJasa(Carikodekamaribu())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
+          
           
         }
         
         else{
-          modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString()),
-            tb_biaya_inap.getModel().getValueAt(i, 6).toString(),dat.readRec_JasaPelayanan(tb_biaya_inap.getModel().getValueAt(i, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
-          dat.CloseCon();
+            
+          modelpelayanan.addRow(new Object[]{tb_biaya_inap.getModel().getValueAt(i, 0).toString(),GetJasa(tb_biaya_inap.getModel().getValueAt(i, 9).toString()),
+          
+          tb_biaya_inap.getModel().getValueAt(i, 6).toString(),GetJasa(tb_biaya_inap.getModel().getValueAt(i, 9).toString())* Integer.valueOf(tb_biaya_inap.getModel().getValueAt(i, 6).toString())});
+        
          }
         
        } 
@@ -4687,6 +4769,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
   
   private void setRinci(){
   
+     
+      hapusBiayarinci();
+      
+      
       String[] title=new String[9];
       
       title[0]="Tindakan";
@@ -4809,6 +4895,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     }  
   
+ 
+  
   private void settbpilih(String cari,boolean b) {
         try {
             datl = new Crud_local();
@@ -4831,6 +4919,162 @@ public class frm_poli_ralan extends javax.swing.JFrame {
 
     }
     
+            
+  private int GetjmlNoncoverBPJS(String kdtarif){
+      int is=0;
+      
+        try {
+            
+            
+            
+            datl4 = new Crud_local();
+            
+            is=datl4.GetJmlNoncoverBPJS(kdtarif);
+            
+            datl4.CloseCon();
+            
+            
+            
+           
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return is;
+  }
+  
+  
+  
+  private String GetKodeNoncoverBPJS(String kdtarif){
+      
+      String i="";
+      
+        try {
+            datl3 = new Crud_local();
+            
+            i=datl3.GetKodeNoncoverBPJS(kdtarif);
+            
+            datl3.CloseCon();
+                    
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+   return i;
+  }
+          
+          
+  private Double GetTarifNoncoverBPJS(String noraw,String kdtarif){
+      
+      Double i=0.0;
+      
+        try {
+            datl3 = new Crud_local();
+            
+            i=datl3.readRec_TarifNoncover( noraw, kdtarif);
+            
+            datl3.CloseCon();
+                    
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+   return i;
+  }
+  
+  private int Getjml(String noraw,String kdtarif){
+      
+      int i=0;
+      
+        try {
+            datl2 = new Crud_local();
+          
+            i=datl2.GetJmlTindakan( noraw, kdtarif);
+          
+            datl2.CloseCon();
+                    
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+   return i;
+  }
+  
+   private void setBiayaNoncoverBPJS(){
+
+       DecimalFormat df2 = new DecimalFormat(".##");
+
+       Double tot=0.0;
+       
+     
+      
+       
+       
+        try {
+            
+            datl = new Crud_local();
+            
+            datl.readRec_BiayaNoncover(this.txt_no_rawat.getText());
+            
+            datl.CloseCon();
+             
+             int l=datl.modelkodetariftitle.getRowCount();
+//             JOptionPane.showMessageDialog(null,"getjml:"+GetjmlNoncoverBPJS("LD-0001"));
+            
+           
+            
+          if(l!=0){  
+              
+//              JOptionPane.showMessageDialog(null, "rec2:"+l);
+           for(int i=0;i < l;i++){ 
+           
+         if(!GetKodeNoncoverBPJS(datl.modelkodetariftitle.getValueAt(i, 0).toString()).isEmpty()){      
+               
+//             JOptionPane.showMessageDialog(null, "i:"+i);
+            String kd=datl.modelkodetariftitle.getValueAt(i, 0).toString();
+//             JOptionPane.showMessageDialog(null, "kode:"+kd);
+           String nm=datl.modelkodetariftitle.getValueAt(i,2).toString();   
+//            JOptionPane.showMessageDialog(null, "nm:"+nm);
+            String trf=datl.modelkodetariftitle.getValueAt(i,1).toString();
+               
+//            JOptionPane.showMessageDialog(null, "trf:"+trf);
+//            JOptionPane.showMessageDialog(null, "jml tindakan:"+ this.Getjml(this.txt_no_rawat.getText(), kd));
+          
+            
+//            
+            if(this.GetjmlNoncoverBPJS(kd)<
+                    this.Getjml(this.txt_no_rawat.getText(), kd)){
+
+               tot=GetTarifNoncoverBPJS(this.txt_no_rawat.getText(), kd)*(Getjml(this.txt_no_rawat.getText(), kd)-GetjmlNoncoverBPJS(kd));
+//               JOptionPane.showMessageDialog(null, "tot:"+tot);                   
+            }   
+               
+            else if(this.GetjmlNoncoverBPJS(kd)==
+                    this.Getjml(this.txt_no_rawat.getText(), kd)){
+               
+               tot=GetTarifNoncoverBPJS(this.txt_no_rawat.getText(), kd)*(Getjml(this.txt_no_rawat.getText(), kd));
+            }   
+            else{
+//                 JOptionPane.showMessageDialog(null, ">");
+               tot=GetTarifNoncoverBPJS(this.txt_no_rawat.getText(), kd)*(GetjmlNoncoverBPJS(kd));
+            }
+            
+            modelnoncoverbpjs.addRow(new Object[]{ nm,trf,
+                                                    df2.format(tot) });
+          
+           }
+          }
+       
+        }
+          
+           tb_non_cover.setModel(modelnoncoverbpjs);
+             setukurantbnoncover();
+        } catch (Exception ex) {
+            Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+  }
+  
+  
     /**
      * @param args the command line arguments
      */
@@ -5038,7 +5282,6 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbl;
     private javax.swing.JLabel lbl_biaya_adm_ranap;
     private javax.swing.JLabel lbl_biaya_reg;
@@ -5103,6 +5346,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTable tb_jasa_pelayanan;
     private javax.swing.JTable tb_jual_bebas;
     private javax.swing.JTable tb_lab;
+    private javax.swing.JTable tb_non_cover;
     private javax.swing.JTable tb_obat;
     private javax.swing.JTable tb_reg;
     private javax.swing.JTable tb_reg_inap;
