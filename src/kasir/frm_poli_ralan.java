@@ -946,6 +946,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         tb_non_cover = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
+        lbl_tot_non_cover = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         tb_biaya_tindakan = new javax.swing.JTable();
@@ -2022,6 +2023,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         ));
         jScrollPane15.setViewportView(tb_non_cover);
 
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel11.setText("Tagihan yang Tidak di Cover BPJS");
 
         jLabel54.setText("List Tagihan");
@@ -2037,10 +2039,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                     .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 73, Short.MAX_VALUE)))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_tot_non_cover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel24Layout.setVerticalGroup(
@@ -2049,7 +2052,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel54))
+                    .addComponent(jLabel54)
+                    .addComponent(lbl_tot_non_cover))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
@@ -3005,6 +3009,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     
     private void hpsTbbiaya(){
     
+        txt_bayar_asuransi.setText("");
+        
     DefaultTableModel dm = (DefaultTableModel) tb_biaya_tindakan.getModel();
             int rowCount = dm.getRowCount();
     if(rowCount!=0){
@@ -3254,6 +3260,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           
            for(int i=0;i<tb_jual_bebas.getModel().getRowCount();i++){
             tot=tot+Double.parseDouble(tb_jual_bebas.getModel().getValueAt(i, 5).toString());
+          }
+       }
+     
+       return tot;
+   }
+   
+    private Double sumnoncover(){
+     double tot=0.0;
+       if(tb_non_cover.getModel().getRowCount()>0){
+          
+           for(int i=0;i<tb_non_cover.getModel().getRowCount();i++){
+            tot=tot+Double.parseDouble(tb_non_cover.getModel().getValueAt(i, 2).toString());
           }
        }
      
@@ -3695,6 +3713,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 jam();
                 
                   setRinci();
+                  
+                  setAsuransitotnoncoverbpjs();
             }
         }
     }//GEN-LAST:event_tb_reg_inapMouseReleased
@@ -4804,6 +4824,11 @@ public class frm_poli_ralan extends javax.swing.JFrame {
       
      tb_rinci_tagihan.setModel(modelrinci);
       
+     DecimalFormat df2 = new DecimalFormat(".##");
+       if(lbl_status.getText().equals("2")){   
+        
+          txt_bayar_asuransi.setText(String.valueOf(df2.format(alltot)));
+       }
   
   }
   
@@ -4848,6 +4873,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     }
      
      lbl_total_tagihan.setText(Utilitas.formatuang(alltot));
+     
+     
      
 //     this.setHitung();
 
@@ -4999,15 +5026,20 @@ public class frm_poli_ralan extends javax.swing.JFrame {
    return i;
   }
   
+   private void setAsuransitotnoncoverbpjs(){
+        DecimalFormat df2 = new DecimalFormat(".##");
+
+      Double totnon=alltot-sumnoncover();
+             txt_bayar_asuransi.setText( df2.format(totnon));
+          
+   }
+  
    private void setBiayaNoncoverBPJS(){
 
        DecimalFormat df2 = new DecimalFormat(".##");
 
        Double tot=0.0;
-       
      
-      
-       
        
         try {
             
@@ -5068,6 +5100,9 @@ public class frm_poli_ralan extends javax.swing.JFrame {
           
            tb_non_cover.setModel(modelnoncoverbpjs);
              setukurantbnoncover();
+            
+             lbl_tot_non_cover.setText(Utilitas.formatuang(sumnoncover()));
+             
         } catch (Exception ex) {
             Logger.getLogger(frm_poli_ralan.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -5329,6 +5364,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_tot_jual_bebas_grand;
     private javax.swing.JLabel lbl_tot_kamar;
     private javax.swing.JLabel lbl_tot_lab;
+    private javax.swing.JLabel lbl_tot_non_cover;
     private javax.swing.JLabel lbl_tot_obat;
     private javax.swing.JLabel lbl_tot_obat_grand;
     private javax.swing.JLabel lbl_tot_tindakan;
