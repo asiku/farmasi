@@ -1005,6 +1005,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         bt_pembayaran = new javax.swing.JButton();
         cmb_cara_bayar = new javax.swing.JComboBox<>();
+        cmb_cara_bayar1 = new javax.swing.JComboBox<>();
+        bt_cari_coding_bpjs = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_unit_detail_history = new javax.swing.JTable();
@@ -2388,10 +2390,10 @@ public class frm_poli_ralan extends javax.swing.JFrame {
         jTabbedPane4.addTab("Tagihan Obat Jual Bebas", jPanel15);
 
         jPanel7.add(jTabbedPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 750, 300));
-        jPanel7.add(txt_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 100, 150, 30));
+        jPanel7.add(txt_plafon_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 120, 30));
 
         jLabel7.setText("Coding BPJS");
-        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 130, 20));
+        jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 80, 130, 20));
 
         bt_pembayaran.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         bt_pembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unit_poli/save_ico.png"))); // NOI18N
@@ -2401,11 +2403,18 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 bt_pembayaranActionPerformed(evt);
             }
         });
-        jPanel7.add(bt_pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 150, 50));
+        jPanel7.add(bt_pembayaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 160, 150, 40));
 
-        cmb_cara_bayar.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        cmb_cara_bayar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "===CARA BAYAR===", "LUNAS", "PIUTANG" }));
-        jPanel7.add(cmb_cara_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, -1, -1));
+        cmb_cara_bayar.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        cmb_cara_bayar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "===STATUS BAYAR===", "LUNAS", "PIUTANG" }));
+        jPanel7.add(cmb_cara_bayar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 20, 160, -1));
+
+        cmb_cara_bayar1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        cmb_cara_bayar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "===CARA BAYAR===", "ASURANSI", "BPJS", "CASH", "COST SHARING BPJS", "COST SHARING ASURANSI" }));
+        jPanel7.add(cmb_cara_bayar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 160, -1));
+
+        bt_cari_coding_bpjs.setText("jButton1");
+        jPanel7.add(bt_cari_coding_bpjs, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 110, 30, -1));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -2498,8 +2507,8 @@ public class frm_poli_ralan extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTabbedPane3)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3604,7 +3613,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private void bt_pembayaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_pembayaranActionPerformed
         // TODO add your handling code here:
      
-     if(!this.cmb_cara_bayar.getSelectedItem().equals("===CARA BAYAR===")){
+     if(!this.cmb_cara_bayar.getSelectedItem().equals("===STATUS BAYAR===")){
          
        if(lbl_sisa_tagihan.getText().equals("0")){ 
            JOptionPane.showMessageDialog(null, "Sisa Pembayaran Masih Nol");
@@ -5193,6 +5202,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Tab_reg;
     private javax.swing.JToolBar ToolBar;
     private javax.swing.JButton bt_batal;
+    private javax.swing.JButton bt_cari_coding_bpjs;
     private javax.swing.JButton bt_cari_tgl;
     private javax.swing.JButton bt_cari_tgl_tindakan;
     private javax.swing.JButton bt_cari_tindakan;
@@ -5213,6 +5223,7 @@ public class frm_poli_ralan extends javax.swing.JFrame {
     private javax.swing.JCheckBox ck_kary;
     private javax.swing.JCheckBox ck_umum;
     private javax.swing.JComboBox<String> cmb_cara_bayar;
+    private javax.swing.JComboBox<String> cmb_cara_bayar1;
     private javax.swing.JDialog dlg_deposit;
     private javax.swing.JDialog dlg_dpjp;
     private javax.swing.JDialog dlg_update_naik_kelas;
